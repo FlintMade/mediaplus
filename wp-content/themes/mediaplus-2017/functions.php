@@ -6,7 +6,7 @@
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function chdogs_setup() {
+function mediaplus_setup() {
 	/*
 	 * Let WordPress manage the document title.
 	 * By adding theme support, we declare that this theme does not use a
@@ -22,8 +22,8 @@ function chdogs_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
-	add_image_size('chdogs-xl', 1200, false);
-	add_image_size('chdogs-xxl', 1600, false);
+	add_image_size('mediaplus-xl', 1200, false);
+	add_image_size('mediaplus-xxl', 1600, false);
 
 	// Enable shortcodes
 	//add_filter('widget_text', 'do_shortcode');
@@ -66,39 +66,39 @@ add_action( 'after_setup_theme', 'wpdocs_after_setup_theme' );
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
 }
-add_action( 'after_setup_theme', 'chdogs_setup' );
+add_action( 'after_setup_theme', 'mediaplus_setup' );
 
 /**
  * Enqueue scripts and styles.
  */
-function chdogs_scripts() {
+function mediaplus_scripts() {
 	// Theme stylesheets
-	wp_enqueue_style('chdogs-fonts', 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700|Yrsa:500');
-	wp_enqueue_style('chdogs-style', get_stylesheet_uri(), array(), '02.17.17.02');
-	wp_enqueue_style('chdogs-print', get_theme_file_uri('/assets/css/print.css'), array(), false, 'print');
+	wp_enqueue_style('mediaplus-fonts', 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700|Yrsa:500');
+	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array(), '02.17.17.02');
+	wp_enqueue_style('mediaplus-print', get_theme_file_uri('/assets/css/print.css'), array(), false, 'print');
 
 	// Old IE overrides
-	wp_enqueue_style('chdogs-ie', get_theme_file_uri('/assets/css/old-ie.css'));
-	wp_style_add_data('chdogs-ie', 'conditional', 'lt IE 9');
+	wp_enqueue_style('mediaplus-ie', get_theme_file_uri('/assets/css/old-ie.css'));
+	wp_style_add_data('mediaplus-ie', 'conditional', 'lt IE 9');
 
 	// Load the html5 shiv.
 	wp_enqueue_script('html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), false, false);
 	wp_script_add_data('html5', 'conditional', 'lt IE 9');
 
 	// Theme scripts
-	// wp_enqueue_script('chdogs-scripts', get_theme_file_uri( '/assets/js/scripts.js' ), array(), false, true);
-	wp_enqueue_script('chdogs-scripts', get_theme_file_uri( '/assets/js/scripts.min.js' ), array(), false, true);
+	// wp_enqueue_script('mediaplus-scripts', get_theme_file_uri( '/assets/js/scripts.js' ), array(), false, true);
+	wp_enqueue_script('mediaplus-scripts', get_theme_file_uri( '/assets/js/scripts.min.js' ), array(), false, true);
 
 	// Fluid videos
 	if (!is_page(array(2, 17, 76, 79))) {
-		wp_enqueue_script('chdogs-fluidvideos', get_theme_file_uri( '/assets/js/fluidvids.js' ), array(), false, true);
+		wp_enqueue_script('mediaplus-fluidvideos', get_theme_file_uri( '/assets/js/fluidvids.js' ), array(), false, true);
 	}
 
 	// Remove silly WP stuff
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
 }
-add_action( 'wp_enqueue_scripts', 'chdogs_scripts' );
+add_action( 'wp_enqueue_scripts', 'mediaplus_scripts' );
 
 // Excerpt ellipsis
 function new_excerpt_more($more) {
