@@ -76,6 +76,33 @@
         <?php echo get_the_title($item->ID); ?>
         <button>Expand details</button>
         <?php echo get_field('dates_of_service', $item->ID); ?>
+
+        <?php 
+          $posts = get_field('process_items', $item->ID);
+          if($posts):
+        ?>
+          <ul>
+            <?php foreach($posts as $post): ?>
+              <?php setup_postdata($post); ?>
+              <li><?php the_title(); ?></li>
+            <?php endforeach; ?>
+          </ul>
+          <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
+
+        <?php 
+          $posts = get_field('relevant_expertise', $item->ID);
+          if($posts):
+        ?>
+          <ul>
+            <?php foreach($posts as $post): ?>
+              <?php setup_postdata($post); ?>
+              <li><?php the_title(); ?></li>
+            <?php endforeach; ?>
+          </ul>
+          <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
+        
       </li>
     <?php endforeach; ?>
   </ul>
