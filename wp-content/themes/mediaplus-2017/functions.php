@@ -73,26 +73,10 @@ add_action( 'after_setup_theme', 'mediaplus_setup' );
  */
 function mediaplus_scripts() {
 	// Theme stylesheets
-	wp_enqueue_style('mediaplus-fonts', 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700|Yrsa:500');
-	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array(), '02.17.17.02');
-	wp_enqueue_style('mediaplus-print', get_theme_file_uri('/assets/css/print.css'), array(), false, 'print');
-
-	// Old IE overrides
-	wp_enqueue_style('mediaplus-ie', get_theme_file_uri('/assets/css/old-ie.css'));
-	wp_style_add_data('mediaplus-ie', 'conditional', 'lt IE 9');
-
+	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array());
 	// Load the html5 shiv.
 	wp_enqueue_script('html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), false, false);
 	wp_script_add_data('html5', 'conditional', 'lt IE 9');
-
-	// Theme scripts
-	// wp_enqueue_script('mediaplus-scripts', get_theme_file_uri( '/assets/js/scripts.js' ), array(), false, true);
-	wp_enqueue_script('mediaplus-scripts', get_theme_file_uri( '/assets/js/scripts.min.js' ), array(), false, true);
-
-	// Fluid videos
-	if (!is_page(array(2, 17, 76, 79))) {
-		wp_enqueue_script('mediaplus-fluidvideos', get_theme_file_uri( '/assets/js/fluidvids.js' ), array(), false, true);
-	}
 
 	// Remove silly WP stuff
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
