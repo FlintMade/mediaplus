@@ -26,58 +26,69 @@
       <img src="<?php echo $large; ?>" alt="" role="none" />
     </picture>
   </div>
-  <?php
-    $args = array(
-      'post_type' => 'offerings',
-      'post_status' => 'publish',
-      'posts_per_page' => -1,
-      'order' => 'menu_order',
-    );
-    $items = get_posts($args);
-  ?>
-  <h2><?php echo $offerings_title; ?></h2>
-  <ul>
-    <?php foreach ($items as $item): ?>
-      <li><?php echo get_the_title($item->ID); ?></li>
-    <?php endforeach; ?>
-  </ul>
-  <?php
-    $args = array(
-      'post_type' => 'process',
-      'post_status' => 'publish',
-      'posts_per_page' => -1,
-      'order' => 'menu_order',
-    );
-    $items = get_posts($args);
-  ?>
-  <h2><?php echo $process_title; ?></h2>
-  <ul>
-    <?php foreach ($items as $item): ?>
-      <li><?php echo get_the_title($item->ID); ?></li>
-    <?php endforeach; ?>
-  </ul>
-  <section>
-    <?php the_content(); ?>
-  </section>
-<?php endwhile;?>
-<section class="clear team" aria-label="The team">
-  <?php
-    $args = array(
-      'post_type' => 'people',
-      'post_status' => 'publish',
-      'posts_per_page' => -1,
-      'order' => 'menu_order',
-    );
-    $items = get_posts($args);
-    foreach ($items as $item):
-  ?>
-    <div class="person">
-      <h3><?php echo $item->post_title; ?></h3>
-      <p><?php echo get_field('person_title', $item->ID) ?></p>
-      <div class="person__bio">
-        <?php echo wpautop($item->post_content); ?>
+  <div class="contain">
+    <div class="row row--halves">
+      <div class="grid-col row row--flush row--thirds">
+        <?php
+          $args = array(
+            'post_type' => 'offerings',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'order' => 'menu_order',
+          );
+          $items = get_posts($args);
+        ?>
+        <div class="grid-col">
+          <h2><?php echo $offerings_title; ?></h2>
+          <ul>
+            <?php foreach ($items as $item): ?>
+              <li><?php echo get_the_title($item->ID); ?></li>
+            <?php endforeach; ?>
+          </ul>
+          <?php
+            $args = array(
+              'post_type' => 'process',
+              'post_status' => 'publish',
+              'posts_per_page' => -1,
+              'order' => 'menu_order',
+            );
+            $items = get_posts($args);
+          ?>
+        </div>
+        <div class="grid-col">
+          <h2><?php echo $process_title; ?></h2>
+          <ul>
+            <?php foreach ($items as $item): ?>
+              <li><?php echo get_the_title($item->ID); ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="grid-col">test</div>
       </div>
+      <section class="grid-col">
+        <?php the_content(); ?>
+      </section>
     </div>
-  <?php endforeach; ?>
+  <?php endwhile;?>
+  <section class="row row--flush row--halves team" aria-label="The team">
+    <?php
+      $args = array(
+        'post_type' => 'people',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'order' => 'menu_order',
+      );
+      $items = get_posts($args);
+      foreach ($items as $item):
+    ?>
+      <div class="person grid-col">
+        <h3><?php echo $item->post_title; ?></h3>
+        <p><?php echo get_field('person_title', $item->ID) ?></p>
+        <div class="person__bio">
+          <?php echo wpautop($item->post_content); ?>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
 </section>
 <?php get_footer(); ?>

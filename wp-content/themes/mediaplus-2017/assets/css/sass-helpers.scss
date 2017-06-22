@@ -9,6 +9,11 @@
  *	---------------------------------------------
  */
 
+/* Media queries */
+$bp-s: 40em;
+$bp-m: 50em;
+$bp-l: 64em;
+
 /* Fonts */
 $font-body: 'Domaine Text', 'Garamond Old Style', serif;
 $font-heading: 'Chalet', 'Helvetica Neue', sans-serif;
@@ -23,5 +28,14 @@ $grey-light: #bcbcbc;
 $bg-grey-med: #bcbcbc;
 $bg-grey-light: #f7f7f7;
 
-/* Media queries */
-$bp-s: 40em;
+/* Spacing: em are pretty much there just as fallbacks for browsers that don't support rem measurements */
+$space-xs: 1rem;
+$space-xs-em: 1em;
+$space-s: 1.25rem;
+$space-s-em: 1.25em;
+$space-m: 2rem;
+$space-m-em: 2em;
+$space-l: 2.5rem;
+$space-l-em: 2.5em;
+$space-xl: 3.75rem;
+$space-xl-em: 3.75em;

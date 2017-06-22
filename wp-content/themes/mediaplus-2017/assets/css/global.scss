@@ -37,6 +37,11 @@ a:link, a:visited {
  *	---------------------------------------------
  */
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1em;
+  line-height: 1;
+}
+
 h1, .h1,
 h2, .h2,
 h4, .h4 {
@@ -72,8 +77,25 @@ h3, .h3 {
   font-size: 1.25em;
 }
 
+p, ul, ol, blockquote {
+  margin-bottom: 1em;
+}
+
 @media (max-width: $bp-s) {
   body {
-    font-size: .875;
+    font-size: 87.5%;
   }
+}
+
+/*
+ *	UTILITIES
+ *	---------------------------------------------
+ */
+
+.clear:after, .clear::after,
+.row:after, .row::after {
+  content: "";
+  display: table;
+  clear: both;
+  width: 100%;
 }
