@@ -7,12 +7,15 @@
 .footer {
   padding: $space-l-em 0;
   padding: $space-l 0;
+
+  font-size: .875em; /* 14px */
+
   background: $bg-grey-light;
   color: $grey-med;
 
   h2 {
     margin-bottom: .75rem;
-    font-size: 1.125rem;
+    font-size: 1.286em; /* 18px */
   }
 
   h2,
@@ -32,6 +35,7 @@
 
 .footer__copyright {
   display: block;
+  font-size: 1em;
 }
 
 @media (min-width: $bp-l) {
