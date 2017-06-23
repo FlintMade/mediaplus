@@ -18,23 +18,19 @@
   padding: 0;
 }
 
-.grid-col {
-  margin-bottom: $space-l;
+.grid-col + .grid-col {
+  margin-top: $space-l;
+}
 
-  .grid-col:last-child {
-    margin-bottom: 0;
-  }
+.grid-col :last-child {
+  margin-bottom: 0;
 }
 
 /*
  *	DESKTOP
  *	---------------------------------------------
  */
-@media (min-width: $bp-m) {
-  .contain {
-    padding: 0 $space-xl;
-  }
-
+@media (min-width: $bp-s) {
   .row {
     padding: 0 $space-m;
   }
@@ -45,11 +41,10 @@
 
   .grid-col {
     float: left;
-    margin: 0 0 0 $space-m;
+  }
 
-    &:first-child {
-      margin-left: 0;
-    }
+  .grid-col + .grid-col {
+    margin: 0 0 0 $space-m;
   }
 
   .row--halves .grid-col {
@@ -65,19 +60,55 @@
     width: calc(66.666% - (2 *#{$space-m})/3);
   }
 
-  .col--right {
+  .grid-col--right {
     float: right;
   }
 }
 
-@media (min-width: $bp-m) and (max-width: $bp-l) {
+@media (min-width: $bp-m) {
+  .contain {
+    padding: 0 $space-m;
+  }
+}
+
+@media (min-width: $bp-s) and (max-width: $bp-l) {
+  /* Unfloat nested columns */
   .grid-col .grid-col {
     float: none;
-    margin: 0 0 $space-l;
     width: 100%;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
+  .grid-col .grid-col + .grid-col {
+    margin: $space-l 0 0;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .contain {
+    padding: 0 $space-xl;
+  }
+}
+
+@media (min-width: $bp-l) and (max-width: $bp-xl) {
+  /* Float nested columns as halves */
+  .grid-col .grid-col {
+    width: calc(50% - #{$space-m});
+  }
+
+  .grid-col .grid-col + .grid-col {
+    margin-top: $space-l;
+
+    &:nth-child(2) {
+      margin-top: 0;
     }
+  }
+  
+  .grid-col .grid-col:nth-child(even) {
+    margin-left: $space-m;
+  }
+
+  .grid-col .grid-col:nth-child(3n+3) {
+    margin-left: 0;
+    clear: both;
   }
 }

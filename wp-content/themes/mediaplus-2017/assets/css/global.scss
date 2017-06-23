@@ -11,7 +11,7 @@
 }
 
 body {
-  font: 400 100%/1.625 $font-body;
+  font: 400 100%/1.75 $font-body;
 }
 
 :focus {
@@ -38,7 +38,8 @@ a:link, a:visited {
  */
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 1em;
+  margin: 0 0 $space-s-em;
+  margin-bottom: $space-s;
   line-height: 1;
 }
 
@@ -81,7 +82,7 @@ p, ul, ol, blockquote {
   margin-bottom: 1em;
 }
 
-@media (max-width: $bp-s) {
+@media (max-width: $bp-m) {
   body {
     font-size: 87.5%;
   }

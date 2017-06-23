@@ -1,5 +1,5 @@
   </main>
-  <footer role="contentinfo" class="site-footer">
+  <footer role="contentinfo" class="footer">
     <div class="contain">
       <?php
         $footer_address_title = get_field('footer_address_title', 13);
@@ -29,7 +29,7 @@
           </div>
           <div class="grid-col">
             <h2><?php echo $social_media_title; ?></h2>
-            <ul>
+            <ul class="footer__social">
               <?php
                 foreach($social_media_accounts as $item):
                 $item_title = $item['social_media_site'];
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="grid-col">
-          <small>Copyright &copy; <?php echo date("Y"); ?> <?php echo get_bloginfo('name'); ?> All rights reserved.</small>
+          <small class="footer__copyright">Copyright &copy; <?php echo date("Y"); ?> <?php echo get_bloginfo('name'); ?> All rights reserved.</small>
         </div>
       </div>
     </div>
