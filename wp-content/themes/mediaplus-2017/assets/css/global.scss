@@ -38,8 +38,8 @@ a:link, a:visited {
  */
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 $space-s-em;
-  margin-bottom: $space-s;
+  margin: 0 0 $space-xs-em;
+  margin-bottom: $space-xs;
   line-height: 1;
 }
 
@@ -63,15 +63,14 @@ h1, .h1 {
   color: $grey-dark;
 }
 
-h3, .h3 {
-  font-weight: 400;
-  font-family: $font-heading;
-  color: $redorange;
-}
-
 .h2-variant {
   font-size: 1.5em;
   line-height: 1.2;
+}
+
+h3, .h3 {
+  font: 400 1.125em/1 $font-heading;
+  color: $redorange;
 }
 
 .h4-variant {
@@ -99,4 +98,24 @@ p, ul, ol, blockquote {
   display: table;
   clear: both;
   width: 100%;
+}
+
+/*
+ *	=============================================
+ *	COMPONENTS
+ *	=============================================
+ */
+
+/*
+ *	META ITEMS
+ *	---------------------------------------------
+ */
+
+.meta-items {
+  list-style: none;
+  color: $grey-med;
+
+  ul, ol {
+    list-style: none;
+  }
 }

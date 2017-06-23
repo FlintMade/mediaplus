@@ -12,6 +12,8 @@
       <h1><?php echo $inpage_title; ?></h1>
     </div>
     <div class="grid-col">
+
+      <!-- OFFERINGS -->
       <section>
         <?php
           $args = array(
@@ -22,13 +24,15 @@
           );
           $items = get_posts($args);
         ?>
-        <h2><?php echo $offerings_title; ?></h2>
-        <ul>
+        <h2 class="h3"><?php echo $offerings_title; ?></h2>
+        <ul class="meta-items">
           <?php foreach ($items as $item): ?>
             <li><?php echo get_the_title($item->ID); ?></li>
           <?php endforeach; ?>
         </ul>
       </section>
+
+      <!-- PROCESS ITEMS -->
       <section>
         <?php
           $args = array(
@@ -39,13 +43,15 @@
           );
           $items = get_posts($args);
         ?>
-        <h2><?php echo $process_title; ?></h2>
-        <ul>
+        <h2 class="h3"><?php echo $process_title; ?></h2>
+        <ul class="meta-items">
           <?php foreach ($items as $item): ?>
             <li><?php echo get_the_title($item->ID); ?></li>
           <?php endforeach; ?>
         </ul>
       </section>
+
+      <!-- EXPERTISE ITEMS -->
       <section>
         <?php
           $args = array(
@@ -56,8 +62,8 @@
           );
           $items = get_posts($args);
         ?>
-        <h2><?php echo $expertise_title; ?></h2>
-        <ul>
+        <h2 class="h3"><?php echo $expertise_title; ?></h2>
+        <ul class="meta-items">
           <?php foreach ($items as $item): ?>
             <li><?php echo get_the_title($item->ID); ?></li>
           <?php endforeach; ?>
@@ -77,7 +83,7 @@
     );
     $items = get_posts($args);
   ?>
-  <ul class="clients">
+  <ul class="meta-items clients">
     <?php foreach ($items as $item): ?>
       <li class="row row--third-two-thirds client">
         <div class="grid-col">

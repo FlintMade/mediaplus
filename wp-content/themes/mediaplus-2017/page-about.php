@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 <?php while (have_posts()): the_post(); global $post; ?>
+
+  <!-- BANNER IMAGE -->
   <?php
     $banner_image = get_field('top_banner_image');
     $small = $banner_image['sizes']['mediaplus-s'];
@@ -26,9 +28,12 @@
       <img src="<?php echo $large; ?>" alt="" role="none" />
     </picture>
   </div>
+
   <div class="contain">
     <div class="row row--halves">
       <div class="grid-col row row--flush row--thirds">
+
+        <!-- OFFERINGS -->
         <?php
           $args = array(
             'post_type' => 'offerings',
@@ -39,37 +44,43 @@
           $items = get_posts($args);
         ?>
         <div class="grid-col">
-          <h2><?php echo $offerings_title; ?></h2>
-          <ul>
+          <h3><?php echo $offerings_title; ?></h3>
+          <ul class="meta-items">
             <?php foreach ($items as $item): ?>
               <li><?php echo get_the_title($item->ID); ?></li>
             <?php endforeach; ?>
           </ul>
-          <?php
-            $args = array(
-              'post_type' => 'process',
-              'post_status' => 'publish',
-              'posts_per_page' => -1,
-              'order' => 'menu_order',
-            );
-            $items = get_posts($args);
-          ?>
         </div>
+
+        <!-- PROCESS ITEMS -->
+        <?php
+          $args = array(
+            'post_type' => 'process',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'order' => 'menu_order',
+          );
+          $items = get_posts($args);
+        ?>
         <div class="grid-col">
-          <h2><?php echo $process_title; ?></h2>
-          <ul>
+          <h3><?php echo $process_title; ?></h3>
+          <ul class="meta-items">
             <?php foreach ($items as $item): ?>
               <li><?php echo get_the_title($item->ID); ?></li>
             <?php endforeach; ?>
           </ul>
         </div>
-        <div class="grid-col">test</div>
       </div>
+
+      <!-- PAGE DESCRIPTION -->
       <section class="grid-col">
         <?php the_content(); ?>
       </section>
+
     </div>
   <?php endwhile;?>
+
+  <!-- TEAM MEMBERS -->
   <section class="row row--flush row--halves team" aria-label="The team">
     <?php
       $args = array(
@@ -90,5 +101,6 @@
       </div>
     <?php endforeach; ?>
   </div>
+
 </section>
 <?php get_footer(); ?>
