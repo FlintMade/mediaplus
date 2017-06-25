@@ -1,0 +1,298 @@
+/*
+ *	=============================================
+ *	HEADER
+ *	=============================================
+ */
+
+.page-content {
+  margin-top: 10em;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  a:link, a:visited {
+    border-bottom: 0;
+  }
+}
+
+.header__context,
+.header__tray-content {
+  padding: $space-s-em;
+  padding: $space-s;
+}
+
+@media (max-width: $bp-header-s) {
+  .page-content {
+    margin-top: 6.43em; /* ~90px */
+  }
+}
+
+@media (min-width: $bp-header-m) {
+  .header__context,
+  .header__tray-content {
+    padding: $space-m;
+  }
+}
+
+/*
+ *	CONTEXT: LOGO + PAGE LABEL
+ *	---------------------------------------------
+ */
+.header__context {
+  float: left;
+}
+
+.header__brand {
+  display: inline-block;
+  vertical-align: middle;
+  transition: opacity ease 200ms;
+  opacity: 1;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.full-logo {
+  width: 102px;
+  height: 22px;
+}
+
+@media (min-width: $bp-header-m) {
+  .full-logo {
+    width: 135px;
+    height: 30px;
+  }
+}
+
+/*
+ *	TRAY
+ *  See also "Toggle States"
+ *	---------------------------------------------
+ */
+
+.header__tray {
+  float: right;
+}
+
+.header__tray-content {
+  padding-right: 6.75em;
+}
+
+.skip-nav {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+
+  top: .5em;
+  font-size: .75em;
+  color: $grey-dark;
+
+  &:focus {
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+}
+
+.menu-toggle {
+  position: fixed;
+  z-index: 999;
+  top: $space-s;
+  right: $space-s;
+  width: 32px;
+  height: 32px;
+  transition: transform 200ms;
+
+  &:hover {
+    transform: scale(1.125);
+  }
+
+  &:focus {
+    outline: 0;
+    border: 1px solid $grey-med;
+    border-radius: 50%;
+  }
+}
+
+.menu-toggle__open,
+.menu-toggle__close {
+  width: 100%;
+  height: 100%;
+}
+
+.menu-toggle__close {
+  display: none;
+}
+
+.header__menu {
+  display: inline-block;
+  vertical-align: middle;
+
+  ul {
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+  a {
+    color: $grey-med;
+
+    &:hover {
+      border-bottom: 1px solid;
+    }
+  }
+
+  .current-menu-item a,
+  .current_page_item a {
+    color: $grey-dark;
+  }
+}
+
+.header__contact {
+  * {
+    color: $grey-med;
+  }
+
+  h2 {
+    margin-bottom: .75rem;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+@media (max-width: $bp-header-s) {
+  .header__tray {
+    position: fixed;
+    top: 0;
+    right: -50%;
+    width: 50%;
+    height: 100%;
+    &:before {
+      display: block;
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      box-shadow: 0 0 13px 0 #000;
+      opacity: 0;
+      transition: opacity 400ms;
+    }
+  }
+
+  .header__tray-content {
+    position: relative;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    padding: 5.625em $space-s $space-s;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
+
+  .header__menu {
+    flex: 1;
+    font-size: 1.5rem; /* ~24px */
+
+    li + li {
+      margin-top: 1em;
+    }
+
+    a {
+      color: $grey-dark;
+
+      &:hover {
+        color: $redorange;
+      }
+    }
+  }
+}
+
+@media (min-width: $bp-header-m) {
+  .header__tray__content {
+    padding-right: 7.5em;
+  }
+
+  .menu-toggle {
+    top: $space-m;
+    right: $space-m;
+  }
+
+  .header__menu {
+    li {
+      display: inline-block;
+    }
+
+    li + li {
+      margin-left: 2.5em;
+    }
+  }
+}
+
+/*
+ *	TOGGLE STATES
+ *	---------------------------------------------
+ */
+
+.menu-toggle[aria-expanded="true"] {
+  .menu-toggle__close {
+    display: block;
+  }
+
+  .menu-toggle__open {
+    display: none;
+  }
+}
+
+@media (max-width: $bp-header-s) {
+  .page-overlay {
+    display: none;
+    content: "";
+    position: fixed;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(188, 188, 188, .5);
+
+    opacity: 0;
+    transition: opacity 400ms;
+  }
+
+  .header.menu-active {
+    .header__tray {
+      right: 0;
+    }
+
+    .header__tray:before {
+      opacity: 1;
+    }
+  }
+
+  .header__tray {
+    transition: right 400ms;
+  }
+}
+
+@media (min-width: $bp-header-m) {
+  .header__menu[aria-hidden="true"] {
+    display: none;
+  }
+}

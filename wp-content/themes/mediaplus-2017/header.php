@@ -20,7 +20,35 @@
 </head>
 
 <body <?php body_class(); ?>>
-  <header role="banner" class="site-header">
-    <?php wp_nav_menu( array( 'theme_location' => 'header-menu', 'container_class' => 'site-header__menu', 'container_id' => 'header-menu' ) ); ?>
+  <header role="banner" class="clear header">
+    <div class="header__context">
+      <a class="header__brand" href="<?php echo get_site_url(); ?>">
+        <svg class="full-logo" role="img" title="Media plus">
+          <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mediaplus"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="header__tray">
+      <div class="header__tray-content">
+        <a class="skip-nav" href="#main">Skip to main content</a>
+        <nav class="header__menu" role="navigation">
+          <?php wp_nav_menu(array('theme_location' => 'header-menu', 'container_id' => 'js-menu-contents')); ?>
+        </nav>
+
+        <div class="header__contact" aria-hidden="true">
+          <?php
+            $footer_phone_email_title = get_field('footer_phone_email_title', 13);
+            $phone_number = get_field('phone_number', 13);
+            $email_address = get_field('email_address', 13);
+          ?>
+          <h2><?php echo $footer_phone_email_title; ?></h2>
+          <p>
+            <?php echo $phone_number; ?><br />
+            <a href="mailto:<?php echo $email_address; ?>"><?php echo $email_address; ?></a>
+          </p>
+        </div>
+      </div>
+    </div>
   </header>
-  <main role="main">
+  <main role="main" id="main" class="page-content">

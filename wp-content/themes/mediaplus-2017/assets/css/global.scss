@@ -29,7 +29,12 @@ body {
 }
 
 a:link, a:visited {
+  border-bottom: 1px solid;
   text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 /*
@@ -84,6 +89,21 @@ p, ul, ol, blockquote {
 @media (max-width: $bp-m) {
   body {
     font-size: 87.5%;
+  }
+}
+
+/*
+ *	FORM ELEMENTS
+ *	---------------------------------------------
+ */
+
+button {
+  border: 0;
+  background: transparent;
+  -webkit-appearance: none;
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
