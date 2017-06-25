@@ -21,10 +21,10 @@
 
   // Button properties
   menuButton.classList.add('menu-toggle');
-  menuButton.setAttribute('id', 'js-menu');
+  menuButton.setAttribute('id', 'js-menu-toggle');
   menuButton.setAttribute('aria-label', 'Site menu');
   menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-controls', 'menu');
+  menuButton.setAttribute('aria-controls', 'js-menu');
   menuButton.innerHTML = '<svg class="menu-toggle__open" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#menu"/></svg><svg class="menu-toggle__close" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#x"/></svg>';
 
   // Page overlay properties

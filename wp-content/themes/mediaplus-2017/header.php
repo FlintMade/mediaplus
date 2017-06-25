@@ -32,7 +32,7 @@
     <div class="header__tray">
       <div class="header__tray-content">
         <a class="skip-nav" href="#main">Skip to main content</a>
-        <nav class="header__menu" role="navigation">
+        <nav id="js-menu" class="header__menu" role="navigation">
           <?php wp_nav_menu(array('theme_location' => 'header-menu', 'container_id' => 'js-menu-contents')); ?>
         </nav>
 
