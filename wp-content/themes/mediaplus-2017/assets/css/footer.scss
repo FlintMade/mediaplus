@@ -5,6 +5,8 @@
  */
 
 .footer {
+  margin-top: 4.375em;
+  margin-top: 4.375rem; /* 54px */
   padding: $space-l-em 0;
   padding: $space-l 0;
 
@@ -44,6 +46,10 @@
 }
 
 @media (min-width: $bp-l) {
+  .footer {
+    margin-top: 5em;
+  }
+
   .footer__copyright {
     margin-left: calc(33.333% - (2 *#{$space-m})/3);
   }

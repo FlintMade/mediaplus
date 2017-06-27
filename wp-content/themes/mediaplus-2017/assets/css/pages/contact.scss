@@ -1,0 +1,70 @@
+/*
+ *	=============================================
+ *	CONTACT PAGE
+ *	=============================================
+ */
+
+.feature-address {
+  @extend .h2;
+  font-weight: 400;
+
+  a:link, a:visited {
+    border-bottom: 0;
+    color: inherit;
+  }
+
+  a:hover {
+    border-bottom: 1px solid;
+  }
+}
+
+.contact-row {
+  padding-top: 1.5em;
+  border-top: 1px solid $grey-light;
+
+  font-size: .875em;
+  line-height: 1.286;
+  color: $grey-med;
+
+  a:link, a:visited {
+    border-bottom: 0;
+    color: inherit;
+  }
+
+  a:hover {
+    border-bottom: 1px solid;
+    color: $grey-dark;
+  }
+
+  h2, h3 {
+    font: 1em/1 $font-body;
+    color: $grey-dark;
+  }
+
+  ul {
+    list-style: none;
+  }
+}
+
+.contact-row + .contact-row {
+  margin-top: 1.5em;
+}
+
+@media (max-width: $bp-m) {
+  .contact-rows {
+    padding: $space-s;
+  }
+
+  .contact-row {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .contact-row {
+    h3 {
+      margin-bottom: 1.5em;
+    }
+  }
+}

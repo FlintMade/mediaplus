@@ -9,6 +9,16 @@
  *	---------------------------------------------
  */
 
+.page-section + .page-section {
+  margin-top: 3.375em;
+  margin-top: 3.375rem; /* 54px */
+}
+
+.page-section--feature + .page-section {
+  margin-top: 4.5em;
+  margin-top: 4.5rem; /* 72px */
+}
+
 .row {
   padding: 0 $space-s-em;
   padding: 0 $space-s;
@@ -47,16 +57,31 @@
     margin: 0 0 0 $space-m;
   }
 
-  .row--halves .grid-col {
+  .row--halves > .grid-col {
     width: calc(50% - #{$space-xs});
   }
 
-  .row--thirds .grid-col,
-  .row--third-two-thirds .grid-col {
+  .row--thirds > .grid-col,
+  .row--third-two-thirds > .grid-col {
     width: calc(33.333% - (2 *#{$space-m})/3);
   }
 
-  .row--third-two-thirds .grid-col:last-child {
+  .row--thirds {
+    > .grid-col {
+      margin-top: $space-l;
+    }
+
+    > .grid-col:nth-child(-n + 3) {
+      margin-top: 0;
+    }
+
+    > .grid-col:nth-child(3n+1) {
+      margin-left: 0;
+      clear: both;
+    }
+  }
+
+  .row--third-two-thirds > .grid-col:last-child {
     width: calc(66.666% - (2 *#{$space-m})/3);
   }
 
@@ -68,6 +93,14 @@
 @media (min-width: $bp-m) {
   .contain {
     padding: 0 $space-m;
+  }
+
+  .page-section + .page-section {
+    margin-top: 4em;
+  }
+
+  .page-section--feature + .page-section {
+    margin-top: 7.5em;
   }
 }
 
@@ -96,19 +129,16 @@
   }
 
   .grid-col .grid-col + .grid-col {
-    margin-top: $space-l;
+    margin: $space-l 0 0 0;
+    clear: both;
 
     &:nth-child(2) {
       margin-top: 0;
     }
-  }
-  
-  .grid-col .grid-col:nth-child(even) {
-    margin-left: $space-m;
-  }
 
-  .grid-col .grid-col:nth-child(3n+3) {
-    margin-left: 0;
-    clear: both;
+    &:nth-child(even) {
+      margin-left: $space-m;
+      clear: none;
+    }
   }
 }

@@ -14,27 +14,31 @@
   $social_media_accounts = get_field('social_media_accounts');
 ?>
 <div class="contain">
-  <section class="row row--third-two-thirds">
-    <h1 class="grid-col"><?php the_title(); ?></h1>
-    <p class="grid-col">
-      <?php echo $street_address; ?><br />
-      <?php echo $city_state_zip_code; ?><br />
-      USA<br />
-      <?php echo $phone_number; ?><br />
-      <a href="mailto:<?php echo $email_address; ?>"><?php echo $email_address; ?></a>
-    </p>
+  <section class="page-section--feature row row--third-two-thirds">
+    <h1 class="h2 grid-col"><?php the_title(); ?></h1>
+    <div class="feature-address grid-col">
+      <p>
+        <?php echo $street_address; ?><br />
+        <?php echo $city_state_zip_code; ?><br />
+        USA<br />
+      </p>
+      <p>
+        <?php echo $phone_number; ?><br />
+        <a href="mailto:<?php echo $email_address; ?>"><?php echo $email_address; ?></a>
+      </p>
+    </div>
   </section>
-  <section class="row row--third-two-thirds">
-    <h2 class="grid-col"><?php echo $inquiries_section_title; ?></h2>
-    <div class="grid-col">
-      <ul class="inquiry-types">
+  <div class="page-section contact-rows">
+    <section class="row row--third-two-thirds contact-row">
+      <h2 class="grid-col"><?php echo $inquiries_section_title; ?></h2>
+      <ul class="grid-col row row--flush row--thirds inquiry-types">
         <?php
           foreach($inquiry_types as $item):
           $item_title = $item['inquiry_type_title'];
           $item_contact_name = $item['contact_name'];
           $item_contact_email = $item['contact_email_address'];
         ?>
-          <li class="inquiry-type">
+          <li class="grid-col inquiry-type">
             <h3><?php echo $item_title; ?></h3>
             <p>
               <?php echo $item_contact_name; ?><br />
@@ -43,26 +47,30 @@
           </li>
         <?php endforeach; ?>
       </ul>
-    </div>
-  </section>
-  <section class="row row--third-two-thirds">
-    <h2 class="grid-col"><?php echo $additional_section_title; ?></h2>
-    <div class="grid-col">
-      <h3><?php echo $pdfs_title; ?></h3>
-      <?php echo $pdfs_text; ?>
-      <h3><?php echo $social_media_title; ?></h3>
-      <ul>
-        <?php
-          foreach($social_media_accounts as $item):
-          $item_title = $item['social_media_site'];
-          $item_url = $item['social_media_url'];
-        ?>
-          <li>
-            <a href="<?php echo $item_url; ?>"><?php echo $item_title; ?></a>
-          </li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  </section>
+    </section>
+    <section class="row row--third-two-thirds contact-row">
+      <h2 class="grid-col"><?php echo $additional_section_title; ?></h2>
+      <div class="grid-col row row--flush row--thirds">
+        <div class="grid-col">
+          <h3><?php echo $pdfs_title; ?></h3>
+          <?php echo $pdfs_text; ?>
+        </div>
+        <div class="grid-col">
+          <h3><?php echo $social_media_title; ?></h3>
+          <ul>
+            <?php
+              foreach($social_media_accounts as $item):
+              $item_title = $item['social_media_site'];
+              $item_url = $item['social_media_url'];
+            ?>
+              <li>
+                <a href="<?php echo $item_url; ?>"><?php echo $item_title; ?></a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
 <?php endwhile;?>
 <?php get_footer(); ?>

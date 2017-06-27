@@ -57,8 +57,13 @@ h4, .h4 {
 }
 
 h1, .h1 {
-  font-size: 3.125em; 
+  font-size: 3.125em;
   line-height: 1.02;
+}
+
+h2, .h2 {
+  font-size: 1.5em;
+  line-height: 1.1;
 }
 
 .h2-variant,
@@ -89,6 +94,10 @@ p, ul, ol, blockquote {
 @media (max-width: $bp-m) {
   body {
     font-size: 87.5%;
+  }
+
+  h2, .h2 {
+    font-size: 1.25rem;
   }
 }
 
