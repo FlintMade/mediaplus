@@ -45,6 +45,18 @@
   font-size: 1em;
 }
 
+@media (min-width: $bp-l) and (max-width: $bp-xl) {
+  .footer__contact > .grid-col {
+    float: none;
+    display: inline-block;
+    width: auto;
+  }
+
+  .footer__contact > .grid-col + .grid-col {
+    margin-top: 0;
+  }
+}
+
 @media (min-width: $bp-l) {
   .footer {
     margin-top: 5em;

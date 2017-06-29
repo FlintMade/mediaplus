@@ -12,7 +12,7 @@
         $social_media_accounts = get_field('social_media_accounts', 13);
       ?>
       <div class="row row--halves">
-        <div class="grid-col row row--flush row--thirds">
+        <div class="grid-col row row--flush row--thirds footer__contact">
           <div class="grid-col">
             <h2><?php echo $footer_address_title; ?></h2>
             <p>
