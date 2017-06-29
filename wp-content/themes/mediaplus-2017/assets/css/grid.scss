@@ -132,24 +132,3 @@
     padding: 0 $space-xl;
   }
 }
-
-@media (min-width: $bp-l) and (max-width: $bp-xl) {
-  /* Float nested columns as halves */
-  .grid-col .grid-col {
-    width: calc(50% - 1rem);
-  }
-
-  .grid-col .grid-col + .grid-col {
-    margin: $space-l 0 0 0;
-    clear: both;
-
-    &:nth-child(2) {
-      margin-top: 0;
-    }
-
-    &:nth-child(even) {
-      margin-left: $space-m;
-      clear: none;
-    }
-  }
-}
