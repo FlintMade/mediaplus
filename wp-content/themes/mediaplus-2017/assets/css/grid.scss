@@ -19,6 +19,12 @@
   margin-top: 4.5rem; /* 72px */
 }
 
+.contain {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 70em;
+}
+
 .row {
   padding: 0 $space-s-em;
   padding: 0 $space-s;
@@ -26,6 +32,10 @@
 
 .row--flush {
   padding: 0;
+}
+
+.grid-col {
+  margin-bottom: 0;
 }
 
 .grid-col + .grid-col {
@@ -93,6 +103,7 @@
 @media (min-width: $bp-m) {
   .contain {
     padding: 0 $space-m;
+    max-width: 125em;
   }
 
   .page-section + .page-section {
@@ -125,7 +136,7 @@
 @media (min-width: $bp-l) and (max-width: $bp-xl) {
   /* Float nested columns as halves */
   .grid-col .grid-col {
-    width: calc(50% - #{$space-m});
+    width: calc(50% - 1rem);
   }
 
   .grid-col .grid-col + .grid-col {

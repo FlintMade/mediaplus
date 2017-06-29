@@ -7,14 +7,14 @@
   $expertise_title = get_field('expertise_title');
 ?>
 <div class="contain">
-  <div class="row row--third-two-thirds">
+  <div class="page-section--feature row row--third-two-thirds">
     <div class="grid-col">
-      <h1><?php echo $inpage_title; ?></h1>
+      <h1 class="h2"><?php echo $inpage_title; ?></h1>
     </div>
-    <div class="grid-col">
+    <div class="grid-col row row--flush row--thirds biz-attributes">
 
       <!-- OFFERINGS -->
-      <section>
+      <section class="grid-col">
         <?php
           $args = array(
             'post_type' => 'offerings',
@@ -33,7 +33,7 @@
       </section>
 
       <!-- PROCESS ITEMS -->
-      <section>
+      <section class="grid-col">
         <?php
           $args = array(
             'post_type' => 'process',
@@ -46,13 +46,13 @@
         <h2 class="h3"><?php echo $process_title; ?></h2>
         <ul class="meta-items">
           <?php foreach ($items as $item): ?>
-            <li><?php echo get_the_title($item->ID); ?></li>
+            <li data-attr-slug="<?php echo strtolower(str_replace(' ', '-', str_replace(' + ', '-', get_the_title($item->ID)))); ?>"><?php echo get_the_title($item->ID); ?></li>
           <?php endforeach; ?>
         </ul>
       </section>
 
       <!-- EXPERTISE ITEMS -->
-      <section>
+      <section class="grid-col">
         <?php
           $args = array(
             'post_type' => 'expertise',
@@ -65,7 +65,7 @@
         <h2 class="h3"><?php echo $expertise_title; ?></h2>
         <ul class="meta-items">
           <?php foreach ($items as $item): ?>
-            <li><?php echo get_the_title($item->ID); ?></li>
+            <li data-attr-slug="<?php echo strtolower(str_replace(' ', '-', str_replace(' + ', '-', get_the_title($item->ID)))); ?>"><?php echo get_the_title($item->ID); ?></li>
           <?php endforeach; ?>
         </ul>
       </section>
@@ -73,7 +73,7 @@
   </div>
 <?php endwhile;?>
 
-<section aria-label="Client list">
+<section class="page-section" aria-label="Client list">
   <?php
     $args = array(
       'post_type' => 'clientele',
@@ -86,17 +86,27 @@
   <ul class="meta-items clients">
     <?php foreach ($items as $item): ?>
       <li class="row row--third-two-thirds client">
-        <div class="grid-col">
+        <div class="grid-col client__header">
           <?php echo get_the_title($item->ID); ?>
-          <button>Expand details</button>
-          <?php echo get_field('dates_of_service', $item->ID); ?>
+          <button class="row-toggle" aria-label="Expand client details" aria-expanded="false" aria-controls="details-<?php echo $item->post_name; ?>">
+            <svg class="row-toggle__expand" role="img" title="Media plus"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#expand"></use></svg>
+            <svg class="row-toggle__collapse" role="img" title="Media plus"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#collapse"></use></svg>
+          </button>
         </div>
-        <div class="grid-col">
+
+        <div id="details-<?php echo $item->post_name; ?>" class="grid-col row row--flush row--thirds">
+
+          <!-- CLIENT DATES -->
+          <div class="grid-col client__dates">
+            <?php echo get_field('dates_of_service', $item->ID); ?>
+          </div>
+
+          <!-- CLIENT PROCESS ITEMS -->
           <?php 
             $posts = get_field('process_items', $item->ID);
             if($posts):
           ?>
-            <ul>
+            <ul class="grid-col client__details-list" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
               <?php foreach($posts as $post): ?>
                 <?php setup_postdata($post); ?>
                 <li><?php the_title(); ?></li>
@@ -105,11 +115,12 @@
             <?php wp_reset_postdata(); ?>
           <?php endif; ?>
 
+          <!-- CLIENT EXPERTISE AREAS -->
           <?php 
             $posts = get_field('relevant_expertise', $item->ID);
             if($posts):
           ?>
-            <ul>
+            <ul class="grid-col client__details-list" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
               <?php foreach($posts as $post): ?>
                 <?php setup_postdata($post); ?>
                 <li><?php the_title(); ?></li>

@@ -1,0 +1,160 @@
+/*
+ *	=============================================
+ *	CLIENTS PAGE
+ *	=============================================
+ */
+
+/*
+ *	COMPANY ATTRIBUTES
+ *  See also "Hover + Toggle States"
+ *	---------------------------------------------
+ */
+
+@media (max-width: $bp-l) {
+  /* Float nested columns as halves */
+  .biz-attributes .grid-col {
+    float: left;
+    width: calc(50% - 1rem);
+  }
+
+  .biz-attributes .grid-col + .grid-col {
+    margin: $space-l 0 0 0;
+    clear: both;
+
+    &:nth-child(2) {
+      margin-top: 0;
+    }
+
+    &:nth-child(even) {
+      margin-left: $space-m;
+      clear: none;
+    }
+  }
+}
+
+/*
+ *	CLIENT ROWS
+ *  See also "Hover + Toggle States"
+ *	---------------------------------------------
+ */
+
+.client {
+  position: relative;
+  padding-top: $space-xs;
+  border-top: 1px solid $grey-light;
+}
+
+.client + .client {
+  margin-top: $space-xs;
+}
+
+.client__details-list {
+  overflow: hidden;
+  transition: height 400ms;
+}
+
+.row-toggle {
+  display: none;
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  padding: .75rem;
+
+  &:hover,
+  &:focus {
+    svg {
+      fill: $grey-dark;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.row-toggle__collapse,
+.row-toggle__expand {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: $grey-med;
+}
+
+.row-toggle__collapse {
+  display: none;
+}
+
+@media (max-width: $bp-s) {
+  .client__dates {
+    display: none;
+  }
+}
+
+@media (max-width: $bp-m) {
+  .clients {
+    padding: $space-s;
+  }
+
+  .client {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .row-toggle {
+    right: -.75em;
+  }
+  
+  .client .grid-col:not(.client__header) {
+    margin-top: 2rem;
+  }
+}
+
+@media (min-width: $bp-m) {
+  .row-toggle {
+    right: $space-m;
+  }
+}
+
+@media (min-width: $bp-l) and (max-width: $bp-xl) {
+  .grid-col .client__details-list:last-child {
+    float: right;
+    margin-top: $space-s;
+  }
+}
+
+/*
+ *	HOVER + TOGGLE STATES
+ *	---------------------------------------------
+ */
+
+.biz-attributes li {
+  transition: opacity 200ms, color 200ms;
+}
+
+.biz-attributes.active li {
+  opacity: .5;
+}
+
+.biz-attributes.active li:hover {
+  opacity: 1;
+  color: $grey-dark;
+  cursor: default;
+}
+
+.client.active,
+.client.expanded {
+  color: $redorange;
+
+  svg {
+    fill: $redorange;
+  }
+}
+
+.row-toggle[aria-expanded="true"] {
+  .row-toggle__expand {
+    display: none;
+  }
+
+  .row-toggle__collapse {
+    display: block;
+  }
+}
