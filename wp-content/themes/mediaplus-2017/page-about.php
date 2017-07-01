@@ -4,15 +4,14 @@
   <!-- BANNER IMAGE -->
   <?php
     $banner_image = get_field('top_banner_image');
-    $small = $banner_image['sizes']['mediaplus-s'];
-    $medium = $banner_image['sizes']['medium'];
     $large = $banner_image['sizes']['large'];
     $xl = $banner_image['sizes']['mediaplus-xl'];
     $xxl = $banner_image['sizes']['mediaplus-xxl'];
+    $xxxl = $banner_image['sizes']['mediaplus-xxxl'];
     $offerings_title = get_field('offerings_title');
     $process_title = get_field('process_title');
   ?>
-  <div class="page-banner">
+  <div class="page-section page-banner">
     <picture>
       <?php if ($xxl): ?>
         <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
@@ -20,17 +19,12 @@
       <?php if ($xl): ?>
         <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
       <?php endif; ?>
-      <?php if ($large): ?>
-        <source media="(min-width: 640px)" srcset="<?php echo $large; ?>">
-      <?php endif; ?>
-      <source media="(min-width: 480px)" srcset="<?php echo $medium; ?>">
-      <source media="(min-width: 0)" srcset="<?php echo $small; ?>">
       <img src="<?php echo $large; ?>" alt="" role="none" />
     </picture>
   </div>
 
-  <div class="contain">
-    <div class="row row--halves">
+  <div class="contain page-section">
+    <div class="page-section row row--halves">
       <div class="grid-col row row--flush row--thirds">
 
         <!-- OFFERINGS -->
@@ -81,7 +75,7 @@
   <?php endwhile;?>
 
   <!-- TEAM MEMBERS -->
-  <section class="row row--flush row--halves team" aria-label="The team">
+  <section class="page-section row row--flush row--halves team" aria-label="The team">
     <?php
       $args = array(
         'post_type' => 'people',
@@ -93,9 +87,31 @@
       foreach ($items as $item):
     ?>
       <div class="person grid-col">
-        <h3><?php echo $item->post_title; ?></h3>
-        <p><?php echo get_field('person_title', $item->ID) ?></p>
-        <div class="person__bio">
+        <?php
+          $person_image = get_field('person_image', $item->ID);
+          $medium = $person_image['sizes']['medium'];
+          $large = $person_image['sizes']['large'];
+          $xl = $person_image['sizes']['mediaplus-person-xl'];
+        ?>
+        <div class="person__image">
+          <picture>
+            <?php if ($xl): ?>
+              <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
+            <?php endif; ?>
+            <?php if ($large): ?>
+              <source media="(min-width: 576px)" srcset="<?php echo $large; ?>">
+            <?php endif; ?>
+            <img src="<?php echo $medium; ?>" alt="" role="none" />
+          </picture>
+        </div>
+
+        <div class="person__initial">
+          <h3><?php echo $item->post_title; ?></h3>
+          <p><?php echo get_field('person_title', $item->ID) ?></p>
+          <button class="person__expand" aria-label="More Info">More Info+</button>
+        </div>
+
+        <div class="person__more">
           <?php echo wpautop($item->post_content); ?>
         </div>
       </div>

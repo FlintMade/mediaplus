@@ -1,0 +1,99 @@
+/*
+ *	=============================================
+ *	ABOUT PAGE
+ *	=============================================
+ */
+
+.page-id-7 .page-content {
+  margin-top: 0;
+}
+
+/*
+ *	PAGE BANNER
+ *	---------------------------------------------
+ */
+
+.page-banner,
+.person__image {
+  position: relative;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+
+  picture {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  picture img {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 100%;
+    margin-left: -200%;
+  }
+}
+
+.page-banner {
+  padding-top: 400px;
+}
+
+@media (min-width: $bp-m) {
+  .page-banner {
+    padding-top: 50%;
+
+    picture, img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/*
+ *	TEAM
+ *	---------------------------------------------
+ */
+
+.person {
+  position: relative;
+  background: #f7f7f7;
+}
+
+.person__image {
+  position: absolute;
+  z-index: 1;
+
+  picture, img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.person__initial,
+.person__more {
+  position: relative;
+  padding: $space-s-em;
+  padding: $space-s;
+}
+
+.person__initial {
+  z-index: 3;
+}
+
+.person__more {
+  z-index: 2;
+}
+
+@media (min-width: $bp-s) {
+  .person__initial,
+  .person__more {
+    padding: $space-m;
+  }
+}

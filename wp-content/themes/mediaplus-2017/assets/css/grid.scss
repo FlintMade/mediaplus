@@ -67,8 +67,20 @@
     margin: 0 0 0 $space-m;
   }
 
-  .row--halves > .grid-col {
-    width: calc(50% - #{$space-xs});
+  .row--halves {
+    > .grid-col {
+      margin-top: $space-l;
+      width: calc(50% - (#{$space-m}/2));
+    }
+
+    > .grid-col:nth-child(-n + 2) {
+      margin-top: 0;
+    }
+
+    > .grid-col:nth-child(2n+1) {
+      margin-left: 0;
+      clear: both;
+    }
   }
 
   .row--thirds > .grid-col {
@@ -106,7 +118,7 @@
 @media (min-width: $bp-m) {
   .contain {
     padding: 0 $space-m;
-    max-width: 125em;
+    max-width: 128em; /* 2048px */
   }
 
   .page-section + .page-section {
