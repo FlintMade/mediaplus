@@ -85,26 +85,11 @@
       );
       $items = get_posts($args);
       foreach ($items as $item):
+      $person_image = get_field('person_image', $item->ID);
+      $xl = $person_image['sizes']['mediaplus-person-xl'];
+      $large = $person_image['sizes']['large'];
     ?>
-      <div class="person grid-col">
-        <?php
-          $person_image = get_field('person_image', $item->ID);
-          $medium = $person_image['sizes']['medium'];
-          $large = $person_image['sizes']['large'];
-          $xl = $person_image['sizes']['mediaplus-person-xl'];
-        ?>
-        <div class="person__image">
-          <picture>
-            <?php if ($xl): ?>
-              <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
-            <?php endif; ?>
-            <?php if ($large): ?>
-              <source media="(min-width: 576px)" srcset="<?php echo $large; ?>">
-            <?php endif; ?>
-            <img src="<?php echo $medium; ?>" alt="" role="none" />
-          </picture>
-        </div>
-
+      <div class="person grid-col" <?php if ($large){echo 'style="background-image: url(\'' . $large . '\')"';} ?>>
         <div class="person__initial">
           <h3><?php echo $item->post_title; ?></h3>
           <p><?php echo get_field('person_title', $item->ID) ?></p>

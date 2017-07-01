@@ -13,8 +13,7 @@
  *	---------------------------------------------
  */
 
-.page-banner,
-.person__image {
+.page-banner {
   position: relative;
   z-index: -1;
   height: 100%;
@@ -64,16 +63,8 @@
 .person {
   position: relative;
   background: #f7f7f7;
-}
-
-.person__image {
-  position: absolute;
-  z-index: 1;
-
-  picture, img {
-    width: 100%;
-    height: auto;
-  }
+  background-position: center;
+  background-size: cover;
 }
 
 .person__initial,
@@ -84,11 +75,14 @@
 }
 
 .person__initial {
-  z-index: 3;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
 }
 
 .person__more {
-  z-index: 2;
+  z-index: 1;
 }
 
 @media (min-width: $bp-s) {
