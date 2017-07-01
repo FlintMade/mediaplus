@@ -73,7 +73,8 @@
   </div>
 <?php endwhile;?>
 
-<section class="page-section" aria-label="Client list">
+<section class="page-section">
+  <h2 class="sr-only">Client list</h2>
   <?php
     $args = array(
       'post_type' => 'clientele',
@@ -87,47 +88,64 @@
     <?php foreach ($items as $item): ?>
       <li class="row row--third-two-thirds client">
         <div class="grid-col client__header">
-          <?php echo get_the_title($item->ID); ?>
+          <h3><?php echo get_the_title($item->ID); ?></h3>
           <button class="row-toggle" aria-label="Expand client details" aria-expanded="false" aria-controls="details-<?php echo $item->post_name; ?>">
             <svg class="row-toggle__expand" role="img" title="Media plus"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#expand"></use></svg>
             <svg class="row-toggle__collapse" role="img" title="Media plus"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#collapse"></use></svg>
           </button>
         </div>
 
-        <div id="details-<?php echo $item->post_name; ?>" class="grid-col row row--flush row--thirds">
+        <div id="details-<?php echo $item->post_name; ?>" class="grid-col client__details">
+          <div class="client__details-interior">
+            <div class="row row--flush row--thirds">
+              <!-- CLIENT DATES -->
+              <div class="client__dates">
+                <?php echo get_field('dates_of_service', $item->ID); ?>
+              </div>
 
-          <!-- CLIENT DATES -->
-          <div class="grid-col client__dates">
-            <?php echo get_field('dates_of_service', $item->ID); ?>
+              <!-- CLIENT PROCESS ITEMS -->
+              <?php 
+                $posts = get_field('process_items', $item->ID);
+                if($posts):
+              ?>
+                <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
+                  <h4 aria-label="Services for this client">Service</h4>
+                  <ul class="client__details-list">
+                    <?php foreach($posts as $post): ?>
+                      <?php setup_postdata($post); ?>
+                      <li><?php the_title(); ?></li>
+                    <?php endforeach; ?>
+                  </ul>
+                </div>
+                <?php wp_reset_postdata(); ?>
+              <?php endif; ?>
+
+              <!-- CLIENT EXPERTISE AREAS -->
+              <?php 
+                $posts = get_field('relevant_expertise', $item->ID);
+                if($posts):
+              ?>
+                <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
+                  <h4 aria-label="Client category">Category</h4>
+                  <ul class="client__details-list">
+                    <?php foreach($posts as $post): ?>
+                      <?php setup_postdata($post); ?>
+                      <li><?php the_title(); ?></li>
+                    <?php endforeach; ?>
+                  </ul>
+                </div>
+                <?php wp_reset_postdata(); ?>
+              <?php endif; ?>
+            </div>
+
+            <!-- MORE INFO LINK -->
+            <?php
+              $more_info_link = get_field('more', $item->ID);
+              if ($more_info_link):
+            ?>
+              <a class="more-link client__more" href="<?php echo $more_info_link; ?>">More info <?php include('svgs/arrow.svg'); ?></a>
+            <?php endif; ?>
           </div>
-
-          <!-- CLIENT PROCESS ITEMS -->
-          <?php 
-            $posts = get_field('process_items', $item->ID);
-            if($posts):
-          ?>
-            <ul class="grid-col client__details-list" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
-              <?php foreach($posts as $post): ?>
-                <?php setup_postdata($post); ?>
-                <li><?php the_title(); ?></li>
-              <?php endforeach; ?>
-            </ul>
-            <?php wp_reset_postdata(); ?>
-          <?php endif; ?>
-
-          <!-- CLIENT EXPERTISE AREAS -->
-          <?php 
-            $posts = get_field('relevant_expertise', $item->ID);
-            if($posts):
-          ?>
-            <ul class="grid-col client__details-list" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
-              <?php foreach($posts as $post): ?>
-                <?php setup_postdata($post); ?>
-                <li><?php the_title(); ?></li>
-              <?php endforeach; ?>
-            </ul>
-            <?php wp_reset_postdata(); ?>
-          <?php endif; ?>
         </div>
       </li>
     <?php endforeach; ?>

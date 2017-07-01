@@ -31,6 +31,7 @@ body {
 a:link, a:visited {
   border-bottom: 1px solid;
   text-decoration: none;
+  color: inherit;
 }
 
 a:hover {
@@ -121,6 +122,15 @@ button {
  *	---------------------------------------------
  */
 
+/* Accessibly hide visually */
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute !important;
+}
+
 .clear:after, .clear::after,
 .row:after, .row::after {
   content: "";
@@ -146,5 +156,43 @@ button {
 
   ul, ol {
     list-style: none;
+  }
+}
+
+/*
+ *	"MORE INFO" LINKS
+ *	---------------------------------------------
+ */
+
+.more-link {
+  font-size: 1rem;
+  font-family: $font-heading;
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: .625rem;
+    width: 35px;
+    width: 2.1875rem;
+    height: 35px;
+    height: 2.1875rem;
+  }
+}
+
+/* More specific to override base link styles */
+a.more-link {
+  border-bottom: 0;
+  color: $grey-light;
+
+  &:hover {
+    color: $redorange;
+
+    .arrow-circle {
+      fill: $redorange;
+    }
+
+    .arrow-stroke {
+      fill: #fff;
+    }
   }
 }

@@ -74,12 +74,18 @@ add_action( 'after_setup_theme', 'mediaplus_setup' );
 function mediaplus_scripts() {
 	// Theme stylesheets
 	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array());
+
 	// Load the html5 shiv.
 	wp_enqueue_script('html5', get_theme_file_uri('/assets/js/html5.js'), array(), false, false);
 	wp_script_add_data('html5', 'conditional', 'lt IE 9');
 
 	// Load theme scripts
 	wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/scripts.js'), array(), false, true);
+
+	// Load page-specific scripts
+	if (is_page(11)) {
+		wp_enqueue_script('clientScripts', get_theme_file_uri('/assets/js/clients.js'), array('scripts'), false, true);
+	}
 
 	// Remove silly WP stuff
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );

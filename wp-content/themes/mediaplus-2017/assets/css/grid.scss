@@ -71,8 +71,7 @@
     width: calc(50% - #{$space-xs});
   }
 
-  .row--thirds > .grid-col,
-  .row--third-two-thirds > .grid-col {
+  .row--thirds > .grid-col {
     width: calc(33.333% - (2 *#{$space-m})/3);
   }
 
@@ -91,8 +90,12 @@
     }
   }
 
+  .row--third-two-thirds > .grid-col {
+    width: calc(33.333% - #{$space-m}/2);
+  }
+
   .row--third-two-thirds > .grid-col:last-child {
-    width: calc(66.666% - (2 *#{$space-m})/3);
+    width: calc(66.666% - #{$space-m}/2);
   }
 
   .grid-col--right {

@@ -34,7 +34,7 @@
 
 /*
  *	CLIENT ROWS
- *  See also "Hover + Toggle States"
+ *  See also "Active state" and "Toggle states"
  *	---------------------------------------------
  */
 
@@ -42,15 +42,16 @@
   position: relative;
   padding-top: $space-xs;
   border-top: 1px solid $grey-light;
+  
+  h3, h4 {
+    margin-bottom: 0;
+    font: 400 100%/1.75 $font-body;
+    color: $grey-med;
+  }
 }
 
 .client + .client {
   margin-top: $space-xs;
-}
-
-.client__details-list {
-  overflow: hidden;
-  transition: height 400ms;
 }
 
 .row-toggle {
@@ -58,6 +59,7 @@
   position: absolute;
   top: .5rem;
   right: .5rem;
+  margin-right: -.75rem;
   padding: .75rem;
 
   &:hover,
@@ -83,10 +85,24 @@
   display: none;
 }
 
-@media (max-width: $bp-s) {
-  .client__dates {
-    display: none;
-  }
+.client__details {
+  transition: height 400ms;
+}
+
+.client__details,
+.client__details-section {
+  overflow: hidden;
+}
+
+.client__details-section {
+  margin-top: 1.5rem;
+}
+
+.client__more {
+  float: right;
+  clear: both;
+  margin-top: 2.25em;
+  margin-top: 2.25rem;
 }
 
 @media (max-width: $bp-m) {
@@ -99,12 +115,19 @@
     padding-left: 0;
   }
 
-  .row-toggle {
-    right: -.75em;
+  .client h3,
+  .client h4 {
+    font-size: 1.14em;
   }
-  
-  .client .grid-col:not(.client__header) {
-    margin-top: 2rem;
+}
+
+@media (min-width: $bp-s) {
+  .client__dates + .client__details-section {
+    margin-top: 0;
+  }
+
+  .client__more {
+    margin-top: 1em;
   }
 }
 
@@ -114,15 +137,49 @@
   }
 }
 
-@media (min-width: $bp-l) and (max-width: $bp-xl) {
-  .grid-col .client__details-list:last-child {
+@media (max-width: $bp-clients-s) {
+  .grid-col + .client__details {
+    margin-top: 0;
+  }
+
+  .client__dates {
+    display: none;
+  }
+
+  .client__details-section h4 {
+    float: left;
+    width: 6em;
+    color: $grey-dark;
+  }
+
+  .client__details-list {
     float: right;
-    margin-top: $space-s;
+    width: calc(100% - 8.5em);
+  }
+}
+
+@media (min-width: $bp-clients-l) {
+  .client__dates,
+  .client__details-section {
+    float: left;
+    width: calc(33.333% - (2 *#{$space-m})/3);
+  }
+
+  .client__details-section {
+    margin: 0 0 0 $space-m;
+  }
+
+  .client__details-section h4 {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute !important;
   }
 }
 
 /*
- *	HOVER + TOGGLE STATES
+ *	ACTIVE STATE
  *	---------------------------------------------
  */
 
@@ -130,22 +187,43 @@
   transition: opacity 200ms, color 200ms;
 }
 
-.biz-attributes.active li {
+.biz-attributes.active li,
+.biz-attributes.filtered li {
   opacity: .5;
 }
 
-.biz-attributes.active li:hover {
+.biz-attributes.active li:hover,
+.biz-attributes.filtered li:hover,
+.biz-attributes.filtered .current {
   opacity: 1;
   color: $grey-dark;
-  cursor: default;
+  cursor: pointer;
 }
 
-.client.active,
-.client.expanded {
-  color: $redorange;
+.client.filtered {
+  color: $grey-dark;
+
+  h3, h4 {
+    color: $grey-dark;
+  }
 
   svg {
+    fill: $grey-dark;
+  }
+}
+
+/*
+ *	TOGGLE STATES
+ *	---------------------------------------------
+ */
+
+.client.expanded {
+  svg {
     fill: $redorange;
+  }
+
+  h3 {
+    color: $redorange;
   }
 }
 
@@ -156,5 +234,11 @@
 
   .row-toggle__collapse {
     display: block;
+  }
+}
+
+@media (min-width: $bp-clients-l) {
+  .client.expanded {
+    color: $redorange;
   }
 }
