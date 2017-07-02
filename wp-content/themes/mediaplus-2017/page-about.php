@@ -92,11 +92,14 @@
       <div class="person grid-col" <?php if ($large){echo 'style="background-image: url(\'' . $large . '\')"';} ?>>
         <div class="person__initial">
           <h3><?php echo $item->post_title; ?></h3>
-          <p><?php echo get_field('person_title', $item->ID) ?></p>
-          <button class="person__expand" aria-label="More Info">More Info+</button>
+          <p class="meta"><?php echo get_field('person_title', $item->ID) ?></p>
         </div>
 
-        <div class="person__more">
+        <button class="meta person__toggle" aria-expanded="false" aria-controls="bio-<?php echo $item->post_name; ?>" data-name="<?php echo $item->post_title; ?>">
+          <span aria-label="View more info about <?php echo $item->post_name; ?>">More Info+</span>
+        </button>
+
+        <div class="person__more" id="bio-<?php echo $item->post_name; ?>">
           <?php echo wpautop($item->post_content); ?>
         </div>
       </div>

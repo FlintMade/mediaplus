@@ -86,6 +86,10 @@ function mediaplus_scripts() {
 	wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/scripts.js'), array(), false, true);
 
 	// Load page-specific scripts
+	if (is_page(7)) {
+		wp_enqueue_script('aboutScripts', get_theme_file_uri('/assets/js/about.js'), array('scripts'), false, true);
+	}
+
 	if (is_page(11)) {
 		wp_enqueue_script('clientScripts', get_theme_file_uri('/assets/js/clients.js'), array('scripts'), false, true);
 	}

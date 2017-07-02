@@ -46,7 +46,7 @@
 
 @media (min-width: $bp-m) {
   .page-banner {
-    padding-top: 50%;
+    padding-top: 46%;
 
     picture, img {
       width: 100%;
@@ -57,37 +57,194 @@
 
 /*
  *	TEAM
+ *  See also "Bio states"
  *	---------------------------------------------
  */
 
 .person {
   position: relative;
   background: #f7f7f7;
-  background-position: center;
+  background-position: center left;
   background-size: cover;
+
+  h3 {
+    margin-bottom: 0;
+    font-size: 1.14em;
+    color: $grey-dark;
+  }
+
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+
+  &:hover {
+    &:after {
+      opacity: .33;
+    }
+  }
 }
 
 .person__initial,
-.person__more {
-  position: relative;
+.person__more,
+.person__toggle,
+.person__toggle span {
   padding: $space-s-em;
   padding: $space-s;
 }
 
 .person__initial {
   position: absolute;
-  bottom: 0;
+  z-index: 3;
+  top: calc(100% - 8em);
   left: 0;
-  z-index: 2;
+  transition: top 400ms;
 }
 
 .person__more {
-  z-index: 1;
+  position: relative;
+  z-index: 2;
+  padding-top: 6em; /* Space for name, etc */
+  background: #f7f7f7;
+  min-height: 300px;
+  height: 100%;
+  transition: opacity 500ms;
+
+  p {
+    max-width: 32em;
+  }
+}
+
+.person__toggle {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  font: 1.14em/1 $font-body;
+  color: $grey-med;
+  &:hover,
+  &:focus {
+    color: $grey-dark;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.person .meta {
+  font-size: 1.14em;
 }
 
 @media (min-width: $bp-s) {
   .person__initial,
-  .person__more {
+  .person__more,
+  .person__toggle,
+  .person__toggle span {
     padding: $space-m;
   }
+
+  .person__initial {
+    top: calc(100% - 9em);
+  }
+
+  .person__more {
+    padding-left: 14.5em;
+    min-height: 460px;
+  }
+}
+
+@media (max-width: $bp-l) {
+  .person + .person {
+    margin-top: $space-m;
+  }
+}
+
+@media (min-width: $bp-s) and (max-width: $bp-l) {
+  /* Unfloat nested columns */
+  .team .person {
+    float: none;
+    width: 100%;
+  }
+
+  .person + .person,
+  .person + .person:nth-child(2) {
+    margin: $space-m 0 0;
+  }
+}
+
+@media (min-width: $bp-m) {
+  .person {
+    h3 {
+      font-size: 1.125em;
+    }
+  }
+
+  .person__toggle,
+  .person .meta {
+    font-size: .875em;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .person {
+    background-position: center;
+  }
+
+  /* Make rows of people consistent heights, only if flex wrap supported */
+  @supports (flex-wrap: wrap) {
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+@media (min-width: $bp-l) and (max-width: $bp-xl) {
+  .person__more {
+    padding-top: 6em; /* Space for name, etc */
+    padding-left: $space-m;
+  }
+}
+
+/*
+ *	BIO STATES
+ *	---------------------------------------------
+ */
+
+.person.active {
+  .person__initial {
+    top: 0;
+  }
+}
+
+.person__toggle[aria-expanded="true"] {
+  height: auto;
+
+  &:after {
+    display: none;
+  }
+}
+
+.person__more[aria-hidden="true"] {
+  opacity: 0;
 }

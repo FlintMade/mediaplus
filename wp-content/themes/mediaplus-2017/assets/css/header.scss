@@ -42,6 +42,11 @@
  *	CONTEXT: LOGO + PAGE LABEL
  *	---------------------------------------------
  */
+
+.header {
+  z-index: 999;
+}
+
 .header__context {
   float: left;
 }
