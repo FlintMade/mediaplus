@@ -127,3 +127,94 @@
     }
   }
 }
+
+/*
+ *	INDIVIDUAL POST
+ *	---------------------------------------------
+ */
+
+.post-content {
+  position: relative;
+
+  a:link, a:visited {
+    color: $redorange;
+  }
+
+  a:hover {
+    border-bottom: 0;
+    color: $grey-dark;
+  }
+
+  * {
+    margin-bottom: 1.5em;
+  }
+
+  li {
+    margin-bottom: .75em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: $space-l-em 0 1em;
+    margin: $space-l 0 1em;
+  }
+
+  .post-content__title {
+    margin-top: 0;
+  }
+
+  blockquote {
+    margin: 1em 0;
+    font: 600 2em/1.2 $font-heading;
+    color: $redorange;
+
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: $bp-s) {
+  .post-content {
+    blockquote {
+      font-size: 2.625em;
+    }
+  }
+}
+
+@media (min-width: 54em) {
+  .post-content {
+    position: relative;
+
+    > * {
+      padding-left: calc(100% - 36em);
+      padding-left: calc(100% - 36rem);
+      max-width: 100%;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      float: left;
+      padding-left: 0;
+      max-width: calc(100% - 40em);
+      max-width: calc(100% - 40rem);
+
+      + * {
+        margin-top: $space-xl-em;
+        margin-top: $space-xl;
+      }
+    }
+
+    blockquote {
+      padding-left: 0;
+      max-width: 70%;
+    }
+  }
+}
+
+@media (min-width: $bp-xl) {
+  .post-content {
+    blockquote {
+      max-width: calc(100% - 40em);
+      max-width: calc(100% - 40rem);
+    }
+  }
+}
