@@ -31,7 +31,6 @@
 
     <div class="header__tray">
       <div class="header__tray-content">
-        <a class="skip-nav" href="#main">Skip to main content</a>
         <nav id="js-menu" class="header__menu" role="navigation">
           <?php wp_nav_menu(array('theme_location' => 'header-menu', 'container_id' => 'js-menu-contents')); ?>
         </nav>
@@ -51,4 +50,4 @@
       </div>
     </div>
   </header>
-  <main role="main" id="main" class="page-content">
+  <main role="main" class="page-content">
