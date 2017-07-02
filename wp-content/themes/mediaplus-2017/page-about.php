@@ -25,7 +25,7 @@
 
   <div class="contain page-section">
     <div class="page-section row row--halves">
-      <div class="grid-col row row--flush row--thirds">
+      <div class="grid-col row row--flush row--third-two-thirds about-attrs">
 
         <!-- OFFERINGS -->
         <?php

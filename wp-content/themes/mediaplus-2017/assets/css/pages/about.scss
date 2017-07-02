@@ -56,6 +56,34 @@
 }
 
 /*
+ *	COMPANY INFO
+ *	---------------------------------------------
+ */
+
+@media (max-width: $bp-s) {
+  .about-attrs .grid-col {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .about-attrs .grid-col + .grid-col {
+    margin: 0 0 0 $space-m;
+  }
+}
+
+@media (min-width: $bp-l) and (max-width: $bp-xl) {
+  /* Unfloat nested columns */
+  .about-attrs .grid-col {
+    float: none;
+    width: 100%;
+  }
+
+  .about-attrs .grid-col + .grid-col {
+    margin: $space-l 0 0;
+  }
+}
+
+/*
  *	TEAM
  *  See also "Bio states"
  *	---------------------------------------------
