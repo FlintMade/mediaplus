@@ -1,0 +1,95 @@
+/*
+ *	=============================================
+ *	COMPONENTS
+ *	=============================================
+ */
+
+/*
+ *	META ITEMS
+ *	---------------------------------------------
+ */
+
+.meta-items {
+  list-style: none;
+  color: $grey-med;
+
+  ul, ol {
+    list-style: none;
+  }
+}
+
+/*
+ *	ROW ITEMS
+ *  Used for clients, contact rows, and journal
+ *  post previews
+ *	---------------------------------------------
+ */
+
+.row-item {
+  padding-top: $space-xs;
+  border-top: 1px solid $grey-light;
+}
+
+.row-item + .row-item {
+  margin-top: $space-xs;
+}
+
+@media (max-width: $bp-m) {
+  .row-items {
+    padding: 0 $space-s;
+  }
+
+  .row-item {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: $bp-m) {
+  .row-item {
+    padding-top: 1.5em;
+  }
+
+  .row-item + .row-item {
+    margin-top: 1.5em;
+  }
+}
+
+/*
+ *	"MORE INFO" LINKS
+ *	---------------------------------------------
+ */
+
+.more-link {
+  display: inline-block;
+  font-size: 1rem;
+  font-family: $font-heading;
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: .625rem;
+    width: 35px;
+    width: 2.1875rem;
+    height: 35px;
+    height: 2.1875rem;
+  }
+}
+
+/* More specific to override base link styles */
+a.more-link {
+  border-bottom: 0;
+  color: $grey-light;
+
+  &:hover {
+    color: $redorange;
+
+    .arrow-circle {
+      fill: $redorange;
+    }
+
+    .arrow-stroke {
+      fill: #fff;
+    }
+  }
+}

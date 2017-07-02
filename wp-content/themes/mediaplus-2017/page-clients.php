@@ -84,9 +84,9 @@
     );
     $items = get_posts($args);
   ?>
-  <ul class="meta-items clients">
+  <ul class="meta-items row-items clients">
     <?php foreach ($items as $item): ?>
-      <li class="row row--third-two-thirds client">
+      <li class="row row--third-two-thirds row-item client">
         <div class="grid-col client__header">
           <h3><?php echo get_the_title($item->ID); ?></h3>
           <button class="row-toggle" aria-label="Expand client details" aria-expanded="false" aria-controls="details-<?php echo $item->post_name; ?>">

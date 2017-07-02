@@ -11,7 +11,14 @@
 }
 
 body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   font: 400 100%/1.75 $font-body;
+}
+
+main {
+  flex: 1;
 }
 
 :focus {
@@ -137,62 +144,4 @@ button {
   display: table;
   clear: both;
   width: 100%;
-}
-
-/*
- *	=============================================
- *	COMPONENTS
- *	=============================================
- */
-
-/*
- *	META ITEMS
- *	---------------------------------------------
- */
-
-.meta-items {
-  list-style: none;
-  color: $grey-med;
-
-  ul, ol {
-    list-style: none;
-  }
-}
-
-/*
- *	"MORE INFO" LINKS
- *	---------------------------------------------
- */
-
-.more-link {
-  font-size: 1rem;
-  font-family: $font-heading;
-
-  svg {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: .625rem;
-    width: 35px;
-    width: 2.1875rem;
-    height: 35px;
-    height: 2.1875rem;
-  }
-}
-
-/* More specific to override base link styles */
-a.more-link {
-  border-bottom: 0;
-  color: $grey-light;
-
-  &:hover {
-    color: $redorange;
-
-    .arrow-circle {
-      fill: $redorange;
-    }
-
-    .arrow-stroke {
-      fill: #fff;
-    }
-  }
 }

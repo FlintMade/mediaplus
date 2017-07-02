@@ -28,8 +28,8 @@
       </p>
     </div>
   </section>
-  <div class="page-section contact-rows">
-    <section class="row row--third-two-thirds contact-row">
+  <div class="page-section row-items contact-rows">
+    <section class="row row--third-two-thirds row-item contact-row">
       <h2 class="grid-col"><?php echo $inquiries_section_title; ?></h2>
       <ul class="grid-col row row--flush row--thirds inquiry-types">
         <?php
@@ -48,7 +48,7 @@
         <?php endforeach; ?>
       </ul>
     </section>
-    <section class="row row--third-two-thirds contact-row">
+    <section class="row row--third-two-thirds row-item contact-row">
       <h2 class="grid-col"><?php echo $additional_section_title; ?></h2>
       <div class="grid-col row row--flush row--thirds">
         <div class="grid-col">

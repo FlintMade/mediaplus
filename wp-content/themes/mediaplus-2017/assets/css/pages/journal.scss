@@ -1,0 +1,100 @@
+/*
+ *	=============================================
+ *	JOURNAL
+ *	=============================================
+ */
+
+/*
+ *	JOURNAL INDEX
+ *	---------------------------------------------
+ */
+
+.post-preview {
+  position: relative;
+
+  &:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+.post-preview__thumb {
+  padding-bottom: 2.9375em; /* Space for more link */
+}
+
+.post__title {
+  a:link, a:visited {
+    border-bottom: 0;
+  }
+}
+
+/* Excerpt */
+.post__title + p {
+  margin-bottom: 0;
+}
+
+.post__date,
+.post__more {
+  position: absolute;
+  bottom: 0;
+}
+
+.post__date {
+  margin-bottom: .4em; /* Override normal p margin and align w/ more link */
+  color: $grey-med;
+  left: 0;
+}
+
+.post__more {
+  right: 0;
+}
+
+.post__placeholder {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: $bp-s) {
+  .grid-col + .post-preview__thumb {
+    margin-top: 2rem;
+  }
+}
+
+@media (min-width: $bp-s) {
+  @supports (display: flex) {
+    .post-preview {
+      display: flex;
+      justify-content: space-between;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  .post-preview__info {
+    position: relative;
+    padding-bottom: 4em; /* Space for more link */
+  }
+
+  .post-preview__thumb {
+    padding-bottom: 0;
+  }  
+}
+
+@media (min-width: $bp-m) {
+  .post__date {
+    font-size: .875em;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .post-preview > .grid-col {
+    width: calc(50% - #{$space-xl}/2);
+
+    &:last-child {
+      float: right;
+    }
+  }
+}

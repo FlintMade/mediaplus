@@ -52,18 +52,12 @@
 
 .client {
   position: relative;
-  padding-top: $space-xs;
-  border-top: 1px solid $grey-light;
   
   h3, h4 {
     margin-bottom: 0;
     font: 400 100%/1.75 $font-body;
     color: $grey-med;
   }
-}
-
-.client + .client {
-  margin-top: $space-xs;
 }
 
 .row-toggle {
@@ -118,15 +112,6 @@
 }
 
 @media (max-width: $bp-m) {
-  .clients {
-    padding: $space-s;
-  }
-
-  .client {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
   .client h3,
   .client h4 {
     font-size: 1.14em;
@@ -144,6 +129,14 @@
 }
 
 @media (min-width: $bp-m) {
+  .client {
+    padding-top: 1em;
+  }
+
+  .client + .client {
+    margin-top: 1em;
+  }
+
   .row-toggle {
     right: $space-m;
   }

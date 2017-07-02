@@ -1,0 +1,1 @@
+Looking for an SVG in here you can't find? Please refer to the README in the root of the project for more info.
