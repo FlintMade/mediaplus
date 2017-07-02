@@ -42,38 +42,14 @@ function wpdocs_after_setup_theme() {
     add_theme_support( 'html5', array( 'search-form' ) );
 }
 add_action( 'after_setup_theme', 'wpdocs_after_setup_theme' );
-
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-		'gallery',
-		'audio',
-	) );
-
-	// Add theme support for Custom Logo.
-	add_theme_support( 'custom-logo', array(
-		'width'       => 250,
-		'height'      => 250,
-		'flex-width'  => true,
-	) );
-
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
-
 }
 add_action( 'after_setup_theme', 'mediaplus_setup' );
 
-/**
- * Enqueue scripts and styles.
+/*
+ *	SCRIPTS AND STYLES
+ *	---------------------------------------------
  */
+
 function mediaplus_scripts() {
 	// Theme stylesheets
 	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array());
@@ -99,6 +75,11 @@ function mediaplus_scripts() {
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
 }
 add_action( 'wp_enqueue_scripts', 'mediaplus_scripts' );
+
+/*
+ *	EXCERPTS
+ *	---------------------------------------------
+ */
 
 // Excerpt ellipsis
 function new_excerpt_more($more) {
