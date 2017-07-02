@@ -64,7 +64,7 @@
 .person {
   position: relative;
   background: #f7f7f7;
-  background-position: center left;
+  background-position: center;
   background-size: cover;
 
   h3 {
@@ -155,6 +155,22 @@
   font-size: 1.14em;
 }
 
+.person .person__bio-meta {
+  font-size: 1em;
+}
+
+.person__bio-meta {
+  padding: .5em 0 2.5em;
+}
+
+.person__meta-value + .person__meta-label {
+  margin-top: 1em;
+}
+
+.person__meta-value {
+  color: $grey-med;
+}
+
 @media (min-width: $bp-s) {
   .person__initial,
   .person__more,
@@ -173,12 +189,6 @@
   }
 }
 
-@media (max-width: $bp-l) {
-  .person + .person {
-    margin-top: $space-m;
-  }
-}
-
 @media (min-width: $bp-s) and (max-width: $bp-l) {
   /* Unfloat nested columns */
   .team .person {
@@ -189,6 +199,12 @@
   .person + .person,
   .person + .person:nth-child(2) {
     margin: $space-m 0 0;
+  }
+}
+
+@media (max-width: $bp-l) {
+  .person + .person {
+    margin-top: $space-m;
   }
 }
 
@@ -203,13 +219,17 @@
   .person .meta {
     font-size: .875em;
   }
+
+  .person__bio-meta {
+    padding: 1.5em 0 3em;
+  }
+
+  .person__meta-value + .person__meta-label {
+    margin-top: 1.5em;
+  }
 }
 
 @media (min-width: $bp-l) {
-  .person {
-    background-position: center;
-  }
-
   /* Make rows of people consistent heights, only if flex wrap supported */
   @supports (flex-wrap: wrap) {
     .team {

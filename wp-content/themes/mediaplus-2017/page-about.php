@@ -88,6 +88,8 @@
       $person_image = get_field('person_image', $item->ID);
       $xl = $person_image['sizes']['mediaplus-person-xl'];
       $large = $person_image['sizes']['large'];
+      $email = get_field('person_email', $item->ID);
+      $phone = get_field('person_number', $item->ID);
     ?>
       <div class="person grid-col" <?php if ($large){echo 'style="background-image: url(\'' . $large . '\')"';} ?>>
         <div class="person__initial">
@@ -101,6 +103,16 @@
 
         <div class="person__more" id="bio-<?php echo $item->post_name; ?>">
           <?php echo wpautop($item->post_content); ?>
+          <div class="meta person__bio-meta">
+            <?php if ($email): ?>
+              <dd class="person__meta-label">Email</dd>
+              <dt class="person__meta-value"><?php echo $email; ?></dt>
+            <?php endif; ?>
+            <?php if ($phone): ?>
+              <dd class="person__meta-label">Phone</dd>
+              <dt class="person__meta-value"><?php echo $phone; ?></dt>
+            <?php endif; ?>
+          </div>
         </div>
       </div>
     <?php endforeach; ?>
