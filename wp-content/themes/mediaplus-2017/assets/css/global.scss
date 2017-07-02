@@ -103,9 +103,15 @@ p, ul, ol, blockquote {
   body {
     font-size: 87.5%;
   }
+}
 
-  h2, .h2 {
-    font-size: 1.25rem;
+@media (min-width: $bp-xxl) {
+  body {
+    font-size: 112.5%;
+  }
+
+  p {
+    max-width: 36em;
   }
 }
 
