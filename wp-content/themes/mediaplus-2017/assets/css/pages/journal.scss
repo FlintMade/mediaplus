@@ -193,6 +193,11 @@
     max-width: 100%;
     height: auto;
   }
+
+  .fluidvids {
+    max-width: 900px;
+    margin: $space-l-em 0;
+  }
 }
 
 @media (max-width: $bp-header-s) {
@@ -233,7 +238,7 @@
   .post-content {
     position: relative;
 
-    > *:not(img) {
+    > * {
       padding-left: calc(100% - 36em);
       padding-left: calc(100% - 36rem);
       max-width: 100%;
@@ -256,16 +261,19 @@
       max-width: 70%;
     }
 
-    img {
+    img,
+    .fluidvids {
       margin-top: $space-xl-em;
       margin-bottom: $space-xl-em;
+      padding-left: 0;
     }
   }
 }
 
 @media (min-width: $bp-l) {
   .post-content {
-    img {
+    img,
+    .fluidvids {
       margin-left: -$space-xl;
     }
   }

@@ -92,6 +92,10 @@ function mediaplus_scripts() {
 		wp_enqueue_script('journalIndexScripts', get_theme_file_uri('/assets/js/journal-index.js'), array('scripts', 'mediaPlusjQuery'), false, true);
 	}
 
+	if (is_singular('post')) {
+		wp_enqueue_script('fluidVids', get_theme_file_uri('/assets/js/fluidvids.js'), array(), false, true);
+	}
+
 	// Ajaxing posts
 	global $wp_query;
 	wp_localize_script('journalIndexScripts', 'ajaxpagination', array(
@@ -160,11 +164,14 @@ function my_image_size_override() {
 }
 
 /*
- *	REMOVE PARAGRAPH TAGS FROM AROUND POST IMAGES
+ *	REMOVE PARAGRAPH TAGS FROM AROUND POST MEDIA
  *	-----------------------------------------------------------------
  */
 
-function filter_ptags_on_images($content){
-  return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+function filter_ptags_on_images($content) {
+  $content = preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+  // $content = preg_replace('/<p>\s*(<script.*>*.<\/script>)\s*<\/p>/iU', '\1', $content);
+  $content = preg_replace('/<p>\s*(<iframe.*>*.<\/iframe>)\s*<\/p>/iU', '\1', $content);
+  return $content;
 }
 add_filter('the_content', 'filter_ptags_on_images');
