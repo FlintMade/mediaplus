@@ -5,6 +5,53 @@
  */
 
 /*
+ *	PAGE BANNER
+ *	---------------------------------------------
+ */
+
+.page-banner {
+  position: relative;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+
+  picture {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  picture img {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 100%;
+    margin-left: -200%;
+  }
+}
+
+.page-banner {
+  padding-top: 400px;
+}
+
+@media (min-width: $bp-m) {
+  .page-banner {
+    padding-top: 46%;
+
+    picture, img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/*
  *	META ITEMS
  *	---------------------------------------------
  */
