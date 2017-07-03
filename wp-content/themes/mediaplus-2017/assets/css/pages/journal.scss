@@ -26,12 +26,6 @@
 
 .post-preview__thumb {
   padding-bottom: 3.25em; /* Space for more link */
-
-  picture, img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
 }
 
 .post__title {
@@ -186,11 +180,25 @@
       margin-bottom: 0;
     }
   }
+
+  img {
+    margin: $space-l-em 0;
+  }
 }
 
 @media (max-width: $bp-header-s) {
   .post-content:first-child {
     margin-top: 6.43em; /* ~90px */
+  }
+}
+
+@media (max-width: $bp-s) {
+  /* Full bleed */
+  .post-content {
+    img {
+      margin-left: -$space-s;
+      max-width: calc(100% + (#{$space-s} * 2));
+    }
   }
 }
 
@@ -200,13 +208,21 @@
       font-size: 2.625em;
     }
   }
+
+  /* Full bleed */
+  .post-content {
+    img {
+      margin-left: -$space-m;
+      max-width: calc(100% + (#{$space-m} * 2));
+    }
+  }
 }
 
 @media (min-width: 54em) {
   .post-content {
     position: relative;
 
-    > * {
+    > *:not(img) {
       padding-left: calc(100% - 36em);
       padding-left: calc(100% - 36rem);
       max-width: 100%;
@@ -227,6 +243,20 @@
     blockquote {
       padding-left: 0;
       max-width: 70%;
+    }
+
+    img {
+      margin-top: $space-xl-em;
+      margin-bottom: $space-xl-em;
+    }
+  }
+}
+
+@media (min-width: $bp-l) {
+  .post-content {
+    img {
+      margin-left: -$space-xl;
+      max-width: 100%;
     }
   }
 }
