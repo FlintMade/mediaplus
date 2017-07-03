@@ -50,4 +50,4 @@
       </div>
     </div>
   </header>
-  <main role="main" class="page-content">
+  <main role="main" class="page-content <?php if (is_front_page()): ?>timeline-process<?php endif; ?>">
