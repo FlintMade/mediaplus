@@ -25,7 +25,13 @@
 }
 
 .post-preview__thumb {
-  padding-bottom: 2.9375em; /* Space for more link */
+  padding-bottom: 3.25em; /* Space for more link */
+
+  picture, img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .post__title {

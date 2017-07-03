@@ -13,10 +13,16 @@
 
       <div class="grid-col post-preview__thumb">
         <?php
-          $thumbnail = wp_get_attachment_image_src(get_the_post_thumbnail($post_id));
-          if ($thumbnail):
+          $large = get_the_post_thumbnail_url('', 'mediaplus-thumb-l');
+          $medium = get_the_post_thumbnail_url('', 'mediaplus-thumb-m');
+          if ($medium):
         ?>
-          <?php echo $thumbnail; ?>
+          <picture>
+            <?php if ($large): ?>
+              <source media="(min-width: 1000px)" srcset="<?php echo $large; ?>">
+            <?php endif; ?>
+            <img src="<?php echo $medium; ?>" alt="" role="none" />
+          </picture>
         <?php else: ?>
           <?php include('svgs/post-placeholder.svg'); ?>
         <?php endif; ?>

@@ -23,10 +23,15 @@ function mediaplus_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	add_image_size('mediaplus-m', 480, false);
-	add_image_size('mediaplus-person-xl', 1000, false);
+	
 	add_image_size('mediaplus-xl', 1200, false);
 	add_image_size('mediaplus-xxl', 1600, false);
 	add_image_size('mediaplus-xxxl', 1600, false);
+
+	add_image_size('mediaplus-person-xl', 1000, false);
+
+	add_image_size('mediaplus-thumb-l', 900, 530, true);
+	add_image_size('mediaplus-thumb-m', 600, 353, true);
 
 	// Enable shortcodes
 	//add_filter('widget_text', 'do_shortcode');
