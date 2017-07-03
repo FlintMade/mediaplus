@@ -186,12 +186,31 @@
     }
   }
 
+  img,
+  .wp-caption {
+    margin: $space-l-em 0;
+    padding-left: 0;
+    max-width: 100%;
+  }
+
   img {
     display: inline-block;
     vertical-align: middle;
-    margin: $space-l-em 0;
-    max-width: 100%;
     height: auto;
+  }
+
+  .wp-caption {
+    width: auto !important;
+
+    img {
+      margin-top: 0;
+      margin-bottom: 1em;
+    }
+  }
+
+  .wp-caption-text {
+    font-family: $font-heading;
+    color: $grey-med;
   }
 
   .fluidvids {
@@ -234,6 +253,14 @@
   }
 }
 
+@media (min-width: $bp-m) {
+  .post-content {
+    .wp-caption-text {
+      font-size: .875em;
+    }
+  }
+}
+
 @media (min-width: 54em) {
   .post-content {
     position: relative;
@@ -262,6 +289,7 @@
     }
 
     img,
+    .wp-caption,
     .fluidvids {
       margin-top: $space-xl-em;
       margin-bottom: $space-xl-em;
