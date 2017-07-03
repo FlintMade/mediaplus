@@ -139,8 +139,17 @@
  *	---------------------------------------------
  */
 
+.single-post .page-content {
+  margin-top: 0;
+}
+
 .post-content {
   position: relative;
+
+  /* If no preceding banner image */
+  &:first-child {
+    margin-top: 10em;
+  }
 
   a:link, a:visited {
     color: $redorange;
@@ -176,6 +185,12 @@
     :last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+@media (max-width: $bp-header-s) {
+  .post-content:first-child {
+    margin-top: 6.43em; /* ~90px */
   }
 }
 
