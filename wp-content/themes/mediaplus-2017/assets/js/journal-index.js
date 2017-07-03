@@ -14,6 +14,9 @@
 
   var pageNumber = 1;
 
+  $('#postPreviews').append('<p class="load-status" id="loader" aria-hidden="true">Loading More &hellip;</p>');
+  var loader = document.getElementById('loader');
+
   var morePosts = debounce(function() {
     var reachedEnd = document.getElementById('emptyPosts');
     if (reachedEnd) {
@@ -31,17 +34,16 @@
             page: pageNumber
           },
           beforeSend: function() {
-            $('#postPreviews').append('<p class="load-status" id="loader">Loading More &hellip;</p>');
+            loader.removeAttribute('aria-hidden');
           },
           success: function(newPosts) {
-            $('#loader').fadeOut(200).remove();
-            $('#postPreviews').append(newPosts);
+            loader.setAttribute('aria-hidden', 'true');
+            $(newPosts).insertBefore(loader);
 
             setTimeout(function(){
-              var displayedPosts = document.querySelectorAll('.post-preview');
-              var newPostIndex = (pageNumber - 1) * 3;
-              for (var i = newPostIndex; i < displayedPosts.length; i++) {
-                displayedPosts[i].style.opacity = '1';
+              var invisiblePosts = document.querySelectorAll('.post-preview:not(.loaded)');
+              for (var i = 0; i < invisiblePosts.length; i++) {
+                invisiblePosts[i].classList.add('loaded');
               }
             }, 200);
           }
