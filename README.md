@@ -2,6 +2,10 @@
 
 ## Various notes
 
+### .htaccess
+
+The `.htaccess` file in the root of the project is just for the development environment. The `.prodhtaccess` file has all your caching etc.
+
 ### Assets
 
 * CSS and JS are loaded through enqueue functions in `functions.php`
