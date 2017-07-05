@@ -8,30 +8,6 @@
    */
 
   /*
-   *  FADE IN HOME TEXT ELEMENTS
-   *	---------------------------------------------
-   */
-
-   /*
-  var fadeInTextItems = function() {
-    var textItems = document.querySelectorAll('.timeline-process__item');
-    for (var i = 0; i < textItems.length; i++) {
-      var thisItem = textItems[i],
-          thisTiming = (i * 600) + 300;
-      fadeItem(thisItem, thisTiming);
-    }
-  };
-
-  var fadeItem = function(item, timing) {
-    setTimeout(function(){
-      item.classList.add('revealed');
-    }, timing);
-  };
-
-  fadeInTextItems();
-  */
-
-  /*
    *  REVEAL TEXT
    *  Slide-fade across home page text to create
    *  letter-by-letter animation effect
@@ -60,7 +36,7 @@
     var overlays = timelineWrap.querySelectorAll('.overlay');
     for (var i = 0; i < overlays.length; i++) {
       var thisOverlay = overlays[i],
-          thisTiming = (i * 1000) + 500;
+          thisTiming = (i * 600);
       slideOverlay(thisOverlay, thisTiming);
     }
   };

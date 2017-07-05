@@ -69,7 +69,7 @@ function mediaplus_scripts() {
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 	// Theme stylesheets
-	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array());
+	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array(), '07.04.17.01');
 
 	// Load the html5 shiv.
 	wp_enqueue_script('html5', get_theme_file_uri('/assets/js/html5.js'), array(), false, false);

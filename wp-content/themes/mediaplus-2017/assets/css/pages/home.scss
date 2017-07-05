@@ -27,17 +27,7 @@
   li {
     display: inline;
     position: relative;
-    /*
-    opacity: 0;
-    transition: opacity 600ms ease-in;
-    */
   }
-
-  /*
-  .revealed {
-    opacity: 1;
-  }
-  */
 
   .overlay {
     display: block;
@@ -47,7 +37,7 @@
     right: 0;
     width: 200%;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1));
-    transition: width 1000ms ease-in;
+    transition: width 1200ms ease-in;
 
     &.open {
       width: 0;
