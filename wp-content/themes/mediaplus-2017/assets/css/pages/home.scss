@@ -4,13 +4,18 @@
  *	=============================================
  */
 
-.timeline-process {
+.main--home {
   display: flex;
   min-height: calc(100vh - 6.43em);
   flex-direction: column;
   justify-content: flex-end;
   padding: $space-s-em;
   padding: $space-s;
+}
+
+.timeline-process {
+  position: relative;
+  overflow: hidden;
 
   ul {
     margin-bottom: 0;
@@ -21,6 +26,32 @@
 
   li {
     display: inline;
+    position: relative;
+    /*
+    opacity: 0;
+    transition: opacity 600ms ease-in;
+    */
+  }
+
+  /*
+  .revealed {
+    opacity: 1;
+  }
+  */
+
+  .overlay {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1));
+    transition: width 1000ms ease-in;
+
+    &.open {
+      width: 0;
+    }  
   }
 }
 
@@ -41,7 +72,7 @@
 }
 
 @media (min-width: $bp-header-m) {
-  .timeline-process {
+  .main--home {
     padding: $space-m;
     min-height: calc(100vh - 10em);
   }

@@ -8,17 +8,23 @@
     'order' => 'ASC',
   );
   $items = get_posts($args);
+  $itemCount = count($items);
+  $i = 0;
 ?>
-<ul class="h1">
-  <?php foreach ($items as $item): ?>
-    <li>
-      <?php
-        $itemText = get_the_title($item->ID);
-        echo str_replace(' +', '&nbsp;<svg class="process__icon process__plus" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="' . get_template_directory_uri() . '/assets/images/sprite.svg#plusBig"></use></svg>', $itemText);
-      ?>
-      <svg class="process__icon process__arrow" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrowBig"></use></svg>
-    </li>
-  <?php endforeach; ?>
-</ul>
+<div class="timeline-process">
+  <ul class="h1" id="homeText">
+    <?php foreach ($items as $item): $i++; ?>
+      <li class="timeline-process__item">
+        <?php
+          $itemText = get_the_title($item->ID);
+          echo str_replace(' +', '&nbsp;<svg class="process__icon process__plus" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="' . get_template_directory_uri() . '/assets/images/sprite.svg#plusBig"></use></svg>', $itemText);
+        ?>
+        <?php if ($i < $itemCount): ?>
+          <svg class="process__icon process__arrow" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrowBig"></use></svg>
+        <?php endif; ?>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+</div>
 
 <?php get_footer(); ?>
