@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'chalet-newyork';
+  src: url('assets/fonts/Chalet-NewYorkSixty.eot');
+  src: local('☺'), /* sneakily trick IE */
+        url('assets/fonts/Chalet-NewYorkSixty.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'domain-text';
+  src: url('assets/fonts/DomaineText-Light.eot');
+  src: local('☺'),
+        url('assets/fonts/DomaineText-Light.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}

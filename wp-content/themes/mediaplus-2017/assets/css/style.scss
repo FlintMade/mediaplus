@@ -8,6 +8,7 @@ Version: 1.0
 /* sass --watch style.scss:../../style.css --style compressed */
 
 @import 'sass-helpers';
+@import 'fonts';
 @import 'global';
 @import 'grid';
 @import 'header';
