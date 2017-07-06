@@ -22,10 +22,19 @@
 <body <?php body_class(); ?>>
   <header role="banner" class="clear header">
     <div class="header__context">
-      <a class="header__brand" href="<?php echo get_site_url(); ?>">
-        <svg class="full-logo" role="img" title="Media plus">
-          <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mediaplus"/>
-        </svg>
+      <a class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus">
+        <?php if (is_post_type_archive('expertise') || is_singular('expertise') || is_post_type_archive('offerings') || is_singular('offerings')): ?>
+          <svg class="m-plus" role="none" title="Media plus">
+            <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mplus"/>
+          </svg>
+        <?php else: ?>
+          <svg class="full-logo" role="none" >
+            <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mediaplus"/>
+          </svg>
+          <svg class="m-plus hidden" role="none" title="Media plus">
+            <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mplus"/>
+          </svg>
+        <?php endif; ?>
       </a>
     </div>
 

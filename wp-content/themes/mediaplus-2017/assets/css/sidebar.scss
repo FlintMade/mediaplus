@@ -1,0 +1,65 @@
+/*
+ *	=============================================
+ *	SITE SIDEBAR
+ *	=============================================
+ */
+
+.site-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  font-family: $font-heading;
+  background: $orange;
+  color: #fff;
+
+  a:link, a:visited {
+    border-bottom: 0;
+    color: inherit;
+    opacity: .5;
+    transition: opacity 200ms;
+  }
+  
+  a:hover {
+    opacity: 1;
+  }
+}
+
+.site-sidebar__content {
+  padding: $space-s-em;
+  padding: $space-s;
+  padding-left: 4.75em;
+}
+
+.case-study-list {
+  list-style: none;
+  font-weight: 600;
+  font-size: 2.286em; /* 32px */
+  line-height: 1.03125;
+}
+
+@media (min-width: $bp-s) {
+  .site-sidebar__content {
+    padding-left: 5em;
+  }
+}
+
+@media (min-width: $bp-header-m) {
+  .site-sidebar__content {
+    padding: $space-m $space-m $space-m 6.125em;
+  }
+}
+
+@media (min-width: $bp-sidebar-l) {
+  .site-sidebar {
+    width: 24.6875em; /* 395px */
+    height: 100%;
+  }
+
+  .case-study-list {
+    font-size: 2.5625em; /* 41px */
+    line-height: 1.05;
+  }
+}

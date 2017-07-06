@@ -1,5 +1,5 @@
   </main>
-  <?php if (!is_front_page()): ?>
+  <?php if (!is_front_page() && !is_post_type_archive('expertise') && !is_singular('expertise') && !is_post_type_archive('offerings') && !is_singular('offerings')): ?>
     <footer role="contentinfo" class="footer">
       <div class="contain">
         <?php

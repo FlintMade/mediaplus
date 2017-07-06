@@ -54,6 +54,8 @@
 .header__brand {
   display: inline-block;
   vertical-align: middle;
+  line-height: 1;
+  position: relative;
   transition: opacity ease 200ms;
   opacity: 1;
 
@@ -67,9 +69,26 @@
   height: 22px;
 }
 
+.m-plus {
+  width: 46px;
+  height: 22px;
+
+  &.hidden {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
 @media (min-width: $bp-header-m) {
   .full-logo {
     width: 135px;
+    height: 30px;
+  }
+
+  .m-plus {
+    width: 58px;
     height: 30px;
   }
 }

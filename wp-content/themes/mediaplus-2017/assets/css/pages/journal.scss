@@ -190,12 +190,7 @@
 
   blockquote {
     margin: 1em 0;
-    font: 600 2em/1.2 $font-heading;
     color: $redorange;
-
-    :last-child {
-      margin-bottom: 0;
-    }
   }
 
   img,
@@ -243,14 +238,6 @@
     img {
       margin-left: -$space-s;
       max-width: calc(100% + (#{$space-s} * 2));
-    }
-  }
-}
-
-@media (min-width: $bp-s) {
-  .post-content {
-    blockquote {
-      font-size: 2.625em;
     }
   }
 }

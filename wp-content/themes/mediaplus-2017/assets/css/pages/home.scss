@@ -67,3 +67,9 @@
     min-height: calc(100vh - 10em);
   }
 }
+
+@media (min-width: $bp-m) {
+  .timeline-process ul {
+    font-size: 3.125em;
+  }
+}

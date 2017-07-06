@@ -26,7 +26,13 @@ function mediaplus_setup() {
 	
 	add_image_size('mediaplus-xl', 1200, false);
 	add_image_size('mediaplus-xxl', 1600, false);
-	add_image_size('mediaplus-xxxl', 1600, false);
+	add_image_size('mediaplus-xxxl', 2048, false);
+
+	add_image_size('mediaplus-gallery-s', 480, 270, true);
+	add_image_size('mediaplus-gallery-m', 600, 337, true);
+	add_image_size('mediaplus-gallery-l', 900, 506, true);
+	add_image_size('mediaplus-gallery-xl', 1200, 675, true);
+	add_image_size('mediaplus-gallery-xxl', 1600, 900, true);
 
 	add_image_size('mediaplus-person-xl', 1000, false);
 

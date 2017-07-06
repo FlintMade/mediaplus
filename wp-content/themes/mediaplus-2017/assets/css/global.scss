@@ -99,8 +99,16 @@ h4, h5, h6 {
   font-size: 1.25em;
 }
 
-p, ul, ol, blockquote {
+p, ul, ol {
   margin-bottom: 1em;
+}
+
+blockquote {
+  font: 600 2em/1.2 $font-heading;
+
+  :last-child {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: $bp-m) {
@@ -111,13 +119,11 @@ p, ul, ol, blockquote {
 
 @media (min-width: $bp-s) {
   h1, .h1 {
-    font-size: 2.75em;
+    font-size: 2.5625em;
   }
-}
 
-@media (min-width: $bp-m) {
-  h1, .h1 {
-    font-size: 3.125em;
+  blockquote {
+    font-size: 2.625em;
   }
 }
 
