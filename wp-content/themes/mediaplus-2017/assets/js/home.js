@@ -36,7 +36,7 @@
     var overlays = timelineWrap.querySelectorAll('.overlay');
     for (var i = 0; i < overlays.length; i++) {
       var thisOverlay = overlays[i],
-          thisTiming = (i * 600);
+          thisTiming = (i * 1600);
       slideOverlay(thisOverlay, thisTiming);
     }
   };
@@ -44,6 +44,7 @@
   var slideOverlay = function(overlay, timing) {
     setTimeout(function(){
       overlay.classList.add('open');
+      console.log(timing);
     }, timing);
   };
 

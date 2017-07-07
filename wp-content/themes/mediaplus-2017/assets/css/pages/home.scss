@@ -35,9 +35,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 200%;
+    width: 240%;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1));
-    transition: width 1200ms ease-in;
+    transition: width 2400ms ease-in;
 
     &.open {
       width: 0;
