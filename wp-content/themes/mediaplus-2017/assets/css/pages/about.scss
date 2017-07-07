@@ -24,6 +24,21 @@
   }
 }
 
+@media (min-width: $bp-s) {
+  .about-intro {
+    position: relative;
+  }
+
+  .about-intro-headline {
+    position: absolute;
+    left: $space-m;
+  }
+
+  .about-attrs {
+    padding-top: 5.25em;
+  }
+}
+
 @media (min-width: $bp-l) and (max-width: $bp-xl) {
   /* Unfloat nested columns */
   .about-attrs .grid-col {

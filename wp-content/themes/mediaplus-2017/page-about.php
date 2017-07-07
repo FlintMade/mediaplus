@@ -8,6 +8,7 @@
     $xl = $banner_image['sizes']['mediaplus-xl'];
     $xxl = $banner_image['sizes']['mediaplus-xxl'];
     $xxxl = $banner_image['sizes']['mediaplus-xxxl'];
+    $intro_headline = get_field('intro_headline');
     $offerings_title = get_field('offerings_title');
     $process_title = get_field('process_title');
   ?>
@@ -24,7 +25,16 @@
   </div>
 
   <div class="contain page-section">
-    <div class="page-section row row--halves">
+    <div class="page-section row row--halves about-intro">
+
+      <!-- PAGE DESCRIPTION -->
+      <section class="grid-col grid-col--right">
+        <?php if ($intro_headline): ?>
+          <h2 class="about-intro-headline"><?php echo $intro_headline; ?></h2>
+        <?php endif; ?>
+        <?php the_content(); ?>
+      </section>
+
       <div class="grid-col row row--flush row--third-two-thirds about-attrs">
 
         <!-- OFFERINGS -->
@@ -65,11 +75,6 @@
           </ul>
         </div>
       </div>
-
-      <!-- PAGE DESCRIPTION -->
-      <section class="grid-col">
-        <?php the_content(); ?>
-      </section>
 
     </div>
   <?php endwhile;?>

@@ -67,6 +67,10 @@
     margin: 0 0 0 $space-m;
   }
 
+  .grid-col--right + .grid-col:not(.grid-col--right) {
+    margin-left: 0;
+  }
+
   .row--halves {
     > .grid-col {
       margin-top: $space-l;
