@@ -21,8 +21,6 @@
 
 .contact-row {
   border-top: 1px solid $grey-light;
-
-  font-size: .9375em;
   line-height: 1.286;
   color: $grey-med;
 
@@ -46,10 +44,20 @@
   }
 }
 
+.inquiry__name {
+  margin-bottom: 0;
+}
+
 @media (min-width: $bp-l) {
   .contact-row {
     h3 {
       margin-bottom: 1.5em;
     }
+  }
+}
+
+@media (min-width: $bp-l) and (max-width: $bp-xl) {
+  .inquiry__email {
+    font-size: .875em;
   }
 }

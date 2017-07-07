@@ -40,8 +40,10 @@
         ?>
           <li class="grid-col inquiry-type">
             <h3><?php echo $item_title; ?></h3>
-            <p>
-              <?php echo $item_contact_name; ?><br />
+            <p class="inquiry__name">
+              <?php echo $item_contact_name; ?>
+            </p>
+            <p class="inquiry__email">
               <?php echo $item_contact_email; ?>
             </p>
           </li>
