@@ -73,11 +73,13 @@
  */
 
 .row-item {
+  padding-top: $space-xs-em;
   padding-top: $space-xs;
   border-top: 1px solid $grey-light;
 }
 
 .row-item + .row-item {
+  margin-top: $space-xs-em;
   margin-top: $space-xs;
 }
 
