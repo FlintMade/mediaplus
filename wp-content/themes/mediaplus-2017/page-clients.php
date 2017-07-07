@@ -107,14 +107,16 @@
               <?php 
                 $posts = get_field('process_items', $item->ID);
                 if($posts):
+                $item_count = count($posts);
+                $i = 0;
               ?>
                 <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
                   <h4 aria-label="Services for this client">Service</h4>
                   <ul class="client__details-list">
                     <?php foreach($posts as $post): ?>
                       <?php setup_postdata($post); ?>
-                      <li><?php the_title(); ?></li>
-                    <?php endforeach; ?>
+                      <li><?php the_title(); ?><?php if ($item_count > 1 && $i == 0){echo ' <span class="client__item-count">(' . str_pad($item_count, 2, '0', STR_PAD_LEFT) . ')</span>'; } ?></li>
+                    <?php $i++; endforeach; ?>
                   </ul>
                 </div>
                 <?php wp_reset_postdata(); ?>
@@ -124,14 +126,16 @@
               <?php 
                 $posts = get_field('relevant_expertise', $item->ID);
                 if($posts):
+                $item_count = count($posts);
+                $i = 0;
               ?>
                 <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
                   <h4 aria-label="Client category">Category</h4>
                   <ul class="client__details-list">
                     <?php foreach($posts as $post): ?>
                       <?php setup_postdata($post); ?>
-                      <li><?php the_title(); ?></li>
-                    <?php endforeach; ?>
+                      <li><?php the_title(); ?><?php if ($item_count > 1 && $i == 0){echo ' <span class="client__item-count">(' . str_pad($item_count, 2, '0', STR_PAD_LEFT) . ')</span>'; } ?></li>
+                    <?php $i++; endforeach; ?>
                   </ul>
                 </div>
                 <?php wp_reset_postdata(); ?>

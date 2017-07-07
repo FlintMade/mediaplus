@@ -87,7 +87,7 @@
             </ul>
             <button class="gallery__prev" title="Previous image"></button>
             <button class="gallery__next" title="Next image"></button>
-            <p class="gallery__label">Gallery <span class="gallery__index">01</span> / 0<?php echo str_pad($imageCount, 1, '0', STR_PAD_LEFT); ?></p>
+            <p class="gallery__label">Gallery <span class="gallery__index">01</span> / <?php echo str_pad($imageCount, 2, '0', STR_PAD_LEFT); ?></p>
           </div>
         </section>
         <?php endif; ?>

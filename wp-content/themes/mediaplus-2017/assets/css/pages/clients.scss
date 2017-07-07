@@ -104,6 +104,10 @@
   margin-top: 1.5rem;
 }
 
+.client__item-count {
+  display: none;
+}
+
 .client__more {
   float: right;
   clear: both;
@@ -181,6 +185,10 @@
     overflow: hidden;
     position: absolute !important;
   }
+
+  .client__item-count {
+    display: inline;
+  }
 }
 
 /*
@@ -229,6 +237,10 @@
 
   h3 {
     color: $redorange;
+  }
+
+  .client__item-count {
+    display: none;
   }
 }
 
