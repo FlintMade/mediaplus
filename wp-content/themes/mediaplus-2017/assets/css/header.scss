@@ -215,9 +215,10 @@
   .header__menu {
     flex: 1;
     font-size: 1.5rem; /* ~24px */
+    line-height: 1;
 
     li + li {
-      margin-top: 1em;
+      margin-top: 1.5em;
     }
 
     a {
