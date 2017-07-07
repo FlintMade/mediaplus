@@ -78,7 +78,7 @@
   display: block;
   margin: 3.375em auto;
   text-align: center;
-  font: 1.125em/1 $font-heading;
+  font: 1.125em/1 $font-subheading;
   color: $grey-med;
   opacity: 1;
   transition: opacity 200ms;
@@ -216,7 +216,7 @@
   }
 
   .wp-caption-text {
-    font-family: $font-heading;
+    font-family: $font-subheading;
     color: $grey-med;
   }
 

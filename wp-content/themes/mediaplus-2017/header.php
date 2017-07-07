@@ -17,6 +17,8 @@
   <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon-62.png" sizes="62x62" type="image/png">
   <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon-192.png" sizes="192x192" type="image/png">
   <?php wp_head(); ?>
+  <script src="https://use.typekit.net/iuq2xoe.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
 </head>
 
 <body <?php body_class(); ?>>
