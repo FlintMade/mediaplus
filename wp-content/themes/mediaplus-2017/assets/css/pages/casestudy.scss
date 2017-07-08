@@ -189,14 +189,63 @@
   z-index: 4;
   width: 50%;
   height: 100%;
+  padding: $space-s-em;
+  padding: $space-s;
+
+  .arrow {
+    width: 2em;
+    height: 2em;
+    opacity: 0;
+    transition: opacity 400ms;
+  }
+
+  &:hover, &:focus {
+    .arrow {
+      opacity: 1;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+@supports (animation-fill-mode: forwards) {
+  .gallery__prev,
+  .gallery__next {
+    &:focus {
+      .arrow {
+        animation-name: fadeFocusOut;
+        animation-duration: 400ms;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    &:focus:hover {
+      .arrow {
+        animation-fill-mode: none;
+        opacity: 1;
+        transition: opacity 400ms;
+      }
+    }
+  }
+
+  @keyframes fadeFocusOut {
+    to {
+      opacity: 0;
+    }
+  }
 }
 
 .gallery__prev {
   left: 0;
+  text-align: left;
 }
 
 .gallery__next {
   right: 0;
+  text-align: right;
 }
 
 .gallery__label {
@@ -213,6 +262,11 @@
 @media (min-width: $bp-m) {
   .gallery__label {
     font-size: .9375em;
+  }
+
+  .gallery__prev,
+  .gallery__next {
+    padding: 3rem;
   }
 }
 

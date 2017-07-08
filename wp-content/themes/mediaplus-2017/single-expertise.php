@@ -90,8 +90,16 @@
                 </li>
               <?php endforeach; ?>
             </ul>
-            <button class="gallery__prev" title="Previous image"></button>
-            <button class="gallery__next" title="Next image"></button>
+            <button class="gallery__prev" title="Previous image">
+              <svg class="arrow" role="none">
+                <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrowPrev"/>
+              </svg>
+            </button>
+            <button class="gallery__next" title="Next image">
+              <svg class="arrow" role="none">
+                <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrow"/>
+              </svg>
+            </button>
             <p class="gallery__label">Gallery <span class="gallery__index">01</span> / <?php echo str_pad($imageCount, 2, '0', STR_PAD_LEFT); ?></p>
           </div>
         </section>
