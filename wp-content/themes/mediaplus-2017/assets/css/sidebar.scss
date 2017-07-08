@@ -139,6 +139,12 @@ body.single-expertise a.sections__expertise {
     z-index: z('sidebar') - 1;
     height: 100%;
   }
+
+  /* No overlay on case studies */
+  body.single-expertise .page-overlay--nav {
+    height: 0;
+  }
+
   .case-study-sections {
     display: block;
     bottom: $space-m;
