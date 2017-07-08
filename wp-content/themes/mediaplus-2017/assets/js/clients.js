@@ -12,12 +12,6 @@
    *	---------------------------------------------
    */
 
-  // Find ancestor
-  function findAncestor (el, cls) {
-    while ((el = el.parentElement) && !el.classList.contains(cls));
-    return el;
-  }
-
   // Check for media query support
   function mediaQueriesSupported() {
     return (typeof window.matchMedia != "undefined" || typeof window.msMatchMedia != "undefined");

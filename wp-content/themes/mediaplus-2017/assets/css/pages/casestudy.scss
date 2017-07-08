@@ -46,7 +46,9 @@
 
 .single-expertise {
   h1, h2, h3, h4, h5, h6,
-  blockquote {
+  blockquote,
+  button:hover,
+  button:focus {
     color: $orange;
   }
 
@@ -288,5 +290,69 @@
 @media (min-width: $bp-xl) {
   .color-block {
     min-height: 29em;
+  }
+}
+
+/*
+ *	SECTION: LISTS
+ *	---------------------------------------------
+ */
+
+.row--lists {
+  position: relative;
+}
+
+.case-study__list {
+  margin-bottom: $space-m-em;
+  margin-bottom: $space-m;
+
+  ul {
+    margin-bottom: 0;
+    list-style: none;
+    overflow: hidden;
+    transition: height 400ms;
+  }
+
+  li:nth-child(n+7) {
+    display: none;
+  }
+}
+
+.lists-wrapper:focus {
+  outline: 0;
+}
+
+.lists-wrapper.expanded {
+  li:nth-child(n+7) {
+    display: block;
+  }
+}
+
+.toggle-lists {
+  display: none;
+  position: absolute;
+  top: -1.25em;
+  right: .5em;
+  padding: 1em;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+@media (min-width: 500px) {
+  .case-study__list {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: $space-m-em;
+    margin-right: $space-m;
+    max-width: calc(49% - #{$space-m});
+  }
+
+  .toggle-lists {
+    top: auto;
+    right: auto;
+    bottom: -.5em;
+    margin-left: -1em;
   }
 }

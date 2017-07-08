@@ -89,6 +89,10 @@ function mediaplus_scripts() {
 		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts'), false, true);
 	}
 
+	if (is_singular('expertise')) {
+		wp_enqueue_script('caseStudyScripts', get_theme_file_uri('/assets/js/casestudy.js'), array('scripts'), false, true);
+	}
+
 	if (is_page(7)) {
 		wp_enqueue_script('aboutScripts', get_theme_file_uri('/assets/js/about.js'), array('scripts'), false, true);
 	}

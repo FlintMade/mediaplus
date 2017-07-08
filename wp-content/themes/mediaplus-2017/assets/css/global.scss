@@ -146,6 +146,8 @@ button {
   border: 0;
   background: transparent;
   -webkit-appearance: none;
+  font: 1em/1 $font-body;
+  color: $grey-med;
 
   &:hover {
     cursor: pointer;

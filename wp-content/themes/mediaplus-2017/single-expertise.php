@@ -18,7 +18,12 @@
     </section>
 
     <!-- CASE STUDY SECTIONS -->
-    <?php if (have_rows('page_sections')): while (have_rows('page_sections')): the_row(); ?>
+    <?php
+      if (have_rows('page_sections')):
+      $sectionIndex = 0;
+      while (have_rows('page_sections')):
+      the_row();
+    ?>
       
       <?php
         if (get_row_layout() == 'text_section'):
@@ -152,9 +157,36 @@
             </div>
           </section>
 
+        <?php
+          elseif (get_row_layout() == 'lists_section'):
+          $list_1_headline = get_sub_field('list_1_headline');
+          $list_1 = get_sub_field('list_1');
+          $list_2_headline = get_sub_field('list_2_headline');
+          $list_2 = get_sub_field('list_2');
+        ?>
+
+          <!-- LISTS SECTION -->
+          <section class="row row--lists page-section">
+            <div class="lists-wrapper expanded" id="lists-<?php echo $sectionIndex; ?>" aria-hidden="true">
+              <?php if ($list_1): ?>
+                <div class="case-study__list">
+                  <h3><?php echo $list_1_headline; ?></h3>
+                  <?php echo $list_1; ?>
+                </div>
+              <?php endif; ?>
+              <?php if ($list_2): ?>
+                <div class="case-study__list">
+                  <h3><?php echo $list_2_headline; ?></h3>
+                  <?php echo $list_2; ?>
+                </div>
+              <?php endif; ?>
+            </div>
+            <button class="toggle-lists" aria-hidden="true" aria-controls="lists-<?php echo $sectionIndex; ?>" aria-expanded="false">View all+</button>
+          </section>
+
       <?php endif; ?>
 
-    <?php endwhile; endif; ?>
+    <?php $sectionIndex++; endwhile; endif; ?>
 
   </article>
 <?php endwhile;?>
