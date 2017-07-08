@@ -178,47 +178,51 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
   document.body.insertBefore(navOverlay, sidebar);
 
   /* Toggle sidebar nav */
-  var toggleNav = function() {
+  var openSidebar = function() {
+    navOverlay.style.display = 'block';
+    fade(navOverlay, 0, 1, 200);
+    sidebar.classList.remove('closed');
+    sidebarBtn.setAttribute('aria-expanded', 'true');
+    logoTextWrap.classList.add('abbreviated');
 
-    // Open nav
-    if (sidebar.getAttribute('aria-hidden') == 'true') {
-      navOverlay.style.display = 'block';
-      fade(navOverlay, 0, 1, 200);
-      sidebar.classList.remove('closed');
-      sidebarBtn.setAttribute('aria-expanded', 'true');
-      logoTextWrap.classList.add('abbreviated');
-
-      // Stagger CSS transitions
-      setTimeout(function(){
-        sidebar.removeAttribute('aria-hidden');
-
-        setTimeout(function(){
-          sidebarContent.classList.add('active');
-        }, 300);
-      }, 200);
-
-    // Close nav
-    } else {
-      navOverlay.style.display = 'none';
-      fade(navOverlay, 1, 0, 200);
-      sidebarBtn.setAttribute('aria-expanded', 'false');
-      sidebarContent.classList.remove('active');
-      
-      // Stagger CSS transitions
-      setTimeout(function(){
-        sidebar.setAttribute('aria-hidden', 'true');
-        setTimeout(function(){
-          logoTextWrap.classList.remove('abbreviated');
-        }, 200);
-      }, 100);
+    // Stagger CSS transitions
+    setTimeout(function(){
+      sidebar.removeAttribute('aria-hidden');
 
       setTimeout(function(){
-        sidebar.classList.add('closed');
-      }, 800);
-    }
-
+        sidebarContent.classList.add('active');
+      }, 300);
+    }, 200);
   };
 
-  sidebarBtn.addEventListener('click', toggleNav, false);
+  var closeSidebar = function() {
+    navOverlay.style.display = 'none';
+    fade(navOverlay, 1, 0, 200);
+    sidebarBtn.setAttribute('aria-expanded', 'false');
+    sidebarContent.classList.remove('active');
+    
+    // Stagger CSS transitions
+    setTimeout(function(){
+      sidebar.setAttribute('aria-hidden', 'true');
+      setTimeout(function(){
+        logoTextWrap.classList.remove('abbreviated');
+      }, 200);
+    }, 100);
+
+    setTimeout(function(){
+      sidebar.classList.add('closed');
+    }, 800);
+  };
+
+  var toggleSidebar = function() {
+    if (sidebar.getAttribute('aria-hidden') == 'true') {
+      openSidebar();
+    } else {
+      closeSidebar();
+    }
+  };
+
+  sidebarBtn.addEventListener('click', toggleSidebar, false);
+  navOverlay.addEventListener('click', closeSidebar, false);
 
 })(document, window);
