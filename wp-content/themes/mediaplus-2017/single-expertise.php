@@ -124,14 +124,15 @@
           elseif (get_row_layout() == 'colorful_block_section'):
           $section_headline = get_sub_field('block_headline');
           $section_subheadline = get_sub_field('block_sub_headline');
-          $data_value = get_sub_field('data_value');
           $alignment = get_sub_field('block_alignment');
           $alignmentVal = $alignment['value'];
+          $data_value = get_sub_field('data_value');
+          $block_image = get_sub_field('transparent_image')['sizes']['large'];
         ?>
 
           <!-- COLORFUL BLOCK SECTION -->
           <section class="row row--color-block page-section">
-            <div class="grid-col <?php if ($alignmentVal == 'R'): ?>grid-col--right<?php endif; ?> color-block">
+            <div class="grid-col <?php if ($alignmentVal == 'R'): ?>grid-col--right<?php endif; ?> color-block <?php if ($data_value): ?>color-block--data<?php endif; ?>">
               <div class="color-block__text">
                 <?php if ($section_headline): ?>
                   <h3 class="color-block__heading"><?php echo $section_headline; ?></h3>
@@ -141,7 +142,12 @@
                 <?php endif; ?>
               </div>
               <?php if ($data_value): ?>
-                <p class="data color-block__feature"><?php echo $section_subheadline; ?></p>
+                <p class="data color-block__feature">
+                  <span class="data__<?php echo strlen($data_value); ?>"><?php echo $data_value; ?></span>
+                </p>
+              <?php endif; ?>
+              <?php if ($block_image): ?>
+                <img src="<?php echo $block_image; ?>" alt="" role="none" />
               <?php endif; ?>
             </div>
           </section>
