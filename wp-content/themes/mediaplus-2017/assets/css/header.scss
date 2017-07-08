@@ -9,11 +9,6 @@
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-
   a:link, a:visited {
     border-bottom: 0;
   }
@@ -21,8 +16,18 @@
 
 .header__context,
 .header__tray-content {
+  position: fixed;
+  top: 0;
   padding: $space-s-em;
   padding: $space-s;
+}
+
+.header__context {
+  left: 0;
+}
+
+.header__tray-content {
+  right: 0;
 }
 
 @media (max-width: $bp-header-s) {
@@ -43,12 +48,8 @@
  *	---------------------------------------------
  */
 
-.header {
-  z-index: 999;
-}
-
 .header__context {
-  float: left;
+  z-index: z('sidebar') + 1;
 }
 
 .header__brand {
@@ -64,32 +65,50 @@
   }
 }
 
-.full-logo {
-  width: 102px;
-  height: 22px;
+.logo__text-wrap,
+.logo__plus {
+  display: inline-block;
+  vertical-align: top;
 }
 
-.m-plus {
-  width: 46px;
-  height: 22px;
+.logo__text-wrap {
+  overflow: hidden;
+  width: 5.133em;
+  transition: width 300ms;
 
-  &.hidden {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+  /* Show only the M */
+  &.abbreviated {
+    width: 1.45em;
   }
+}
+
+.logo__text {
+  width: 5.133em; /* 77px */
+  height: 1.466em; /* 22px */
+}
+
+.logo__plus {
+  width: 1.466em;
+  height: 1.466em;
 }
 
 @media (min-width: $bp-header-m) {
-  .full-logo {
-    width: 135px;
-    height: 30px;
+  .logo__text-wrap {
+    width: 6.5625em;
+
+    &.abbreviated {
+      width: 1.8em;
+    }
   }
 
-  .m-plus {
-    width: 58px;
-    height: 30px;
+  .logo__text {
+    width: 6.5625em; /* 105px */
+    height: 1.875em; /* 30px */
+  }
+
+  .logo__plus {
+    width: 1.875em;
+    height: 1.875em;
   }
 }
 
@@ -101,6 +120,7 @@
 
 .header__tray {
   float: right;
+  z-index: z('header') - 1;
 }
 
 .header__tray-content {
@@ -109,7 +129,7 @@
 
 .menu-toggle {
   position: fixed;
-  z-index: 999;
+  z-index: z('header');
   top: $space-s;
   right: $space-s;
   width: 32px;
@@ -203,7 +223,7 @@
 
   .header__tray-content {
     position: relative;
-    z-index: 998;
+    z-index: z('header') - 1;
     display: flex;
     flex-direction: column;
     padding: 5.625em $space-s $space-s;
@@ -268,19 +288,9 @@
 }
 
 @media (max-width: $bp-header-s) {
-  .page-overlay {
-    display: none;
-    content: "";
-    position: fixed;
-    z-index: 997;
-    top: 0;
-    left: 0;
-    width: 100%;
+  .page-overlay--header {
+    z-index: z('header') - 2;
     height: 100%;
-    background: rgba(188, 188, 188, .5);
-
-    opacity: 0;
-    transition: opacity 400ms;
   }
 
   .header.menu-active {

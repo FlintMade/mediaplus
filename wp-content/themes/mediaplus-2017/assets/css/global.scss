@@ -18,12 +18,15 @@ body {
 }
 
 main {
+  position: relative;
+  z-index: z('main');
+
   flex: 1;
 }
 
 :focus {
   outline: 1px dashed #000;
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 
 ::selection {

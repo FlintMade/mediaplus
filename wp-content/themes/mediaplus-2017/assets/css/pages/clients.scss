@@ -32,18 +32,6 @@
   }
 }
 
-/* Make sure biz attributes stack in front of non-useful header items */
-@media (min-width: $bp-header-m) {
-  .biz-attributes {
-    position: relative;
-    z-index: 998;
-  }
-
-  .header__menu {
-    z-index: 999;
-  }
-}
-
 /*
  *	CLIENT ROWS
  *  See also "Active state" and "Toggle states"

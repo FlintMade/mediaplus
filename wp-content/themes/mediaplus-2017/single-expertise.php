@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-<?php include('includes/sidebar.php'); ?>
 <?php while (have_posts()): the_post(); global $post; ?>
   <article class="case-study">
 

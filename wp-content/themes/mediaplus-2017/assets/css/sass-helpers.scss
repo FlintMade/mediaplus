@@ -53,3 +53,22 @@ $space-xl: 3.75rem;
 $space-xl-em: 3.75em;
 $space-2xm: 4rem;
 $space-2xm-em: 4em;
+
+/*
+ *	Z-INDEX MANAGEMENT
+ *	---------------------------------------------
+ */
+
+@function z($layer) {
+  @if not map-has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
+  }
+
+  @return map-get($z-layers, $layer);
+}
+
+$z-layers: (
+  "main": 600,
+  "header": 800,
+  "sidebar": 900
+)

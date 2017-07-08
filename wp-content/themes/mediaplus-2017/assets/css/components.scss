@@ -5,6 +5,25 @@
  */
 
 /*
+ *	PAGE OVERLAY
+ *  Used for mobile header nav and desktop
+ *  sidebar nav
+ *	---------------------------------------------
+ */
+
+.page-overlay {
+  display: none;
+  content: "";
+  position: fixed;
+  z-index: z('main') + 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(188, 188, 188, .5);
+  opacity: 0;
+}
+
+/*
  *	PAGE BANNER
  *	---------------------------------------------
  */

@@ -24,20 +24,16 @@
 <body <?php body_class(); ?>>
   <header role="banner" class="clear header">
     <div class="header__context">
-      <a class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus">
-        <?php if (is_post_type_archive('expertise') || is_singular('expertise') || is_post_type_archive('offerings') || is_singular('offerings')): ?>
-          <svg class="m-plus" title="Media plus">
-            <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mplus"/>
+      <button class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus show case studies" id="sidebar-toggle" aria-expanded="false" aria-controls="sidebar-nav">
+        <span class="logo__text-wrap <?php if (is_singular('expertise') || is_singular('offerings')): ?>abbreviated<?php endif; ?>">
+          <svg class="logo__text" title="Media plus">
+            <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#media"/>
           </svg>
-        <?php else: ?>
-          <svg class="full-logo" title="Media plus">
-            <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mediaplus"/>
-          </svg>
-          <svg class="m-plus hidden" role="none">
-            <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#mplus"/>
-          </svg>
-        <?php endif; ?>
-      </a>
+        </span>
+        <svg class="logo__plus" title="Media plus">
+          <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#plusBig"/>
+        </svg>
+      </button>
     </div>
 
     <div class="header__tray">
@@ -61,4 +57,5 @@
       </div>
     </div>
   </header>
+  <?php include('includes/sidebar.php'); ?>
   <main role="main" class="page-content <?php if (is_front_page()): ?>main--home<?php endif; ?>">

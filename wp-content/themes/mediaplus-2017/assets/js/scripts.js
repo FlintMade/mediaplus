@@ -73,7 +73,7 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
     menuContents = document.getElementById('js-menu-contents'),
     headerContact = document.querySelector('.header__contact'),
     menuBtn = document.createElement('button'),
-    pageOverlay = document.createElement('span');
+    headerOverlay = document.createElement('span');
 
   // Button properties
   menuBtn.classList.add('menu-toggle');
@@ -84,8 +84,9 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
   menuBtn.innerHTML = '<svg class="menu-toggle__open" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#menu"/></svg><svg class="menu-toggle__close" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#x"/></svg>';
 
   // Page overlay properties
-  pageOverlay.classList.add('page-overlay');
-  pageOverlay.setAttribute('role', 'none');
+  headerOverlay.classList.add('page-overlay');
+  headerOverlay.classList.add('page-overlay--header');
+  headerOverlay.setAttribute('role', 'none');
   
   // Menu properties
   menu.setAttribute('aria-hidden', 'true');
@@ -93,12 +94,12 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
   
   // Add button to page
   headerTray.insertBefore(menuBtn, headerTrayContent);
-  headerTray.insertBefore(pageOverlay, headerTrayContent);
+  headerTray.insertBefore(headerOverlay, headerTrayContent);
 
   var hideMenu = function() {
     header.classList.remove('menu-active');
-    fade(pageOverlay, 1, 0, 200, function(){
-      pageOverlay.style.display = 'block';
+    fade(headerOverlay, 1, 0, 200, function(){
+      headerOverlay.style.display = 'block';
     });
     menu.setAttribute('aria-hidden', 'true');
     menuBtn.setAttribute('aria-expanded', 'false');
@@ -107,8 +108,8 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
 
   var showMenu = function() {
     header.classList.add('menu-active');
-    pageOverlay.style.display = 'block';
-    fade(pageOverlay, 0, 1, 200);
+    headerOverlay.style.display = 'block';
+    fade(headerOverlay, 0, 1, 200);
     menu.removeAttribute('aria-hidden');
     menuBtn.setAttribute('aria-expanded', 'true');
 
@@ -133,7 +134,7 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
 
   // Close header if clicked on overlay
   window.addEventListener('click', function(e){
-    if (e.target == pageOverlay) {
+    if (e.target == headerOverlay) {
       hideMenu();
     }
   }, false);
@@ -143,16 +144,81 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
     // Desktop
     if (window.outerWidth > bpHeaderSmall) {
       headerContact.setAttribute('aria-hidden', 'true');
-      pageOverlay.style.display = 'none';
-    // Mobile
+    // Mobile 
     } else {
       if (header.classList.contains('menu-active')) {
         headerContact.removeAttribute('aria-hidden');
-        pageOverlay.style.display = 'block';
       }
     }
   }, 100);
 
   window.addEventListener('resize', resizeMenu);
+
+  /*
+   *	=============================================
+   *	SIDEBAR NAV
+   *	=============================================
+   */
+
+  var sidebarBtn = document.getElementById('sidebar-toggle'),
+      logoTextWrap = sidebarBtn.querySelector('.logo__text-wrap'),
+      sidebar = document.getElementById('sidebar-nav'),
+      sidebarContent = sidebar.querySelector('.site-sidebar__content'),
+      navOverlay = document.createElement('span');
+
+  /*
+   *  TOGGLE SIDEBAR
+   *	---------------------------------------------
+   */
+
+  // Nav overlay properties
+  navOverlay.classList.add('page-overlay');
+  navOverlay.classList.add('page-overlay--nav');
+  navOverlay.setAttribute('role', 'none');
+  document.body.insertBefore(navOverlay, sidebar);
+
+  /* Toggle sidebar nav */
+  var toggleNav = function() {
+
+    // Open nav
+    if (sidebar.getAttribute('aria-hidden') == 'true') {
+      navOverlay.style.display = 'block';
+      fade(navOverlay, 0, 1, 200);
+      sidebar.classList.remove('closed');
+      sidebarBtn.setAttribute('aria-expanded', 'true');
+      logoTextWrap.classList.add('abbreviated');
+
+      // Stagger CSS transitions
+      setTimeout(function(){
+        sidebar.removeAttribute('aria-hidden');
+
+        setTimeout(function(){
+          sidebarContent.classList.add('active');
+        }, 300);
+      }, 200);
+
+    // Close nav
+    } else {
+      navOverlay.style.display = 'none';
+      fade(navOverlay, 1, 0, 200);
+      sidebarBtn.setAttribute('aria-expanded', 'false');
+      sidebarContent.classList.remove('active');
+      
+      // Stagger CSS transitions
+      setTimeout(function(){
+        sidebar.setAttribute('aria-hidden', 'true');
+        setTimeout(function(){
+          logoTextWrap.classList.remove('abbreviated');
+        }, 200);
+      }, 100);
+
+      setTimeout(function(){
+        sidebar.classList.add('closed');
+      }, 800);
+    }
+
+  };
+
+  sidebarBtn.addEventListener('click', toggleNav, false);
 
 })(document, window);
