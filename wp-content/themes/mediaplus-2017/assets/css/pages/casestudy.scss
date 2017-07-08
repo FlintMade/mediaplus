@@ -165,15 +165,16 @@
 
 .slide {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   left: 0;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
+  transition: opacity 800ms;
 
-  &:first-child {
-    z-index: 2;
-    opacity: 1;
+  &[aria-hidden="true"] {
+    z-index: 1;
+    opacity: 0;
   }
 
   img {
@@ -191,6 +192,10 @@
   height: 100%;
   padding: $space-s-em;
   padding: $space-s;
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
 
   .arrow {
     width: 2em;
@@ -233,6 +238,10 @@
   padding: $space-s-em;
   padding: $space-s;
   line-height: 1;
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 @media (min-width: $bp-m) {

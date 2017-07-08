@@ -13,6 +13,58 @@
    *	---------------------------------------------
    */
 
+  /* Advance slide */
+  var advanceSlide = function(e) {
+    var gallery = findAncestor(e.currentTarget, 'gallery'),
+        currentSlide = gallery.querySelector('.current'),
+        labelIndex = gallery.querySelector('.gallery__index');
+    
+    /* Next slide */
+    if (e.currentTarget.classList.contains('gallery__next')) {
+      if (currentSlide.nextElementSibling) {
+        var newSlide = currentSlide.nextElementSibling;
+      } else {
+        var newSlide = gallery.querySelector('.slide:first-child');
+      }
+
+    /* Previous slide */
+    } else {
+      if (currentSlide.previousElementSibling) {
+        var newSlide = currentSlide.previousElementSibling;
+      } else {
+        var newSlide = gallery.querySelector('.slide:last-child');
+      }
+    }
+      
+    currentSlide.classList.remove('current');
+    currentSlide.setAttribute('aria-hidden', 'true');
+
+    newSlide.classList.add('current');
+    newSlide.removeAttribute('aria-hidden');
+    labelIndex.innerText = newSlide.getAttribute('data-slideIndex');
+  };
+
+  /* Set up galleries */
+  var galleries = document.querySelectorAll('.gallery');
+  for (var i = 0; i < galleries.length; i++) {
+    var gallery = galleries[i],
+        prev = gallery.querySelector('.gallery__prev'),
+        next = gallery.querySelector('.gallery__next'),
+        label = gallery.querySelector('.gallery__label');
+
+    prev.removeAttribute('aria-hidden');
+    prev.removeAttribute('tabindex');
+    prev.addEventListener('click', advanceSlide, false);
+
+    next.removeAttribute('aria-hidden');
+    next.removeAttribute('tabindex');
+    next.addEventListener('click', advanceSlide, false);
+
+    label.removeAttribute('aria-hidden');
+    label.setAttribute('aria-live', 'polite');
+    label.setAttribute('aria-atomic', 'true');
+  }
+
   /*
    *	SECTION: LISTS
    *	---------------------------------------------

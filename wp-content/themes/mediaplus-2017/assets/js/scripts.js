@@ -4,6 +4,9 @@
  *	=============================================
  */
 
+// JS is available
+document.documentElement.classList.remove('no-js');
+
 // Find ancestor
 function findAncestor (el, cls) {
   while ((el = el.parentElement) && !el.classList.contains(cls));

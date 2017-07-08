@@ -62,6 +62,7 @@
         $images = get_sub_field('images_gallery');
         if ($images):
         $imageCount = count($images);
+        $i = 1;
       ?>
 
         <!-- GALLERY SECTION -->
@@ -74,8 +75,13 @@
                 $large = $image['sizes']['mediaplus-gallery-l'];
                 $xl = $image['sizes']['mediaplus-gallery-xl'];
                 $xxl = $image['sizes']['mediaplus-gallery-xxl'];
+                if ($image['description']) {
+                  $image_text = $image['description'];
+                } else {
+                  $image_text = $image['alt'];
+                }
               ?>
-                <li class="slide">
+                <li class="slide <?php if ($i == 1): ?>current<?php endif; ?>" data-slideIndex="<?php echo str_pad($i, 2, '0', STR_PAD_LEFT); ?>" <?php if ($i > 1): ?>aria-hidden="true"<?php endif; ?>>
                   <picture>
                     <?php if ($xxl): ?>
                       <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
@@ -83,24 +89,24 @@
                     <?php if ($xl): ?>
                       <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
                     <?php endif; ?>
-                    <source media="(min-width: 576)" srcset="<?php echo $medium; ?>">
+                    <source media="(min-width: 500px)" srcset="<?php echo $medium; ?>">
                     <source media="(min-width: 0)" srcset="<?php echo $small; ?>">
-                    <img src="<?php echo $medium; ?>" alt="<?php echo $image['alt']; ?>" />
+                    <img src="<?php echo $medium; ?>" alt="<?php echo $image_text; ?>" />
                   </picture>
                 </li>
-              <?php endforeach; ?>
+              <?php $i++; endforeach; ?>
             </ul>
-            <button class="gallery__prev" title="Previous image">
+            <p class="gallery__label">Gallery <span class="gallery__index">01</span> / <?php echo str_pad($imageCount, 2, '0', STR_PAD_LEFT); ?></p>
+            <button class="gallery__prev" title="Previous image" aria-hidden="true" tabindex="-1">
               <svg class="arrow" role="none">
                 <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrowPrev"/>
               </svg>
             </button>
-            <button class="gallery__next" title="Next image">
+            <button class="gallery__next" title="Next image" aria-hidden="true" tabindex="-1">
               <svg class="arrow" role="none">
                 <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrow"/>
               </svg>
             </button>
-            <p class="gallery__label">Gallery <span class="gallery__index">01</span> / <?php echo str_pad($imageCount, 2, '0', STR_PAD_LEFT); ?></p>
           </div>
         </section>
         <?php endif; ?>
