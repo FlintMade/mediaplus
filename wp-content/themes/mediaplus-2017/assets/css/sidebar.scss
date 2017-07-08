@@ -132,6 +132,17 @@ body.single-expertise a.sections__expertise {
     &[aria-hidden="true"] {
       left: -25em;
       height: 100%;
+
+      &.tease {
+        left: -22em;
+        transition: left 300ms;
+      }
+    }
+
+    &.tease {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 

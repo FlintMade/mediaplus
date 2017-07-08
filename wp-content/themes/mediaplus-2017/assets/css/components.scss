@@ -21,6 +21,10 @@
   width: 100%;
   background: rgba(188, 188, 188, .5);
   opacity: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 /*
