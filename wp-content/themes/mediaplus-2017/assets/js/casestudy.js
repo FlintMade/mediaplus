@@ -14,16 +14,16 @@
    *	---------------------------------------------
    */
 
-  var setRecentCS = function() {
-    var recent = document.querySelector('.case-study--current'),
-        recentID = recent.getAttribute('id').replace('cs-', ''),
+  var recent = document.querySelector('.case-study--current');
+
+  var setRecentCS = function(recent) {
+    var recentID = recent.getAttribute('id').replace('cs-', ''),
         recentUrl = recent.getAttribute('data-fullurl'),
         currentLink = document.querySelector('.case-study-list .current'),
         sidebarLink = document.getElementById('link-' + recentID);
 
     if (currentLink === null || currentLink !== sidebarLink) {
       history.replaceState({}, 'foo', recentUrl);
-      console.log(recentUrl);
       localStorage.setItem('recentPage', recentID);
       localStorage.setItem('recentUrl', recentUrl);
 
@@ -35,7 +35,7 @@
     }
   };
 
-  setRecentCS();
+  setRecentCS(recent);
 
   /*
    *	SECTION: GALLERY
@@ -183,6 +183,9 @@
    *	LOAD NEXT CASE STUDY
    *	---------------------------------------------
    */
+
+  var lastScroll = 0;
+
   var scrollToNextCS = debounce(function() {
     var currentCS = document.querySelector('.case-study--current'),
         scrolledTo = window.scrollY + window.outerHeight;
@@ -190,44 +193,62 @@
     // Hide next link if one is already in view
     hideNextLink();
 
-    if (scrolledTo >= document.body.clientHeight) {
-      if (currentCS) {
-        var currentID = currentCS.getAttribute('id').replace('cs-', ''),
-          nextLink = document.getElementById('after-' + currentID);
-          
-        if (nextLink) {
-          var nextID = nextLink.getAttribute('data-postid');
+    // Scrolling up
+    if (window.scrollY < lastScroll) {
+      var caseStudies = document.querySelectorAll('.case-study');
 
-          // Pop up next link like a toast
-          nextLink.classList.add('visible');
+      // See which case study is in view and set it to current
+      for (var i = 0; i < caseStudies.length; i++) {
+        var thisTop = caseStudies[i].getBoundingClientRect().top,
+            thisHeight = caseStudies[i].offsetHeight;
+        if ((thisTop + thisHeight - window.outerHeight / 2) >= 0) {
+          setRecentCS(caseStudies[i]);
+          break;
+        }
+      }
 
-          // Load the next case study
-          $.ajax({
-            url: loadNextCaseStudy.ajaxurl,
-            type: 'post',
-            data: {
-              action: 'next_case_study',
-              query_vars: loadNextCaseStudy.query_vars,
-              p: nextID
-            },
-            beforeSend: function() {
-              currentCS.classList.remove('case-study--current');
-            },
-            success: function(newPosts) {
-              $('#flow').append(newPosts);
-              setUpGalleries();
-              setRecentCS();
+    // Scrolling down
+    } else {
+      if (scrolledTo >= document.body.clientHeight) {
+        if (currentCS) {
+          var currentID = currentCS.getAttribute('id').replace('cs-', ''),
+            nextLink = document.getElementById('after-' + currentID);
+            
+          if (nextLink) {
+            var nextID = nextLink.getAttribute('data-postid');
 
-              var currentCS = document.querySelector('.case-study--current');
-              if (scrolledTo > (window.scrollY + currentCS.getBoundingClientRect().top + 400)) {
-                console.log(currentCS.getBoundingClientRect().top);
-                hideNextLink();
+            // Pop up next link like a toast
+            nextLink.classList.add('visible');
+
+            // Load the next case study
+            $.ajax({
+              url: loadNextCaseStudy.ajaxurl,
+              type: 'post',
+              data: {
+                action: 'next_case_study',
+                query_vars: loadNextCaseStudy.query_vars,
+                p: nextID
+              },
+              beforeSend: function() {
+                currentCS.classList.remove('case-study--current');
+              },
+              success: function(newPosts) {
+                $('#flow').append(newPosts);
+                setUpGalleries();
+                var recent = document.querySelector('.case-study--current');
+                setRecentCS(recent);
+                if (scrolledTo > (window.scrollY + recent.getBoundingClientRect().top + 400)) {
+                  hideNextLink();
+                }
               }
-            }
-          });
+            });
+          }
         }
       }
     }
+
+    // Set new scroll top
+    lastScroll = window.scrollY;
   }, 200);
 
   var hideNextLink = function(){
