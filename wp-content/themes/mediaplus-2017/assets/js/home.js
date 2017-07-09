@@ -8,6 +8,14 @@
    */
 
   /*
+   *  SET RECENT PAGE
+   *  Remember home as last "case study flow" page
+   *	---------------------------------------------
+   */
+
+  localStorage.setItem('recentPage', 'home');
+
+  /*
    *  REVEAL TEXT
    *  Slide-fade across home page text to create
    *  letter-by-letter animation effect
