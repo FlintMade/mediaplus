@@ -160,37 +160,40 @@
    *	LOAD NEXT CASE STUDY
    *	---------------------------------------------
    */
-  var scrollToNextCS = function() {
-    var currentCS = document.querySelector('.case-study--current'),
-        currentSlug = currentCS.getAttribute('data-slug'),
-        nextLink = document.getElementById('next-' + currentSlug);
-    
-    if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - 200) {
-      var postID = nextLink.getAttribute('data-postID');
-      
-      // Pop up next link like a toast
-      nextLink.classList.add('visible');
+  var scrollToNextCS = debounce(function() {
+    var currentCS = document.querySelector('.case-study--current');
 
-      // Load the next case study
-      $.ajax({
-        url: loadNextCaseStudy.ajaxurl,
-        type: 'post',
-        data: {
-          action: 'next_case_study',
-          query_vars: loadNextCaseStudy.query_vars,
-          p: postID
-        },
-        success: function(newPosts) {
-          currentCS.classList.remove('case-study--current');
-          $('#flow').append(newPosts);
-        }
-      });
-    } else {
+    if (currentCS) {
+      var currentID = currentCS.getAttribute('id').replace('cs-', ''),
+          nextLink = document.getElementById('after-' + currentID),
+          nextID = nextLink.getAttribute('data-postid');
 
-      // Hide next link
-      nextLink.classList.remove('visible');
+      if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - 200) {
+        // Pop up next link like a toast
+        nextLink.classList.add('visible');
+
+        // Load the next case study
+        $.ajax({
+          url: loadNextCaseStudy.ajaxurl,
+          type: 'post',
+          data: {
+            action: 'next_case_study',
+            query_vars: loadNextCaseStudy.query_vars,
+            p: nextID
+          },
+          beforeSend: function() {
+            currentCS.classList.remove('case-study--current');
+          },
+          success: function(newPosts) {
+            $('#flow').append(newPosts);
+          }
+        });
+      } else {
+        // Hide next link
+        nextLink.classList.remove('visible');
+      }
     }
-  };
+  }, 200);
 
   window.addEventListener('scroll', scrollToNextCS, false);
 

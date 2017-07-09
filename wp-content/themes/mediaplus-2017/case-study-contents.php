@@ -1,4 +1,4 @@
-<article class="case-study case-study--current" id="cs-<?php echo $post->post_name; ?>" data-slug="<?php echo $post->post_name; ?>">
+<article class="case-study case-study--current" id="cs-<?php echo $post->ID; ?>">
   <div class="row case-study__title">
     <h1><?php the_title(); ?></h1>
   </div>
@@ -209,7 +209,7 @@
   $next_post = get_previous_post();
   if (!empty( $next_post )):
 ?>
-  <a class="next-case-study" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>" id="next-<?php echo $post->post_name; ?>" data-postID="<?php echo $next_post->ID; ?>">
+  <a class="next-case-study" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>" id="after-<?php echo $post->ID; ?>" data-postid="<?php echo $next_post->ID; ?>">
     <span>Next expertise:</span>
     <span class="next__title">&ndash; <?php echo esc_attr($next_post->post_title); ?></span>
     <svg class="arrow" role="none">
