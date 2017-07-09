@@ -268,8 +268,8 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
       // Clicking overlay closes sidebar
       navOverlay.addEventListener('click', closeSidebar, false);
 
-      // Tease sidebar on hover
-      if (window.outerWidth >= bpSidebarL) {
+      // Tease sidebar on hover, but not on home
+      if (window.outerWidth >= bpSidebarL && !document.body.classList.contains('home')) {
         window.addEventListener('mousemove', teaseSidebar, false);
       }
     }
