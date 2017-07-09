@@ -5,7 +5,12 @@
  */
 
 .main--home {
+  margin-top: 0;
+}
+
+.home-intro {
   display: flex;
+  position: relative;
   margin-top: 5em;
   min-height: calc(100vh - 5em);
   flex-direction: column;
@@ -13,6 +18,10 @@
   padding: $space-s-em;
   padding: $space-s;
   padding-bottom: 5em;
+
+  + #flow {
+    margin-top: 10em;
+  }
 }
 
 .timeline-process {
@@ -92,7 +101,7 @@
 }
 
 @media (min-width: $bp-header-m) {
-  .main--home {
+  .home-intro {
     padding: $space-m;
     padding-right: 10em;
   }

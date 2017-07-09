@@ -22,7 +22,7 @@
    *	---------------------------------------------
    */
 
-  var pageContent = document.querySelector('.page-content'),
+  var homeIntro = document.querySelector('.home-intro'),
       timelineWrap = document.querySelector('.timeline-process'),
       text = document.getElementById('homeText'),
       textHeight = text.offsetHeight,
@@ -34,7 +34,7 @@
       homeScrollBtn.setAttribute('id', 'js-menu-toggle');
       homeScrollBtn.setAttribute('aria-label', 'View case studies');
       homeScrollBtn.innerHTML = '<span>Learn more</span><svg class="arrow" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#arrow"/></svg>';
-      pageContent.appendChild(homeScrollBtn);
+      homeIntro.appendChild(homeScrollBtn);
 
   var createOverlays = function(){
     for (var i = 0; i < numOverlays; i++){
@@ -60,6 +60,7 @@
     // Fade in scroll button at end
     setTimeout(function(){
       fade(homeScrollBtn, 0, 1, 400);
+      loadFirstCaseStudy();
     }, afterAll);
   };
 
@@ -71,5 +72,28 @@
 
   createOverlays();
   slideOverlays();
+
+  /*
+   *  SCROLL TO FIRST CASE STUDY
+   *	---------------------------------------------
+   */
+
+  var loadFirstCaseStudy = function() {
+    $.ajax({
+      url: loadNextCaseStudy.ajaxurl,
+      type: 'post',
+      data: {
+        action: 'next_case_study',
+        query_vars: loadNextCaseStudy.query_vars
+      },
+      success: function(newPosts) {
+        setTimeout(function(){
+          $('#flow').append(newPosts);
+          setUpGalleries();
+          resetCaseStudy();
+        }, 200);
+      }
+    });
+  };
 
 })(document, window);

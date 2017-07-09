@@ -85,15 +85,15 @@ function mediaplus_scripts() {
 	wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/scripts.js'), array(), false, true);
 
 	// Load page-specific scripts
-	if (is_singular('expertise') || is_home()) {
+	if (is_front_page() || is_singular('expertise') || is_home()) {
 		wp_enqueue_script('mediaPlusjQuery', get_theme_file_uri('/assets/js/jquery-3.2.1.min.js'), array(), false, true);
 	}
 
 	if (is_front_page()) {
-		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts'), false, true);
+		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts', 'mediaPlusjQuery'), false, true);
 	}
 
-	if (is_singular('expertise')) {
+	if (is_front_page() || is_singular('expertise')) {
 		wp_enqueue_script('caseStudyScripts', get_theme_file_uri('/assets/js/casestudy.js'), array('scripts', 'mediaPlusjQuery'), false, true);
 	}
 
@@ -115,6 +115,10 @@ function mediaplus_scripts() {
 
 	// Set up loading next case study
 	global $wp_query;
+	wp_localize_script('homeScripts', 'loadNextCaseStudy', array(
+		'ajaxurl' => admin_url('admin-ajax.php')
+	));
+
 	wp_localize_script('caseStudyScripts', 'loadNextCaseStudy', array(
 		'ajaxurl' => admin_url('admin-ajax.php')
 	));
@@ -140,7 +144,15 @@ add_action( 'wp_ajax_next_case_study', 'next_case_study');
 function next_case_study() {
 	$query_vars = json_decode(stripslashes( $_POST['query_vars'] ), true);
 	$query_vars['post_type'] = 'expertise';
-	$query_vars['p'] = $_POST['p'];
+
+	// Next case study
+	if ($_POST['p']) {
+		$query_vars['p'] = $_POST['p'];
+
+	// First case study (home page)
+	} else {
+		$query_vars['posts_per_page'] = 1;
+	}
 	$posts = new WP_Query($query_vars);
 	$GLOBALS['wp_query'] = $posts;
 
