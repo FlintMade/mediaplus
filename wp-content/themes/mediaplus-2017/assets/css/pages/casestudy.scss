@@ -60,17 +60,15 @@
 
 .next-case-study {
   z-index: z('main') - 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   bottom: -6em;
-  padding: $space-s-em;
-  padding: $space-s;
+  padding: 1.5em $space-s-em;
+  padding: 1.25em $space-s;
   height: 6em;
   background: $bg-grey-light;
-  transition: bottom 400ms;
+  transition: bottom 400ms, height 400ms, opacity 400ms;
 
   span {
+    display: block;
     font-size: 1.5em;
     font-size: 1.5rem;
     line-height: 1.2;
@@ -84,6 +82,8 @@
     left: $space-s;
     transform: rotate(90deg);
     transform-origin: center;
+    opacity: 1;
+    transition: opacity 200ms;
   }
 
   &:focus,
@@ -176,7 +176,7 @@ a.next-case-study {
 
   .next-case-study {
     bottom: -9.25em;
-    padding-left: $space-m;
+    padding: 3.125em $space-m;
     height: 9.25em;
 
     .arrow {

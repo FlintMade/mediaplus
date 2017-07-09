@@ -9,6 +9,19 @@
    */
 
   /*
+   *  HELPER FUNCTIONS
+   *	---------------------------------------------
+   */
+
+  // Get offset of element relative to document, not window
+  function docOffset(el) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+  }
+
+  /*
    *  SET RECENT PAGE
    *  Remember as last "case study flow" page
    *	---------------------------------------------
@@ -180,7 +193,7 @@
   });
 
   /*
-   *	LOAD NEXT CASE STUDY
+   *	SCROLL TO LOAD NEXT CASE STUDY
    *	---------------------------------------------
    */
 
@@ -191,6 +204,7 @@
     var visibleLink = document.querySelector('.next-case-study.visible');
     if (visibleLink !== null) {
       visibleLink.classList.remove('visible');
+      visibleLink.removeEventListener('click', clickToLoadCS, false);
     }
   };
 
@@ -234,6 +248,7 @@
 
           // Pop up next link like a toast
           nextLink.classList.add('visible');
+          nextLink.addEventListener('click', clickToLoadCS, false);
 
           // Load the next case study
           $.ajax({
@@ -306,5 +321,33 @@
   };
 
   window.addEventListener('scroll', scrollEvents, false);
+
+  /*
+   *	CLICK TO LOAD NEXT CASE STUDY
+   *	---------------------------------------------
+   */
+
+  var clickToLoadCS = function(e) {
+    e.preventDefault();
+    var nextLink = e.currentTarget,
+        current = document.querySelector('.case-study--current'),
+        currentTop = docOffset(current).top;
+
+    window.removeEventListener('scroll', scrollEvents, false);
+    nextLink.style.height = '100%';
+    nextLink.querySelector('.arrow').style.opacity = 0;
+
+    // After grow
+    setTimeout(function(){
+      window.scrollTo(0, currentTop - 50);
+      nextLink.style.opacity = 0;
+
+      // Fade to case study
+      setTimeout(function(){
+        current.style.opacity = 1;
+        window.addEventListener('scroll', scrollEvents, false);
+      }, 400);
+    }, 600);
+  };
 
 })(document, window);
