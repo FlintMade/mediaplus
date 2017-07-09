@@ -27,6 +27,7 @@
 }
 
 .header__tray-content {
+  z-index: z('header') - 1;
   right: 0;
 }
 
@@ -223,7 +224,6 @@
 
   .header__tray-content {
     position: relative;
-    z-index: z('header') - 1;
     display: flex;
     flex-direction: column;
     padding: 5.625em $space-s $space-s;
