@@ -190,7 +190,7 @@
     // Hide next link if one is already in view
     hideNextLink();
 
-    if (scrolledTo >= document.body.clientHeight - 200) {
+    if (scrolledTo >= document.body.clientHeight) {
       if (currentCS) {
         var currentID = currentCS.getAttribute('id').replace('cs-', ''),
           nextLink = document.getElementById('after-' + currentID);
@@ -217,7 +217,10 @@
               $('#flow').append(newPosts);
               setUpGalleries();
               setRecentCS();
-              if (scrolledTo > (window.scrollY + nextLink.getBoundingClientRect().top + nextLink.offsetHeight + 200)) {
+
+              var currentCS = document.querySelector('.case-study--current');
+              if (scrolledTo > (window.scrollY + currentCS.getBoundingClientRect().top + 400)) {
+                console.log(currentCS.getBoundingClientRect().top);
                 hideNextLink();
               }
             }
