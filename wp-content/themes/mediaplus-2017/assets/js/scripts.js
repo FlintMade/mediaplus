@@ -211,7 +211,9 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
       }, 200);
 
       setTimeout(function(){
-        logoTextWrap.classList.remove('abbreviated');
+        if (!document.body.classList.contains('single-expertise')) {
+          logoTextWrap.classList.remove('abbreviated');
+        }
       }, 200);
     }, 100);
 
@@ -231,11 +233,11 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
 
   var resizeSidebar = debounce(function() {
     if (window.outerWidth >= bpSidebarL) {
-      setTimeout(function(){
-        openSidebar();
-      }, 200);
+      openSidebar();
+    } else {
+      closeSidebar();
     }
-  }, 200);
+  }, 400);
 
   var teaseSidebar = debounce(function(e) {
     if (sidebar.getAttribute('aria-hidden') == 'true') {
