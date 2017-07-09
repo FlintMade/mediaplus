@@ -11,7 +11,9 @@
 
 .case-study {
   position: relative;
+  z-index: z('main') - 2;
   margin-bottom: 9em;
+  min-height: 100vh;
 }
 
 .case-study__title {
@@ -24,6 +26,7 @@
   flex-direction: column;
   justify-content: center;
   position: fixed;
+  z-index: z('main') - 1;
   bottom: -6em;
   left: 0;
   padding: $space-s-em;

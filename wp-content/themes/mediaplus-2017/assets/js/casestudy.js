@@ -161,39 +161,53 @@
    *	---------------------------------------------
    */
   var scrollToNextCS = debounce(function() {
-    var currentCS = document.querySelector('.case-study--current');
+    var currentCS = document.querySelector('.case-study--current'),
+        scrolledTo = window.scrollY + window.outerHeight;
 
-    if (currentCS) {
-      var currentID = currentCS.getAttribute('id').replace('cs-', ''),
-          nextLink = document.getElementById('after-' + currentID),
-          nextID = nextLink.getAttribute('data-postid');
+    // Hide next link if one is already in view
+    hideNextLink();
 
-      if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - 200) {
-        // Pop up next link like a toast
-        nextLink.classList.add('visible');
+    if (scrolledTo >= document.body.clientHeight - 200) {
+      if (currentCS) {
+        var currentID = currentCS.getAttribute('id').replace('cs-', ''),
+          nextLink = document.getElementById('after-' + currentID);
+          
+        if (nextLink) {
+          var nextID = nextLink.getAttribute('data-postid');
 
-        // Load the next case study
-        $.ajax({
-          url: loadNextCaseStudy.ajaxurl,
-          type: 'post',
-          data: {
-            action: 'next_case_study',
-            query_vars: loadNextCaseStudy.query_vars,
-            p: nextID
-          },
-          beforeSend: function() {
-            currentCS.classList.remove('case-study--current');
-          },
-          success: function(newPosts) {
-            $('#flow').append(newPosts);
-          }
-        });
-      } else {
-        // Hide next link
-        nextLink.classList.remove('visible');
+          // Pop up next link like a toast
+          nextLink.classList.add('visible');
+
+          // Load the next case study
+          $.ajax({
+            url: loadNextCaseStudy.ajaxurl,
+            type: 'post',
+            data: {
+              action: 'next_case_study',
+              query_vars: loadNextCaseStudy.query_vars,
+              p: nextID
+            },
+            beforeSend: function() {
+              currentCS.classList.remove('case-study--current');
+            },
+            success: function(newPosts) {
+              $('#flow').append(newPosts);
+              if (scrolledTo > (window.scrollY + nextLink.getBoundingClientRect().top + nextLink.offsetHeight + 200)) {
+                hideNextLink();
+              }
+            }
+          });
+        }
       }
     }
   }, 200);
+
+  var hideNextLink = function(){
+    var visibleLink =  document.querySelector('.next-case-study.visible');
+    if (visibleLink !== null) {
+      visibleLink.classList.remove('visible');
+    }
+  };
 
   window.addEventListener('scroll', scrollToNextCS, false);
 
