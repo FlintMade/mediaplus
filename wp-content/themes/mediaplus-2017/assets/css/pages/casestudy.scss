@@ -9,20 +9,82 @@
   margin-top: $space-s;
 }
 
+.case-study {
+  position: relative;
+  margin-bottom: 9em;
+}
+
 .case-study__title {
   margin-bottom: 3em;
 }
 
+.next-case-study {
+  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  bottom: -6em;
+  left: 0;
+  padding: $space-s-em;
+  padding: $space-s;
+  width: 100%;
+  height: 6em;
+  background: $bg-grey-light;
+
+  span {
+    font-size: 1.5em;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -1em;
+    left: $space-s-em;
+    left: $space-s;
+    transform: rotate(90deg);
+    transform-origin: center;
+  }
+
+  &:focus {
+    bottom: 0;
+  }
+}
+
+a.next-case-study {
+  border-bottom: 0;
+}
+
+.next__title {
+  font-family: $font-heading;
+}
+
 /* Make space for the M+ */
 @media (max-width: $bp-s) {
-  .case-study {
+  .case-studies {
     padding-left: 3.325em;
+  }
+
+  .next-case-study {
+    padding-left: 4.575em; /* Align to text */
+
+    .arrow {
+      margin-top: -1.15em;
+      width: 2.333em; /* 35px */
+      height: 2.333em;
+    }
   }
 }
 
 @media (min-width: $bp-s) and (max-width: $bp-m) {
-  .case-study {
+  .case-studies {
     padding-left: 2.75em;
+  }
+
+  .next-case-study {
+    padding-left: 4.75em; /* Align to text */
   }
 
   .single-expertise .page-content {
@@ -31,8 +93,12 @@
 }
 
 @media (min-width: $bp-m) and (max-width: $bp-sidebar-l) {
-  .case-study {
+  .case-studies {
     padding-left: 4.125em;
+  }
+
+  .next-case-study {
+    padding-left: 6.125em; /* Align to text */
   }
 
   .single-expertise .page-content {
@@ -45,13 +111,35 @@
     margin-top: 4.5em;
   }
 
-  .case-study {
-    float: right;
+  .case-studies,
+  .next-case-study {
     width: calc(100% - 24.6875em);
+  }
+
+  .case-studies {
+    float: right;
+  }
+
+  .case-study {
+    margin-bottom: 18.25em;
   }
 
   .case-study__title {
     display: none;
+  }
+
+  .next-case-study {
+    right: 0;
+    bottom: -9.25em;
+    left: auto;
+    padding-left: $space-m;
+    height: 9.25em;
+
+    .arrow {
+      right: $space-m;
+      left: auto;
+      transform: rotate(0);
+    }
   }
 }
 
@@ -64,7 +152,8 @@
   h1, h2, h3, h4, h5, h6,
   blockquote,
   button:hover,
-  button:focus {
+  button:focus,
+  .next-case-study:hover {
     color: $orange;
   }
 
@@ -214,8 +303,6 @@
   }
 
   .arrow {
-    width: 2em;
-    height: 2em;
     opacity: 0;
     transition: opacity 400ms;
   }

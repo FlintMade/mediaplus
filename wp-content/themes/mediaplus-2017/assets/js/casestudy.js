@@ -9,6 +9,21 @@
    */
 
   /*
+   *  SET RECENT PAGE
+   *  Remember as last "case study flow" page
+   *	---------------------------------------------
+   */
+
+  var setRecentCS = function() {
+    var recent = document.querySelector('.case-study--current'),
+        recentSlug = recent.getAttribute('id');
+    localStorage.setItem('recentPage', recentSlug);
+    console.log(localStorage.getItem('recentPage'));
+  };
+
+  setRecentCS();
+
+  /*
    *	SECTION: GALLERY
    *	---------------------------------------------
    */
