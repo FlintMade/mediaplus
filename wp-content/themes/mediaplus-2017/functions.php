@@ -85,12 +85,16 @@ function mediaplus_scripts() {
 	wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/scripts.js'), array(), false, true);
 
 	// Load page-specific scripts
+	if (is_singular('expertise') || is_home()) {
+		wp_enqueue_script('mediaPlusjQuery', get_theme_file_uri('/assets/js/jquery-3.2.1.min.js'), array(), false, true);
+	}
+
 	if (is_front_page()) {
 		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts'), false, true);
 	}
 
 	if (is_singular('expertise')) {
-		wp_enqueue_script('caseStudyScripts', get_theme_file_uri('/assets/js/casestudy.js'), array('scripts'), false, true);
+		wp_enqueue_script('caseStudyScripts', get_theme_file_uri('/assets/js/casestudy.js'), array('scripts', 'mediaPlusjQuery'), false, true);
 	}
 
 	if (is_page(7)) {
@@ -102,7 +106,6 @@ function mediaplus_scripts() {
 	}
 
 	if (is_home()) {
-		wp_enqueue_script('mediaPlusjQuery', get_theme_file_uri('/assets/js/jquery-3.2.1.min.js'), array(), false, true);
 		wp_enqueue_script('journalIndexScripts', get_theme_file_uri('/assets/js/journal-index.js'), array('scripts', 'mediaPlusjQuery'), false, true);
 	}
 
@@ -110,14 +113,53 @@ function mediaplus_scripts() {
 		wp_enqueue_script('fluidVids', get_theme_file_uri('/assets/js/fluidvids.js'), array(), false, true);
 	}
 
-	// Ajaxing posts
+	// Set up loading next case study
 	global $wp_query;
+	wp_localize_script('caseStudyScripts', 'loadNextCaseStudy', array(
+		'ajaxurl' => admin_url('admin-ajax.php')
+	));
+
+	// Set up journal pagination
 	wp_localize_script('journalIndexScripts', 'ajaxpagination', array(
 		'ajaxurl' => admin_url('admin-ajax.php'),
 		'query_vars' => json_encode($wp_query->query)
 	));
 }
 add_action( 'wp_enqueue_scripts', 'mediaplus_scripts' );
+
+/*
+ *	LOAD NEXT CASE STUDY
+ *	For background: https://www.smashingmagazine.com/2011/10/how-to-use-ajax-in-wordpress/
+ *	https://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side
+ *	--------------------------------------------------------------------------------------
+ */
+
+add_action( 'wp_ajax_next_case_study', 'next_case_study');
+add_action( 'wp_ajax_next_case_study', 'next_case_study');
+
+function next_case_study() {
+	$query_vars = json_decode(stripslashes( $_POST['query_vars'] ), true);
+	$query_vars['post_type'] = 'expertise';
+	$query_vars['p'] = $_POST['p'];
+	$posts = new WP_Query($query_vars);
+	$GLOBALS['wp_query'] = $posts;
+
+	add_filter('editor_max_image_size', 'case_study_size_override');
+
+	if ($posts->have_posts()) { 
+		while ($posts->have_posts()) { 
+			$posts->the_post();
+			get_template_part('case-study-contents');
+		}
+	}
+
+	remove_filter('editor_max_image_size', 'case_study_size_override');
+	die();
+}
+
+function case_study_size_override() {
+  return array(2048);
+}
 
 /*
  *	EXCERPTS
@@ -157,7 +199,7 @@ function mediaplus_ajax_pagination() {
 	$posts = new WP_Query($query_vars);
 	$GLOBALS['wp_query'] = $posts;
 
-	add_filter('editor_max_image_size', 'my_image_size_override');
+	add_filter('editor_max_image_size', 'journal_size_override');
 
 	if(!$posts->have_posts()) { 
 		get_template_part('empty-posts');
@@ -168,12 +210,12 @@ function mediaplus_ajax_pagination() {
 			get_template_part('post-preview');
 		}
 	}
-	remove_filter('editor_max_image_size', 'my_image_size_override');
+	remove_filter('editor_max_image_size', 'journal_size_override');
 
 	die();
 }
 
-function my_image_size_override() {
+function journal_size_override() {
   return array(900, 530);
 }
 

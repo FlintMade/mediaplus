@@ -18,7 +18,6 @@
     var recent = document.querySelector('.case-study--current'),
         recentSlug = recent.getAttribute('id');
     localStorage.setItem('recentPage', recentSlug);
-    console.log(localStorage.getItem('recentPage'));
   };
 
   setRecentCS();
@@ -161,14 +160,34 @@
    *	LOAD NEXT CASE STUDY
    *	---------------------------------------------
    */
-
   var scrollToNextCS = function() {
     var currentCS = document.querySelector('.case-study--current'),
         currentSlug = currentCS.getAttribute('data-slug'),
         nextLink = document.getElementById('next-' + currentSlug);
+    
     if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - 200) {
+      var postID = nextLink.getAttribute('data-postID');
+      
+      // Pop up next link like a toast
       nextLink.classList.add('visible');
+
+      // Load the next case study
+      $.ajax({
+        url: loadNextCaseStudy.ajaxurl,
+        type: 'post',
+        data: {
+          action: 'next_case_study',
+          query_vars: loadNextCaseStudy.query_vars,
+          p: postID
+        },
+        success: function(newPosts) {
+          currentCS.classList.remove('case-study--current');
+          $('#flow').append(newPosts);
+        }
+      });
     } else {
+
+      // Hide next link
       nextLink.classList.remove('visible');
     }
   };
