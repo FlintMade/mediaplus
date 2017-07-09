@@ -16,8 +16,23 @@
 
   var setRecentCS = function() {
     var recent = document.querySelector('.case-study--current'),
-        recentSlug = recent.getAttribute('id');
-    localStorage.setItem('recentPage', recentSlug);
+        recentID = recent.getAttribute('id').replace('cs-', ''),
+        recentUrl = recent.getAttribute('data-fullurl'),
+        currentLink = document.querySelector('.case-study-list .current'),
+        sidebarLink = document.getElementById('link-' + recentID);
+
+    if (currentLink === null || currentLink !== sidebarLink) {
+      history.replaceState({}, 'foo', recentUrl);
+      console.log(recentUrl);
+      localStorage.setItem('recentPage', recentID);
+      localStorage.setItem('recentUrl', recentUrl);
+
+      if (currentLink) {
+        currentLink.classList.remove('current');
+      }
+
+      sidebarLink.classList.add('current');
+    }
   };
 
   setRecentCS();
@@ -201,6 +216,7 @@
             success: function(newPosts) {
               $('#flow').append(newPosts);
               setUpGalleries();
+              setRecentCS();
               if (scrolledTo > (window.scrollY + nextLink.getBoundingClientRect().top + nextLink.offsetHeight + 200)) {
                 hideNextLink();
               }

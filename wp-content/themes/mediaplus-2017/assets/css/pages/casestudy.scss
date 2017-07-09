@@ -4,6 +4,16 @@
  *	=============================================
  */
 
+.case-study-list {
+  a:link, a:visited {
+    opacity: .5;
+  }
+  a:hover,
+  a.current {
+    opacity: 1;
+  }
+}
+
 .single-expertise .page-content {
   margin-top: $space-s-em;
   margin-top: $space-s;

@@ -12,7 +12,7 @@
     <ul class="case-study-list">
       <?php foreach ($items as $item): ?>
         <li>
-          <a href="<?php echo get_permalink($item->ID); ?>">
+          <a href="<?php echo get_permalink($item->ID); ?>" id="link-<?php echo $item->ID; ?>">
             <?php echo get_the_title($item->ID); ?>
           </a>
         </li>

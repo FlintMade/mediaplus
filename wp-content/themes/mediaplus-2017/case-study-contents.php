@@ -1,4 +1,4 @@
-<article class="case-study case-study--current" id="cs-<?php echo $post->ID; ?>">
+<article class="case-study case-study--current" id="cs-<?php echo $post->ID; ?>" data-fullurl="<?php echo get_permalink($post->ID); ?>">
   <div class="row case-study__title">
     <h1><?php the_title(); ?></h1>
   </div>
