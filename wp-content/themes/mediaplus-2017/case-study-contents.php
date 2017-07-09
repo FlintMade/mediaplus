@@ -67,7 +67,7 @@
 
       <!-- GALLERY SECTION -->
       <section class="row row--gallery page-section">
-        <div class="gallery">
+        <div class="gallery initial">
           <ul class="slides">
             <?php foreach ($images as $image):
               $small = $image['sizes']['mediaplus-gallery-s'];

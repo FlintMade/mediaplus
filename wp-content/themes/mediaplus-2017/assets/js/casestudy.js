@@ -59,25 +59,33 @@
   };
 
   /* Set up galleries */
-  var galleries = document.querySelectorAll('.gallery');
-  for (var i = 0; i < galleries.length; i++) {
-    var gallery = galleries[i],
-        prev = gallery.querySelector('.gallery__prev'),
-        next = gallery.querySelector('.gallery__next'),
-        label = gallery.querySelector('.gallery__label');
+  var setUpGalleries = function() {
+    var galleries = document.querySelectorAll('.gallery');
+    for (var i = 0; i < galleries.length; i++) {
+      var gallery = galleries[i];
+      if (gallery.querySelectorAll('.slide').length > 1) {
+        var prev = gallery.querySelector('.gallery__prev'),
+            next = gallery.querySelector('.gallery__next'),
+            label = gallery.querySelector('.gallery__label');
 
-    prev.removeAttribute('aria-hidden');
-    prev.removeAttribute('tabindex');
-    prev.addEventListener('click', advanceSlide, false);
+        prev.removeAttribute('aria-hidden');
+        prev.removeAttribute('tabindex');
+        prev.addEventListener('click', advanceSlide, false);
 
-    next.removeAttribute('aria-hidden');
-    next.removeAttribute('tabindex');
-    next.addEventListener('click', advanceSlide, false);
+        next.removeAttribute('aria-hidden');
+        next.removeAttribute('tabindex');
+        next.addEventListener('click', advanceSlide, false);
 
-    label.removeAttribute('aria-hidden');
-    label.setAttribute('aria-live', 'polite');
-    label.setAttribute('aria-atomic', 'true');
-  }
+        label.removeAttribute('aria-hidden');
+        label.setAttribute('aria-live', 'polite');
+        label.setAttribute('aria-atomic', 'true');
+
+        gallery.classList.remove('initial');
+      }
+    }
+  };
+
+  setUpGalleries();
 
   /*
    *	SECTION: LISTS
@@ -192,6 +200,7 @@
             },
             success: function(newPosts) {
               $('#flow').append(newPosts);
+              setUpGalleries();
               if (scrolledTo > (window.scrollY + nextLink.getBoundingClientRect().top + nextLink.offsetHeight + 200)) {
                 hideNextLink();
               }
