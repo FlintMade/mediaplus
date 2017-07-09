@@ -216,6 +216,7 @@
     }
   };
 
+  // Scroll to load and activate case studies
   var scrollToNextCS = debounce(function() {
     var currentCS = document.querySelector('.case-study--current'),
         scrolledTo = window.scrollY + window.outerHeight;
@@ -262,14 +263,25 @@
       }
     }
 
-    // Animate next case study in
-    var current = document.querySelector('.case-study--current');
-    current.style.opacity = 1 - (current.getBoundingClientRect().top / window.outerHeight);
-
     // Set new scroll top
     lastScroll = window.scrollY;
-  }, 10);
+  }, 200);
 
-  window.addEventListener('scroll', scrollToNextCS, false);
+  // Fade in next case study - needs to fire more often than scrollToNextCS
+  var fadeInNextCS = function() {
+    var current = document.querySelector('.case-study--current:not(:first-child)');
+    if (current) {
+      if (!current.style.opacity || current.style.opacity < 1) {
+        current.style.opacity = 1 - ((current.getBoundingClientRect().top / window.outerHeight) * 1.25);
+      }
+    }
+  };
+
+  var scrollEvents = function() {
+    scrollToNextCS();
+    fadeInNextCS();
+  };
+
+  window.addEventListener('scroll', scrollEvents, false);
 
 })(document, window);
