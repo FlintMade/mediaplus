@@ -217,9 +217,8 @@
   };
 
   // Scroll to load and activate case studies
-  var scrollToNextCS = debounce(function() {
-    var currentCS = document.querySelector('.case-study--current'),
-        scrolledTo = window.scrollY + window.outerHeight;
+  var scrollToNextCS = debounce(function(scrolledTo, loaderValue) {
+    var currentCS = document.querySelector('.case-study--current');
 
     hideNextLink();
     resetCaseStudy();
@@ -247,16 +246,17 @@
             },
             beforeSend: function() {
               currentCS.classList.remove('case-study--current');
+              loaderValue.style.width = '100%';
             },
             success: function(newPosts) {
-              $('#flow').append(newPosts);
-              setUpGalleries();
-              resetCaseStudy();
-              var current = document.querySelector('.case-study--current'),
-                  nextLink = document.querySelector('.next-case-study.visible');
-              if (scrolledTo > (window.scrollY + current.getBoundingClientRect().top + nextLink.offsetHeight)) {
-                hideNextLink();
-              }
+              setTimeout(function(){
+                loaderValue.style.display = 'none';
+                loaderValue.style.width = '0';
+                loaderValue.style.display = 'block';
+                $('#flow').append(newPosts);
+                setUpGalleries();
+                resetCaseStudy();
+              }, 200);
             }
           });
         }
@@ -277,8 +277,31 @@
     }
   };
 
+  // Animate fake loading bar
+  var animateLoader = function(scrolledTo, loaderValue) {
+    var current = document.querySelector('.case-study--current');
+    if (current) {
+      var currentID = current.getAttribute('id').replace('cs-', ''),
+          nextLink = document.getElementById('after-' + currentID),
+          currentBottom = current.getBoundingClientRect().top + current.offsetHeight,
+          spaceBelow = ((document.body.clientHeight - scrolledTo) * 1.5) / window.outerHeight;
+      if (nextLink && spaceBelow > 0 && spaceBelow <= 1) {
+        loaderValue.style.width = (1 - spaceBelow) * 100 + '%';
+      } else {
+        // Scrolling up
+        if (window.scrollY < lastScroll && spaceBelow > 1) {
+          loaderValue.style.width = 0;
+        }
+      }
+    }
+  };
+
   var scrollEvents = function() {
-    scrollToNextCS();
+    var scrolledTo = window.scrollY + window.outerHeight,
+        loaderValue = document.getElementById('loader-value');
+
+    animateLoader(scrolledTo, loaderValue);
+    scrollToNextCS(scrolledTo, loaderValue);
     fadeInNextCS();
   };
 

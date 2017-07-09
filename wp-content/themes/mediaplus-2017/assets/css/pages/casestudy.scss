@@ -21,10 +21,11 @@
 
 .case-study {
   position: relative;
-  z-index: z('main') - 2;
+  z-index: z('main') - 3;
   margin-bottom: 3em;
   min-height: 100vh;
   opacity: 0;
+  transition: opacity 200ms;
 
   &:first-child {
     opacity: 1;
@@ -35,18 +36,36 @@
   margin-bottom: 3em;
 }
 
+.status-bar,
 .next-case-study {
   display: block;
+  position: fixed;
+  left: 0;
+  width: 100%;
+}
+
+.status-bar {
+  z-index: z('main') - 2;
+  top: 0;
+  height: 6px;
+}
+
+.status-bar__value {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: $grey-med;
+  transition: width 200ms;
+}
+
+.next-case-study {
+  z-index: z('main') - 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: fixed;
-  z-index: z('main') - 1;
   bottom: -6em;
-  left: 0;
   padding: $space-s-em;
   padding: $space-s;
-  width: 100%;
   height: 6em;
   background: $bg-grey-light;
   transition: bottom 400ms;
@@ -132,6 +151,7 @@ a.next-case-study {
   }
 
   .case-studies,
+  .status-bar,
   .next-case-study {
     width: calc(100% - 24.6875em);
   }
@@ -148,10 +168,14 @@ a.next-case-study {
     display: none;
   }
 
+  .status-bar,
   .next-case-study {
     right: 0;
-    bottom: -9.25em;
     left: auto;
+  }
+
+  .next-case-study {
+    bottom: -9.25em;
     padding-left: $space-m;
     height: 9.25em;
 
