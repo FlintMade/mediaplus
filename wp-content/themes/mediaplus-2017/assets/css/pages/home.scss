@@ -6,11 +6,13 @@
 
 .main--home {
   display: flex;
-  min-height: calc(100vh - 6.43em);
+  margin-top: 5em;
+  min-height: calc(100vh - 5em);
   flex-direction: column;
   justify-content: flex-end;
   padding: $space-s-em;
   padding: $space-s;
+  padding-bottom: 5em;
 }
 
 .timeline-process {
@@ -20,7 +22,7 @@
   ul {
     margin-bottom: 0;
     max-width: 21em;
-    line-height: 1.9;
+    line-height: 1.8;
     color: $grey-dark;
   }
 
@@ -33,6 +35,7 @@
     display: block;
     content: '';
     position: absolute;
+    z-index: z('main') - 2;
     top: 0;
     right: 0;
     width: 240%;
@@ -61,10 +64,48 @@
   height: .62em; /* 31px */
 }
 
+.scroll-home {
+  position: absolute;
+  z-index: z('main') - 1;
+  right: $space-s-em;
+  right: $space-s;
+  bottom: $space-s-em;
+  bottom: $space-s;
+  font: 400 1.25em/1 $font-subheading;
+  opacity: 0;
+
+  span, .arrow {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  span {
+    margin-right: 1.25em;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+    transform-origin: center;
+    width: 32px;
+    height: 32px;
+  }
+}
+
 @media (min-width: $bp-header-m) {
   .main--home {
     padding: $space-m;
-    min-height: calc(100vh - 10em);
+    padding-right: 10em;
+  }
+
+  .scroll-home {
+    right: $space-m;
+    bottom: $space-m;
+    transform: rotate(90deg);
+    transform-origin: top right;
+
+    .arrow {
+      transform: rotate(0);
+    }
   }
 }
 

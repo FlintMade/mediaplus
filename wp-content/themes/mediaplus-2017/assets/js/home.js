@@ -22,11 +22,19 @@
    *	---------------------------------------------
    */
 
-  var timelineWrap = document.querySelector('.timeline-process'),
+  var pageContent = document.querySelector('.page-content'),
+      timelineWrap = document.querySelector('.timeline-process'),
       text = document.getElementById('homeText'),
       textHeight = text.offsetHeight,
       lineHeight = parseInt(window.getComputedStyle(text, null).getPropertyValue('line-height')),
-      numOverlays = Math.round(textHeight / lineHeight);
+      numOverlays = Math.round(textHeight / lineHeight),
+      homeScrollBtn = document.createElement('button');
+
+      homeScrollBtn.classList.add('scroll-home');
+      homeScrollBtn.setAttribute('id', 'js-menu-toggle');
+      homeScrollBtn.setAttribute('aria-label', 'View case studies');
+      homeScrollBtn.innerHTML = '<span>Learn more</span><svg class="arrow" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#arrow"/></svg>';
+      pageContent.appendChild(homeScrollBtn);
 
   var createOverlays = function(){
     for (var i = 0; i < numOverlays; i++){
@@ -41,18 +49,23 @@
   };
 
   var slideOverlays = function() {
-    var overlays = timelineWrap.querySelectorAll('.overlay');
+    var overlays = timelineWrap.querySelectorAll('.overlay'),
+        afterAll = (overlays.length * 1600) + 800;
     for (var i = 0; i < overlays.length; i++) {
       var thisOverlay = overlays[i],
           thisTiming = (i * 1600);
       slideOverlay(thisOverlay, thisTiming);
     }
+
+    // Fade in scroll button at end
+    setTimeout(function(){
+      fade(homeScrollBtn, 0, 1, 400);
+    }, afterAll);
   };
 
   var slideOverlay = function(overlay, timing) {
     setTimeout(function(){
       overlay.classList.add('open');
-      console.log(timing);
     }, timing);
   };
 
