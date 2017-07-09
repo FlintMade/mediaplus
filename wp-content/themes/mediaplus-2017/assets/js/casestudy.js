@@ -251,9 +251,9 @@
               $('#flow').append(newPosts);
               setUpGalleries();
               resetCaseStudy();
-              var recent = document.querySelector('.case-study--current'),
+              var current = document.querySelector('.case-study--current'),
                   nextLink = document.querySelector('.next-case-study.visible');
-              if (scrolledTo > (window.scrollY + recent.getBoundingClientRect().top + nextLink.offsetHeight)) {
+              if (scrolledTo > (window.scrollY + current.getBoundingClientRect().top + nextLink.offsetHeight)) {
                 hideNextLink();
               }
             }
@@ -262,9 +262,13 @@
       }
     }
 
+    // Animate next case study in
+    var current = document.querySelector('.case-study--current');
+    current.style.opacity = 1 - (current.getBoundingClientRect().top / window.outerHeight);
+
     // Set new scroll top
     lastScroll = window.scrollY;
-  }, 200);
+  }, 10);
 
   window.addEventListener('scroll', scrollToNextCS, false);
 
