@@ -157,4 +157,22 @@
     }
   });
 
+  /*
+   *	LOAD NEXT CASE STUDY
+   *	---------------------------------------------
+   */
+
+  var scrollToNextCS = function() {
+    var currentCS = document.querySelector('.case-study--current'),
+        currentSlug = currentCS.getAttribute('data-slug'),
+        nextLink = document.getElementById('next-' + currentSlug);
+    if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - 200) {
+      nextLink.classList.add('visible');
+    } else {
+      nextLink.classList.remove('visible');
+    }
+  };
+
+  window.addEventListener('scroll', scrollToNextCS, false);
+
 })(document, window);
