@@ -1,6 +1,9 @@
 <?php get_header(); ?>
 <?php while (have_posts()): the_post(); global $post; ?>
   <article class="case-study">
+    <div class="row case-study__title">
+      <h1><?php the_title(); ?></h1>
+    </div>
 
     <!-- INTRO -->
     <?php
@@ -10,7 +13,7 @@
     <section class="row row--intro page-section">
       <div class="grid-col">
         <?php if ($page_headline): ?>
-          <h1><?php echo $page_headline; ?></h1>
+          <h2 class="case-study__headline"><?php echo $page_headline; ?></h2>
         <?php endif; ?>
         <?php echo $page_intro; ?>
       </div>

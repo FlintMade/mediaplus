@@ -5,8 +5,12 @@
  */
 
 .single-expertise .page-content {
-  margin-top: 6.428em;
-  margin-top: 5.625rem; /* 90px */
+  margin-top: $space-s-em;
+  margin-top: $space-s;
+}
+
+.case-study__title {
+  margin-bottom: 3em;
 }
 
 /* Make space for the M+ */
@@ -20,11 +24,19 @@
   .case-study {
     padding-left: 2.75em;
   }
+
+  .single-expertise .page-content {
+    margin-top: $space-xs;
+  }
 }
 
 @media (min-width: $bp-m) and (max-width: $bp-sidebar-l) {
   .case-study {
     padding-left: 4.125em;
+  }
+
+  .single-expertise .page-content {
+    margin-top: 1.8rem;
   }
 }
 
@@ -36,6 +48,10 @@
   .case-study {
     float: right;
     width: calc(100% - 24.6875em);
+  }
+
+  .case-study__title {
+    display: none;
   }
 }
 
