@@ -316,12 +316,17 @@ var scrollEvents = function() {
   var scrolledTo = window.scrollY + window.outerHeight,
       loaderValue = document.getElementById('loader-value');
 
-  animateLoader(scrolledTo, loaderValue);
-  scrollToNextCS(scrolledTo, loaderValue);
-  fadeInNextCS();
+  if (lastScroll !== window.scrollY) {
+    animateLoader(scrolledTo, loaderValue);
+    scrollToNextCS(scrolledTo, loaderValue);
+    fadeInNextCS();
+    lastScroll = window.scrollY;
+  }
 };
 
-window.addEventListener('scroll', scrollEvents, false);
+if (document.body.classList.contains('single-expertise')) {
+  window.addEventListener('scroll', scrollEvents, false);
+}
 
 /*
   *	CLICK TO LOAD NEXT CASE STUDY

@@ -4,7 +4,7 @@
  *	=============================================
  */
 
-.main--home {
+body.home {
   overflow: hidden;
 }
 
@@ -167,10 +167,6 @@ a.scroll-home {
 
 body.intro-scrolled {
   overflow: auto;
-
-  .main--home {
-    overflow: auto;
-  }
 
   a.sections__home {
     opacity: .5;

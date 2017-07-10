@@ -32,6 +32,10 @@
     <svg class="arrow" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#arrow"></use></svg>
   </a>
 </div>
-<div class="case-studies" id="flow"></div>
+<div class="case-studies" id="flow">
+  <span class="status-bar" role="none">
+    <span class="status-bar__value" id="loader-value" role="none"></span>
+  </span>
+</div>
 
 <?php get_footer(); ?>

@@ -56,7 +56,6 @@ var slideOverlays = function() {
     loadFirstCaseStudy();
 
     // Attach scroll past intro event
-    window.removeEventListener('wheel', scrollAwayIntro, false);
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
   }, afterAll);
@@ -87,7 +86,7 @@ var loadFirstCaseStudy = function() {
     },
     success: function(newPosts) {
       setTimeout(function(){
-        $('#flow').append(newPosts);
+        $('#flow').prepend(newPosts);
         setUpGalleries();
       }, 200);
     }
@@ -108,9 +107,8 @@ var setUpFirstCS = function() {
   document.body.classList.add('intro-scrolled');
 
   setTimeout(function(){
-    window.removeEventListener('wheel', scrollAwayIntro, false);
-    window.removeEventListener('mousewheel', scrollAwayIntro, false);
-    window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
+    window.addEventListener('mousewheel', scrollEvents, false);
+    window.addEventListener('DOMMouseScroll', scrollEvents, false);
     if (homeIntro.parentNode) {
       homeIntro.parentNode.removeChild(homeIntro);
     }
