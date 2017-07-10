@@ -13,4 +13,4 @@ Flow pages refer to the home page, expertise case studies, and offerings case st
 ### Assets
 
 * CSS and JS are loaded through enqueue functions in `functions.php`
-* Most SVGs are accessed from sprite.svg in the assets folder via `<use>` tags. Styling the pieces of the "more info" arrows on hover was not working well with the sprite approach, so they have been embedded in the markup directly as includes. Post placeholders also live on their own, as they are used only in one place and would have added notable weight to the SVG spritesheet.
+* Most SVGs are accessed from the `svgs` directory in the `mediaplus-2017` theme folder. In the case of SVGs that didn't need multi-color, state-dependent styling and/or were repeated multiple times in the DOM, those can be found in `mediaplus-2017/assets/images/sprite.svg` and are accessed via `<use>` tags.

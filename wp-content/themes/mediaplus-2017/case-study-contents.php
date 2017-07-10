@@ -98,14 +98,10 @@
           </ul>
           <p class="gallery__label">Gallery <span class="gallery__index">01</span> / <?php echo str_pad($imageCount, 2, '0', STR_PAD_LEFT); ?></p>
           <button class="gallery__prev" title="Previous image" aria-hidden="true" tabindex="-1">
-            <svg class="arrow" role="none">
-              <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrowPrev"/>
-            </svg>
+            <?php include('svgs/arrow-prev.svg'); ?>
           </button>
           <button class="gallery__next" title="Next image" aria-hidden="true" tabindex="-1">
-            <svg class="arrow" role="none">
-              <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrow"/>
-            </svg>
+            <?php include('svgs/arrow.svg'); ?>
           </button>
         </div>
       </section>
@@ -212,8 +208,6 @@
   <a class="next-case-study" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>" id="after-<?php echo $post->ID; ?>" data-postid="<?php echo $next_post->ID; ?>">
     <span>Next expertise:</span>
     <span class="next__title">&ndash; <?php echo esc_attr($next_post->post_title); ?></span>
-    <svg class="arrow" role="none">
-      <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrow"/>
-    </svg>
+    <?php include('svgs/arrow.svg'); ?>
   </a>
 <?php endif; ?>

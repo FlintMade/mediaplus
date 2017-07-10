@@ -29,7 +29,7 @@
   </div>
   <a class="scroll-home" id="scroll-home" aria-label="View case studies" href="<?php echo get_post_type_archive_link('expertise'); ?>">
     <span>Learn more</span>
-    <svg class="arrow" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#arrow"></use></svg>
+    <?php include('svgs/arrow.svg'); ?>
   </a>
 </div>
 <div class="case-studies" id="flow">

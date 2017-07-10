@@ -11,7 +11,7 @@ Version: 1.0
 @import 'fonts';
 @import 'global';
 @import 'grid';
-@import 'components';
+@import 'components'; /* Includes shared icon styles */
 @import 'header';
 @import 'footer';
 @import 'sidebar';

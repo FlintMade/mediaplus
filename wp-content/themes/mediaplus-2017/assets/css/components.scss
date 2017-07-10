@@ -164,6 +164,59 @@ a.more-link {
 }
 
 /*
+ *	ICONS
+ *	=============================================
+ */
+
+/*
+ *	COLOR SCHEMING
+ *	---------------------------------------------
+ */
+
+.menu-toggle:hover,
+.menu-toggle:focus,
+a:hover .arrow,
+a:focus .arrow {
+  circle {
+    fill: $redorange;
+  }
+
+  path {
+    fill: #fff;
+  }
+}
+
+body.flow {
+  .menu-toggle:hover,
+  .menu-toggle:focus,
+  a:hover .arrow,
+  a:focus .arrow {
+    circle {
+      fill: $orange;
+    }
+
+    path {
+      fill: #fff;
+    }
+  }
+}
+
+body.offerings {
+  .menu-toggle:hover,
+  .menu-toggle:focus,
+  a:hover .arrow,
+  a:focus .arrow {
+    circle {
+      fill: $blue;
+    }
+
+    path {
+      fill: #fff;
+    }
+  }
+}
+
+/*
  *	ARROWS
  *	---------------------------------------------
  */
