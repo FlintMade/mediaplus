@@ -43,10 +43,10 @@ var createOverlays = function(){
 
 var slideOverlays = function() {
   var overlays = timelineWrap.querySelectorAll('.overlay'),
-      afterAll = (overlays.length * 0) + 400;
+      afterAll = (overlays.length * 1600) + 400;
   for (var i = 0; i < overlays.length; i++) {
     var thisOverlay = overlays[i],
-        thisTiming = (i * 0);
+        thisTiming = (i * 1600);
     slideOverlay(thisOverlay, thisTiming);
   }
 
