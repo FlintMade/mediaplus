@@ -262,9 +262,12 @@ var scrollToNextCS = debounce(function(scrolledTo, loaderValue) {
           },
           beforeSend: function() {
             currentCS.classList.remove('case-study--current');
-            loaderValue.style.width = '100%';
+            if (parseInt(loaderValue.style.width) < 90) {
+              loaderValue.style.width = '90%';
+            }
           },
           success: function(newPosts) {
+            loaderValue.style.width = '100%';
             setTimeout(function(){
               loaderValue.style.display = 'none';
               loaderValue.style.width = '0';
