@@ -115,12 +115,11 @@
         $xl = $image['sizes']['mediaplus-xl'];
         $xxl = $image['sizes']['mediaplus-xxl'];
         $alignment = get_sub_field('image_alignment');
-        $alignmentVal = $alignment['value'];
       ?>
 
       <!-- IMAGE SECTION -->
       <section class="row row--image page-section">
-        <div class="grid-col <?php if ($alignmentVal == 'R'): ?>grid-col--right<?php endif; ?>">
+        <div class="grid-col <?php if ($alignment == 'Right'): ?>grid-col--right<?php endif; ?>">
           <picture>
             <?php if ($xxl): ?>
               <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
@@ -140,14 +139,13 @@
         $section_headline = get_sub_field('block_headline');
         $section_subheadline = get_sub_field('block_sub_headline');
         $alignment = get_sub_field('block_alignment');
-        $alignmentVal = $alignment['value'];
         $data_value = get_sub_field('data_value');
         $block_image = get_sub_field('transparent_image')['sizes']['large'];
       ?>
 
         <!-- COLORFUL BLOCK SECTION -->
         <section class="row row--color-block page-section">
-          <div class="grid-col <?php if ($alignmentVal == 'R'): ?>grid-col--right<?php endif; ?> color-block <?php if ($data_value): ?>color-block--data<?php endif; ?>">
+          <div class="grid-col <?php if ($alignment == 'Right'): ?>grid-col--right<?php endif; ?> color-block <?php if ($data_value): ?>color-block--data<?php endif; ?>">
             <div class="color-block__text">
               <?php if ($section_headline): ?>
                 <h3 class="color-block__heading"><?php echo $section_headline; ?></h3>
