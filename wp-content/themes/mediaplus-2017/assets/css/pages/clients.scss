@@ -51,10 +51,12 @@
 .row-toggle {
   display: none;
   position: absolute;
-  top: .25rem;
+  top: .5rem;
   right: .5rem;
   margin-right: -.75rem;
   padding: .75rem;
+  width: 100%;
+  text-align: right;
 
   &:hover,
   &:focus {
@@ -70,6 +72,7 @@
 
 .row-toggle__collapse,
 .row-toggle__expand {
+  display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
   fill: $grey-med;
@@ -130,6 +133,7 @@
   }
 
   .row-toggle {
+    top: .25em;
     right: $space-m;
   }
 }
@@ -238,7 +242,7 @@
   }
 
   .row-toggle__collapse {
-    display: block;
+    display: inline-block;
   }
 }
 
