@@ -27,13 +27,7 @@ var homeIntro = document.querySelector('.home-intro'),
     textHeight = text.offsetHeight,
     lineHeight = parseInt(window.getComputedStyle(text, null).getPropertyValue('line-height')),
     numOverlays = Math.round(textHeight / lineHeight),
-    homeScrollBtn = document.createElement('button');
-
-    homeScrollBtn.classList.add('scroll-home');
-    homeScrollBtn.setAttribute('id', 'js-menu-toggle');
-    homeScrollBtn.setAttribute('aria-label', 'View case studies');
-    homeScrollBtn.innerHTML = '<span>Learn more</span><svg class="arrow" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#arrow"/></svg>';
-    homeIntro.appendChild(homeScrollBtn);
+    homeScrollLink = document.getElementById('scroll-home');
 
 var createOverlays = function(){
   for (var i = 0; i < numOverlays; i++){
@@ -58,7 +52,7 @@ var slideOverlays = function() {
 
   // Fade in scroll button at end
   setTimeout(function(){
-    fade(homeScrollBtn, 0, 1, 400);
+    fade(homeScrollLink, 0, 1, 400);
     loadFirstCaseStudy();
 
     // Attach scroll past intro event
@@ -111,10 +105,6 @@ var loadFirstCaseStudy = function() {
 var delta = 0;
 
 var scrollAwayIntro = function(e) {
-  if (!document.body.classList.add('sticky-intro')) {
-    document.body.classList.add('sticky-intro');
-  }
-
   delta++;
   var scrollAmount = 5 * Math.abs(delta);
   homeIntro.style.top = '-' + scrollAmount + '%';

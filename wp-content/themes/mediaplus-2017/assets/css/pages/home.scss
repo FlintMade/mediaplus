@@ -5,7 +5,7 @@
  */
 
 .main--home {
-  overflow: auto;
+  overflow: hidden;
 }
 
 .main--home,
@@ -18,6 +18,7 @@
 
 .home-intro {
   display: flex;
+  position: fixed;
   z-index: z('main') - 1;
   flex-direction: column;
   justify-content: flex-end;
@@ -82,7 +83,6 @@
   right: $space-s;
   bottom: $space-s-em;
   bottom: $space-s;
-  font: 400 1.25em/1 $font-subheading;
   opacity: 0;
 
   span, .arrow {
@@ -100,6 +100,12 @@
     width: 32px;
     height: 32px;
   }
+}
+
+a.scroll-home {
+  border-bottom: 0;
+  font: 400 1.25em/1 $font-subheading;
+  color: $grey-med;
 }
 
 @media (max-height: 20em) {
@@ -154,22 +160,9 @@
 }
 
 /*
- *	STICKY HOME INTRO
- *  Enabled via home.js
+ *	SCROLLED PAST HOME INTRO
  *	---------------------------------------------
  */
-
-body.sticky-intro {
-  overflow: hidden;
-
-  .main--home {
-    overflow: hidden;
-  }
-
-  .home-intro {
-    position: fixed;
-  }
-}
 
 body.intro-scrolled {
   overflow: auto;
