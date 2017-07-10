@@ -291,7 +291,7 @@ var fadeInNextCS = function() {
   var current = document.querySelector('.case-study--current:not(:first-child)');
   if (current) {
     if (!current.style.opacity || current.style.opacity < 1) {
-      current.style.opacity = 1 - ((current.getBoundingClientRect().top / window.outerHeight) * 1.25);
+      current.style.opacity = 1 - ((current.getBoundingClientRect().top / window.outerHeight));
     }
   }
 };
