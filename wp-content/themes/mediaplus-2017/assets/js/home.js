@@ -79,16 +79,16 @@ slideOverlays();
 // Load first case study
 var loadFirstCaseStudy = function() {
   $.ajax({
-    url: loadNextCaseStudy.ajaxurl,
+    url: firstCaseStudy.ajaxurl,
     type: 'post',
     data: {
-      action: 'next_case_study',
-      query_vars: loadNextCaseStudy.query_vars
+      action: 'first_case_study',
+      query_vars: firstCaseStudy.query_vars
     },
     success: function(newPosts) {
       setTimeout(function(){
         $('#flow').append(newPosts);
-        //setUpGalleries();
+        setUpGalleries();
       }, 200);
     }
   });

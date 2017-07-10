@@ -115,7 +115,7 @@ function mediaplus_scripts() {
 
 	// Set up loading next case study
 	global $wp_query;
-	wp_localize_script('homeScripts', 'loadNextCaseStudy', array(
+	wp_localize_script('homeScripts', 'firstCaseStudy', array(
 		'ajaxurl' => admin_url('admin-ajax.php')
 	));
 
@@ -132,27 +132,19 @@ function mediaplus_scripts() {
 add_action( 'wp_enqueue_scripts', 'mediaplus_scripts' );
 
 /*
- *	LOAD NEXT CASE STUDY
+ *	LOAD FIRST CASE STUDY
  *	For background: https://www.smashingmagazine.com/2011/10/how-to-use-ajax-in-wordpress/
  *	https://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side
  *	--------------------------------------------------------------------------------------
  */
 
-add_action( 'wp_ajax_next_case_study', 'next_case_study');
-add_action( 'wp_ajax_next_case_study', 'next_case_study');
+add_action( 'wp_ajax_nopriv_first_case_study', 'first_case_study');
+add_action( 'wp_ajax_first_case_study', 'first_case_study');
 
-function next_case_study() {
+function first_case_study() {
 	$query_vars = json_decode(stripslashes( $_POST['query_vars'] ), true);
 	$query_vars['post_type'] = 'expertise';
-
-	// Next case study
-	if ($_POST['p']) {
-		$query_vars['p'] = $_POST['p'];
-
-	// First case study (home page)
-	} else {
-		$query_vars['posts_per_page'] = 1;
-	}
+	$query_vars['posts_per_page'] = 1;
 	$posts = new WP_Query($query_vars);
 	$GLOBALS['wp_query'] = $posts;
 
@@ -171,6 +163,37 @@ function next_case_study() {
 
 function case_study_size_override() {
   return array(2048);
+}
+
+/*
+ *	LOAD NEXT CASE STUDY
+ *	For background: https://www.smashingmagazine.com/2011/10/how-to-use-ajax-in-wordpress/
+ *	https://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side
+ *	--------------------------------------------------------------------------------------
+ */
+
+add_action( 'wp_ajax_nopriv_next_case_study', 'next_case_study');
+add_action( 'wp_ajax_next_case_study', 'next_case_study');
+
+function next_case_study() {
+	$query_vars = json_decode(stripslashes( $_POST['query_vars'] ), true);
+	$query_vars['post_type'] = 'expertise';
+
+	$query_vars['p'] = $_POST['p'];
+	$posts = new WP_Query($query_vars);
+	$GLOBALS['wp_query'] = $posts;
+
+	add_filter('editor_max_image_size', 'case_study_size_override');
+
+	if ($posts->have_posts()) { 
+		while ($posts->have_posts()) { 
+			$posts->the_post();
+			get_template_part('case-study-contents');
+		}
+	}
+
+	remove_filter('editor_max_image_size', 'case_study_size_override');
+	die();
 }
 
 /*
