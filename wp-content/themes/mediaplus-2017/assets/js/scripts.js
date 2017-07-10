@@ -78,7 +78,6 @@ var header = document.querySelector('.header'),
 menuBtn.classList.add('menu-toggle');
 menuBtn.setAttribute('id', 'js-menu-toggle');
 menuBtn.setAttribute('aria-label', 'Site menu');
-menuBtn.setAttribute('aria-expanded', 'false');
 menuBtn.setAttribute('aria-controls', 'js-menu');
 menuBtn.innerHTML = '<svg class="menu-toggle__open" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#menu"/></svg><svg class="menu-toggle__close" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#x"/></svg>';
 
@@ -88,21 +87,39 @@ headerOverlay.classList.add('page-overlay--header');
 headerOverlay.setAttribute('role', 'none');
 
 // Menu properties
-menu.setAttribute('aria-hidden', 'true');
 menu.setAttribute('aria-labelledby', 'menu-button');
+
+// Hide menu on page load if mobile or in main flow
+if (window.outerWidth <= bpHeaderSmall || document.body.classList.contains('home') || document.body.classList.contains('single-expertise')) {
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menu.setAttribute('aria-hidden', 'true');
+  header.classList.remove('menu-active');
+} else {
+  menuBtn.setAttribute('aria-expanded', 'true');
+}
 
 // Add button to page
 headerTray.insertBefore(menuBtn, headerTrayContent);
 headerTray.insertBefore(headerOverlay, headerTrayContent);
 
 var hideMenu = function() {
-  header.classList.remove('menu-active');
-  fade(headerOverlay, 1, 0, 200, function(){
-    headerOverlay.style.display = 'block';
-  });
-  menu.setAttribute('aria-hidden', 'true');
-  menuBtn.setAttribute('aria-expanded', 'false');
-  headerContact.setAttribute('aria-hidden', 'true');
+  if (window.outerWidth <= bpHeaderSmall || document.body.classList.contains('home') || document.body.classList.contains('single-expertise')) {
+    header.classList.remove('menu-active');
+    fade(headerOverlay, 1, 0, 200, function(){
+      headerOverlay.style.display = 'block';
+    });
+    menu.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    headerContact.setAttribute('aria-hidden', 'true');
+  } else {
+    var recentPage = localStorage.getItem('recentPage');
+    if (recentPage === 'home' || !recentPage) {
+      window.location.href = '/';
+    } else {
+      var recentUrl = localStorage.getItem('recentUrl');
+      window.location.href = recentUrl;
+    }
+  }
 };
 
 var showMenu = function() {

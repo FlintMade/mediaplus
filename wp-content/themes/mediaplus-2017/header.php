@@ -22,7 +22,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-  <header role="banner" class="clear header">
+  <header role="banner" class="clear header menu-active">
     <div class="header__context">
       <button class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus show case studies" id="sidebar-toggle" aria-expanded="false" aria-controls="sidebar-nav">
         <span class="logo__text-wrap <?php if (is_singular('expertise') || is_singular('offerings')): ?>abbreviated<?php endif; ?>">
