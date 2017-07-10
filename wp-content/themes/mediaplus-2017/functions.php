@@ -89,12 +89,12 @@ function mediaplus_scripts() {
 		wp_enqueue_script('mediaPlusjQuery', get_theme_file_uri('/assets/js/jquery-3.2.1.min.js'), array(), false, true);
 	}
 
-	if (is_front_page()) {
-		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts', 'mediaPlusjQuery'), false, true);
-	}
-
 	if (is_front_page() || is_singular('expertise')) {
 		wp_enqueue_script('caseStudyScripts', get_theme_file_uri('/assets/js/casestudy.js'), array('scripts', 'mediaPlusjQuery'), false, true);
+	}
+
+	if (is_front_page()) {
+		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts', 'mediaPlusjQuery', 'caseStudyScripts'), false, true);
 	}
 
 	if (is_page(7)) {

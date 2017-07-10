@@ -5,23 +5,25 @@
  */
 
 .main--home {
+  overflow: auto;
+}
+
+.main--home,
+.home-intro {
+  position: absolute;
   margin-top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .home-intro {
   display: flex;
-  position: relative;
-  margin-top: 5em;
-  min-height: calc(100vh - 5em);
+  z-index: z('main') - 1;
   flex-direction: column;
   justify-content: flex-end;
-  padding: $space-s-em;
-  padding: $space-s;
-  padding-bottom: 5em;
-
-  + #flow {
-    margin-top: 10em;
-  }
+  padding: 3em $space-s-em 4em;
+  padding: 3em $space-s 4em;
+  background: #fff;
 }
 
 .timeline-process {
@@ -31,7 +33,7 @@
   ul {
     margin-bottom: 0;
     max-width: 21em;
-    line-height: 1.8;
+    font: 600 1.5em/1.5 $font-heading;
     color: $grey-dark;
   }
 
@@ -100,10 +102,30 @@
   }
 }
 
+@media (max-height: 20em) {
+  .timeline-process {
+    ul li {
+      font-size: .75em;
+    }
+  }
+}
+
+@media (min-height: 36em) {
+  .home-intro {
+    padding: 5em $space-s-em;
+    padding: 5em $space-s;
+  }
+
+  .timeline-process {
+    ul li {
+      font-size: 1.25em;
+    }
+  }
+}
+
 @media (min-width: $bp-header-m) {
   .home-intro {
-    padding: $space-m;
-    padding-right: 10em;
+    padding: 5em 10em $space-m $space-m;
   }
 
   .scroll-home {
@@ -120,6 +142,47 @@
 
 @media (min-width: $bp-m) {
   .timeline-process ul {
-    font-size: 3.125em;
+    font-size: 2em;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .timeline-process ul {
+    font-size: 2.5em;
+    line-height: 1.8em;
+  }
+}
+
+/*
+ *	STICKY HOME INTRO
+ *  Enabled via home.js
+ *	---------------------------------------------
+ */
+
+body.sticky-intro {
+  overflow: hidden;
+
+  .main--home {
+    overflow: hidden;
+  }
+
+  .home-intro {
+    position: fixed;
+  }
+}
+
+body.intro-scrolled {
+  overflow: auto;
+
+  .main--home {
+    overflow: auto;
+  }
+
+  .sections__home {
+    opacity: .5;
+  }
+
+  .sections__expertise {
+    opacity: 1;
   }
 }

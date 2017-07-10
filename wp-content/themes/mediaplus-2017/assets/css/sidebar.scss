@@ -152,6 +152,7 @@ body.single-expertise a.sections__expertise {
   }
 
   /* No overlay on case studies */
+  body.home .page-overlay--nav,
   body.single-expertise .page-overlay--nav {
     height: 0;
   }

@@ -13,7 +13,7 @@
 ?>
 <div class="home-intro">
   <div class="timeline-process">
-    <ul class="h1" id="homeText">
+    <ul id="homeText">
       <?php foreach ($items as $item): $i++; ?>
         <li class="timeline-process__item">
           <?php

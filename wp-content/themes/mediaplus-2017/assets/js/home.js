@@ -1,99 +1,130 @@
-(function(document, window, undefined){
-  'use strict';
+'use strict';
 
-  /*
-   *	=============================================
-   *	HOME PAGE
-   *	=============================================
-   */
+/*
+  *	=============================================
+  *	HOME PAGE
+  *	=============================================
+  */
 
-  /*
-   *  SET RECENT PAGE
-   *  Remember home as last "case study flow" page
-   *	---------------------------------------------
-   */
+/*
+  *  SET RECENT PAGE
+  *  Remember home as last "case study flow" page
+  *	---------------------------------------------
+  */
 
-  localStorage.setItem('recentPage', 'home');
+localStorage.setItem('recentPage', 'home');
 
-  /*
-   *  REVEAL TEXT
-   *  Slide-fade across home page text to create
-   *  letter-by-letter animation effect
-   *	---------------------------------------------
-   */
+/*
+  *  REVEAL TEXT
+  *  Slide-fade across home page text to create
+  *  letter-by-letter animation effect
+  *	---------------------------------------------
+  */
 
-  var homeIntro = document.querySelector('.home-intro'),
-      timelineWrap = document.querySelector('.timeline-process'),
-      text = document.getElementById('homeText'),
-      textHeight = text.offsetHeight,
-      lineHeight = parseInt(window.getComputedStyle(text, null).getPropertyValue('line-height')),
-      numOverlays = Math.round(textHeight / lineHeight),
-      homeScrollBtn = document.createElement('button');
+var homeIntro = document.querySelector('.home-intro'),
+    timelineWrap = document.querySelector('.timeline-process'),
+    text = document.getElementById('homeText'),
+    textHeight = text.offsetHeight,
+    lineHeight = parseInt(window.getComputedStyle(text, null).getPropertyValue('line-height')),
+    numOverlays = Math.round(textHeight / lineHeight),
+    homeScrollBtn = document.createElement('button');
 
-      homeScrollBtn.classList.add('scroll-home');
-      homeScrollBtn.setAttribute('id', 'js-menu-toggle');
-      homeScrollBtn.setAttribute('aria-label', 'View case studies');
-      homeScrollBtn.innerHTML = '<span>Learn more</span><svg class="arrow" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#arrow"/></svg>';
-      homeIntro.appendChild(homeScrollBtn);
+    homeScrollBtn.classList.add('scroll-home');
+    homeScrollBtn.setAttribute('id', 'js-menu-toggle');
+    homeScrollBtn.setAttribute('aria-label', 'View case studies');
+    homeScrollBtn.innerHTML = '<span>Learn more</span><svg class="arrow" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#arrow"/></svg>';
+    homeIntro.appendChild(homeScrollBtn);
 
-  var createOverlays = function(){
-    for (var i = 0; i < numOverlays; i++){
-      var overlay = document.createElement('span'),
-          division = (100 / numOverlays),
-          topPos =  division * i;
-      overlay.classList.add('overlay');
-      overlay.style.top = topPos + '%';
-      overlay.style.height = division + '%';
-      timelineWrap.appendChild(overlay);
+var createOverlays = function(){
+  for (var i = 0; i < numOverlays; i++){
+    var overlay = document.createElement('span'),
+        division = (100 / numOverlays),
+        topPos =  division * i;
+    overlay.classList.add('overlay');
+    overlay.style.top = topPos + '%';
+    overlay.style.height = division + '%';
+    timelineWrap.appendChild(overlay);
+  }
+};
+
+var slideOverlays = function() {
+  var overlays = timelineWrap.querySelectorAll('.overlay'),
+      afterAll = (overlays.length * 0) + 400;
+  for (var i = 0; i < overlays.length; i++) {
+    var thisOverlay = overlays[i],
+        thisTiming = (i * 0);
+    slideOverlay(thisOverlay, thisTiming);
+  }
+
+  // Fade in scroll button at end
+  setTimeout(function(){
+    fade(homeScrollBtn, 0, 1, 400);
+    loadFirstCaseStudy();
+
+    // Attach scroll past intro event
+    window.removeEventListener('wheel', scrollAwayIntro, false);
+    window.addEventListener('mousewheel', scrollAwayIntro, false);
+    window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
+  }, afterAll);
+};
+
+var slideOverlay = function(overlay, timing) {
+  setTimeout(function(){
+    overlay.classList.add('open');
+  }, timing);
+};
+
+createOverlays();
+slideOverlays();
+
+/*
+  *  SCROLL TO FIRST CASE STUDY
+  *	---------------------------------------------
+  */
+
+// Load first case study
+var loadFirstCaseStudy = function() {
+  $.ajax({
+    url: loadNextCaseStudy.ajaxurl,
+    type: 'post',
+    data: {
+      action: 'next_case_study',
+      query_vars: loadNextCaseStudy.query_vars
+    },
+    success: function(newPosts) {
+      setTimeout(function(){
+        $('#flow').append(newPosts);
+        //setUpGalleries();
+        var currentCS = document.querySelector('.case-study--current');
+        console.log(currentCS);
+        setRecentCS(currentCS);
+      }, 200);
     }
-  };
+  });
+};
 
-  var slideOverlays = function() {
-    var overlays = timelineWrap.querySelectorAll('.overlay'),
-        afterAll = (overlays.length * 1600) + 800;
-    for (var i = 0; i < overlays.length; i++) {
-      var thisOverlay = overlays[i],
-          thisTiming = (i * 1600);
-      slideOverlay(thisOverlay, thisTiming);
-    }
+/*
+  *  SCROLL AWAY HOME INTRO
+  *  Background: https://www.sitepoint.com/html5-javascript-mouse-wheel/
+  *	-------------------------------------------------------------------
+  */
+var delta = 0;
 
-    // Fade in scroll button at end
+var scrollAwayIntro = function(e) {
+  if (!document.body.classList.add('sticky-intro')) {
+    document.body.classList.add('sticky-intro');
+  }
+
+  delta++;
+  var scrollAmount = 5 * Math.abs(delta);
+  homeIntro.style.top = '-' + scrollAmount + '%';
+  if (scrollAmount >= 100) {
     setTimeout(function(){
-      fade(homeScrollBtn, 0, 1, 400);
-      loadFirstCaseStudy();
-    }, afterAll);
-  };
-
-  var slideOverlay = function(overlay, timing) {
-    setTimeout(function(){
-      overlay.classList.add('open');
-    }, timing);
-  };
-
-  createOverlays();
-  slideOverlays();
-
-  /*
-   *  SCROLL TO FIRST CASE STUDY
-   *	---------------------------------------------
-   */
-
-  var loadFirstCaseStudy = function() {
-    $.ajax({
-      url: loadNextCaseStudy.ajaxurl,
-      type: 'post',
-      data: {
-        action: 'next_case_study',
-        query_vars: loadNextCaseStudy.query_vars
-      },
-      success: function(newPosts) {
-        setTimeout(function(){
-          $('#flow').append(newPosts);
-          setUpGalleries();
-          resetCaseStudy();
-        }, 200);
-      }
-    });
-  };
-
-})(document, window);
+      window.removeEventListener('wheel', scrollAwayIntro, false);
+      window.removeEventListener('mousewheel', scrollAwayIntro, false);
+      window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
+      document.body.classList.add('intro-scrolled');
+      openSidebar();
+    }, 200);
+  }
+};

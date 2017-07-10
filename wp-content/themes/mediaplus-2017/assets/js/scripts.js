@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  *	=============================================
  *	MISC HELPERS
@@ -53,225 +55,220 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
   };
   tick();
 }
-
-(function(document, window, undefined){
-  'use strict';
-
-  var bpHeaderSmall = 800;
-
-  /*
-   *	=============================================
-   *	HEADER TOGGLE
-   *	=============================================
-   */
   
-  // Vars
-  var header = document.querySelector('.header'),
-    headerTray = document.querySelector('.header__tray'),
-    headerTrayContent = document.querySelector('.header__tray-content'),
-    menu = document.querySelector('.header__menu'),
-    menuContents = document.getElementById('js-menu-contents'),
-    headerContact = document.querySelector('.header__contact'),
-    menuBtn = document.createElement('button'),
-    headerOverlay = document.createElement('span');
+var bpHeaderSmall = 800;
 
-  // Button properties
-  menuBtn.classList.add('menu-toggle');
-  menuBtn.setAttribute('id', 'js-menu-toggle');
-  menuBtn.setAttribute('aria-label', 'Site menu');
-  menuBtn.setAttribute('aria-expanded', 'false');
-  menuBtn.setAttribute('aria-controls', 'js-menu');
-  menuBtn.innerHTML = '<svg class="menu-toggle__open" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#menu"/></svg><svg class="menu-toggle__close" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#x"/></svg>';
+/*
+  *	=============================================
+  *	HEADER TOGGLE
+  *	=============================================
+  */
 
-  // Page overlay properties
-  headerOverlay.classList.add('page-overlay');
-  headerOverlay.classList.add('page-overlay--header');
-  headerOverlay.setAttribute('role', 'none');
-  
-  // Menu properties
-  menu.setAttribute('aria-hidden', 'true');
-  menu.setAttribute('aria-labelledby', 'menu-button');
-  
-  // Add button to page
-  headerTray.insertBefore(menuBtn, headerTrayContent);
-  headerTray.insertBefore(headerOverlay, headerTrayContent);
+// Vars
+var header = document.querySelector('.header'),
+  headerTray = document.querySelector('.header__tray'),
+  headerTrayContent = document.querySelector('.header__tray-content'),
+  menu = document.querySelector('.header__menu'),
+  menuContents = document.getElementById('js-menu-contents'),
+  headerContact = document.querySelector('.header__contact'),
+  menuBtn = document.createElement('button'),
+  headerOverlay = document.createElement('span');
 
-  var hideMenu = function() {
-    header.classList.remove('menu-active');
-    fade(headerOverlay, 1, 0, 200, function(){
-      headerOverlay.style.display = 'block';
-    });
-    menu.setAttribute('aria-hidden', 'true');
-    menuBtn.setAttribute('aria-expanded', 'false');
-    headerContact.setAttribute('aria-hidden', 'true');
-  };
+// Button properties
+menuBtn.classList.add('menu-toggle');
+menuBtn.setAttribute('id', 'js-menu-toggle');
+menuBtn.setAttribute('aria-label', 'Site menu');
+menuBtn.setAttribute('aria-expanded', 'false');
+menuBtn.setAttribute('aria-controls', 'js-menu');
+menuBtn.innerHTML = '<svg class="menu-toggle__open" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#menu"/></svg><svg class="menu-toggle__close" role="none"><use xlink:href="/wp-content/themes/mediaplus-2017/assets/images/sprite.svg#x"/></svg>';
 
-  var showMenu = function() {
-    header.classList.add('menu-active');
+// Page overlay properties
+headerOverlay.classList.add('page-overlay');
+headerOverlay.classList.add('page-overlay--header');
+headerOverlay.setAttribute('role', 'none');
+
+// Menu properties
+menu.setAttribute('aria-hidden', 'true');
+menu.setAttribute('aria-labelledby', 'menu-button');
+
+// Add button to page
+headerTray.insertBefore(menuBtn, headerTrayContent);
+headerTray.insertBefore(headerOverlay, headerTrayContent);
+
+var hideMenu = function() {
+  header.classList.remove('menu-active');
+  fade(headerOverlay, 1, 0, 200, function(){
     headerOverlay.style.display = 'block';
-    fade(headerOverlay, 0, 1, 200);
-    menu.removeAttribute('aria-hidden');
-    menuBtn.setAttribute('aria-expanded', 'true');
+  });
+  menu.setAttribute('aria-hidden', 'true');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  headerContact.setAttribute('aria-hidden', 'true');
+};
 
-    if (window.outerWidth <= bpHeaderSmall) {
+var showMenu = function() {
+  header.classList.add('menu-active');
+  headerOverlay.style.display = 'block';
+  fade(headerOverlay, 0, 1, 200);
+  menu.removeAttribute('aria-hidden');
+  menuBtn.setAttribute('aria-expanded', 'true');
+
+  if (window.outerWidth <= bpHeaderSmall) {
+    headerContact.removeAttribute('aria-hidden');
+  }
+
+  // Set focus on first link
+  menu.children[0].children[0].children[0].focus();
+};
+
+// Handle button click event
+menuBtn.addEventListener('click', function () {
+  
+  // If active...
+  if (header.classList.contains('menu-active')) {
+    hideMenu();
+  } else {
+    showMenu();
+  }
+}, false);
+
+// Close header if clicked on overlay
+window.addEventListener('click', function(e){
+  if (e.target == headerOverlay) {
+    hideMenu();
+  }
+}, false);
+
+// Handle header design differences when resizing
+var resizeMenu = debounce(function() {
+  // Desktop
+  if (window.outerWidth > bpHeaderSmall) {
+    headerContact.setAttribute('aria-hidden', 'true');
+  // Mobile 
+  } else {
+    if (header.classList.contains('menu-active')) {
       headerContact.removeAttribute('aria-hidden');
     }
+  }
+}, 100);
 
-    // Set focus on first link
-    menu.children[0].children[0].children[0].focus();
-  };
+window.addEventListener('resize', resizeMenu);
 
-  // Handle button click event
-  menuBtn.addEventListener('click', function () {
-    
-    // If active...
-    if (header.classList.contains('menu-active')) {
-      hideMenu();
-    } else {
-      showMenu();
-    }
-  }, false);
+/*
+  *	=============================================
+  *	SIDEBAR NAV
+  *	=============================================
+  */
 
-  // Close header if clicked on overlay
-  window.addEventListener('click', function(e){
-    if (e.target == headerOverlay) {
-      hideMenu();
-    }
-  }, false);
+var bpSidebarM = 901,
+    bpSidebarL = 1101,
+    sidebarBtn = document.getElementById('sidebar-toggle'),
+    logoTextWrap = sidebarBtn.querySelector('.logo__text-wrap'),
+    sidebar = document.getElementById('sidebar-nav'),
+    sidebarContent = sidebar.querySelector('.site-sidebar__content'),
+    navOverlay = document.createElement('span');
 
-  // Handle header design differences when resizing
-  var resizeMenu = debounce(function() {
-    // Desktop
-    if (window.outerWidth > bpHeaderSmall) {
-      headerContact.setAttribute('aria-hidden', 'true');
-    // Mobile 
-    } else {
-      if (header.classList.contains('menu-active')) {
-        headerContact.removeAttribute('aria-hidden');
-      }
-    }
-  }, 100);
+/*
+  *  TOGGLE SIDEBAR
+  *	---------------------------------------------
+  */
 
-  window.addEventListener('resize', resizeMenu);
+// Nav overlay properties
+navOverlay.classList.add('page-overlay');
+navOverlay.classList.add('page-overlay--nav');
+navOverlay.setAttribute('role', 'none');
+document.body.insertBefore(navOverlay, sidebar);
 
-  /*
-   *	=============================================
-   *	SIDEBAR NAV
-   *	=============================================
-   */
+/* Toggle sidebar nav */
+var openSidebar = function() {
+  sidebar.classList.remove('closed');
+  sidebarBtn.setAttribute('aria-expanded', 'true');
+  logoTextWrap.classList.add('abbreviated');
 
-  var bpSidebarM = 901,
-      bpSidebarL = 1101,
-      sidebarBtn = document.getElementById('sidebar-toggle'),
-      logoTextWrap = sidebarBtn.querySelector('.logo__text-wrap'),
-      sidebar = document.getElementById('sidebar-nav'),
-      sidebarContent = sidebar.querySelector('.site-sidebar__content'),
-      navOverlay = document.createElement('span');
+  // Stagger CSS transitions
+  setTimeout(function(){
+    sidebar.removeAttribute('aria-hidden');
+    navOverlay.style.display = 'block';
+    fade(navOverlay, 0, 1, 200);
 
-  /*
-   *  TOGGLE SIDEBAR
-   *	---------------------------------------------
-   */
-
-  // Nav overlay properties
-  navOverlay.classList.add('page-overlay');
-  navOverlay.classList.add('page-overlay--nav');
-  navOverlay.setAttribute('role', 'none');
-  document.body.insertBefore(navOverlay, sidebar);
-
-  /* Toggle sidebar nav */
-  var openSidebar = function() {
-    sidebar.classList.remove('closed');
-    sidebarBtn.setAttribute('aria-expanded', 'true');
-    logoTextWrap.classList.add('abbreviated');
-
-    // Stagger CSS transitions
     setTimeout(function(){
-      sidebar.removeAttribute('aria-hidden');
-      navOverlay.style.display = 'block';
-      fade(navOverlay, 0, 1, 200);
+      sidebarContent.classList.add('active');
+    }, 300);
+  }, 200);
+};
 
-      setTimeout(function(){
-        sidebarContent.classList.add('active');
-      }, 300);
+var closeSidebar = function() {
+  sidebarBtn.setAttribute('aria-expanded', 'false');
+  sidebarContent.classList.remove('active');
+  
+  // Stagger CSS transitions
+  setTimeout(function(){
+    sidebar.setAttribute('aria-hidden', 'true');
+    fade(navOverlay, 1, 0, 200);
+
+    setTimeout(function(){
+      navOverlay.style.display = 'none';
     }, 200);
-  };
-
-  var closeSidebar = function() {
-    sidebarBtn.setAttribute('aria-expanded', 'false');
-    sidebarContent.classList.remove('active');
-    
-    // Stagger CSS transitions
-    setTimeout(function(){
-      sidebar.setAttribute('aria-hidden', 'true');
-      fade(navOverlay, 1, 0, 200);
-
-      setTimeout(function(){
-        navOverlay.style.display = 'none';
-      }, 200);
-
-      setTimeout(function(){
-        if (!document.body.classList.contains('single-expertise')) {
-          logoTextWrap.classList.remove('abbreviated');
-        }
-      }, 200);
-    }, 100);
 
     setTimeout(function(){
-      sidebar.classList.add('closed');
-    }, 800);
-  };
-
-  var toggleSidebar = function() {
-    sidebar.classList.remove('tease');
-    if (sidebar.getAttribute('aria-hidden') == 'true') {
-      openSidebar();
-    } else {
-      closeSidebar();
-    }
-  };
-
-  var resizeSidebar = debounce(function() {
-    if (window.outerWidth >= bpSidebarL) {
-      openSidebar();
-    } else {
-      closeSidebar();
-    }
-  }, 400);
-
-  var teaseSidebar = debounce(function(e) {
-    if (sidebar.getAttribute('aria-hidden') == 'true') {
-      if (e.clientX < 400) {
-        sidebar.classList.remove('closed');
-        sidebar.classList.add('tease');
-        sidebar.addEventListener('click', toggleSidebar, false);
-      } else {
-        sidebar.classList.remove('tease');
-        setTimeout(function(){
-          sidebar.classList.add('closed');
-          sidebar.removeEventListener('click', toggleSidebar, false);
-        }, 400);
+      if (!document.body.classList.contains('single-expertise')) {
+        logoTextWrap.classList.remove('abbreviated');
       }
-    }
+    }, 200);
   }, 100);
 
-  // ON LOAD
+  setTimeout(function(){
+    sidebar.classList.add('closed');
+  }, 800);
+};
 
-    // Hook up sidebar button
-    sidebarBtn.addEventListener('click', toggleSidebar, false);
+var toggleSidebar = function() {
+  sidebar.classList.remove('tease');
+  if (sidebar.getAttribute('aria-hidden') == 'true') {
+    openSidebar();
+  } else {
+    closeSidebar();
+  }
+};
 
-    if (document.body.classList.contains('single-expertise')) {
-      // Persist sidebar on case study pages
-      resizeSidebar();
-      window.addEventListener('resize', resizeSidebar);
+var resizeSidebar = debounce(function() {
+  if (window.outerWidth >= bpSidebarL) {
+    openSidebar();
+  } else {
+    closeSidebar();
+  }
+}, 400);
+
+var teaseSidebar = debounce(function(e) {
+  if (sidebar.getAttribute('aria-hidden') == 'true') {
+    if (e.clientX < 400) {
+      sidebar.classList.remove('closed');
+      sidebar.classList.add('tease');
+      sidebar.addEventListener('click', toggleSidebar, false);
     } else {
-      // Clicking overlay closes sidebar
-      navOverlay.addEventListener('click', closeSidebar, false);
-
-      // Tease sidebar on hover, but not on home
-      if (window.outerWidth >= bpSidebarL && !document.body.classList.contains('home')) {
-        window.addEventListener('mousemove', teaseSidebar, false);
-      }
+      sidebar.classList.remove('tease');
+      setTimeout(function(){
+        sidebar.classList.add('closed');
+        sidebar.removeEventListener('click', toggleSidebar, false);
+      }, 400);
     }
+  }
+}, 100);
 
-})(document, window);
+// ON LOAD
+
+  // Hook up sidebar button
+  sidebarBtn.addEventListener('click', toggleSidebar, false);
+
+  if (document.body.classList.contains('single-expertise')) {
+    // Persist sidebar on case study pages
+    resizeSidebar();
+    window.addEventListener('resize', resizeSidebar);
+  } else {
+    // Clicking overlay closes sidebar
+    navOverlay.addEventListener('click', closeSidebar, false);
+
+    // Tease sidebar on hover, but not on home
+    if (window.outerWidth >= bpSidebarL && !document.body.classList.contains('home')) {
+      window.addEventListener('mousemove', teaseSidebar, false);
+    }
+  }

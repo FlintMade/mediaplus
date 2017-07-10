@@ -15,6 +15,10 @@
 }
 
 .single-expertise .page-content {
+  margin-top: 0;
+}
+
+.case-studies {
   margin-top: $space-s-em;
   margin-top: $space-s;
 }
@@ -126,7 +130,7 @@ a.next-case-study {
     padding-left: 4.75em; /* Align to text */
   }
 
-  .single-expertise .page-content {
+  .case-studies {
     margin-top: $space-xs;
   }
 }
@@ -140,13 +144,13 @@ a.next-case-study {
     padding-left: 6.125em; /* Align to text */
   }
 
-  .single-expertise .page-content {
+  .case-studies {
     margin-top: 1.8rem;
   }
 }
 
 @media (min-width: $bp-sidebar-l) {
-  .single-expertise .page-content {
+  .case-studies {
     margin-top: 4.5em;
   }
 
