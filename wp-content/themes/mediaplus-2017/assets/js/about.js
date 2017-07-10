@@ -25,10 +25,7 @@
       btn.innerHTML = '<span aria-label="View more info about ' + personName + '">More info+</span>';
 
       bio.setAttribute('aria-hidden', 'true');
-
-      setTimeout(function(){
-        person.classList.remove('active');
-      }, 200);
+      person.classList.remove('active');
 
     // Show bio
     } else {
@@ -39,7 +36,7 @@
 
       setTimeout(function(){
         bio.removeAttribute('aria-hidden');
-      }, 200);
+      }, 100);
     }
   };
 
