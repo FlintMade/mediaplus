@@ -47,7 +47,7 @@ var setRecentCS = function(recent) {
   }
 };
 
-if (recent) {
+if (document.body.classList.contains('single-expertise') && recent) {
   setRecentCS(recent);
 }
 
@@ -315,18 +315,13 @@ var animateLoader = function(scrolledTo, loaderValue) {
 var scrollEvents = function() {
   var scrolledTo = window.scrollY + window.outerHeight,
       loaderValue = document.getElementById('loader-value');
-
-  if (lastScroll !== window.scrollY) {
-    animateLoader(scrolledTo, loaderValue);
-    scrollToNextCS(scrolledTo, loaderValue);
-    fadeInNextCS();
-    lastScroll = window.scrollY;
-  }
+  console.log(scrolledTo, document.body.clientHeight);
+  animateLoader(scrolledTo, loaderValue);
+  scrollToNextCS(scrolledTo, loaderValue);
+  fadeInNextCS();
 };
 
-if (document.body.classList.contains('single-expertise')) {
-  window.addEventListener('scroll', scrollEvents, false);
-}
+window.addEventListener('scroll', scrollEvents, false);
 
 /*
   *	CLICK TO LOAD NEXT CASE STUDY

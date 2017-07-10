@@ -33,6 +33,17 @@
   </a>
 </div>
 <div class="case-studies" id="flow">
+  <?php
+    $args = array(
+      'posts_per_page' => 1,
+      'post_type' => 'expertise'
+    );
+    $posts = get_posts($args);
+    foreach($posts as $post):
+    setup_postdata($post);
+  ?>
+    <?php include('case-study-contents.php'); ?>
+  <?php wp_reset_postdata(); endforeach; ?>
   <span class="status-bar" role="none">
     <span class="status-bar__value" id="loader-value" role="none"></span>
   </span>
