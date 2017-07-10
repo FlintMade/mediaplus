@@ -65,14 +65,13 @@ add_action( 'after_setup_theme', 'mediaplus_setup' );
 function wpdocs_dequeue_script() {
 	wp_dequeue_script('jquery-ui-core');
 	wp_dequeue_script('jquery');
-	wp_deregister_script('jquery');
 }
 add_action('wp_print_scripts', 'wpdocs_dequeue_script', 100);
 
 function mediaplus_scripts() {
 
 	// Cache busting for all scripts that have or will change
-	$versionString = '07.10.17.02';
+	$versionString = '07.10.17.03';
 
 	// Remove silly WP stuff
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
