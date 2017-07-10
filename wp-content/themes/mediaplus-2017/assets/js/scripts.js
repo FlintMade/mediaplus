@@ -103,6 +103,11 @@ headerTray.insertBefore(menuBtn, headerTrayContent);
 headerTray.insertBefore(headerOverlay, headerTrayContent);
 
 var hideMenu = function() {
+  var menuItems = menu.querySelectorAll('li.visible');
+  for (var i = 0; i < menuItems.length; i++) {
+    menuItems[i].classList.remove('visible');
+  }
+
   if (window.outerWidth <= bpHeaderSmall || document.body.classList.contains('flow')) {
     header.classList.remove('menu-active');
     fade(headerOverlay, 1, 0, 200, function(){
@@ -130,11 +135,25 @@ var showMenu = function() {
   menuBtn.setAttribute('aria-expanded', 'true');
 
   if (window.outerWidth <= bpHeaderSmall) {
+    var menuItems = menu.querySelectorAll('li');
     headerContact.removeAttribute('aria-hidden');
+    setTimeout(function(){
+      for (var i = 0; i < menuItems.length; i++) {
+        var thisItem = menuItems[i],
+            thisTiming = 600 * i;
+        showMenuItem(thisItem, thisTiming);
+      }
+    }, 400);
   }
 
   // Set focus on first link
   menu.children[0].children[0].children[0].focus();
+};
+
+var showMenuItem = function(thisItem, thisTiming) {
+  setTimeout(function(){
+    thisItem.classList.add('visible');
+  }, thisTiming);
 };
 
 // Handle button click event

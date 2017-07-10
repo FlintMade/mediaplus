@@ -135,7 +135,6 @@
   right: $space-s;
   width: 32px;
   height: 32px;
-  transition: transform 200ms;
 
   &:focus {
     outline: 0;
@@ -233,6 +232,15 @@
 
     li + li {
       margin-top: 1.5em;
+    }
+
+    li {
+      opacity: 0;
+      transition: opacity 600ms;
+
+      &.visible {
+        opacity: 1;
+      }
     }
 
     a {
