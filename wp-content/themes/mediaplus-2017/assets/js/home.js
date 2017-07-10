@@ -104,7 +104,9 @@ var delta = 0;
 var setUpFirstCS = function() {
   var currentCS = document.querySelector('.case-study--current');
   setRecentCS(currentCS);
-  openSidebar();
+  if (window.outerWidth > bpHeaderSmall) {
+    openSidebar();
+  }
 
   setTimeout(function(){
     document.body.classList.add('intro-scrolled');
