@@ -53,6 +53,11 @@ var slideOverlays = function() {
   // Fade in scroll button at end
   setTimeout(function(){
     fade(homeScrollLink, 0, 1, 400);
+    loadFirstCaseStudy();
+
+    // Attach scroll past intro event
+    window.addEventListener('mousewheel', scrollAwayIntro, false);
+    window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
   }, afterAll);
 };
 
@@ -65,6 +70,30 @@ var slideOverlay = function(overlay, timing) {
 createOverlays();
 slideOverlays();
 
+
+/*
+  *  SCROLL TO FIRST CASE STUDY
+  *	---------------------------------------------
+  */
+
+// Load first case study
+var loadFirstCaseStudy = function() {
+  $.ajax({
+    url: firstCaseStudy.ajaxurl,
+    type: 'post',
+    data: {
+      action: 'first_case_study',
+      query_vars: firstCaseStudy.query_vars
+    },
+    success: function(newPosts) {
+      setTimeout(function(){
+        $('#flow').prepend(newPosts);
+        setUpGalleries();
+      }, 200);
+    }
+  });
+};
+
 /*
   *  SCROLL AWAY HOME INTRO
   *  Background: https://www.sitepoint.com/html5-javascript-mouse-wheel/
@@ -76,13 +105,24 @@ var setUpFirstCS = function() {
   var currentCS = document.querySelector('.case-study--current');
   setRecentCS(currentCS);
   openSidebar();
-  document.body.classList.add('intro-scrolled');
 
   setTimeout(function(){
+    document.body.classList.add('intro-scrolled');
+    window.addEventListener('mousewheel', scrollEvents, false);
+    window.addEventListener('DOMMouseScroll', scrollEvents, false);
     if (homeIntro.parentNode) {
       homeIntro.parentNode.removeChild(homeIntro);
     }
   }, 200);
+};
+
+var scrollAwayIntro = function(e) {
+  delta++;
+  var scrollAmount = 5 * Math.abs(delta);
+  homeIntro.style.top = '-' + scrollAmount + '%';
+  if (scrollAmount >= 100) {
+    setUpFirstCS();
+  }
 };
 
 var clickAwayIntro = function(e) {
