@@ -105,7 +105,7 @@ var delta = 0;
 var setUpFirstCS = function() {
   var currentCS = document.querySelector('.case-study--current');
   setRecentCS(currentCS);
-  if (window.outerWidth > bpHeaderSmall) {
+  if (window.outerWidth >= bpSidebarL) {
     openSidebar();
   } else {
     logoTextWrap.classList.add('abbreviated');
