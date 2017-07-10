@@ -6,6 +6,10 @@
 
 The `.htaccess` file in the root of the project is just for the development environment. The `.prodhtaccess` file has all your caching etc.
 
+### "Flow"
+
+Flow pages refer to the home page, expertise case studies, and offerings case studies. Anywhere you see a class `.flow`, refers to all these pages.
+
 ### Assets
 
 * CSS and JS are loaded through enqueue functions in `functions.php`

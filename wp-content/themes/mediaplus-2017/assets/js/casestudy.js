@@ -47,7 +47,7 @@ var setRecentCS = function(recent) {
   }
 };
 
-if (document.body.classList.contains('single-expertise') && recent) {
+if (document.body.classList.contains('single-case-study') && recent) {
   setRecentCS(recent);
 }
 
@@ -323,7 +323,7 @@ var scrollEvents = function() {
   fadeInNextCS();
 };
 
-if (document.body.classList.contains('single-expertise')) {
+if (document.body.classList.contains('single-case-study')) {
   window.addEventListener('scroll', scrollEvents, false);
 }
 

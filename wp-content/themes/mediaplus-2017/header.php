@@ -21,7 +21,13 @@
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
 </head>
 
-<body <?php body_class(); ?>>
+<?php if (is_singular('expertise') || is_singular('offerings')): ?>
+  <body <?php body_class('flow single-case-study'); ?>>
+<?php elseif (is_front_page()): ?>
+  <body <?php body_class('flow'); ?>>
+<?php else: ?>
+  <body <?php body_class(); ?>>
+<?php endif; ?>
   <header role="banner" class="clear header menu-active">
     <div class="header__context">
       <button class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus show case studies" id="sidebar-toggle" aria-expanded="false" aria-controls="sidebar-nav">
