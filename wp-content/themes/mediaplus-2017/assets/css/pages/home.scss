@@ -25,6 +25,7 @@
   padding: 3em $space-s-em 4em;
   padding: 3em $space-s 4em;
   background: #fff;
+  transition: margin-top 1200ms; /* Only used on scroll click event */
 }
 
 .timeline-process {
@@ -171,11 +172,17 @@ body.intro-scrolled {
     overflow: auto;
   }
 
-  .sections__home {
+  a.sections__home {
     opacity: .5;
   }
 
-  .sections__expertise {
+  a.sections__expertise {
     opacity: 1;
+  }
+}
+
+body.intro-clicked-past {
+  .home-intro {
+    margin-top: -100%;
   }
 }

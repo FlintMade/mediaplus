@@ -89,9 +89,6 @@ var loadFirstCaseStudy = function() {
       setTimeout(function(){
         $('#flow').append(newPosts);
         //setUpGalleries();
-        var currentCS = document.querySelector('.case-study--current');
-        console.log(currentCS);
-        setRecentCS(currentCS);
       }, 200);
     }
   });
@@ -104,17 +101,37 @@ var loadFirstCaseStudy = function() {
   */
 var delta = 0;
 
+var setUpFirstCS = function() {
+  var currentCS = document.querySelector('.case-study--current');
+  setRecentCS(currentCS);
+  openSidebar();
+  document.body.classList.add('intro-scrolled');
+
+  setTimeout(function(){
+    window.removeEventListener('wheel', scrollAwayIntro, false);
+    window.removeEventListener('mousewheel', scrollAwayIntro, false);
+    window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
+    if (homeIntro.parentNode) {
+      homeIntro.parentNode.removeChild(homeIntro);
+    }
+  }, 200);
+};
+
 var scrollAwayIntro = function(e) {
   delta++;
   var scrollAmount = 5 * Math.abs(delta);
   homeIntro.style.top = '-' + scrollAmount + '%';
   if (scrollAmount >= 100) {
-    setTimeout(function(){
-      window.removeEventListener('wheel', scrollAwayIntro, false);
-      window.removeEventListener('mousewheel', scrollAwayIntro, false);
-      window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
-      document.body.classList.add('intro-scrolled');
-      openSidebar();
-    }, 200);
+    setUpFirstCS();
   }
 };
+
+var clickAwayIntro = function(e) {
+  e.preventDefault();
+  document.body.classList.add('intro-clicked-past');
+  setTimeout(function(){
+    setUpFirstCS();
+  }, 400);
+};
+
+homeScrollLink.addEventListener('click', clickAwayIntro, false);
