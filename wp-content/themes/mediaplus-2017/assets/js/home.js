@@ -95,8 +95,9 @@ var loadFirstCaseStudy = function() {
 };
 
 /*
-  *  SCROLL AWAY HOME INTRO
-  *  Background: https://www.sitepoint.com/html5-javascript-mouse-wheel/
+  * SCROLL AWAY HOME INTRO
+  * Background: https://www.sitepoint.com/html5-javascript-mouse-wheel/
+  * Sidebar-related functions are in scripts.js
   *	-------------------------------------------------------------------
   */
 var delta = 0;
@@ -106,6 +107,8 @@ var setUpFirstCS = function() {
   setRecentCS(currentCS);
   if (window.outerWidth > bpHeaderSmall) {
     openSidebar();
+  } else {
+    logoTextWrap.classList.add('abbreviated');
   }
 
   setTimeout(function(){
