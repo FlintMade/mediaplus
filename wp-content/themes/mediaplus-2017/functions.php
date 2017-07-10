@@ -270,3 +270,19 @@ function filter_ptags_on_images($content) {
   return $content;
 }
 add_filter('the_content', 'filter_ptags_on_images');
+
+/*
+ *	FLUSH! THOSE! BUFFERS!
+ *	And fix a PHP error
+ *	-----------------------------------------------------------------
+ */
+
+remove_action('shutdown', 'wp_ob_end_flush_all', 1);
+
+function flush_no_mediaplus() {
+	$levels = ob_get_level();
+	for ( $i = 0; $i < $levels - 1; $i++ )
+		ob_end_flush();
+}
+
+add_action('shutdown', 'flush_no_mediaplus', 1, 0);
