@@ -274,21 +274,21 @@ var resizeSidebar = debounce(function() {
   }
 }, 400);
 
-var teaseSidebar = debounce(function(e) {
+var teaseSidebar = function() {
   if (sidebar.getAttribute('aria-hidden') == 'true') {
-    if (e.clientX < 400) {
-      sidebar.classList.remove('closed');
-      sidebar.classList.add('tease');
-      sidebar.addEventListener('click', toggleSidebar, false);
-    } else {
-      sidebar.classList.remove('tease');
-      setTimeout(function(){
-        sidebar.classList.add('closed');
-        sidebar.removeEventListener('click', toggleSidebar, false);
-      }, 400);
-    }
+    sidebar.classList.remove('closed');
+    sidebar.classList.add('tease');
   }
-}, 100);
+};
+
+var unTeaseSidebar = function() {
+  if (sidebar.getAttribute('aria-hidden') == 'true') {
+    sidebar.classList.remove('tease');
+    setTimeout(function(){
+      sidebar.classList.add('closed');
+    }, 400);
+  }
+};
 
 // ON LOAD
 
@@ -305,6 +305,7 @@ var teaseSidebar = debounce(function(e) {
 
     // Tease sidebar on hover, but not on home
     if (window.outerWidth >= bpSidebarL && !document.body.classList.contains('home')) {
-      window.addEventListener('mousemove', teaseSidebar, false);
+      sidebarBtn.addEventListener('mouseenter', teaseSidebar, false);
+      sidebarBtn.addEventListener('mouseleave', unTeaseSidebar, false);
     }
   }
