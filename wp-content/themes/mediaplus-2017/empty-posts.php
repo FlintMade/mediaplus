@@ -1,1 +1,0 @@
-<p class="load-status load-status--empty" id="emptyPosts">That’s all for now!</p>

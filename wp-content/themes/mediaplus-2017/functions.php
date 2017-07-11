@@ -239,10 +239,7 @@ function mediaplus_ajax_pagination() {
 
 	add_filter('editor_max_image_size', 'journal_size_override');
 
-	if(!$posts->have_posts()) { 
-		get_template_part('empty-posts');
-	}
-	else {
+	if($posts->have_posts()) { 
 		while ( $posts->have_posts() ) { 
 			$posts->the_post();
 			get_template_part('post-preview');
