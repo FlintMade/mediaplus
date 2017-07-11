@@ -59,6 +59,10 @@ body.home {
 
 /* JS tells text to slide if no lines wrap */
 .slide {
+  p {
+    margin-bottom: .125em;
+  }
+
   .overlay {
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1));
     transition: width 3200ms ease-in;
