@@ -154,7 +154,7 @@ var showMenu = function() {
     setTimeout(function(){
       for (var i = 0; i < menuItems.length; i++) {
         var thisItem = menuItems[i],
-            thisTiming = 600 * i;
+            thisTiming = 400 * i;
         showMenuItem(thisItem, thisTiming);
       }
     }, 400);

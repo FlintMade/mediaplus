@@ -192,8 +192,8 @@
   .header__tray {
     position: fixed;
     top: 0;
-    right: -50%;
-    width: 50%;
+    right: -60%;
+    width: 60%;
     height: 100%;
 
     &:before {
@@ -223,16 +223,16 @@
 
   .header__menu {
     flex: 1;
-    font-size: 1.5rem; /* ~24px */
+    font-size: 2rem;
     line-height: 1;
 
     li + li {
-      margin-top: 1.5em;
+      margin-top: .75em;
     }
 
     li {
       opacity: 0;
-      transition: opacity 600ms;
+      transition: opacity 300ms;
 
       &.visible {
         opacity: 1;
