@@ -59,6 +59,7 @@
 
 .person {
   position: relative;
+  padding-top: 125%; /* Ratio sizing hack */
   background: #f7f7f7;
   background-position: center;
   background-size: cover;
@@ -113,10 +114,12 @@
 }
 
 .person__more {
-  position: relative;
+  position: absolute;
   z-index: z('person') - 2;
+  top: 0;
+  right: 0;
   padding-top: 6em; /* Space for name, etc */
-  min-height: 300px;
+  width: 100%;
   height: 100%;
 
   p {
@@ -172,6 +175,12 @@
   color: $grey-med;
 }
 
+@media (min-width: 34em) {
+  .person {
+    padding-top: 80%;
+  }
+}
+
 @media (min-width: $bp-s) {
   .person__initial,
   .person__more,
@@ -207,6 +216,8 @@
 
 @media (min-width: $bp-m) {
   .person {
+    padding-top: 66%;
+
     h3 {
       font-size: 1.125em;
     }
@@ -227,12 +238,8 @@
 }
 
 @media (min-width: $bp-l) {
-  /* Make rows of people consistent heights, only if flex wrap supported */
-  @supports (flex-wrap: wrap) {
-    .team {
-      display: flex;
-      flex-wrap: wrap;
-    }
+  .person {
+    padding-top: 50%;
   }
 }
 
@@ -240,6 +247,18 @@
   .person__more {
     padding-top: 6em; /* Space for name, etc */
     padding-left: $space-m;
+  }
+}
+
+@media (min-width: 90em) {
+  .person {
+    padding-top: 40%;
+  }
+}
+
+@media (min-width: $bp-xxl) {
+  .person {
+    padding-top: 33%;
   }
 }
 
