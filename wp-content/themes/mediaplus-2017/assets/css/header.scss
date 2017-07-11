@@ -162,10 +162,6 @@
 
   a {
     color: $grey-med;
-
-    &:hover {
-      border-bottom: 1px solid;
-    }
   }
 
   .current-menu-item a,
@@ -245,10 +241,6 @@
 
     a {
       color: $grey-dark;
-
-      &:hover {
-        color: $redorange;
-      }
     }
   }
 }

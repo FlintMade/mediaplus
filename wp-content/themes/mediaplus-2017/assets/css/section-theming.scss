@@ -1,0 +1,82 @@
+/*
+ *	=============================================
+ *	SITE SECTION COLOR THEMING
+ *	=============================================
+ */
+
+/*
+ *	BASE
+ *	---------------------------------------------
+ */
+
+.menu-toggle:hover,
+.menu-toggle:focus,
+a:hover .arrow,
+a:focus .arrow {
+  circle {
+    fill: $redorange;
+  }
+
+  path {
+    fill: #fff;
+  }
+}
+
+a:hover,
+.header-menu a:hover {
+  border-bottom-color: $redorange;
+  color: $redorange;
+}
+
+/*
+ *	FLOW PAGES
+ *  Home, expertise case studies
+ *	---------------------------------------------
+ */
+
+body.flow {
+  .menu-toggle:hover,
+  .menu-toggle:focus,
+  a:hover .arrow,
+  a:focus .arrow {
+    circle {
+      fill: $orange;
+    }
+
+    path {
+      fill: #fff;
+    }
+  }
+
+  a:hover,
+  .header-menu a:hover {
+    border-bottom-color: $orange;
+    color: $orange;
+  }
+}
+
+/*
+ *	OFFERINGS CASE STUDIES
+ *	---------------------------------------------
+ */
+
+body.offerings {
+  .menu-toggle:hover,
+  .menu-toggle:focus,
+  a:hover .arrow,
+  a:focus .arrow {
+    circle {
+      fill: $blue;
+    }
+
+    path {
+      fill: #fff;
+    }
+  }
+
+  a:hover,
+  .header-menu a:hover {
+    border-bottom-color: $blue;
+    color: $blue;
+  }
+}
