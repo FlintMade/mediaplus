@@ -22,8 +22,7 @@ a:focus .arrow {
   }
 }
 
-a:hover,
-.header-menu a:hover {
+.header__menu a:hover {
   border-bottom-color: $redorange;
   color: $redorange;
 }
@@ -48,8 +47,7 @@ body.flow {
     }
   }
 
-  a:hover,
-  .header-menu a:hover {
+  .header__menu a:hover {
     border-bottom-color: $orange;
     color: $orange;
   }
@@ -74,8 +72,7 @@ body.offerings {
     }
   }
 
-  a:hover,
-  .header-menu a:hover {
+  .header__menu a:hover {
     border-bottom-color: $blue;
     color: $blue;
   }
