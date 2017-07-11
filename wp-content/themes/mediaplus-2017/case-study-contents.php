@@ -96,7 +96,9 @@
               </li>
             <?php $i++; endforeach; ?>
           </ul>
-          <p class="gallery__label">Gallery <span class="gallery__index">01</span> / <?php echo str_pad($imageCount, 2, '0', STR_PAD_LEFT); ?></p>
+          <?php if ($imageCount > 1): ?>
+            <p class="gallery__label">Gallery <span class="gallery__index">01</span> / <?php echo str_pad($imageCount, 2, '0', STR_PAD_LEFT); ?></p>
+          <?php endif; ?>
           <button class="gallery__prev" title="Previous image" aria-hidden="true" tabindex="-1">
             <?php include('svgs/arrow-prev.svg'); ?>
           </button>
