@@ -134,6 +134,12 @@ a.scroll-home {
   }
 }
 
+@media (min-width: $bp-m) {
+  .home-intro__text {
+    width: 75%;
+  }
+}
+
 /*
  *	SCROLLED PAST HOME INTRO
  *	---------------------------------------------
