@@ -28,20 +28,20 @@ body.home {
   transition: margin-top 1200ms; /* Only used on scroll click event */
 }
 
-.timeline-process {
+.home-intro__text {
   position: relative;
   overflow: hidden;
+  color: $grey-dark;
 
-  ul {
-    margin-bottom: 0;
-    max-width: 21em;
-    font: 600 1.5em/1.5 $font-heading;
-    color: $grey-dark;
+  p {
+    position: relative;
+    margin-bottom: .5em;
+    font: 600 1.5em/1.25 $font-heading;
+    font-size: 7vmin;
   }
 
-  li {
-    display: inline;
-    position: relative;
+  p:last-child {
+    margin-bottom: 0;
   }
 
   .overlay {
@@ -51,30 +51,34 @@ body.home {
     z-index: z('main') - 2;
     top: 0;
     right: 0;
-    width: 240%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1));
-    transition: width 2400ms ease-in;
-
-    &.open {
-      width: 0;
-    }  
+    width: 200%; /* So this doesn't accidentally get animated when .slide class added */
+    height: 100%;
+    background: #fff;
   }
 }
 
-.process__icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 .325em;
+/* JS tells text to slide if no lines wrap */
+.slide {
+  .overlay {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1));
+    transition: width 3200ms ease-in;
+
+    &.hidden {
+      width: 0;
+    }
+  }
 }
 
-.process__plus {
-  width: .7em; /* 35px */
-  height: .7em;
-}
+/* Otherwise, lines fade in */
+.fade {
+  .overlay {
+    opacity: 1;
+    transition: opacity 800ms ease-in;
 
-.process__arrow {
-  width: .74em; /* 37px */
-  height: .62em; /* 31px */
+    &.hidden {
+      opacity: 0;
+    }
+  }
 }
 
 .scroll-home {
@@ -109,28 +113,7 @@ a.scroll-home {
   color: $grey-med;
 }
 
-@media (max-height: 20em) {
-  .timeline-process {
-    ul li {
-      font-size: .75em;
-    }
-  }
-}
-
-@media (min-height: 36em) {
-  .home-intro {
-    padding: 4.5em $space-s-em;
-    padding: 4.5em $space-s;
-  }
-
-  .timeline-process {
-    ul li {
-      font-size: 1.25em;
-    }
-  }
-}
-
-@media (min-width: $bp-header-m) {
+@media (min-height: 18.75em) and (min-width: $bp-header-m) {
   .home-intro {
     padding: 4.5em 10em $space-m $space-m;
   }
@@ -144,19 +127,6 @@ a.scroll-home {
     .arrow {
       transform: rotate(0);
     }
-  }
-}
-
-@media (min-width: $bp-m) {
-  .timeline-process ul {
-    font-size: 2em;
-  }
-}
-
-@media (min-width: $bp-l) {
-  .timeline-process ul {
-    font-size: 2.5em;
-    line-height: 1.8em;
   }
 }
 

@@ -22,32 +22,41 @@ localStorage.setItem('recentPage', 'home');
   */
 
 var homeIntro = document.querySelector('.home-intro'),
-    timelineWrap = document.querySelector('.timeline-process'),
     text = document.getElementById('homeText'),
-    textHeight = text.offsetHeight,
-    lineHeight = parseInt(window.getComputedStyle(text, null).getPropertyValue('line-height')),
-    numOverlays = Math.round(textHeight / lineHeight),
+    textLines = text.querySelectorAll('.home-intro__line'),
+    overlays = text.querySelectorAll('.overlay'),
     homeScrollLink = document.getElementById('scroll-home');
 
-var createOverlays = function(){
-  for (var i = 0; i < numOverlays; i++){
-    var overlay = document.createElement('span'),
-        division = (100 / numOverlays),
-        topPos =  division * i;
-    overlay.classList.add('overlay');
-    overlay.style.top = topPos + '%';
-    overlay.style.height = division + '%';
-    timelineWrap.appendChild(overlay);
-  }
+var revealTextLine = function(overlay, timing) {
+  setTimeout(function(){
+    overlay.classList.add('hidden');
+  }, timing);
 };
 
-var slideOverlays = function() {
-  var overlays = timelineWrap.querySelectorAll('.overlay'),
-      afterAll = (overlays.length * 1600) + 400;
+var revealText = function() {
+  var revealInterval = 1600,
+      slide = false;
+
+  // Determine if any lines wrap; if so, fade instead of slide
+  for (var i = 0; i < textLines.length; i++) {
+    if (textLines[i].getClientRects().length === 1) {
+      slide = true;
+    } else {
+      slide = false;
+      break;
+    }
+    if (slide = true) {
+      revealInterval = 2400;
+      text.classList.remove('fade');
+      text.classList.add('slide');
+    }
+  }
+
+  // Reveal lines
   for (var i = 0; i < overlays.length; i++) {
     var thisOverlay = overlays[i],
-        thisTiming = (i * 1600);
-    slideOverlay(thisOverlay, thisTiming);
+        thisTiming = (i * revealInterval);
+    revealTextLine(thisOverlay, thisTiming);
   }
 
   // Fade in scroll button at end
@@ -58,18 +67,10 @@ var slideOverlays = function() {
     // Attach scroll past intro event
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
-  }, afterAll);
+  }, (overlays.length * revealInterval) + (revealInterval / 2));
 };
 
-var slideOverlay = function(overlay, timing) {
-  setTimeout(function(){
-    overlay.classList.add('open');
-  }, timing);
-};
-
-createOverlays();
-slideOverlays();
-
+revealText();
 
 /*
   *  SCROLL TO FIRST CASE STUDY

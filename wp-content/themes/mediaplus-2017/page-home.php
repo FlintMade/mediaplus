@@ -1,31 +1,12 @@
 <?php get_header(); ?>
-
-<?php
-  $args = array(
-    'post_type' => 'process',
-    'post_status' => 'publish',
-    'posts_per_page' => -1,
-    'order' => 'ASC',
-  );
-  $items = get_posts($args);
-  $itemCount = count($items);
-  $i = 0;
-?>
 <div class="home-intro">
-  <div class="timeline-process">
-    <ul id="homeText">
-      <?php foreach ($items as $item): $i++; ?>
-        <li class="timeline-process__item">
-          <?php
-            $itemText = get_the_title($item->ID);
-            echo str_replace(' +', '&nbsp;<svg class="process__icon process__plus" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="' . get_template_directory_uri() . '/assets/images/sprite.svg#plusBig"></use></svg>', $itemText);
-          ?>
-          <?php if ($i < $itemCount): ?>
-            <svg class="process__icon process__arrow" role="none"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#arrowBig"></use></svg>
-          <?php endif; ?>
-        </li>
-      <?php endforeach; ?>
-    </ul>
+  <div class="home-intro__text fade" id="homeText">
+    <?php if (have_rows('intro_lines')): while (have_rows('intro_lines')): the_row(); ?>
+      <p>
+        <span class="home-intro__line"><?php echo get_sub_field('intro_line'); ?></span>
+        <span class="overlay" role="none"></span>
+      </p>
+    <?php endwhile; endif; ?>
   </div>
   <a class="scroll-home" id="scroll-home" aria-label="View case studies" href="<?php echo get_post_type_archive_link('expertise'); ?>">
     <span>Learn more</span>
