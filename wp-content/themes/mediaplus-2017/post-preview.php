@@ -24,7 +24,7 @@
             <img src="<?php echo $medium; ?>" alt="" role="none" />
           </picture>
         <?php else: ?>
-          <?php include('svgs/post-placeholder.svg'); ?>
+          <img class="post__placeholder" src="<?php echo get_template_directory_uri(); ?>/svgs/post-placeholder.svg" alt="" role="none" />
         <?php endif; ?>
       </div>
 
