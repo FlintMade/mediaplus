@@ -131,13 +131,17 @@ var hideMenu = function() {
     menuBtn.setAttribute('aria-expanded', 'false');
     headerContact.setAttribute('aria-hidden', 'true');
   } else {
-    var recentPage = localStorage.getItem('recentPage');
-    if (recentPage === 'home' || !recentPage) {
-      window.location.href = '/';
-    } else {
-      var recentUrl = localStorage.getItem('recentUrl');
-      window.location.href = recentUrl;
-    }
+    sendToFlow();
+  }
+};
+
+var sendToFlow = function() {
+  var recentPage = localStorage.getItem('recentPage');
+  if (recentPage === 'home' || !recentPage) {
+    window.location.href = '/';
+  } else {
+    var recentUrl = localStorage.getItem('recentUrl');
+    window.location.href = recentUrl;
   }
 };
 
@@ -209,117 +213,67 @@ window.addEventListener('resize', resizeMenu);
   *	=============================================
   */
 
-var bpSidebarM = 901,
-    bpSidebarL = 1101,
-    sidebarBtn = document.getElementById('sidebar-toggle'),
-    logoTextWrap = sidebarBtn.querySelector('.logo__text-wrap'),
-    sidebar = document.getElementById('sidebar-nav'),
-    sidebarContent = sidebar.querySelector('.site-sidebar__content'),
-    navOverlay = document.createElement('span');
+/*
+ *  LOGO BUTTON TAKES YOU BACK TO RECENT FLOW PAGE
+ *  ----------------------------------------------
+ */
+
+var logoBtn = document.getElementById('logo-btn');
+logoBtn.addEventListener('click', sendToFlow, false);
 
 /*
-  *  TOGGLE SIDEBAR
-  *	---------------------------------------------
-  */
+ *  SIDEBAR FUNCTIONALITY ON FLOW PAGES
+ *  (Home and case studies)
+ *  ---------------------------------------------
+ */
 
-// Nav overlay properties
-navOverlay.classList.add('page-overlay');
-navOverlay.classList.add('page-overlay--nav');
-navOverlay.setAttribute('role', 'none');
-document.body.insertBefore(navOverlay, sidebar);
+var sidebar = document.getElementById('sidebar-nav');
 
-/* Toggle sidebar nav */
-var openSidebar = function() {
-  sidebar.classList.remove('closed');
-  sidebarBtn.setAttribute('aria-expanded', 'true');
-  logoTextWrap.classList.add('abbreviated');
+if (sidebar) {
+  var bpSidebarM = 901,
+      bpSidebarL = 1101,
+      logoTextWrap = logoBtn.querySelector('.logo__text-wrap'),
+      sidebar = document.getElementById('sidebar-nav'),
+      sidebarContent = sidebar.querySelector('.site-sidebar__content');
 
-  // Stagger CSS transitions
-  setTimeout(function(){
-    sidebar.removeAttribute('aria-hidden');
-    navOverlay.style.display = 'block';
-    fade(navOverlay, 0, 1, 200);
-
-    setTimeout(function(){
-      sidebarContent.classList.add('active');
-    }, 300);
-  }, 200);
-};
-
-var closeSidebar = function() {
-  sidebarBtn.setAttribute('aria-expanded', 'false');
-  sidebarContent.classList.remove('active');
-  
-  // Stagger CSS transitions
-  setTimeout(function(){
-    sidebar.setAttribute('aria-hidden', 'true');
-    fade(navOverlay, 1, 0, 200);
-
-    setTimeout(function(){
-      navOverlay.style.display = 'none';
-    }, 200);
-
-    setTimeout(function(){
-      if (!document.body.classList.contains('single-case-study')) {
-        logoTextWrap.classList.remove('abbreviated');
-      }
-    }, 200);
-  }, 100);
-
-  setTimeout(function(){
-    sidebar.classList.add('closed');
-  }, 800);
-};
-
-var toggleSidebar = function() {
-  sidebar.classList.remove('tease');
-  if (sidebar.getAttribute('aria-hidden') == 'true') {
-    openSidebar();
-  } else {
-    closeSidebar();
-  }
-};
-
-var resizeSidebar = debounce(function() {
-  if (window.outerWidth >= bpSidebarL) {
-    openSidebar();
-  } else {
-    closeSidebar();
-  }
-}, 400);
-
-var teaseSidebar = function() {
-  if (sidebar.getAttribute('aria-hidden') == 'true') {
+  /* Toggle sidebar nav */
+  var openSidebar = function() {
     sidebar.classList.remove('closed');
-    sidebar.classList.add('tease');
-  }
-};
+    logoTextWrap.classList.add('abbreviated');
 
-var unTeaseSidebar = function() {
-  if (sidebar.getAttribute('aria-hidden') == 'true') {
-    sidebar.classList.remove('tease');
+    // Stagger CSS transitions
+    setTimeout(function(){
+      sidebar.removeAttribute('aria-hidden');
+      setTimeout(function(){
+        sidebarContent.classList.add('active');
+      }, 300);
+    }, 200);
+  };
+
+  var closeSidebar = function() {
+    sidebarContent.classList.remove('active');
+    
+    // Stagger CSS transitions
+    setTimeout(function(){
+      sidebar.setAttribute('aria-hidden', 'true');
+    }, 100);
+
     setTimeout(function(){
       sidebar.classList.add('closed');
-    }, 400);
-  }
-};
+    }, 800);
+  };
 
-// ON LOAD
-
-  // Hook up sidebar button
-  sidebarBtn.addEventListener('click', toggleSidebar, false);
-
-  if (document.body.classList.contains('single-case-study')) {
-    // Persist sidebar on case study pages
-    resizeSidebar();
-    window.addEventListener('resize', resizeSidebar);
-  } else {
-    // Clicking overlay closes sidebar
-    navOverlay.addEventListener('click', closeSidebar, false);
-
-    // Tease sidebar on hover, but not on home
-    if (window.outerWidth >= bpSidebarL && !document.body.classList.contains('home')) {
-      sidebarBtn.addEventListener('mouseenter', teaseSidebar, false);
-      sidebarBtn.addEventListener('mouseleave', unTeaseSidebar, false);
+  var resizeSidebar = debounce(function() {
+    if (window.outerWidth >= bpSidebarL) {
+      openSidebar();
+    } else {
+      closeSidebar();
     }
+  }, 400);
+
+  // Hook up the functions
+  if (!document.body.classList.contains('home')) {
+    resizeSidebar();
   }
+  window.addEventListener('resize', resizeSidebar);
+}

@@ -93,10 +93,6 @@ body.single-expertise a.sections__expertise {
   opacity: 1;
 }
 
-.page-overlay--nav {
-  background: rgba(255, 255, 255, .5);
-}
-
 @media (min-width: $bp-s) {
   .site-sidebar__content {
     padding-left: 5em;
@@ -145,18 +141,7 @@ body.single-expertise a.sections__expertise {
       }
     }
   }
-
-  .page-overlay--nav {
-    z-index: z('sidebar') - 1;
-    height: 100%;
-  }
-
-  /* No overlay on case studies */
-  body.home .page-overlay--nav,
-  body.single-expertise .page-overlay--nav {
-    height: 0;
-  }
-
+  
   .case-study-sections {
     display: block;
     bottom: $space-m;

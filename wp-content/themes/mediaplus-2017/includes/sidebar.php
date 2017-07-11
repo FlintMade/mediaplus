@@ -1,4 +1,4 @@
-<nav class="site-sidebar closed" id="sidebar-nav" aria-hidden="true" aria-labelledby="sidebar-toggle">
+<nav class="site-sidebar closed" id="sidebar-nav" aria-hidden="true">
   <div class="site-sidebar__content">
     <?php
       $args = array(

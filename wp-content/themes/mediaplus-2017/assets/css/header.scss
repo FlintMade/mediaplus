@@ -58,12 +58,6 @@
   vertical-align: middle;
   line-height: 1;
   position: relative;
-  transition: opacity ease 200ms;
-  opacity: 1;
-
-  &:hover {
-    opacity: .5;
-  }
 }
 
 .logo__text-wrap,
@@ -111,6 +105,30 @@
     width: 1.875em;
     height: 1.875em;
   }
+}
+
+/*
+ *	LOGO HOVER: TEASE SIDEBAR UNLESS ON FLOW PAGES
+ *	----------------------------------------------
+ */
+
+body:not(.flow) .header__brand {
+  &:after {
+    display: block;
+    content: '';
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: -4em;
+    width: 4em;
+    height: 100%;
+    background: $orange;
+    transition: left 300ms;
+  }
+
+  &:hover:after {
+    left: 0;
+  }  
 }
 
 /*
