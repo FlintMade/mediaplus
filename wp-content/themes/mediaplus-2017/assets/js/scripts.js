@@ -55,8 +55,21 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
   };
   tick();
 }
-  
-var bpHeaderSmall = 800;
+
+/*
+  *	=============================================
+  *	HOOK UP GLOBAL SUBTLE CSS TRANSITIONS
+  *	=============================================
+  */
+var afterLoadTiming = 200, /* Give user a little bit of time to cognitively recognize page load */
+    pageBanner = document.querySelector('.page-banner');
+
+/* Fade in banner on page load */
+if (pageBanner) {
+  setTimeout(function(){
+    pageBanner.classList.add('animated');
+  }, afterLoadTiming);
+}
 
 /*
   *	=============================================
@@ -65,14 +78,15 @@ var bpHeaderSmall = 800;
   */
 
 // Vars
-var header = document.querySelector('.header'),
-  headerTray = document.querySelector('.header__tray'),
-  headerTrayContent = document.querySelector('.header__tray-content'),
-  menu = document.querySelector('.header__menu'),
-  menuContents = document.getElementById('js-menu-contents'),
-  headerContact = document.querySelector('.header__contact'),
-  menuBtn = document.createElement('button'),
-  headerOverlay = document.createElement('span');
+var bpHeaderSmall = 800,
+    header = document.querySelector('.header'),
+    headerTray = document.querySelector('.header__tray'),
+    headerTrayContent = document.querySelector('.header__tray-content'),
+    menu = document.querySelector('.header__menu'),
+    menuContents = document.getElementById('js-menu-contents'),
+    headerContact = document.querySelector('.header__contact'),
+    menuBtn = document.createElement('button'),
+    headerOverlay = document.createElement('span');
 
 // Button properties
 menuBtn.classList.add('menu-toggle');
