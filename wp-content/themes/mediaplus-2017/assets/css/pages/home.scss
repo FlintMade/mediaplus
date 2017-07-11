@@ -105,7 +105,7 @@ body.home {
 
 a.scroll-home {
   border-bottom: 0;
-  font: 400 1.25em/1 $font-subheading;
+  font: 400 1.125em/1 $font-subheading;
   color: $grey-med;
 }
 
@@ -119,8 +119,8 @@ a.scroll-home {
 
 @media (min-height: 36em) {
   .home-intro {
-    padding: 5em $space-s-em;
-    padding: 5em $space-s;
+    padding: 4.5em $space-s-em;
+    padding: 4.5em $space-s;
   }
 
   .timeline-process {
@@ -132,12 +132,12 @@ a.scroll-home {
 
 @media (min-width: $bp-header-m) {
   .home-intro {
-    padding: 5em 10em $space-m $space-m;
+    padding: 4.5em 10em $space-m $space-m;
   }
 
   .scroll-home {
     right: $space-m;
-    bottom: $space-m;
+    bottom: 0;
     transform: rotate(90deg);
     transform-origin: top right;
 
