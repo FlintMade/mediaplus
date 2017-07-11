@@ -113,6 +113,11 @@
   opacity: 1;
 }
 
+.person__initial,
+.person__more {
+  transition: opacity 300ms;
+}
+
 .person__more {
   position: absolute;
   z-index: z('person') - 2;
@@ -286,17 +291,5 @@
 
   &:before {
     height: 100%;
-  }
-}
-
-.person.blockedBio {
-  &:after {
-    height: 200%;
-  }
-}
-
-.person.fadedIn {
-  &:after {
-    top: -200%;
   }
 }

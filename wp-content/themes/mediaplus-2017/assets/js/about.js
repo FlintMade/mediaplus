@@ -39,7 +39,7 @@
       if (shownBios.length > 0) {
         setTimeout(function(){
           showBio(btn, person, personName, initialInfo, bio);
-        }, 800);
+        }, 450);
       } else {
         showBio(btn, person, personName, initialInfo, bio);
       }
@@ -48,34 +48,30 @@
 
   // Hide bio
   var hideBio = function(btn, person, personName, initialInfo, bio) {
-    // Slide :after back over text
-    person.classList.remove('fadedIn');
+    // Hide bio and initial
+    initialInfo.style.opacity = '0';
+    bio.setAttribute('aria-hidden', 'true');
 
-    // After the :after slides back in, remove it and slide :before
-    setTimeout(function() {
-      // Hide bio and initial
-      initialInfo.style.opacity = '0';
-      bio.setAttribute('aria-hidden', 'true');
-
-      person.classList.remove('blockedBio');
+    // Timeout allows for bio CSS transition
+    setTimeout(function(){
       person.classList.remove('slidUp');
       
       // Timeout allows for .person:before CSS transition
       setTimeout(function() {
         // Fade in initial info
-        fade(initialInfo, 0, 1, 200);
+        initialInfo.style.opacity = '1';
 
         // Toggle button state
         btn.setAttribute('aria-expanded', 'false');
         btn.innerHTML = '<span aria-label="View more info about ' + personName + '’s info">More Info+</span>';
       }, 300);
-    }, 1200);
+    }, 300);
   };
 
   // Show bio
   var showBio = function(btn, person, personName, initialInfo, bio) {
     // Fade out initial info
-    fade(initialInfo, 1, 0, 200);
+    initialInfo.style.opacity = '0';
 
     // Toggle button state
     btn.setAttribute('aria-expanded', 'true');
@@ -89,19 +85,10 @@
 
       // Timeout allows for .person:before CSS transition
       setTimeout(function() {
-
-        // Show :after
-        person.classList.add('blockedBio');
-
-        setTimeout(function() {
-          // Slide out that :after
-          person.classList.add('fadedIn');
-
-          // Show bio and initial info
-          initialInfo.style.opacity = '1';
-          bio.removeAttribute('aria-hidden');
-        }, 200);
-      }, 300);
+        // Show bio and initial info
+        initialInfo.style.opacity = '1';
+        bio.removeAttribute('aria-hidden');
+      }, 500);
     }, 300);
   };
 
