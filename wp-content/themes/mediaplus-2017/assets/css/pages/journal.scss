@@ -77,12 +77,12 @@
 
 .load-status {
   display: block;
-  margin: 3.375em auto;
+  margin: 3.375em auto 0;
   text-align: center;
   font: 1.125em/1 $font-subheading;
   color: $grey-med;
   opacity: 1;
-  transition: opacity 200ms;
+  transition: opacity 300ms;
 
   &[aria-hidden="true"] {
     display: none;

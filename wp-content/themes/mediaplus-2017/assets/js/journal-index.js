@@ -17,14 +17,7 @@
       postPreviews = document.getElementById('postPreviews');
 
   $('#postPreviews').append('<p class="load-status" id="loader" aria-hidden="true">Loading More &hellip;</p>');
-  var loader = document.getElementById('loader'),
-      emptyMsg = document.createElement('p');
-
-  // Set up empty message
-  emptyMsg.classList.add('load-status');
-  emptyMsg.classList.add('load-status--empty');
-  emptyMsg.setAttribute('id', 'emptyPosts');
-  emptyMsg.innerText = 'That’s all for now!';
+  var loader = document.getElementById('loader');
 
   var morePosts = debounce(function() {
     if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - 200) {
@@ -41,22 +34,23 @@
           loader.removeAttribute('aria-hidden');
         },
         success: function(newPosts) {
-          loader.setAttribute('aria-hidden', 'true');
           $(newPosts).insertBefore(loader);
+          var newNumPosts = document.querySelectorAll('.post-preview').length;
+
+          // Check if reached the end
+          if (numPosts === newNumPosts) {
+            loader.removeAttribute('aria-hidden');
+            loader.innerText = 'That’s all for now!';
+            window.removeEventListener('scroll', morePosts, false);
+          } else {
+            numPosts = newNumPosts;
+            loader.setAttribute('aria-hidden', 'true');
+          }
 
           setTimeout(function(){
-            var invisiblePosts = document.querySelectorAll('.post-preview:not(.loaded)'),
-                newNumPosts = document.querySelectorAll('.post-preview').length;
+            var invisiblePosts = document.querySelectorAll('.post-preview:not(.loaded)');
             for (var i = 0; i < invisiblePosts.length; i++) {
               invisiblePosts[i].classList.add('loaded');
-            }
-
-            // Check if reached the end
-            if (numPosts === newNumPosts) {
-              window.removeEventListener('scroll', morePosts, false);
-              postPreviews.appendChild(emptyMsg);
-            } else {
-              numPosts = newNumPosts;
             }
           }, 200);
         }
