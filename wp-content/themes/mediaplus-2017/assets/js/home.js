@@ -34,7 +34,7 @@ var revealTextLine = function(overlay, timing) {
 };
 
 var revealText = function() {
-  var revealInterval = 0,
+  var revealInterval = 1600,
       slide = false;
 
   // Determine if any lines wrap; if so, fade instead of slide
@@ -46,7 +46,7 @@ var revealText = function() {
       break;
     }
     if (slide = true) {
-      revealInterval = 0;
+      revealInterval = 2400;
       text.classList.remove('fade');
       text.classList.add('slide');
     }
