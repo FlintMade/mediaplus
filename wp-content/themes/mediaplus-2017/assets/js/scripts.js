@@ -57,10 +57,10 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
 }
 
 /*
-  *	=============================================
-  *	HOOK UP GLOBAL SUBTLE CSS TRANSITIONS
-  *	=============================================
-  */
+ *	=============================================
+ *	HOOK UP GLOBAL SUBTLE CSS TRANSITIONS
+ *	=============================================
+ */
 var afterLoadTiming = 200, /* Give user a little bit of time to cognitively recognize page load */
     pageBanner = document.querySelector('.page-banner');
 
@@ -72,10 +72,10 @@ if (pageBanner) {
 }
 
 /*
-  *	=============================================
-  *	HEADER TOGGLE
-  *	=============================================
-  */
+ *	=============================================
+ *	HEADER TOGGLE
+ *	=============================================
+ */
 
 // Vars
 var bpHeaderSmall = 800,
@@ -197,10 +197,17 @@ var resizeMenu = debounce(function() {
   // Desktop
   if (window.outerWidth > bpHeaderSmall) {
     headerContact.setAttribute('aria-hidden', 'true');
+    if (!document.body.classList.contains('flow')) {
+      showMenu();
+    }
   // Mobile 
   } else {
     if (header.classList.contains('menu-active')) {
       headerContact.removeAttribute('aria-hidden');
+      var menuItems = menu.querySelectorAll('li');
+      for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].classList.add('visible');
+      }
     }
   }
 }, 100);
@@ -208,10 +215,10 @@ var resizeMenu = debounce(function() {
 window.addEventListener('resize', resizeMenu);
 
 /*
-  *	=============================================
-  *	SIDEBAR NAV
-  *	=============================================
-  */
+ *	=============================================
+ *	SIDEBAR NAV
+ *	=============================================
+ */
 
 /*
  *  LOGO BUTTON TAKES YOU BACK TO RECENT FLOW PAGE
@@ -275,5 +282,5 @@ if (sidebar) {
   if (!document.body.classList.contains('home')) {
     resizeSidebar();
   }
-  window.addEventListener('resize', resizeSidebar);
+  //window.addEventListener('resize', resizeSidebar);
 }
