@@ -274,16 +274,16 @@
     position: relative;
 
     > * {
-      padding-left: calc(100% - 36em);
-      padding-left: calc(100% - 36rem);
+      padding-right: $space-m;
+      padding-left: calc(33% + (#{$space-m}/2));
       max-width: 100%;
     }
 
     h1, h2, h3, h4, h5, h6 {
       float: left;
+      padding-right: 0;
       padding-left: 0;
-      max-width: calc(100% - 40em);
-      max-width: calc(100% - 40rem);
+      max-width: 33%;
 
       + * {
         margin-top: $space-xl-em;
@@ -292,6 +292,7 @@
     }
 
     blockquote {
+      padding-right: 0;
       padding-left: 0;
       max-width: 70%;
     }
@@ -305,6 +306,7 @@
     .fluidvids {
       margin-top: $space-xl-em;
       margin-bottom: $space-xl-em;
+      padding-right: 0;
       padding-left: 0;
     }
   }
@@ -312,6 +314,10 @@
 
 @media (min-width: $bp-l) {
   .post-content {
+    > * {
+      padding-left: calc(50% + (#{$space-m}/2));
+    }
+
     img,
     .fluidvids {
       margin-left: -$space-xl;
@@ -322,8 +328,8 @@
 @media (min-width: $bp-xl) {
   .post-content {
     blockquote {
-      max-width: calc(100% - 40em);
-      max-width: calc(100% - 40rem);
+      max-width: 50%;
+      max-width: calc(50% - (#{$space-m}/2));
     }
   }
 }
