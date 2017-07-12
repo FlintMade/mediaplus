@@ -34,7 +34,7 @@ var revealTextLine = function(overlay, timing) {
 };
 
 var revealText = function() {
-  var revealInterval = 1600,
+  var revealInterval = 0,
       slide = false;
 
   // Determine if any lines wrap; if so, fade instead of slide
@@ -46,7 +46,7 @@ var revealText = function() {
       break;
     }
     if (slide = true) {
-      revealInterval = 2400;
+      revealInterval = 0;
       text.classList.remove('fade');
       text.classList.add('slide');
     }
@@ -106,6 +106,7 @@ var delta = 0;
 var setUpFirstCS = function() {
   var currentCS = document.querySelector('.case-study--current');
   setRecentCS(currentCS);
+  currentCS.classList.remove('case-study--new');
   if (window.outerWidth >= bpSidebarL) {
     openSidebar();
   } else {
@@ -114,6 +115,8 @@ var setUpFirstCS = function() {
 
   setTimeout(function(){
     document.body.classList.add('intro-scrolled');
+    window.removeEventListener('mousewheel', scrollAwayIntro, false);
+    window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('mousewheel', scrollEvents, false);
     window.addEventListener('DOMMouseScroll', scrollEvents, false);
     if (homeIntro.parentNode) {

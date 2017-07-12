@@ -105,6 +105,19 @@ a.next-case-study {
   font-family: $font-heading;
 }
 
+/* Next loaded case study, before transitioned in */
+.case-study--new {
+  min-height: 0;
+  height: 6em;
+  overflow: hidden;
+  opacity: 0;
+
+  &:first-child {
+    height: auto;
+    opacity: 1;
+  }
+}
+
 /* Make space for the M+ */
 @media (max-width: $bp-s) {
   .case-studies {
@@ -189,6 +202,10 @@ a.next-case-study {
       left: auto;
       transform: rotate(0);
     }
+  }
+
+  .case-study--new {
+    height: 9.25em;
   }
 }
 
