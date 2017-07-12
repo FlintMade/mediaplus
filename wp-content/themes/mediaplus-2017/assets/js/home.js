@@ -106,7 +106,6 @@ var delta = 0;
 var setUpFirstCS = function() {
   var currentCS = document.querySelector('.case-study--current');
   setRecentCS(currentCS);
-  currentCS.classList.remove('case-study--new');
   if (window.outerWidth >= bpSidebarL) {
     openSidebar();
   } else {
@@ -115,6 +114,7 @@ var setUpFirstCS = function() {
 
   setTimeout(function(){
     document.body.classList.add('intro-scrolled');
+    currentCS.classList.remove('case-study--new');
     window.removeEventListener('mousewheel', scrollAwayIntro, false);
     window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('mousewheel', scrollEvents, false);

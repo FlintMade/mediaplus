@@ -253,7 +253,7 @@ if (sidebar) {
       sidebar.removeAttribute('aria-hidden');
       setTimeout(function(){
         sidebarContent.classList.add('active');
-      }, 300);
+      }, 600);
     }, 200);
   };
 
