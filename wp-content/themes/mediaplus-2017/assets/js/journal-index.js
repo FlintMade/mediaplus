@@ -20,7 +20,9 @@
   var loader = document.getElementById('loader');
 
   var morePosts = debounce(function() {
-    if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - 200) {
+    var footerHeight = document.querySelector('.footer').offsetHeight;
+    var lastPostHeight = document.querySelector('.post-preview:last-of-type').offsetHeight;
+    if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - footerHeight - lastPostHeight) {
       pageNumber++;
       $.ajax({
         url: ajaxpagination.ajaxurl,
@@ -59,5 +61,7 @@
   }, 200);
 
   window.addEventListener('scroll', morePosts, false);
+  window.addEventListener('touchmove', morePosts, false);
+  window.addEventListener('touchend', morePosts, false);
 
 })(document, window);
