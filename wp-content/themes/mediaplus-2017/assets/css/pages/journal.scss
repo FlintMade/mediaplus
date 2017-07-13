@@ -28,6 +28,11 @@
   }
 }
 
+.post-preview + .post-preview {
+  margin-top: 2em;
+  padding-top: 2em;
+}
+
 .post-preview__thumb {
   padding-bottom: 3.25em; /* Space for more link */
 
