@@ -53,6 +53,7 @@
 }
 
 .case-study-list {
+  margin-left: 0;
   list-style: none;
   font-weight: 600;
   font-size: 2.286em; /* 32px */
@@ -62,7 +63,7 @@
 .case-study-sections {
   display: flex;
   position: absolute;
-  margin-bottom: 0;
+  margin: 0;
   bottom: 0;
   left: 0;
   width: 100%;

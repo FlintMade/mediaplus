@@ -17,10 +17,14 @@
   .about-attrs .grid-col {
     display: inline-block;
     vertical-align: top;
+
+    &:first-child {
+      margin-bottom: $space-m;
+    }
   }
 
   .about-attrs .grid-col + .grid-col {
-    margin: 0 0 0 $space-m;
+    margin: 0 $space-m 0 0;
   }
 }
 
@@ -59,7 +63,7 @@
 
 .person {
   position: relative;
-  padding-top: 125%; /* Ratio sizing hack */
+  padding-top: 150%; /* Ratio sizing hack */
   background: #f7f7f7;
   background-position: center;
   background-size: cover;
@@ -178,6 +182,12 @@
 
 .person__meta-value {
   color: $grey-med;
+}
+
+@media (min-width: 24em) {
+  .person {
+    padding-top: 125%;
+  }
 }
 
 @media (min-width: 34em) {
