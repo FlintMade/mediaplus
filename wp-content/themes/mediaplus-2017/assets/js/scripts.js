@@ -124,9 +124,11 @@ var hideMenu = function() {
 
   if (window.outerWidth <= bpHeaderSmall || document.body.classList.contains('flow')) {
     header.classList.remove('menu-active');
-    fade(headerOverlay, 1, 0, 200, function(){
-      headerOverlay.style.display = 'block';
-    });
+    fade(headerOverlay, 1, 0, 200);
+    setTimeout(function(){
+      headerOverlay.style.display = 'none';
+      headerOverlay.style.height = '0';
+    }, 200);
     menu.setAttribute('aria-hidden', 'true');
     menuBtn.setAttribute('aria-expanded', 'false');
     headerContact.setAttribute('aria-hidden', 'true');
@@ -154,6 +156,7 @@ var showMenu = function() {
 
   if (window.outerWidth <= bpHeaderSmall) {
     var menuItems = menu.querySelectorAll('li');
+    headerOverlay.style.height = '100%';
     headerContact.removeAttribute('aria-hidden');
     setTimeout(function(){
       for (var i = 0; i < menuItems.length; i++) {

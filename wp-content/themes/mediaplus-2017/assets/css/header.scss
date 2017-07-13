@@ -302,7 +302,6 @@ body:not(.flow) .header__brand {
 @media (max-width: $bp-header-s) {
   .page-overlay--header {
     z-index: z('header') - 2;
-    height: 100%;
   }
 
   .header.menu-active {
