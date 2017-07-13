@@ -153,7 +153,7 @@
                 <h3 class="color-block__heading"><?php echo $section_headline; ?></h3>
               <?php endif; ?>
               <?php if ($section_subheadline): ?>
-                <p class="h4-variant"><?php echo $section_subheadline; ?></p>
+                <p class="h4-variant color-block__subheading"><?php echo $section_subheadline; ?></p>
               <?php endif; ?>
             </div>
             <?php if ($data_value): ?>
