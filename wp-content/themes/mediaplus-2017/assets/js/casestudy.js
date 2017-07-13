@@ -121,7 +121,6 @@ var slideUpCS = function() {
     setTimeout(function(){
       nextLink.style.height = 0;
       newCS.style.opacity = 1;
-      newCS.classList.remove('case-study--new');
       window.addEventListener('scroll', scrollEvents, false);
       window.addEventListener('touchmove', scrollEvents, false);
       window.addEventListener('touchend', scrollEvents, false);
