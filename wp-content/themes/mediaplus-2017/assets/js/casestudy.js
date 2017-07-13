@@ -58,12 +58,49 @@ if (document.body.classList.contains('single-case-study') && recent) {
  */
 
 var lastScroll = 0,
-    loaderValue = 0;
+    loaderValue = document.getElementById('loader-value');
 
 /*
  *	SHARED FUNCTIONS
  *	---------------------------------------------
  */
+
+// Ajax case study
+var fetchTheCS = function(nextID, currentCS, loaderValue, successFunction) {
+  $.ajax({
+    url: loadNextCaseStudy.ajaxurl,
+    type: 'post',
+    data: {
+      action: 'next_case_study',
+      query_vars: loadNextCaseStudy.query_vars,
+      p: nextID
+    },
+    beforeSend: function() {
+      currentCS.classList.remove('case-study--current');
+      if (parseInt(loaderValue.style.width) < 90) {
+        loaderValue.style.width = '90%';
+      }
+    },
+    success: function(newPosts) {
+      loaderValue.style.width = '100%';
+      setTimeout(function(){
+        loaderValue.style.display = 'none';
+        loaderValue.style.width = '0';
+        loaderValue.style.display = 'block';
+        $('#flow').append(newPosts);
+        setUpGalleries();
+
+        if (successFunction) {
+          if (successFunction == fadeReplaceCS) {
+            fadeReplaceCS(currentCS);
+          }
+        } else {
+          resetCaseStudy();
+        }
+      }, 200);
+    }
+  });
+};
 
 // See which case study is in view and set it to current
 var resetCaseStudy = function() {
@@ -103,9 +140,7 @@ var slideUpCS = function() {
       currentTop = docOffset(newCS).top;
 
   // Grow link to fill screen
-  window.removeEventListener('scroll', scrollEvents, false);
-  window.removeEventListener('touchmove', scrollEvents, false);
-  window.removeEventListener('touchend', scrollEvents, false);
+  detachScrollEvents();
   nextLink.style.height = '100%';
   nextLink.querySelector('.arrow').style.opacity = 0;
 
@@ -121,9 +156,7 @@ var slideUpCS = function() {
     setTimeout(function(){
       nextLink.style.height = 0;
       newCS.style.opacity = 1;
-      window.addEventListener('scroll', scrollEvents, false);
-      window.addEventListener('touchmove', scrollEvents, false);
-      window.addEventListener('touchend', scrollEvents, false);
+      attachScrollEvents();
     }, 400);
   }, 600);
 };
@@ -164,12 +197,15 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
   // If scrolling up
   if (window.scrollY < lastScroll) {
+    console.log('up');
 
     // Hide the visible "next" link
     hideNextLink();
 
   // Scrolling down
-  } else {
+} else {
+  console.log('down');
+    
     // If new case study loaded
     var newCS = document.querySelector('.case-study--new');
   
@@ -181,7 +217,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
         if (currentCS) {
           var currentID = currentCS.getAttribute('id').replace('cs-', ''),
               nextLink = document.getElementById('after-' + currentID);
-
+              console.log(nextLink);
           if (nextLink) {
             // Pop up next link like a toast
             if (!nextLink.classList.contains('visible')) {
@@ -191,32 +227,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
             }
 
             // Ajax in a new case study
-            $.ajax({
-              url: loadNextCaseStudy.ajaxurl,
-              type: 'post',
-              data: {
-                action: 'next_case_study',
-                query_vars: loadNextCaseStudy.query_vars,
-                p: nextID
-              },
-              beforeSend: function() {
-                currentCS.classList.remove('case-study--current');
-                if (parseInt(loaderValue.style.width) < 90) {
-                  loaderValue.style.width = '90%';
-                }
-              },
-              success: function(newPosts) {
-                loaderValue.style.width = '100%';
-                setTimeout(function(){
-                  loaderValue.style.display = 'none';
-                  loaderValue.style.width = '0';
-                  loaderValue.style.display = 'block';
-                  $('#flow').append(newPosts);
-                  setUpGalleries();
-                  resetCaseStudy();
-                }, 200);
-              }
-            });
+            fetchTheCS(nextID, currentCS, loaderValue);
           }
         }
       }
@@ -234,16 +245,25 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
 // These are separate because they need different intervals
 var scrollEvents = function(){
-  var scrolledTo = window.scrollY + window.innerHeight,
-      loaderValue = document.getElementById('loader-value');
+  var scrolledTo = window.scrollY + window.innerHeight;
   animateLoader(scrolledTo, loaderValue);
   scrollThruCS(scrolledTo, loaderValue);
 };
 
-if (document.body.classList.contains('single-case-study')) {
+var attachScrollEvents = function() {
   window.addEventListener('scroll', scrollEvents, false);
   window.addEventListener('touchmove', scrollEvents, false);
   window.addEventListener('touchend', scrollEvents, false);
+};
+
+var detachScrollEvents = function() {
+  window.removeEventListener('scroll', scrollEvents, false);
+  window.removeEventListener('touchmove', scrollEvents, false);
+  window.removeEventListener('touchend', scrollEvents, false);
+};
+
+if (document.body.classList.contains('single-case-study')) {
+  attachScrollEvents();
 }
 
 /*
@@ -257,6 +277,62 @@ var clickToLoadCS = function(e) {
   // Swipe up the next link and then fade in the case study
   slideUpCS();
 };
+
+/*
+ *	LOAD NEW FROM SIDEBAR
+ *	---------------------------------------------
+ */
+
+var navigateNewCS = function(e) {
+  e.preventDefault();
+  detachScrollEvents();
+
+  var link = e.currentTarget,
+      nextID = link.getAttribute('id').replace('link-', ''),
+      currentCS = document.querySelector('.case-study--current');
+  
+  // Ajax in new case study
+  fetchTheCS(nextID, currentCS, loaderValue, fadeReplaceCS);
+  attachScrollEvents();
+};
+
+// Do the actual replacement of current CS => new CS
+var fadeReplaceCS = function(currentCS) {
+  var flow = document.getElementById('flow'),
+      caseStudies = flow.querySelectorAll('.case-study:not(.case-study--new)'),
+      newCS = document.querySelector('.case-study--new'),
+      currentTop = docOffset(newCS).top;
+
+  // Fade out flow to hide processes
+  fade(flow, 1, 0, 400);
+
+  setTimeout(function(){
+    window.scrollTo(0, 0);
+
+    // Remove all the other case studies
+    for (var i = 0; i < caseStudies.length; i++) {
+      var thisCS = caseStudies[i],
+          thisID = thisCS.getAttribute('id').replace('cs-', ''),
+          nextLink = document.getElementById('after-' + thisID);
+      if (nextLink) {
+        thisCS.parentNode.removeChild(nextLink);
+      }
+      thisCS.parentNode.removeChild(thisCS);
+    }
+
+    // Fade in the new one + flow
+    fade(flow, 0, 1, 100);
+    newCS.classList.remove('case-study--new');
+    newCS.style.opacity = 1;
+    resetCaseStudy();
+    lastScroll = 0;
+  }, 400);
+};
+
+var sidebarNavLinks = document.querySelectorAll('.case-study-list a');
+for (var i = 0; i < sidebarNavLinks.length; i++) {
+  sidebarNavLinks[i].addEventListener('click', navigateNewCS, false);
+}
 
 /*
  *	CASE STUDY SECTIONS
