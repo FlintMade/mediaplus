@@ -33,6 +33,7 @@ main {
 	background: $grey-dark;
 	color: #fff;
 }
+
 ::-moz-selection {
 	background: $grey-dark;
 	color: #fff;
@@ -144,6 +145,34 @@ blockquote {
  *	FORM ELEMENTS
  *	---------------------------------------------
  */
+
+::-webkit-input-placeholder {
+  color: $grey-med;
+}
+::-moz-placeholder {
+  color: $grey-med;
+}
+:-ms-input-placeholder {
+  color: $grey-med;
+}
+:-moz-placeholder {
+  color: $grey-med;
+}
+
+input {
+  padding: .75em 0;
+  border: 0;
+  border-bottom: 1px solid $grey-med;
+  width: 100%;
+  background: transparent;
+  font: 400 100%/1.75 $font-body;
+
+  &:focus {
+    outline: 0;
+    border-color: $orange;
+    color: $redorange;
+  }
+}
 
 button {
   border: 0;

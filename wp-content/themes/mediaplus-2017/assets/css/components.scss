@@ -183,3 +183,50 @@ a.more-link {
   width: 2em;
   height: 2em;
 }
+
+/*
+ *  MAILCHIMP EMAIL NEWSLETTER FORM
+ *  !important to override inline styles :(
+ *	=============================================
+ */
+
+.mc-wrap {
+  form, .non-form {
+    position: relative;
+  }
+
+  input[type="email"] {
+    padding-left: 45px;
+  }
+
+  .response,
+  div.mce_inline_error {
+    margin-top: 1em;
+    font-size: .875em;
+    line-height: 1.5;
+  }
+}
+
+.mc-submit {
+  position: absolute;
+  top: 1em;
+  margin-top: -6px;
+  left: 0;
+
+  &:focus path, &:hover path {
+    stroke: $redorange;
+  }
+}
+
+#mc_embed_signup div.mce_inline_error {
+  margin: .5em 0 0 !important;
+  padding: 0 !important;
+  font-weight: 400 !important;
+  background-color: transparent !important;
+  color: red !important;
+}
+
+#mc_embed_signup input.mce_inline_error {
+  border-color: red !important;
+  color: red;
+}

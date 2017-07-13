@@ -15,12 +15,12 @@
   background: $bg-grey-light;
   color: $grey-med;
 
-  h2 {
+  h2, .h2 {
     margin-bottom: .75rem;
     font-size: 1.286em; /* 18px */
   }
 
-  h2,
+  h2, .h2,
   a:link, a:visited {
     color: inherit;
   }
@@ -39,9 +39,20 @@
   list-style: none;
 }
 
+.footer__mc-wrap {
+  margin-bottom: $space-s-em;
+  margin-bottom: $space-s;
+}
+
 .footer__copyright {
   display: block;
   font-size: 1em;
+}
+
+@media (min-width: $bp-m) {
+  .footer__mc-wrap {
+    margin-bottom: $space-m;
+  }
 }
 
 @media (min-width: $bp-l) and (max-width: $bp-xl) {
@@ -61,6 +72,7 @@
     margin-top: 5em;
   }
 
+  .footer__mc-wrap,
   .footer__copyright {
     margin-left: calc(33.333% - (2 *#{$space-m})/3);
   }

@@ -71,6 +71,9 @@
             <?php endforeach; ?>
           </ul>
         </div>
+        <div class="grid-col">
+          <?php include('includes/mc-form.php'); ?>
+        </div>
       </div>
     </section>
   </div>

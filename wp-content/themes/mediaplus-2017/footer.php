@@ -44,6 +44,11 @@
             </div>
           </div>
           <div class="grid-col">
+            <?php /* Non-interactable on Contact page */ if (is_page('13')): ?>
+              <?php include('includes/mc-non-form.php'); ?>
+            <?php else: ?>
+              <?php include('includes/mc-form.php'); ?>
+            <?php endif; ?>
             <small class="footer__copyright">Copyright &copy; <?php echo date("Y"); ?> <?php echo get_bloginfo('name'); ?> All rights reserved.</small>
           </div>
         </div>

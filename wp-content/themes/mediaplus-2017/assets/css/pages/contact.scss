@@ -43,6 +43,20 @@
   margin-bottom: 0;
 }
 
+/* Form footer disabled on Contact page */
+.mc-wrap--disabled {
+  opacity: .25;
+
+  button:hover {
+    cursor: not-allowed;
+  }
+
+  button:hover path,
+  button:focus path {
+    stroke: $grey-med;
+  }
+}
+
 @media (min-width: $bp-l) {
   .contact-row {
     h3 {
