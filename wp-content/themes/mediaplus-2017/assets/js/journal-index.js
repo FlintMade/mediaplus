@@ -22,7 +22,7 @@
   var morePosts = debounce(function() {
     var footerHeight = document.querySelector('.footer').offsetHeight;
     var lastPostHeight = document.querySelector('.post-preview:last-of-type').offsetHeight;
-    if ((window.scrollY + window.outerHeight) >= document.body.clientHeight - footerHeight - lastPostHeight) {
+    if ((window.scrollY + window.innerHeight) >= document.body.clientHeight - footerHeight - lastPostHeight) {
       pageNumber++;
       $.ajax({
         url: ajaxpagination.ajaxurl,

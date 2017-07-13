@@ -74,12 +74,12 @@ var resetCaseStudy = function() {
 
     // Scrolling up
     if (window.scrollY < lastScroll) {
-      if ((thisTop + thisHeight - window.outerHeight / 2) >= 0) {
+      if ((thisTop + thisHeight - window.innerHeight / 2) >= 0) {
         setRecentCS(caseStudies[i]);
         break;
       }
     } else {
-      if (thisTop > window.outerHeight / 4) {
+      if (thisTop > window.innerHeight / 4) {
         setRecentCS(caseStudies[i]);
         break;
       }
@@ -104,6 +104,8 @@ var slideUpCS = function() {
 
   // Grow link to fill screen
   window.removeEventListener('scroll', scrollEvents, false);
+  window.removeEventListener('touchmove', scrollEvents, false);
+  window.removeEventListener('touchend', scrollEvents, false);
   nextLink.style.height = '100%';
   nextLink.querySelector('.arrow').style.opacity = 0;
 
@@ -121,6 +123,8 @@ var slideUpCS = function() {
       newCS.style.opacity = 1;
       newCS.classList.remove('case-study--new');
       window.addEventListener('scroll', scrollEvents, false);
+      window.addEventListener('touchmove', scrollEvents, false);
+      window.addEventListener('touchend', scrollEvents, false);
     }, 400);
   }, 600);
 };
@@ -136,7 +140,7 @@ var animateLoader = function(scrolledTo, loaderValue) {
     var currentID = currentCS.getAttribute('id').replace('cs-', ''),
         nextLink = document.getElementById('after-' + currentID),
         currentBottom = currentCS.getBoundingClientRect().top + currentCS.offsetHeight,
-        spaceBelow = ((document.body.clientHeight - scrolledTo) * 1.5) / window.outerHeight;
+        spaceBelow = ((document.body.clientHeight - scrolledTo) * 1.5) / window.innerHeight;
     if (nextLink && spaceBelow > 0 && spaceBelow <= 1) {
       loaderValue.style.width = (1 - spaceBelow) * 100 + '%';
     } else {
@@ -167,7 +171,6 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
   // Scrolling down
   } else {
-  
     // If new case study loaded
     var newCS = document.querySelector('.case-study--new');
   
@@ -232,7 +235,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
 // These are separate because they need different intervals
 var scrollEvents = function(){
-  var scrolledTo = window.scrollY + window.outerHeight,
+  var scrolledTo = window.scrollY + window.innerHeight,
       loaderValue = document.getElementById('loader-value');
   animateLoader(scrolledTo, loaderValue);
   scrollThruCS(scrolledTo, loaderValue);
@@ -240,6 +243,8 @@ var scrollEvents = function(){
 
 if (document.body.classList.contains('single-case-study')) {
   window.addEventListener('scroll', scrollEvents, false);
+  window.addEventListener('touchmove', scrollEvents, false);
+  window.addEventListener('touchend', scrollEvents, false);
 }
 
 /*

@@ -67,6 +67,8 @@ var revealText = function() {
     // Attach scroll past intro event
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
+    window.addEventListener('touchmove', scrollAwayIntro, false);
+    window.addEventListener('touchend', scrollAwayIntro, false);
   }, (overlays.length * revealInterval) + (revealInterval / 2));
 };
 
@@ -115,10 +117,15 @@ var setUpFirstCS = function() {
   setTimeout(function(){
     document.body.classList.add('intro-scrolled');
     currentCS.classList.remove('case-study--new');
+
     window.removeEventListener('mousewheel', scrollAwayIntro, false);
     window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
+
     window.addEventListener('mousewheel', scrollEvents, false);
     window.addEventListener('DOMMouseScroll', scrollEvents, false);
+    window.addEventListener('touchmove', scrollEvents, false);
+    window.addEventListener('touchend', scrollEvents, false);
+
     if (homeIntro.parentNode) {
       homeIntro.parentNode.removeChild(homeIntro);
     }
