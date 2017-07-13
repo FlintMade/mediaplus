@@ -197,15 +197,11 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
   // If scrolling up
   if (window.scrollY < lastScroll) {
-    console.log('up');
-
     // Hide the visible "next" link
     hideNextLink();
 
   // Scrolling down
-} else {
-  console.log('down');
-    
+} else {    
     // If new case study loaded
     var newCS = document.querySelector('.case-study--new');
   
@@ -217,7 +213,6 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
         if (currentCS) {
           var currentID = currentCS.getAttribute('id').replace('cs-', ''),
               nextLink = document.getElementById('after-' + currentID);
-              console.log(nextLink);
           if (nextLink) {
             // Pop up next link like a toast
             if (!nextLink.classList.contains('visible')) {
@@ -324,7 +319,7 @@ var fadeReplaceCS = function(currentCS) {
     fade(flow, 0, 1, 100);
     newCS.classList.remove('case-study--new');
     newCS.style.opacity = 1;
-    resetCaseStudy();
+    setRecentCS(newCS);
     lastScroll = 0;
   }, 400);
 };
