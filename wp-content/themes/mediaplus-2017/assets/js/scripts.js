@@ -195,7 +195,7 @@ var hideMenu = function() {
 };
 
 var sendToFlow = function(e) {
-  if (e.currentTarget) {
+  if (e) {
     e.preventDefault();
   }
   var recentPage = localStorage.getItem('recentPage');
