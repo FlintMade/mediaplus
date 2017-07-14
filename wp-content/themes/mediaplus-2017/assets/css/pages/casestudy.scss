@@ -133,6 +133,10 @@ a.next-case-study {
   }
 }
 
+body.flow .next-case-study:focus {
+  outline: 0;
+}
+
 /* Make space for the M+ */
 @media (max-width: $bp-s) {
   .case-studies {
@@ -396,12 +400,15 @@ a.next-case-study {
   }
 
   &:focus {
-    outline: 0;
-
     .arrow {
       opacity: .5;
     }
   }
+}
+
+body.flow .gallery__prev:focus,
+body.flow .gallery__next:focus {
+  outline: 0;
 }
 
 .gallery__prev {
@@ -563,10 +570,10 @@ a.next-case-study {
   top: -1.25em;
   right: .5em;
   padding: 1em;
+}
 
-  &:focus {
-    outline: 0;
-  }
+body.flow .toggle-lists:focus {
+  outline: 0;
 }
 
 @media (min-width: 500px) {

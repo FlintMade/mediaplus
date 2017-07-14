@@ -9,10 +9,13 @@
  *	---------------------------------------------
  */
 
+:focus {
+  outline: 1px solid rgba(245, 90, 0, .5);
+  outline-offset: 2px;
+}
+
 .menu-toggle:hover,
-.menu-toggle:focus,
-a:hover .arrow,
-a:focus .arrow {
+a:hover .arrow {
   circle {
     fill: $redorange;
   }
@@ -22,13 +25,22 @@ a:focus .arrow {
   }
 }
 
-.header__menu a:hover {
-  border-bottom-color: $redorange;
+.header__menu a:hover,
+.header__menu a:focus {
+  outline: 0;
   color: $redorange;
 }
 
 input:focus {
   border-color: $redorange;
+}
+
+.mc-submit:focus, .mc-submit:hover {
+  outline: 0;
+
+  path {
+    stroke: $redorange;
+  }
 }
 
 /*
@@ -38,10 +50,24 @@ input:focus {
  */
 
 body.flow {
+  :focus {
+    outline: 1px solid rgba(255, 166, 0, .5);
+  }
+
+  button.menu-toggle:focus {
+    outline: 0;
+    border: 1px solid rgba(255, 166, 0, .5);
+    border-radius: 50%;
+  }
+
+  .header__menu a:hover,
+  .header__menu a:focus {
+    outline: 0;
+    color: $orange;
+  }
+
   .menu-toggle:hover,
-  .menu-toggle:focus,
-  a:hover .arrow,
-  a:focus .arrow {
+  a:hover .arrow {
     circle {
       fill: $orange;
     }
@@ -49,11 +75,6 @@ body.flow {
     path {
       fill: #fff;
     }
-  }
-
-  .header__menu a:hover {
-    border-bottom-color: $orange;
-    color: $orange;
   }
 }
 
@@ -63,10 +84,24 @@ body.flow {
  */
 
 body.offerings {
+  :focus {
+    outline: 1px solid rgba(41, 127, 163, .5);
+  }
+
+  button.menu-toggle:focus {
+    outline: 0;
+    border: 1px solid rgba(41, 127, 163, .5);
+    border-radius: 50%;
+  }
+
+  .header__menu a:focus,
+  .header__menu a:hover {
+    outline: 0;
+    color: $blue;
+  }
+
   .menu-toggle:hover,
-  .menu-toggle:focus,
-  a:hover .arrow,
-  a:focus .arrow {
+  a:hover .arrow {
     circle {
       fill: $blue;
     }
@@ -74,11 +109,6 @@ body.offerings {
     path {
       fill: #fff;
     }
-  }
-
-  .header__menu a:hover {
-    border-bottom-color: $blue;
-    color: $blue;
   }
 
   input:focus {

@@ -213,10 +213,6 @@ a.more-link {
   top: 1em;
   margin-top: -6px;
   left: 0;
-
-  &:focus path, &:hover path {
-    stroke: $redorange;
-  }
 }
 
 #mc_embed_signup div.mce_inline_error {
