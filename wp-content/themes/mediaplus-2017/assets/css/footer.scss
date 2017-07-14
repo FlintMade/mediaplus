@@ -30,6 +30,7 @@
 
     &:after {
       @extend %animated-link-pseudo;
+      bottom: 2px;
     }
   }
 

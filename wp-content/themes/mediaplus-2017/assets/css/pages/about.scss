@@ -134,6 +134,23 @@
   p {
     max-width: 32em;
   }
+
+  a:link, a:visited {
+    @extend %animated-link;
+    line-height: 1.5;
+
+    &:after {
+      @extend %animated-link-pseudo;
+    }
+  }
+
+  a:hover {
+    @extend %animated-link-hover;
+
+    &:after {
+      @extend %animated-link-hover-pseudo;
+    }
+  }
 }
 
 .person__toggle {

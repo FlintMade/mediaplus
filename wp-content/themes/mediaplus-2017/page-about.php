@@ -111,7 +111,11 @@
           <div class="meta person__bio-meta">
             <?php if ($email): ?>
               <dd class="person__meta-label">Email</dd>
-              <dt class="person__meta-value"><?php echo $email; ?></dt>
+              <dt class="person__meta-value">
+                <a href="mailto:<?php echo $email; ?>">
+                  <?php echo $email; ?>
+                </a>
+              </dt>
             <?php endif; ?>
             <?php if ($phone): ?>
               <dd class="person__meta-label">Phone</dd>
