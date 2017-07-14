@@ -279,16 +279,43 @@ window.addEventListener('resize', resizeMenu);
 
 /*
  *	=============================================
- *	SIDEBAR NAV
+ *	HEADER LOGO / SIDEBAR NAV
  *	=============================================
  */
+
+/*
+ *  ADD CSS ANIM TO HEADER LOGO ON HOVER
+ *  Prevents @keyframes from blasting away the
+ *  simple hover transition
+ *  ----------------------------------------------
+ */
+
+var logoBtn = document.getElementById('logo-btn');
+
+logoBtn.addEventListener('mouseenter', function(){
+  logoBtn.classList.add('pulse');
+}, false);
+
+// Pause the animation, grab the current state, return the teaser to inital state
+logoBtn.addEventListener('mouseleave', function(){
+  logoBtn.classList.add('pause-pulse');
+  
+  var teaser = logoBtn.querySelector('.teaser'),
+      teaserWidth = teaser.offsetWidth;
+
+  teaser.style.width = teaserWidth + 'px';
+  logoBtn.classList.remove('pause-pulse');
+  logoBtn.classList.remove('pulse');
+  setTimeout(function(){
+    teaser.style.removeProperty('width');
+  }, 100);
+}, false);
 
 /*
  *  LOGO BUTTON TAKES YOU BACK TO RECENT FLOW PAGE
  *  ----------------------------------------------
  */
 
-var logoBtn = document.getElementById('logo-btn');
 logoBtn.addEventListener('click', sendToFlow, false);
 
 /*

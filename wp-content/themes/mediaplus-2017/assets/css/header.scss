@@ -118,22 +118,60 @@
  */
 
 body:not(.flow) .header__brand {
-  &:after {
+  .teaser {
     display: block;
     content: '';
     position: fixed;
     z-index: -1;
     top: 0;
-    left: -4em;
-    width: 4em;
+    left: 0;
+    width: 0;
     height: 100%;
     background: $orange;
-    transition: left 300ms;
+    transition: width 400ms;
   }
 
-  &:hover:after {
-    left: 0;
-  }  
+  &.pulse .teaser {
+    animation: pulse 4000ms infinite;
+  }
+
+  &.pause-pulse .teaser {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    width: 0;
+  }
+  
+  20% {
+    width: 3em;
+  }
+  
+  32% {
+    width: 2.5em;
+  }
+
+  44% {
+    width: 3em;
+  }
+
+  56% {
+    width: 2.5em;
+  }
+
+  68% {
+    width: 3em;
+  }
+
+  80% {
+    width: 0;
+  }
+
+  100% {
+    width: 0;
+  }
 }
 
 /*

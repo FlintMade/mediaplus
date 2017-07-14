@@ -37,6 +37,7 @@
         <svg class="logo__plus" title="Media plus">
           <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#plusBig"/>
         </svg>
+        <span class="teaser" role="none"></span>
       </a>
     </div>
 
