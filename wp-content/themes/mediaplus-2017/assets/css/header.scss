@@ -234,6 +234,8 @@ button.menu-toggle:focus {
 }
 
 .header__contact {
+  opacity: 0;
+
   * {
     color: $grey-med;
   }
@@ -360,7 +362,7 @@ button.menu-toggle:focus {
   }
 
   .header__tray {
-    transition: right 400ms;
+    transition: right 600ms;
   }
 }
 

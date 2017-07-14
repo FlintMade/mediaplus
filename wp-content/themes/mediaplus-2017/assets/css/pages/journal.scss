@@ -217,6 +217,10 @@
     color: $grey-med;
   }
 
+  .post__gallery {
+    clear: both;
+  }
+
   .fluidvids {
     max-width: 900px;
     margin: $space-l-em 0;

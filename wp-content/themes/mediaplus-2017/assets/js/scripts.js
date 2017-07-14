@@ -217,14 +217,21 @@ var showMenu = function() {
   if (window.outerWidth <= bpHeaderSmall) {
     var menuItems = menu.querySelectorAll('li');
     headerOverlay.style.height = '100%';
-    headerContact.removeAttribute('aria-hidden');
     setTimeout(function(){
       for (var i = 0; i < menuItems.length; i++) {
         var thisItem = menuItems[i],
             thisTiming = 400 * i;
         showMenuItem(thisItem, thisTiming);
       }
-    }, 400);
+    }, 600);
+
+    // Fade in contact info at the end
+    var afterAll = 400 * (menuItems.length + 1);
+
+    setTimeout(function(){
+      headerContact.removeAttribute('aria-hidden');
+      fade(headerContact, 0, 1, 400);
+    }, afterAll);
   }
 
   // Set focus on first link
@@ -271,6 +278,8 @@ var resizeMenu = debounce(function() {
       for (var i = 0; i < menuItems.length; i++) {
         menuItems[i].classList.add('visible');
       }
+      headerContact.removeAttribute('aria-hidden');
+      fade(headerContact, 0, 1, 400);
     }
   }
 }, 100);
