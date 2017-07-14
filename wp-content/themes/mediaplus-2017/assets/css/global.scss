@@ -21,7 +21,7 @@ main {
   position: relative;
   z-index: z('main');
 
-  flex: 1;
+  flex: 1 0 auto;
 }
 
 ::selection {
