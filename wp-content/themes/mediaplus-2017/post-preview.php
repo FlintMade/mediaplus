@@ -1,4 +1,4 @@
-    <div class="row row--halves row-item post-preview">
+    <div class="row row--halves row-item post-preview buoyant-parent">
       
       <div class="grid-col post-preview__info">
         <h2 class="post__title">

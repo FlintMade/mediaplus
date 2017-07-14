@@ -8,11 +8,20 @@
 
 // JS is available
 document.documentElement.classList.remove('no-js');
+document.documentElement.classList.add('js');
 
 // Find ancestor
 function findAncestor (el, cls) {
   while ((el = el.parentElement) && !el.classList.contains(cls));
   return el;
+}
+
+// Get offset of element relative to document, not window
+function docOffset(el) {
+  var rect = el.getBoundingClientRect(),
+  scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
 }
 
 // Returns a function, that, as long as it continues to be invoked, will not
@@ -64,11 +73,59 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
 var afterLoadTiming = 200, /* Give user a little bit of time to cognitively recognize page load */
     pageBanner = document.querySelector('.page-banner');
 
-/* Fade in banner on page load */
+// Fade in banner on page load
 if (pageBanner) {
   setTimeout(function(){
     pageBanner.classList.add('animated');
   }, afterLoadTiming);
+}
+
+// Buoyant grid items
+var bobInRows = function() {
+  var scrolledTo = window.scrollY + window.innerHeight,
+      buoyantRows = document.querySelectorAll('.buoyant-parent:not(.animated)');
+  for (var i = 0; i < buoyantRows.length; i++) {
+    var thisParent = buoyantRows[i],
+        thisTop = thisParent.getBoundingClientRect().top;
+
+    // If in view or page is scrolled to the bottom
+    if (thisTop < window.innerHeight || scrolledTo >= document.body.clientHeight) {
+      var theseKids = thisParent.querySelectorAll('.buoyant-kid:not(.animated)');
+
+      // If there are buoyant cols inside the row, animate in one by one
+      if (theseKids.length) {
+        var kidsInView = [];
+
+        // Reduce set to just those in view
+        for (var k = 0; k < theseKids.length; k++) {
+          var thisKid = theseKids[k],
+              thisTop = thisKid.getBoundingClientRect().top;
+          if (thisTop < window.innerHeight  || scrolledTo >= document.body.clientHeight) {
+            kidsInView.push(thisKid);
+          }
+        }
+
+        for (var n = 0; n < kidsInView.length; n++) {
+          kidsInView[n].classList.add('animated');
+        }
+
+      // Otherwise animate the whole row
+      } else {
+        thisParent.classList.add('animated');
+      }
+    }
+  }
+};
+
+// Add this buoyancy to all pages that don't have another event listener
+if (!document.body.classList.contains('flow') && !document.body.classList.contains('blog')) {
+  setTimeout(function(){
+    bobInRows();
+  }, 200);
+
+  window.addEventListener('scroll', bobInRows, false);
+  window.addEventListener('touchmove', bobInRows, false);
+  window.addEventListener('touchend', bobInRows, false);
 }
 
 /*

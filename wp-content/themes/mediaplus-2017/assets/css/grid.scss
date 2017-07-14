@@ -151,3 +151,23 @@
     padding: 0 $space-xl;
   }
 }
+
+/*
+ *	BUOYANT GRID ITEMS
+ *  Slight fade in and pop up transition
+ *  See scripts.js
+ *	---------------------------------------------
+ */
+
+.buoyant-parent:not(.buoyant-kids),
+.buoyant-kid {
+  position: relative;
+  top: $space-m;
+  opacity: .4;
+  transition: opacity 600ms ease-out, top 600ms ease-out;
+
+  &.animated {
+    top: 0;
+    opacity: 1;
+  }
+}

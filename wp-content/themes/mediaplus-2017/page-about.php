@@ -25,7 +25,7 @@
   </div>
 
   <div class="contain page-section">
-    <div class="page-section row row--halves about-intro">
+    <div class="page-section row row--halves about-intro buoyant-parent">
 
       <!-- PAGE DESCRIPTION -->
       <section class="grid-col grid-col--right">
@@ -80,7 +80,7 @@
   <?php endwhile;?>
 
   <!-- TEAM MEMBERS -->
-  <section class="page-section row row--flush row--halves team" aria-label="The team">
+  <section class="page-section row row--flush row--halves team buoyant-parent buoyant-kids" aria-label="The team">
     <?php
       $args = array(
         'post_type' => 'people',
@@ -96,7 +96,7 @@
       $email = get_field('person_email', $item->ID);
       $phone = get_field('person_number', $item->ID);
     ?>
-      <div class="person grid-col" <?php if ($large){echo 'style="background-image: url(\'' . $large . '\')"';} ?>>
+      <div class="grid-col buoyant-kid person" <?php if ($large){echo 'style="background-image: url(\'' . $large . '\')"';} ?>>
         <div class="person__initial">
           <h3><?php echo $item->post_title; ?></h3>
           <p class="meta"><?php echo get_field('person_title', $item->ID) ?></p>

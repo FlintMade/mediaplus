@@ -16,16 +16,6 @@
     padding-top: 0;
     border-top: 0;
   }
-
-  /* Fade in new posts */
-  &:nth-child(n+4) {
-    opacity: 0;
-    transition: opacity 400ms;
-  }
-
-  &.loaded {
-    opacity: 1;
-  }
 }
 
 .post-preview + .post-preview {

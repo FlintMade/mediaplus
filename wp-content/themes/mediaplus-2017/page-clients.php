@@ -7,7 +7,7 @@
   $expertise_title = get_field('expertise_title');
 ?>
 <div class="contain">
-  <div class="page-section--feature row row--third-two-thirds">
+  <div class="page-section--feature row row--third-two-thirds buoyant-parent">
     <div class="grid-col">
       <h1 class="h2"><?php echo $inpage_title; ?></h1>
     </div>
@@ -84,7 +84,7 @@
     );
     $items = get_posts($args);
   ?>
-  <ul class="meta-items row-items clients">
+  <ul class="meta-items row-items clients buoyant-parent">
     <?php foreach ($items as $item): ?>
       <li class="row row--third-two-thirds row-item client">
         <div class="grid-col client__header">

@@ -8,19 +8,6 @@
  */
 
 /*
- *  HELPER FUNCTIONS
- *	---------------------------------------------
- */
-
-// Get offset of element relative to document, not window
-function docOffset(el) {
-  var rect = el.getBoundingClientRect(),
-  scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-}
-
-/*
  *  SET RECENT PAGE
  *  Remember as last "case study flow" page
  *	---------------------------------------------
@@ -111,7 +98,7 @@ var resetCaseStudy = function() {
 
     // Scrolling up
     if (window.scrollY < lastScroll) {
-      if ((thisTop + thisHeight - window.innerHeight / 2) >= 0) {
+      if ((thisTop + thisHeight - window.innerHeight / 3) >= 0) {
         setRecentCS(caseStudies[i]);
         break;
       }

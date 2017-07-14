@@ -14,7 +14,7 @@
   $social_media_accounts = get_field('social_media_accounts');
 ?>
 <div class="contain">
-  <section class="page-section--feature row row--third-two-thirds">
+  <section class="page-section--feature row row--third-two-thirds buoyant-parent">
     <h1 class="h2 grid-col"><?php the_title(); ?></h1>
     <div class="feature-address grid-col">
       <p>
@@ -28,7 +28,7 @@
       </p>
     </div>
   </section>
-  <div class="page-section row-items contact-rows">
+  <div class="page-section row-items contact-rows buoyant-parent">
     <section class="row row--third-two-thirds row-item contact-row">
       <h2 class="grid-col"><?php echo $inquiries_section_title; ?></h2>
       <ul class="grid-col row row--flush row--thirds inquiry-types">

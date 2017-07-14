@@ -53,6 +53,7 @@
             var invisiblePosts = document.querySelectorAll('.post-preview:not(.loaded)');
             for (var i = 0; i < invisiblePosts.length; i++) {
               invisiblePosts[i].classList.add('loaded');
+              invisiblePosts[i].classList.add('animated');
             }
           }, 200);
         }
@@ -63,5 +64,8 @@
   window.addEventListener('scroll', morePosts, false);
   window.addEventListener('touchmove', morePosts, false);
   window.addEventListener('touchend', morePosts, false);
+
+  // See scripts.js
+  bobInRows();
 
 })(document, window);
