@@ -337,6 +337,11 @@
         width: calc(33% - #{$space-xl});
       }
 
+      .gallery-caption {
+        margin-top: -1.25em;
+        padding: 0 $space-xl;
+      }
+
       .gallery-item:nth-child(even) {
         margin-left: $space-xl;
         width: calc(33% - #{$space-xl} / 2);
