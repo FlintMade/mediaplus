@@ -91,7 +91,7 @@
                   <?php endif; ?>
                   <source media="(min-width: 500px)" srcset="<?php echo $medium; ?>">
                   <source media="(min-width: 0)" srcset="<?php echo $small; ?>">
-                  <img src="<?php echo $medium; ?>" alt="<?php echo $image_text; ?>" />
+                  <img src="<?php echo $large; ?>" alt="<?php echo $image_text; ?>" />
                 </picture>
               </li>
             <?php $i++; endforeach; ?>
@@ -131,7 +131,11 @@
             <?php endif; ?>
             <source media="(min-width: 576px)" srcset="<?php echo $large; ?>">
             <source media="(min-width: 0)" srcset="<?php echo $small; ?>">
-            <img src="<?php echo $medium; ?>" alt="<?php echo $image['alt']; ?>" />
+            <?php if ($large): ?>
+              <img src="<?php echo $large; ?>" alt="<?php echo $image['alt']; ?>" />
+            <?php else: ?>
+              <img src="<?php echo $medium; ?>" alt="<?php echo $image['alt']; ?>" />
+            <?php endif; ?>
           </picture>
         </div>
       </section>

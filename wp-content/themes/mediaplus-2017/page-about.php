@@ -19,8 +19,10 @@
       <?php endif; ?>
       <?php if ($xl): ?>
         <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
+        <img src="<?php echo $xl; ?>" alt="" role="none" />
+      <?php else: ?>
+        <img src="<?php echo $large; ?>" alt="" role="none" />
       <?php endif; ?>
-      <img src="<?php echo $large; ?>" alt="" role="none" />
     </picture>
   </div>
 
