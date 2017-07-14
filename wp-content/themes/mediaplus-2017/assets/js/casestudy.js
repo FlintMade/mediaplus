@@ -272,6 +272,16 @@ var navigateNewCS = function(e) {
   var link = e.currentTarget,
       nextID = link.getAttribute('id').replace('link-', ''),
       currentCS = document.querySelector('.case-study--current');
+
+  // Check to see if a new case study was previously loaded but not scrolled to
+  var previouslyLoadedCS = flow.querySelector('.case-study--new');
+  
+  if (previouslyLoadedCS) {
+    var previouslyLoadedID = currentCS.getAttribute('id').replace('cs-', ''),
+        nextLink = document.getElementById('after-' + previouslyLoadedID);
+    previouslyLoadedCS.parentNode.removeChild(previouslyLoadedCS);
+    nextLink.parentNode.removeChild(nextLink);
+  }
   
   // Ajax in new case study
   fetchTheCS(nextID, currentCS, loaderValue, fadeReplaceCS);
