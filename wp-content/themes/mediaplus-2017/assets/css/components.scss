@@ -227,3 +227,35 @@ a.more-link {
   border-color: red !important;
   color: red;
 }
+
+/*
+ *  ANIMATED LINKS
+ *	=============================================
+ */
+
+%animated-link {
+  position: relative;
+  border-bottom: 0;
+  color: inherit;
+  transition: color 300ms;
+}
+
+%animated-link-pseudo {
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: $redorange;
+  transition: width 300ms;
+}
+
+%animated-link-hover {
+  color: $redorange;
+}
+
+%animated-link-hover-pseudo {
+  width: 100%;
+}

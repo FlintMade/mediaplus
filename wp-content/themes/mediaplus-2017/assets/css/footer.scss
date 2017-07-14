@@ -26,11 +26,19 @@
   }
 
   a:link, a:visited {
-    border-bottom: 0;
+    @extend %animated-link;
+
+    &:after {
+      @extend %animated-link-pseudo;
+    }
   }
 
   a:hover {
     color: $redorange;
+
+    &:after {
+      @extend %animated-link-hover-pseudo;
+    }
   }
 }
 

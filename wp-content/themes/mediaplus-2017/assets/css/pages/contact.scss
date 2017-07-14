@@ -13,20 +13,25 @@
 .feature-address,
 .contact-row {
   a:link, a:visited {
-    border-bottom: 2px solid transparent;
-    color: inherit;
-    transition: color 200ms, border-bottom-color 200ms;
+    @extend %animated-link;
+
+    &:after {
+      @extend %animated-link-pseudo;
+    }
   }
 
   a:hover {
-    border-bottom-color: currentColor;
-    color: $redorange;
+    @extend %animated-link-hover;
+
+    &:after {
+      @extend %animated-link-hover-pseudo;
+    }
   }
 }
 
 .contact-row {
   border-top: 1px solid $grey-light;
-  line-height: 1.286;
+  line-height: 1.4;
   color: $grey-med;
 
   h2, h3 {
