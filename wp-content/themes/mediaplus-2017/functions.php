@@ -71,7 +71,7 @@ add_action('wp_print_scripts', 'wpdocs_dequeue_script', 100);
 function mediaplus_scripts() {
 
 	// Cache busting for all scripts that have or will change
-	$versionString = '07.13.17.05';
+	$versionString = '07.14.17';
 
 	// Remove silly WP stuff
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -253,6 +253,17 @@ function mediaplus_ajax_pagination() {
 function journal_size_override() {
   return array(900, 530);
 }
+
+/*
+ *	SET POST MEDIA IMAGE DEFAULTS
+ *	-----------------------------------------------------------------
+ */
+
+function mediaplus_image_defaults() {
+	update_option('image_default_link_type', 'none');
+	update_option('image_default_size', 'large');
+}
+add_action('after_setup_theme', 'mediaplus_image_defaults');
 
 /*
  *	REMOVE PARAGRAPH TAGS FROM AROUND POST MEDIA
