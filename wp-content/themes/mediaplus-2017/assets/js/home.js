@@ -69,7 +69,7 @@ var revealText = function() {
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('touchmove', scrollAwayIntro, false);
     window.addEventListener('touchend', scrollAwayIntro, false);
-  }, (overlays.length * revealInterval) + (revealInterval / 2));
+  }, (overlays.length - .5) * revealInterval);
 };
 
 revealText();
