@@ -13,8 +13,14 @@
 
       <div class="grid-col post-preview__thumb">
         <?php
-          $large = get_the_post_thumbnail_url('', 'mediaplus-thumb-l');
-          $medium = get_the_post_thumbnail_url('', 'mediaplus-thumb-m');
+          $thumbnail_override = get_field('thumbnail_override', $item->ID);
+          if ($thumbnail_override) {
+            $large = $thumbnail_override['sizes']['mediaplus-thumb-l'];
+            $medium = $thumbnail_override['sizes']['mediaplus-thumb-m'];
+          } else {
+            $large = get_the_post_thumbnail_url('', 'mediaplus-thumb-l');
+            $medium = get_the_post_thumbnail_url('', 'mediaplus-thumb-m');
+          }
           if ($medium):
         ?>
           <picture>
