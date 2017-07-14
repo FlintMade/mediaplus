@@ -26,7 +26,7 @@
 .post-preview__thumb {
   padding-bottom: 3.25em; /* Space for more link */
 
-  picture, img {
+  picture, img, .post__gallery {
     display: block;
     width: 100%;
     height: auto;
@@ -189,25 +189,27 @@
   }
 
   img,
-  .wp-caption {
+  .wp-caption,
+  .post__gallery {
     margin: $space-l-em 0;
     padding-left: 0;
     max-width: 100%;
   }
 
   img {
-    display: inline-block;
-    vertical-align: middle;
     height: auto;
   }
 
-  .wp-caption {
-    width: auto !important;
-
+  .wp-caption,
+  .post__gallery {
     img {
       margin-top: 0;
       margin-bottom: 1em;
     }
+  }
+
+  .wp-caption {
+    width: auto !important;
   }
 
   .wp-caption-text {
@@ -230,7 +232,7 @@
 @media (max-width: $bp-s) {
   /* Full bleed */
   .post-content {
-    img {
+    img, .post__gallery {
       margin-left: -$space-s;
       max-width: calc(100% + (#{$space-s} * 2));
     }
@@ -240,9 +242,15 @@
 @media (min-width: $bp-s) and (max-width: $bp-l) {
   /* Full bleed */
   .post-content {
-    img {
+    img, .post__gallery {
       margin-left: -$space-m;
       max-width: calc(100% + (#{$space-m} * 2));
+    }
+  }
+
+  .post__gallery {
+    img {
+      margin-left: 0;
     }
   }
 }
@@ -285,11 +293,19 @@
 
     img,
     .wp-caption,
-    .fluidvids {
+    .fluidvids, 
+    .post__gallery {
       margin-top: $space-xl-em;
       margin-bottom: $space-xl-em;
       padding-right: 0;
       padding-left: 0;
+    }
+
+    .post__gallery {
+      img {
+        margin-top: $space-m-em;
+        margin-bottom: $space-m-em;
+      }
     }
   }
 }
@@ -301,8 +317,39 @@
     }
 
     img,
-    .fluidvids {
+    .fluidvids,
+    .post__gallery {
       margin-left: -$space-xl;
+    }
+
+    /* Gallery imagery alternates two-thirds, one-third */
+    .post__gallery {
+      max-width: calc(100% + (#{$space-m} * 2));
+
+      img {
+        margin-left: 0;
+      }
+
+      .gallery-item {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left:  0;
+        width: calc(33% - #{$space-xl});
+      }
+
+      .gallery-item:nth-child(even) {
+        margin-left: $space-xl;
+        width: calc(33% - #{$space-xl} / 2);
+
+        &:nth-child(4n + 4) {
+          width: calc(66% - #{$space-xl} / 2);
+        }
+      }
+
+      .gallery-item:first-child,
+      .gallery-item:nth-child(4n + 4) + .gallery-item {
+        width: calc(66% - #{$space-xl});
+      }
     }
   }
 }
