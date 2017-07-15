@@ -488,10 +488,9 @@ body.flow .gallery__next:focus {
 
 .data {
   font: 600 4em/1 $font-heading;
-  word-break: break-all;
 }
 
-/* Bump up the type size for shorter data */
+/* Bump up the type size according to data length; "M" characters used to test, as they are generally the widest character */
 .data__4 {
   font-size: 1.25em;
 }
@@ -500,9 +499,12 @@ body.flow .gallery__next:focus {
   font-size: 1.75em;
 }
 
-.data__2,
+.data__2 {
+  font-size: 2.5em;
+}
+
 .data__1 {
-  font-size: 2em;
+  font-size: 4em;
 }
 
 @media (min-width: $bp-s) {
@@ -511,9 +513,9 @@ body.flow .gallery__next:focus {
   }
 }
 
-@media (min-width: $bp-sidebar-l) and (max-width: $bp-xl) {
+@media (min-width: $bp-sidebar-l) and (max-width: 87.5em) {
   .data {
-    font-size: 4vw;
+    font-size: 4.25vw;
   }
 }
 
@@ -526,6 +528,18 @@ body.flow .gallery__next:focus {
 @media (min-width: $bp-xl) {
   .color-block {
     min-height: 29em;
+  }
+}
+
+@media (min-width: 87.5em) and (max-width: $bp-xxl) {
+  .data {
+    font-size: 5.5vw;
+  }
+}
+
+@media (min-width: $bp-xxxl) {
+  .data {
+    font-size: 5em;
   }
 }
 
