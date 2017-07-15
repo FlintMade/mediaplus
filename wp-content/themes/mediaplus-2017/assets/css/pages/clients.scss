@@ -183,6 +183,14 @@
   }
 }
 
+@media (min-width: $bp-xxl) {
+
+  /* Adjust for font size change */
+  .row-toggle {
+    top: .425em;
+  }
+}
+
 /*
  *	ACTIVE STATE
  *	---------------------------------------------
