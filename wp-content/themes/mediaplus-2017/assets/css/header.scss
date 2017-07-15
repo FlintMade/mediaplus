@@ -15,32 +15,41 @@ body {
 }
 
 .header__context,
-.header__tray-content {
+.header__tray {
   position: fixed;
-  top: 0;
-  padding: $space-s-em;
-  padding: $space-s;
+  top: $space-s-em;
+  top: $space-s;
 }
 
 .header__context {
-  left: 0;
+  left: $space-s-em;
+  left: $space-s;
+}
+
+.header__tray {
+  right: $space-s-em;
+  right: $space-s;
 }
 
 .header__tray-content {
   z-index: z('header') - 1;
-  right: 0;
 }
 
 @media (max-width: $bp-header-s) {
   body {
-    margin-top: 6.43em; /* ~90px */
+    padding-top: 6.43em; /* ~90px */
   }
 }
 
 @media (min-width: $bp-header-m) {
-  .header__context,
-  .header__tray-content {
-    padding: $space-m $space-m 0;
+  .header__context {
+    top: $space-m;
+    left: $space-m;
+  }
+
+  .header__tray {
+    top: $space-m;
+    right: $space-m;
   }
 }
 
@@ -181,21 +190,22 @@ body:not(.flow) .header__brand {
  */
 
 .header__tray {
-  float: right;
+  position: fixed;
   z-index: z('header') - 1;
-}
-
-.header__tray-content {
-  padding-right: 6.75em;
+  padding-right: 4em; /* Space for toggle */
 }
 
 .menu-toggle {
-  position: fixed;
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  margin-top: -1rem;
+  right: 0;
   z-index: z('header');
-  top: $space-s;
-  right: $space-s;
   width: 32px;
+  width: 2rem;
   height: 32px;
+  height: 2rem;
 }
 
 button.menu-toggle:focus {
@@ -214,9 +224,14 @@ button.menu-toggle:focus {
   display: none;
 }
 
+.header__tray-content {
+  overflow: hidden;
+}
+
 .header__menu {
-  display: inline-block;
-  vertical-align: middle;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  transition: transform 400ms;
 
   ul {
     margin: 0;
@@ -260,6 +275,7 @@ button.menu-toggle:focus {
     right: -60%;
     width: 60%;
     height: 100%;
+    padding-right: 0;
 
     &:before {
       display: block;
@@ -274,6 +290,16 @@ button.menu-toggle:focus {
       opacity: 0;
       transition: opacity 400ms;
     }
+  }
+
+  .menu-toggle {
+    position: fixed;
+    top: $space-s-em;
+    top: $space-s;
+    right: $space-s-em;
+    right: $space-s;
+    margin-top: 0;
+    margin-right: 0;
   }
 
   .header__tray-content {
@@ -311,15 +337,6 @@ button.menu-toggle:focus {
 }
 
 @media (min-width: $bp-header-m) {
-  .header__tray__content {
-    padding-right: 7.5em;
-  }
-
-  .menu-toggle {
-    top: $space-m;
-    right: $space-m;
-  }
-
   .header__menu {
     li {
       display: inline-block;
@@ -368,6 +385,7 @@ button.menu-toggle:focus {
 
 @media (min-width: $bp-header-m) {
   .header__menu[aria-hidden="true"] {
-    display: none;
+    -webkit-transform: translateX(calc(100% + 4em));
+    transform: translateX(calc(100% + 4em));
   }
 }
