@@ -193,7 +193,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
     var newCS = document.querySelector('.case-study--new');
   
     // If reached the end of the document
-    if (scrolledTo >= document.body.clientHeight) {
+    if (scrolledTo >= document.body.clientHeight - 50) {
       if (newCS) {
         slideUpCS();
       } else {
