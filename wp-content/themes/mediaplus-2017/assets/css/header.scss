@@ -26,11 +26,6 @@ body {
   left: $space-s;
 }
 
-.header__tray {
-  right: $space-s-em;
-  right: $space-s;
-}
-
 .header__tray-content {
   z-index: z('header') - 1;
 }
@@ -191,8 +186,9 @@ body:not(.flow) .header__brand {
 
 .header__tray {
   position: fixed;
+  right: 0;
   z-index: z('header') - 1;
-  padding-right: 4em; /* Space for toggle */
+  padding-right: 6em; /* Space for toggle */
 }
 
 .menu-toggle {
@@ -200,7 +196,7 @@ body:not(.flow) .header__brand {
   top: 50%;
   margin-top: -16px;
   margin-top: -1rem;
-  right: 0;
+  right: 2em;
   z-index: z('header');
   width: 32px;
   width: 2rem;
