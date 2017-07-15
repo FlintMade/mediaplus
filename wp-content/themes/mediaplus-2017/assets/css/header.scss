@@ -389,7 +389,7 @@ button.menu-toggle:focus {
 
 @media (min-width: $bp-header-m) {
   .header__menu[aria-hidden="true"] {
-    -ms-transform: translateX(calc(100% + 4em));
+    -ms-transform: translateX(150%); /* Calc expression wasn't working here */
     -webkit-transform: translateX(calc(100% + 4em));
     transform: translateX(calc(100% + 4em));
   }
