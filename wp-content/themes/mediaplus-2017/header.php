@@ -26,7 +26,7 @@
 <?php else: ?>
   <body <?php body_class(); ?>>
 <?php endif; ?>
-  <header role="banner" class="clear header menu-active">
+  <header role="banner" class="clear header">
     <div class="header__context">
       <a class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus show case studies" id="logo-btn">
         <span class="logo__text-wrap <?php if (is_singular('expertise') || is_singular('offerings')): ?>abbreviated<?php endif; ?>">
@@ -43,7 +43,7 @@
 
     <div class="header__tray">
       <div class="header__tray-content">
-        <nav id="js-menu" class="header__menu" role="navigation">
+        <nav id="js-menu" class="header__menu" role="navigation" aria-hidden="true">
           <?php wp_nav_menu(array('theme_location' => 'header-menu', 'container_id' => 'js-menu-contents')); ?>
         </nav>
 

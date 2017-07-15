@@ -229,9 +229,13 @@ button.menu-toggle:focus {
 }
 
 .header__menu {
+  -ms-transform: translateX(0);
   -webkit-transform: translateX(0);
   transform: translateX(0);
-  transition: transform 400ms;
+
+  &.anim-init {
+    transition: transform 400ms;
+  }
 
   ul {
     margin: 0;
@@ -385,6 +389,7 @@ button.menu-toggle:focus {
 
 @media (min-width: $bp-header-m) {
   .header__menu[aria-hidden="true"] {
+    -ms-transform: translateX(calc(100% + 4em));
     -webkit-transform: translateX(calc(100% + 4em));
     transform: translateX(calc(100% + 4em));
   }
