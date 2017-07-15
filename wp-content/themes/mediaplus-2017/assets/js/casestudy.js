@@ -198,16 +198,14 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
   // Scrolling down
 } else {    
-    var newCS = document.querySelector('.case-study--new');
+    var newCS = document.querySelector('.case-study--new'),
+        numCS = document.querySelectorAll('.case-study').length;
 
     // If new case study loaded, show the next link (might have been scrolled away)
     if (newCS) {
-      if (currentCS) {
-        var currentID = currentCS.getAttribute('id').replace('cs-', ''),
-        nextLink = document.getElementById('after-' + currentID);
-        if (nextLink) {
-          showNextLink(nextLink);
-        }
+      nextLink = newCS.previousElementSibling;
+      if (nextLink) {
+        showNextLink(nextLink);
       }
     }
   
@@ -249,13 +247,11 @@ var scrollEvents = function(){
 
 var attachScrollEvents = function() {
   window.addEventListener('scroll', scrollEvents, false);
-  window.addEventListener('touchmove', scrollEvents, false);
   window.addEventListener('touchend', scrollEvents, false);
 };
 
 var detachScrollEvents = function() {
   window.removeEventListener('scroll', scrollEvents, false);
-  window.removeEventListener('touchmove', scrollEvents, false);
   window.removeEventListener('touchend', scrollEvents, false);
 };
 
