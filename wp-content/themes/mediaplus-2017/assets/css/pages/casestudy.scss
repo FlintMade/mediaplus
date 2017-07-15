@@ -481,7 +481,7 @@ body.flow .gallery__next:focus {
 }
 
 .data {
-  font: 600 4em/1 $font-heading;
+  font: 600 3em/1 $font-heading;
 }
 
 /* Bump up the type size according to data length; "M" characters used to test, as they are generally the widest character */
@@ -499,6 +499,12 @@ body.flow .gallery__next:focus {
 
 .data__1 {
   font-size: 4em;
+}
+
+@media (min-width: $bp-xs) {
+  .data {
+    font-size: 4em;
+  }
 }
 
 @media (min-width: $bp-s) {
