@@ -378,8 +378,8 @@ if (sidebar) {
   // Hook up the functions
   if (!document.body.classList.contains('home')) {
     resizeSidebar();
+    window.addEventListener('resize', resizeSidebar);
   }
-  //window.addEventListener('resize', resizeSidebar);
 }
 
 /*

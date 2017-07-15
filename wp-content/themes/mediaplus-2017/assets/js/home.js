@@ -64,7 +64,7 @@ var revealText = function() {
     fade(homeScrollLink, 0, 1, 400);
     loadFirstCaseStudy();
 
-    // Attach scroll past intro event
+    // Attach scroll events
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('touchmove', scrollAwayIntro, false);
@@ -125,6 +125,7 @@ var setUpFirstCS = function() {
     window.addEventListener('DOMMouseScroll', scrollEvents, false);
     window.addEventListener('touchmove', scrollEvents, false);
     window.addEventListener('touchend', scrollEvents, false);
+    window.addEventListener('resize', resizeSidebar);
 
     if (homeIntro.parentNode) {
       homeIntro.parentNode.removeChild(homeIntro);
