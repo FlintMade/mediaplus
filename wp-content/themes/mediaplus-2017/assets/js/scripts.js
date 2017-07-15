@@ -71,7 +71,7 @@ function fade(el, oldOpacity, newOpacity, timeLapse) {
  *	=============================================
  */
 var afterLoadTiming = 200, /* Give user a little bit of time to cognitively recognize page load */
-    pageBanner = document.querySelector('.page-banner');
+    pageBanner = document.querySelector('.page-banner__media');
 
 // Fade in banner on page load
 if (pageBanner) {

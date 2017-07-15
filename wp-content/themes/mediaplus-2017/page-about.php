@@ -11,19 +11,23 @@
     $intro_headline = get_field('intro_headline');
     $offerings_title = get_field('offerings_title');
     $process_title = get_field('process_title');
+
+    // 2 nested divs needed to prevent horizontal overflow
   ?>
   <div class="page-section page-banner">
-    <picture>
-      <?php if ($xxl): ?>
-        <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
-      <?php endif; ?>
-      <?php if ($xl): ?>
-        <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
-        <img src="<?php echo $xl; ?>" alt="" role="none" />
-      <?php else: ?>
-        <img src="<?php echo $large; ?>" alt="" role="none" />
-      <?php endif; ?>
-    </picture>
+    <div class="page-banner__media">
+      <picture>
+        <?php if ($xxl): ?>
+          <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
+        <?php endif; ?>
+        <?php if ($xl): ?>
+          <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
+          <img src="<?php echo $xl; ?>" alt="" role="none" />
+        <?php else: ?>
+          <img src="<?php echo $large; ?>" alt="" role="none" />
+        <?php endif; ?>
+      </picture>
+    </div>
   </div>
 
   <div class="contain page-section">

@@ -33,12 +33,16 @@
  */
 
 .page-banner {
+  width: 100%;
+  overflow: hidden;
+}
+
+.page-banner__media {
   position: relative;
   z-index: -1;
   height: 0;
   width: 100%;
   padding-top: 400px;
-  overflow: hidden;
   text-align: center;
   opacity: 0;
   transition: opacity 1000ms;
@@ -67,7 +71,7 @@
 }
 
 @media (min-width: $bp-m) {
-  .page-banner {
+  .page-banner__media {
     padding-top: 46%;
 
     picture, img {
