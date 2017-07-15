@@ -64,7 +64,7 @@ var revealText = function() {
     fade(homeScrollLink, 0, 1, 400);
     loadFirstCaseStudy();
 
-    // Attach scroll events
+    // Attach scroll-past-home events
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('touchmove', scrollAwayIntro, false);
