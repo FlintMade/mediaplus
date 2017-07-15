@@ -227,19 +227,20 @@ if (supportedTransform()) {
     menu.removeAttribute('aria-hidden');
     menuBtn.setAttribute('aria-expanded', 'true');
 
-    if (window.outerWidth <= bpHeaderSmall) {
-      var menuItems = menu.querySelectorAll('li');
-      headerOverlay.style.height = '100%';
-      setTimeout(function(){
-        for (var i = 0; i < menuItems.length; i++) {
-          var thisItem = menuItems[i],
-              thisTiming = 400 * i;
-          showMenuItem(thisItem, thisTiming);
-        }
-      }, 600);
+    var menuItems = menu.querySelectorAll('li');
+    setTimeout(function(){
+      for (var i = 0; i < menuItems.length; i++) {
+        var thisItem = menuItems[i],
+            thisTiming = 400 * i;
+        showMenuItem(thisItem, thisTiming);
+      }
+    }, 600);
 
-      // Fade in contact info at the end
-      var afterAll = 400 * (menuItems.length + 1);
+    // Fade in contact info at the end
+    var afterAll = 400 * (menuItems.length + 1);
+
+    if (window.outerWidth <= bpHeaderSmall) {
+      headerOverlay.style.height = '100%';
 
       setTimeout(function(){
         headerContact.removeAttribute('aria-hidden');
