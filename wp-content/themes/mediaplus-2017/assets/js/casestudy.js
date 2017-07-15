@@ -120,6 +120,15 @@ var hideNextLink = function(){
   }
 };
 
+// Pop in link like a toast
+var showNextLink = function(nextLink) {
+  if (!nextLink.classList.contains('visible')) {
+    var nextID = nextLink.getAttribute('data-postid');
+    nextLink.classList.add('visible');
+    nextLink.addEventListener('click', clickToLoadCS, false);
+  }
+};
+
 // Visually load in next case study
 var slideUpCS = function() {
   var nextLink = document.querySelector('.next-case-study.visible'),
@@ -189,8 +198,18 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
   // Scrolling down
 } else {    
-    // If new case study loaded
     var newCS = document.querySelector('.case-study--new');
+
+    // If new case study loaded, show the next link (might have been scrolled away)
+    if (newCS) {
+      if (currentCS) {
+        var currentID = currentCS.getAttribute('id').replace('cs-', ''),
+        nextLink = document.getElementById('after-' + currentID);
+        if (nextLink) {
+          showNextLink(nextLink);
+        }
+      }
+    }
   
     // If reached the end of the document
     if (scrolledTo >= document.body.clientHeight - 50) {
@@ -199,15 +218,11 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
       } else {
         if (currentCS) {
           var currentID = currentCS.getAttribute('id').replace('cs-', ''),
-              nextLink = document.getElementById('after-' + currentID);
+              nextLink = document.getElementById('after-' + currentID),
+              nextID = nextLink.getAttribute('data-postid');
           if (nextLink) {
-            // Pop up next link like a toast
-            if (!nextLink.classList.contains('visible')) {
-              var nextID = nextLink.getAttribute('data-postid');
-              nextLink.classList.add('visible');
-              nextLink.addEventListener('click', clickToLoadCS, false);
-            }
-
+            showNextLink(nextLink);
+    
             // Ajax in a new case study
             fetchTheCS(nextID, currentCS, loaderValue);
           }
