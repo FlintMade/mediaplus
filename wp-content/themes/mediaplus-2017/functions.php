@@ -71,7 +71,7 @@ add_action('wp_print_scripts', 'wpdocs_dequeue_script', 100);
 function mediaplus_scripts() {
 
 	// Cache busting for all scripts that have or will change
-	$versionString = '07.14.17.03';
+	$versionString = '07.15.17';
 
 	// Remove silly WP stuff
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -86,6 +86,7 @@ function mediaplus_scripts() {
 
 	// Load theme scripts
 	wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/scripts.js'), array(), $versionString, true);
+	wp_enqueue_script('svg4everybody', get_theme_file_uri('/assets/js/svg4everybody.min.js'), array(), false, true);
 
 	// Load page-specific scripts
 	if (is_front_page() || is_singular('expertise') || is_home()) {
