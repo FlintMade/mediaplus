@@ -18,15 +18,12 @@
   padding-top: 0;
 }
 
-.case-studies {
-  margin-top: $space-s-em;
-  margin-top: $space-s;
-}
-
 .case-study {
   position: relative;
   z-index: z('main') - 3;
   margin: 0 auto 3em;
+  padding-top: $space-s-em;
+  padding-top: $space-s;
   min-height: 100vh;
   max-width: 1600px;
   opacity: 1;
@@ -163,8 +160,8 @@ body.flow .next-case-study:focus {
     padding-left: 4.75em; /* Align to text */
   }
 
-  .case-studies {
-    margin-top: $space-xs;
+  .case-study {
+    padding-top: $space-xs;
   }
 }
 
@@ -177,16 +174,12 @@ body.flow .next-case-study:focus {
     padding-left: 6.125em; /* Align to text */
   }
 
-  .case-studies {
-    margin-top: 1.8rem;
+  .case-study {
+    padding-top: 1.8rem;
   }
 }
 
 @media (min-width: $bp-sidebar-l) {
-  .case-studies {
-    margin-top: 4.5em;
-  }
-
   .case-studies,
   .status-bar,
   .next-case-study {
@@ -198,7 +191,8 @@ body.flow .next-case-study:focus {
   }
 
   .case-study {
-    margin-bottom: 9em;
+    margin-bottom: 4.5em;
+    padding-top: 4.5em;
   }
 
   .case-study__title {

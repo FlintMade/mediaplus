@@ -134,7 +134,7 @@ var slideUpCS = function() {
   // After grow
   setTimeout(function(){
     newCS.classList.remove('case-study--new');
-    window.scrollTo(0, currentTop - 50);
+    window.scrollTo(0, currentTop);
     nextLink.style.opacity = 0;
     nextLink.classList.remove('visible');
     nextLink.removeEventListener('click', clickToLoadCS, false);
