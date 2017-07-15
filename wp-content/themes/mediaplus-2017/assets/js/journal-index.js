@@ -53,17 +53,23 @@ var morePosts = debounce(function() {
           var invisiblePosts = document.querySelectorAll('.post-preview:not(.loaded)');
           for (var i = 0; i < invisiblePosts.length; i++) {
             invisiblePosts[i].classList.add('loaded');
-            invisiblePosts[i].classList.add('animated');
           }
+          bobInRows();
         }, 200);
       }
     });
   }
 }, 200);
 
-window.addEventListener('scroll', morePosts, false);
-window.addEventListener('touchmove', morePosts, false);
-window.addEventListener('touchend', morePosts, false);
+// Hook up scroll events
+var scrollEvents = function() {
+  bobInRows();
+  morePosts();
+};
+
+window.addEventListener('scroll', scrollEvents, false);
+window.addEventListener('touchmove', scrollEvents, false);
+window.addEventListener('touchend', scrollEvents, false);
 
 // See scripts.js
 bobInRows();
