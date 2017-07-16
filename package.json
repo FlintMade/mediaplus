@@ -1,0 +1,11 @@
+{
+  "name": "mediaplus",
+  "version": "1.0.0",
+  "description": "Media+ site",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

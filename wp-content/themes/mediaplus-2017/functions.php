@@ -58,6 +58,9 @@ add_action( 'after_setup_theme', 'mediaplus_setup' );
 
 /*
  *	SCRIPTS AND STYLES
+ *	Files must also be registered in Grunt build
+ *	process via Gruntfile.js in the root of the
+ *	project
  *	---------------------------------------------
  */
 
@@ -77,9 +80,6 @@ function mediaplus_scripts() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-	// Theme stylesheets
-	wp_enqueue_style('mediaplus-style', get_stylesheet_uri(), array(), $versionString);
-
 	// Load the html5 shiv.
 	wp_enqueue_script('html5', get_theme_file_uri('/assets/js/html5.js'), array(), false, false);
 	wp_script_add_data('html5', 'conditional', 'lt IE 9');
@@ -98,23 +98,40 @@ function mediaplus_scripts() {
 	}
 
 	if (is_front_page()) {
+		wp_enqueue_style('homeStyles', get_theme_file_uri('/assets/css/home.css'), array(), $versionString);
 		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts', 'mediaPlusjQuery', 'caseStudyScripts'), $versionString, true);
 	}
 
+	if (is_singular('expertise')) {
+		wp_enqueue_style('casestudyStyles', get_theme_file_uri('/assets/css/casestudy.css'), array(), $versionString);
+	}
+
 	if (is_page(7)) {
+		wp_enqueue_style('aboutStyles', get_theme_file_uri('/assets/css/about.css'), array(), $versionString);
 		wp_enqueue_script('aboutScripts', get_theme_file_uri('/assets/js/about.js'), array('scripts'), $versionString, true);
 	}
 
 	if (is_page(11)) {
+		wp_enqueue_style('clientStyles', get_theme_file_uri('/assets/css/clients.css'), array(), $versionString);
 		wp_enqueue_script('clientScripts', get_theme_file_uri('/assets/js/clients.js'), array('scripts'), $versionString, true);
 	}
 
+	if (is_page(13)) {
+		wp_enqueue_style('contactStyles', get_theme_file_uri('/assets/css/contact.css'), array(), $versionString);
+	}
+
 	if (is_home()) {
+		wp_enqueue_style('journalStyles', get_theme_file_uri('/assets/css/journal.css'), array(), $versionString);
 		wp_enqueue_script('journalIndexScripts', get_theme_file_uri('/assets/js/journal-index.js'), array('scripts', 'mediaPlusjQuery'), $versionString, true);
 	}
 
 	if (is_singular('post')) {
+		wp_enqueue_style('journalStyles', get_theme_file_uri('/assets/css/journal.css'), array(), $versionString);
 		wp_enqueue_script('fluidVids', get_theme_file_uri('/assets/js/fluidvids.js'), array(), false, true);
+	}
+
+	if (is_404()) {
+		wp_enqueue_style('errorStyles', get_theme_file_uri('/assets/css/errors.css'), array(), $versionString);
 	}
 
 	// Set up loading next case study

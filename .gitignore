@@ -18,6 +18,7 @@ xmlrpc.php
 !wp-content/themes/*/index.php
 
 .sass-cache
+node_modules/*
 
 /.htaccess
 /license.txt
@@ -27,3 +28,5 @@ xmlrpc.php
 wp-content/themes/mediaplus-2017/includes/mc-form.php
 
 wp-content/themes/mediaplus-2017/includes/mc-non-form.php
+
+*.map

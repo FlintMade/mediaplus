@@ -1,5 +1,13 @@
 # mediaplussea.com
 
+This repo belongs to a Wordpress site, but tracks only the relevant theme and a couple housekeeping-esque files. To work on the project, you will need to get the rest of the Wordpress instance from the server, as well as the current database. Instructions for setting up a local environment: [Mac](https://codex.wordpress.org/Installing_WordPress_Locally_on_Your_Mac_With_MAMP) and [PC](https://premium.wpmudev.org/blog/setting-up-xampp/).
+
+## Project dependencies
+
+Besides running on Wordpress, this project uses Grunt to minify and concatenate Sass files and JavaScript files. You’ll need [Ruby](https://www.ruby-lang.org/en/downloads/) installed to use Sass, and you’ll need [Node](https://nodejs.org/en/) (current version is fine) for Grunt.
+
+Once you have these dependencies installed, navigate to the root of the project via the command line and run `npm install` to install the Grunt task dependencies. Then run `grunt watch`. You will need to run this command once per development session where you are making changes to Sass and JavaScript files. Otherwise, your changes will not be reflected in the compiled CSS and JS files.
+
 ## Various notes
 
 ### .htaccess
