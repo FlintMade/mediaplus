@@ -84,36 +84,35 @@ function mediaplus_scripts() {
 	wp_enqueue_script('html5', get_theme_file_uri('/assets/js/html5.js'), array(), false, false);
 	wp_script_add_data('html5', 'conditional', 'lt IE 9');
 
-	// Load theme scripts
-	wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/scripts.js'), array(), $versionString, true);
-	wp_enqueue_script('svg4everybody', get_theme_file_uri('/assets/js/svg4everybody.min.js'), array(), false, true);
+	// Load theme scripts on pages w/o page-specific scripts
+	if (is_404() || is_singular('post')) {
+		wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/compiled/scripts.min.js'), array(), $versionString, true);
+	}
 
-	// Load page-specific scripts
+	// Load jQuery when needed
 	if (is_front_page() || is_singular('expertise') || is_home()) {
 		wp_enqueue_script('mediaPlusjQuery', get_theme_file_uri('/assets/js/jquery-3.2.1.min.js'), array(), false, true);
 	}
 
-	if (is_front_page() || is_singular('expertise')) {
-		wp_enqueue_script('caseStudyScripts', get_theme_file_uri('/assets/js/casestudy.js'), array('scripts', 'mediaPlusjQuery'), $versionString, true);
-	}
-
+	// Load page specific scripts and styles
 	if (is_front_page()) {
 		wp_enqueue_style('homeStyles', get_theme_file_uri('/assets/css/home.css'), array(), $versionString);
-		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/home.js'), array('scripts', 'mediaPlusjQuery', 'caseStudyScripts'), $versionString, true);
+		wp_enqueue_script('homeScripts', get_theme_file_uri('/assets/js/compiled/home.min.js'), array('mediaPlusjQuery'), $versionString, true);
 	}
 
 	if (is_singular('expertise')) {
 		wp_enqueue_style('casestudyStyles', get_theme_file_uri('/assets/css/casestudy.css'), array(), $versionString);
+		wp_enqueue_script('casestudyScripts', get_theme_file_uri('/assets/js/compiled/casestudy.min.js'), array('mediaPlusjQuery'), $versionString, true);
 	}
 
 	if (is_page(7)) {
 		wp_enqueue_style('aboutStyles', get_theme_file_uri('/assets/css/about.css'), array(), $versionString);
-		wp_enqueue_script('aboutScripts', get_theme_file_uri('/assets/js/about.js'), array('scripts'), $versionString, true);
+		wp_enqueue_script('aboutScripts', get_theme_file_uri('/assets/js/compiled/about.min.js'), array(), $versionString, true);
 	}
 
 	if (is_page(11)) {
 		wp_enqueue_style('clientStyles', get_theme_file_uri('/assets/css/clients.css'), array(), $versionString);
-		wp_enqueue_script('clientScripts', get_theme_file_uri('/assets/js/clients.js'), array('scripts'), $versionString, true);
+		wp_enqueue_script('clientScripts', get_theme_file_uri('/assets/js/compiled/clients.min.js'), array(), $versionString, true);
 	}
 
 	if (is_page(13)) {
@@ -122,7 +121,7 @@ function mediaplus_scripts() {
 
 	if (is_home()) {
 		wp_enqueue_style('journalStyles', get_theme_file_uri('/assets/css/journal.css'), array(), $versionString);
-		wp_enqueue_script('journalIndexScripts', get_theme_file_uri('/assets/js/journal-index.js'), array('scripts', 'mediaPlusjQuery'), $versionString, true);
+		wp_enqueue_script('journalIndexScripts', get_theme_file_uri('/assets/js/compiled/journal-index.min.js'), array('mediaPlusjQuery'), $versionString, true);
 	}
 
 	if (is_singular('post')) {
@@ -140,7 +139,11 @@ function mediaplus_scripts() {
 		'ajaxurl' => admin_url('admin-ajax.php')
 	));
 
-	wp_localize_script('caseStudyScripts', 'loadNextCaseStudy', array(
+	wp_localize_script('homeScripts', 'loadNextCaseStudy', array(
+		'ajaxurl' => admin_url('admin-ajax.php')
+	));
+
+	wp_localize_script('casestudyScripts', 'loadNextCaseStudy', array(
 		'ajaxurl' => admin_url('admin-ajax.php')
 	));
 
