@@ -137,11 +137,15 @@ var setUpFirstCS = function() {
 };
 
 var scrollAwayIntro = function(e) {
-  delta++;
-  var scrollAmount = 5 * Math.abs(delta);
-  homeIntro.style.top = '-' + scrollAmount + '%';
-  if (scrollAmount >= 100) {
-    setUpFirstCS();
+  if (e.currentTarget === homeScrollLink) {
+    clickAwayIntro(e);
+  } else {
+    delta++;
+    var scrollAmount = 5 * Math.abs(delta);
+    homeIntro.style.top = '-' + scrollAmount + '%';
+    if (scrollAmount >= 100) {
+      setUpFirstCS();
+    }
   }
 };
 
