@@ -349,4 +349,6 @@ logoBtn.addEventListener('mouseleave', function(){
  *  ----------------------------------------------
  */
 
-logoBtn.addEventListener('click', sendToFlow, false);
+if (!document.body.classList.contains('flow')) {
+  logoBtn.addEventListener('click', sendToFlow, false);
+}
