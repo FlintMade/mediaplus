@@ -27,10 +27,10 @@
             <?php if ($large): ?>
               <source media="(min-width: 1000px)" srcset="<?php echo $large; ?>">
             <?php endif; ?>
-            <img src="<?php echo $medium; ?>" alt="" role="none" />
+            <img src="<?php echo $medium; ?>" alt="" role="none presentation" />
           </picture>
         <?php else: ?>
-          <img class="post__placeholder" src="<?php echo get_template_directory_uri(); ?>/svgs/post-placeholder.svg" alt="" role="none" />
+          <img class="post__placeholder" src="<?php echo get_template_directory_uri(); ?>/svgs/post-placeholder.svg" alt="" role="none presentation" />
         <?php endif; ?>
       </div>
 

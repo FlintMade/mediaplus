@@ -4,7 +4,7 @@
     <?php if (have_rows('intro_lines')): while (have_rows('intro_lines')): the_row(); ?>
       <p>
         <span class="home-intro__line"><?php echo get_sub_field('intro_line'); ?></span>
-        <span class="overlay" role="none"></span>
+        <span class="overlay" role="none presentation"></span>
       </p>
     <?php endwhile; endif; ?>
   </div>
@@ -14,8 +14,8 @@
   </a>
 </div>
 <div class="case-studies" id="flow">
-  <span class="status-bar" role="none">
-    <span class="status-bar__value" id="loader-value" role="none"></span>
+  <span class="status-bar" role="none presentation">
+    <span class="status-bar__value" id="loader-value" role="none presentation"></span>
   </span>
 </div>
 

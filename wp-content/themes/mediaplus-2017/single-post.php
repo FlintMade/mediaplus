@@ -20,7 +20,7 @@
           <?php if ($xl): ?>
             <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
           <?php endif; ?>
-          <img src="<?php echo $large; ?>" alt="" role="none" />
+          <img src="<?php echo $large; ?>" alt="" role="none presentation" />
         </picture>
       </div>
     </div>

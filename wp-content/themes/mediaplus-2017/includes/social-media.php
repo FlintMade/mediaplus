@@ -1,8 +1,10 @@
+<?php $currentID = get_the_ID(); ?>
+
 <!-- OpenGraph docs: https://developers.facebook.com/docs/sharing/webmasters | Cache bust: https://developers.facebook.com/tools/debug/ -->
 <meta property="og:url" content="<?php echo the_permalink(); ?>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="<?php echo the_title(); ?> | <?php echo get_bloginfo('name'); ?>">
-<meta property="og:description" content="<?php echo wp_strip_all_tags(get_the_excerpt());?>">
+<meta property="og:description" content="<?php echo wp_strip_all_tags(get_the_excerpt($currentID));?>">
 <meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>">
 <meta property="og:locale" content="en_US">
 
@@ -13,7 +15,6 @@
 <meta name="twitter:title" content="<?php echo the_title(); ?> | <?php echo get_bloginfo('name'); ?>">
 
 <?php
-  $currentID = get_the_ID();
   $thumb_override = get_field('thumbnail_override', $currentID);
   $thumb = get_the_post_thumbnail_url($currentID, 'mediaplus-thumb-m');
   $banner = get_field('top_banner_image');

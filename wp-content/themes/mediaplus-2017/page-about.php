@@ -22,9 +22,9 @@
         <?php endif; ?>
         <?php if ($xl): ?>
           <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
-          <img src="<?php echo $xl; ?>" alt="" role="none" />
+          <img src="<?php echo $xl; ?>" alt="" role="none presentation" />
         <?php else: ?>
-          <img src="<?php echo $large; ?>" alt="" role="none" />
+          <img src="<?php echo $large; ?>" alt="" role="none presentation" />
         <?php endif; ?>
       </picture>
     </div>

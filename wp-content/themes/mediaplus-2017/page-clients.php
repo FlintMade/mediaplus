@@ -73,88 +73,88 @@
   </div>
 <?php endwhile;?>
 
-<section class="page-section">
-  <h2 class="sr-only">Client list</h2>
-  <?php
-    $args = array(
-      'post_type' => 'clientele',
-      'post_status' => 'publish',
-      'posts_per_page' => -1,
-      'order' => 'menu_order',
-    );
-    $items = get_posts($args);
-  ?>
-  <ul class="meta-items row-items clients buoyant-parent">
-    <?php foreach ($items as $item): ?>
-      <li class="row row--third-two-thirds row-item client">
-        <div class="grid-col client__header">
-          <h3><?php echo get_the_title($item->ID); ?></h3>
-          <button class="row-toggle" aria-label="Expand client details" aria-expanded="false" aria-controls="details-<?php echo $item->post_name; ?>">
-            <svg class="row-toggle__expand" role="img" title="Media plus"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#expand"></use></svg>
-            <svg class="row-toggle__collapse" role="img" title="Media plus"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#collapse"></use></svg>
-          </button>
-        </div>
+  <section class="page-section">
+    <h2 class="sr-only">Client list</h2>
+    <?php
+      $args = array(
+        'post_type' => 'clientele',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'order' => 'menu_order',
+      );
+      $items = get_posts($args);
+    ?>
+    <ul class="meta-items row-items clients buoyant-parent">
+      <?php foreach ($items as $item): ?>
+        <li class="row row--third-two-thirds row-item client">
+          <div class="grid-col client__header">
+            <h3><?php echo get_the_title($item->ID); ?></h3>
+            <button class="row-toggle" aria-label="Expand client details" aria-expanded="false" aria-controls="details-<?php echo $item->post_name; ?>">
+              <svg class="row-toggle__expand" role="img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#expand"></use></svg>
+              <svg class="row-toggle__collapse" role="img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#collapse"></use></svg>
+            </button>
+          </div>
 
-        <div id="details-<?php echo $item->post_name; ?>" class="grid-col client__details">
-          <div class="client__details-interior">
-            <div class="row row--flush row--thirds">
-              <!-- CLIENT DATES -->
-              <div class="client__dates">
-                <?php echo get_field('dates_of_service', $item->ID); ?>
+          <div id="details-<?php echo $item->post_name; ?>" class="grid-col client__details">
+            <div class="client__details-interior">
+              <div class="row row--flush row--thirds">
+                <!-- CLIENT DATES -->
+                <div class="client__dates">
+                  <?php echo get_field('dates_of_service', $item->ID); ?>
+                </div>
+
+                <!-- CLIENT PROCESS ITEMS -->
+                <?php 
+                  $posts = get_field('process_items', $item->ID);
+                  if($posts):
+                  $item_count = count($posts);
+                  $i = 0;
+                ?>
+                  <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
+                    <h4 aria-label="Services for this client">Service</h4>
+                    <ul class="client__details-list">
+                      <?php foreach($posts as $post): ?>
+                        <?php setup_postdata($post); ?>
+                        <li><?php the_title(); ?><?php if ($item_count > 1 && $i == 0){echo ' <span class="client__item-count">(' . str_pad($item_count, 2, '0', STR_PAD_LEFT) . ')</span>'; } ?></li>
+                      <?php $i++; endforeach; ?>
+                    </ul>
+                  </div>
+                  <?php wp_reset_postdata(); ?>
+                <?php endif; ?>
+
+                <!-- CLIENT EXPERTISE AREAS -->
+                <?php 
+                  $posts = get_field('relevant_expertise', $item->ID);
+                  if($posts):
+                  $item_count = count($posts);
+                  $i = 0;
+                ?>
+                  <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
+                    <h4 aria-label="Client category">Category</h4>
+                    <ul class="client__details-list">
+                      <?php foreach($posts as $post): ?>
+                        <?php setup_postdata($post); ?>
+                        <li><?php the_title(); ?><?php if ($item_count > 1 && $i == 0){echo ' <span class="client__item-count">(' . str_pad($item_count, 2, '0', STR_PAD_LEFT) . ')</span>'; } ?></li>
+                      <?php $i++; endforeach; ?>
+                    </ul>
+                  </div>
+                  <?php wp_reset_postdata(); ?>
+                <?php endif; ?>
               </div>
 
-              <!-- CLIENT PROCESS ITEMS -->
-              <?php 
-                $posts = get_field('process_items', $item->ID);
-                if($posts):
-                $item_count = count($posts);
-                $i = 0;
+              <!-- MORE INFO LINK -->
+              <?php
+                $more_info_link = get_field('more', $item->ID);
+                if ($more_info_link):
               ?>
-                <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
-                  <h4 aria-label="Services for this client">Service</h4>
-                  <ul class="client__details-list">
-                    <?php foreach($posts as $post): ?>
-                      <?php setup_postdata($post); ?>
-                      <li><?php the_title(); ?><?php if ($item_count > 1 && $i == 0){echo ' <span class="client__item-count">(' . str_pad($item_count, 2, '0', STR_PAD_LEFT) . ')</span>'; } ?></li>
-                    <?php $i++; endforeach; ?>
-                  </ul>
-                </div>
-                <?php wp_reset_postdata(); ?>
-              <?php endif; ?>
-
-              <!-- CLIENT EXPERTISE AREAS -->
-              <?php 
-                $posts = get_field('relevant_expertise', $item->ID);
-                if($posts):
-                $item_count = count($posts);
-                $i = 0;
-              ?>
-                <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
-                  <h4 aria-label="Client category">Category</h4>
-                  <ul class="client__details-list">
-                    <?php foreach($posts as $post): ?>
-                      <?php setup_postdata($post); ?>
-                      <li><?php the_title(); ?><?php if ($item_count > 1 && $i == 0){echo ' <span class="client__item-count">(' . str_pad($item_count, 2, '0', STR_PAD_LEFT) . ')</span>'; } ?></li>
-                    <?php $i++; endforeach; ?>
-                  </ul>
-                </div>
-                <?php wp_reset_postdata(); ?>
+                <a class="more-link client__more" href="<?php echo $more_info_link; ?>">More info <?php include('svgs/arrow.svg'); ?></a>
               <?php endif; ?>
             </div>
-
-            <!-- MORE INFO LINK -->
-            <?php
-              $more_info_link = get_field('more', $item->ID);
-              if ($more_info_link):
-            ?>
-              <a class="more-link client__more" href="<?php echo $more_info_link; ?>">More info <?php include('svgs/arrow.svg'); ?></a>
-            <?php endif; ?>
           </div>
-        </div>
-      </li>
-    <?php endforeach; ?>
-  </ul>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </section>
 </div>
-</section>
 
 <?php get_footer(); ?>

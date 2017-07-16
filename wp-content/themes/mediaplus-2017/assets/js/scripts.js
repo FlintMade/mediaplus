@@ -163,7 +163,7 @@ if (supportedTransform()) {
   menuBtn.setAttribute('id', 'js-menu-toggle');
   menuBtn.setAttribute('aria-label', 'Site menu');
   menuBtn.setAttribute('aria-controls', 'js-menu');
-  menuBtn.innerHTML = '<svg class="menu-toggle__open" role="none" viewBox="0 0 33 33"><circle class="st0" fill="#E9E9E9" cx="16.5" cy="16.5" r="16"/><path class="st1" fill="#909090" d="M7 21.6h12.1v1.5H7zM7 17.7h19.1v1.5H7zM7 13.8h15.8v1.5H7zM7 9.9h19.1v1.5H7z"/></svg><svg class="menu-toggle__close" viewBox="0 0 33 33"><circle class="st0" fill="#E9E9E9" cx="16.5" cy="16.5" r="16"/><path class="st1" fill="#949494" d="M9.217 22.652L22.722 9.146l1.06 1.06-13.505 13.506z"/><path class="st1" fill="#949494" d="M9.217 10.348l1.06-1.06 13.506 13.505-1.06 1.06z"/></svg>';
+  menuBtn.innerHTML = '<svg class="menu-toggle__open" role="none presentation" viewBox="0 0 33 33"><circle class="st0" fill="#E9E9E9" cx="16.5" cy="16.5" r="16"/><path class="st1" fill="#909090" d="M7 21.6h12.1v1.5H7zM7 17.7h19.1v1.5H7zM7 13.8h15.8v1.5H7zM7 9.9h19.1v1.5H7z"/></svg><svg class="menu-toggle__close" viewBox="0 0 33 33"><circle class="st0" fill="#E9E9E9" cx="16.5" cy="16.5" r="16"/><path class="st1" fill="#949494" d="M9.217 22.652L22.722 9.146l1.06 1.06-13.505 13.506z"/><path class="st1" fill="#949494" d="M9.217 10.348l1.06-1.06 13.506 13.505-1.06 1.06z"/></svg>';
 
   // Page overlay properties
   headerOverlay.classList.add('page-overlay');

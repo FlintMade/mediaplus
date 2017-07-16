@@ -166,7 +166,7 @@
               </p>
             <?php endif; ?>
             <?php if ($block_image): ?>
-              <img src="<?php echo $block_image; ?>" alt="" role="none" />
+              <img src="<?php echo $block_image; ?>" alt="" role="none presentation" />
             <?php endif; ?>
           </div>
         </section>

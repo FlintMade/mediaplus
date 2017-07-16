@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <meta name="format-detection" content="telephone=no">
-  <?php while (have_posts()): the_post(); ?>
-    <meta name="description" content="<?php echo wp_strip_all_tags(get_the_excerpt());?>" />
-    <?php include('includes/social-media.php'); ?>
-  <?php endwhile; ?>
+  <?php include('includes/social-media.php'); ?>
 
   <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon-16.png" sizes="16x16" type="image/png">
   <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon-32.png" sizes="32x32" type="image/png">
@@ -30,14 +27,14 @@
     <div class="header__context">
       <a class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus show case studies" id="logo-btn">
         <span class="logo__text-wrap <?php if (is_singular('expertise') || is_singular('offerings')): ?>abbreviated<?php endif; ?>">
-          <svg class="logo__text" title="Media plus">
+          <svg class="logo__text">
             <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#media"/>
           </svg>
         </span>
-        <svg class="logo__plus" title="Media plus">
+        <svg class="logo__plus">
           <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#plusBig"/>
         </svg>
-        <span class="teaser" role="none"></span>
+        <span class="teaser" role="none presentation"></span>
       </a>
     </div>
 
