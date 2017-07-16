@@ -85,7 +85,7 @@ function mediaplus_scripts() {
 	wp_script_add_data('html5', 'conditional', 'lt IE 9');
 
 	// Load theme scripts on pages w/o page-specific scripts
-	if (is_404() || is_singular('post')) {
+	if (is_page(13) || is_404() || is_singular('post')) {
 		wp_enqueue_script('scripts', get_theme_file_uri('/assets/js/compiled/scripts.min.js'), array(), $versionString, true);
 	}
 
