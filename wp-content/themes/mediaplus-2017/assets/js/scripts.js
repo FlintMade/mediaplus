@@ -82,7 +82,7 @@ if (pageBanner) {
 
 // Buoyant grid items
 var bobInRows = function() {
-  var scrolledTo = window.scrollY + window.innerHeight,
+  var scrolledTo = window.pageYOffset + window.innerHeight,
       buoyantRows = document.querySelectorAll('.buoyant-parent:not(.animated)');
   for (var i = 0; i < buoyantRows.length; i++) {
     var thisParent = buoyantRows[i],

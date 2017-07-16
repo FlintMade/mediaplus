@@ -17,9 +17,11 @@ $('#postPreviews').append('<p class="load-status" id="loader" aria-hidden="true"
 var loader = document.getElementById('loader');
 
 var morePosts = debounce(function() {
+  console.log('more posts has fired');
   var footerHeight = document.querySelector('.footer').offsetHeight;
   var lastPostHeight = document.querySelector('.post-preview:last-of-type').offsetHeight;
-  if ((window.scrollY + window.innerHeight) >= document.body.clientHeight - footerHeight - lastPostHeight) {
+  if ((window.pageYOffset + window.innerHeight) >= document.body.clientHeight - footerHeight - lastPostHeight) {
+    console.log('reached bottom of page');
     pageNumber++;
     $.ajax({
       url: ajaxpagination.ajaxurl,
@@ -29,7 +31,6 @@ var morePosts = debounce(function() {
         query_vars: ajaxpagination.query_vars,
         page: pageNumber
       },
-      cache: false,
       beforeSend: function() {
         loader.removeAttribute('aria-hidden');
         console.log('before worked');
@@ -68,7 +69,6 @@ var scrollEvents = function() {
 };
 
 window.addEventListener('scroll', scrollEvents, false);
-window.addEventListener('touchmove', scrollEvents, false);
 window.addEventListener('touchend', scrollEvents, false);
 
 // See scripts.js

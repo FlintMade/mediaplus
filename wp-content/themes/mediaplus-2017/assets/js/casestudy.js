@@ -97,7 +97,7 @@ var resetCaseStudy = function() {
         thisHeight = caseStudies[i].offsetHeight;
 
     // Scrolling up
-    if (window.scrollY < lastScroll) {
+    if (window.pageYOffset < lastScroll) {
       if ((thisTop + thisHeight - window.innerHeight / 3) >= 0) {
         setRecentCS(caseStudies[i]);
         break;
@@ -173,7 +173,7 @@ var animateLoader = function(scrolledTo, loaderValue) {
       loaderValue.style.width = (1 - spaceBelow) * 100 + '%';
     } else {
       // Scrolling up
-      if (window.scrollY < lastScroll && spaceBelow > 1) {
+      if (window.pageYOffset < lastScroll && spaceBelow > 1) {
         loaderValue.style.width = 0;
       }
     }
@@ -192,7 +192,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
   resetCaseStudy();
 
   // If scrolling up
-  if (window.scrollY < lastScroll) {
+  if (window.pageYOffset < lastScroll) {
     // Hide the visible "next" link
     hideNextLink();
 
@@ -229,7 +229,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
     }
 
     // Set new scroll top
-    lastScroll = window.scrollY;
+    lastScroll = window.pageYOffset;
   }
 }, 200);
 
@@ -240,7 +240,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 
 // These are separate because they need different intervals
 var scrollEvents = function(){
-  var scrolledTo = window.scrollY + window.innerHeight;
+  var scrolledTo = window.pageYOffset + window.innerHeight;
   animateLoader(scrolledTo, loaderValue);
   scrollThruCS(scrolledTo, loaderValue);
 };
