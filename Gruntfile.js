@@ -9,13 +9,13 @@ module.exports = function(grunt) {
 					style: 'compressed'
 				},
 				files: {
-					'wp-content/themes/mediaplus-2017/assets/css/about.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/about.scss',
-					'wp-content/themes/mediaplus-2017/assets/css/casestudy.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/casestudy.scss',
-					'wp-content/themes/mediaplus-2017/assets/css/clients.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/clients.scss',
-					'wp-content/themes/mediaplus-2017/assets/css/contact.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/contact.scss',
-					'wp-content/themes/mediaplus-2017/assets/css/errors.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/errors.scss',
-					'wp-content/themes/mediaplus-2017/assets/css/home.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/home.scss',
-					'wp-content/themes/mediaplus-2017/assets/css/journal.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/journal.scss'
+					'wp-content/themes/mediaplus-2017/assets/css/compiled/about.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/about.scss',
+					'wp-content/themes/mediaplus-2017/assets/css/compiled/casestudy.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/casestudy.scss',
+					'wp-content/themes/mediaplus-2017/assets/css/compiled/clients.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/clients.scss',
+					'wp-content/themes/mediaplus-2017/assets/css/compiled/contact.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/contact.scss',
+					'wp-content/themes/mediaplus-2017/assets/css/compiled/errors.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/errors.scss',
+					'wp-content/themes/mediaplus-2017/assets/css/compiled/home.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/home.scss',
+					'wp-content/themes/mediaplus-2017/assets/css/compiled/journal.css': 'wp-content/themes/mediaplus-2017/assets/css/pages/journal.scss'
 				}
 			}
 		},
