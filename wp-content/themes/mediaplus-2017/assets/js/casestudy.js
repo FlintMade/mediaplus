@@ -53,7 +53,7 @@ var lastScroll = 0,
  */
 
 // Ajax case study
-var fetchTheCS = function(nextID, currentCS, loaderValue, successFunction) {
+var fetchTheCS = function(nextID, nextLink, currentCS, loaderValue, successFunction) {
   $.ajax({
     url: loadNextCaseStudy.ajaxurl,
     type: 'post',
@@ -75,13 +75,12 @@ var fetchTheCS = function(nextID, currentCS, loaderValue, successFunction) {
       loaderValue.style.display = 'block';
       $('#flow').append(newPosts);
       setUpGalleries();
+      showNextLink(nextLink);
 
       if (successFunction) {
         if (successFunction == fadeReplaceCS) {
           fadeReplaceCS(currentCS);
         }
-      } else {
-        resetCaseStudy();
       }
     }
   });
@@ -186,16 +185,14 @@ var animateLoader = function(scrolledTo, loaderValue) {
 var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
   var currentCS = document.querySelector('.case-study--current');
 
-  // Reset recent case study
-  resetCaseStudy();
-
   // If scrolling up
   if (window.pageYOffset < lastScroll) {
     // Hide the visible "next" link
     hideNextLink();
+    resetCaseStudy();
 
   // Scrolling down
-} else {    
+  } else {    
     var newCS = document.querySelector('.case-study--new'),
         numCS = document.querySelectorAll('.case-study').length;
 
@@ -211,16 +208,15 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
     if (scrolledTo >= document.body.clientHeight - 50) {
       if (newCS) {
         slideUpCS();
+        resetCaseStudy();
       } else {
         if (currentCS) {
           var currentID = currentCS.getAttribute('id').replace('cs-', ''),
               nextLink = document.getElementById('after-' + currentID),
               nextID = nextLink.getAttribute('data-postid');
-          if (nextLink) {
-            showNextLink(nextLink);
-    
+          if (nextLink) {    
             // Ajax in a new case study
-            fetchTheCS(nextID, currentCS, loaderValue);
+            fetchTheCS(nextID, nextLink, currentCS, loaderValue);
           }
         }
       }
@@ -293,7 +289,7 @@ var navigateNewCS = function(e) {
   }
   
   // Ajax in new case study
-  fetchTheCS(nextID, currentCS, loaderValue, fadeReplaceCS);
+  fetchTheCS(nextID, link, currentCS, loaderValue, fadeReplaceCS);
   attachScrollEvents();
 };
 
