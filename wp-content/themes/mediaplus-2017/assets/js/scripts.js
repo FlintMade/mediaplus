@@ -171,7 +171,7 @@ if (supportedTransform()) {
   headerOverlay.setAttribute('role', 'none');
 
   // Menu properties
-  menu.setAttribute('aria-labelledby', 'menu-button');
+  menu.setAttribute('aria-labelledby', 'js-menu-toggle');
 
   // Hide menu on page load if mobile or in main flow
   if (window.outerWidth > bpHeaderSmall && !document.body.classList.contains('flow')) {
