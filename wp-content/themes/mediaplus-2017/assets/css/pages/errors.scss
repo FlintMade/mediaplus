@@ -1,0 +1,29 @@
+/*
+ *	=============================================
+ *	ERROR PAGES
+ *	=============================================
+ */
+
+.error404 .page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: $space-s;
+  max-width: 30em;
+  height: 100%;
+  text-align: center;
+
+  * {
+    text-align: left;
+  }
+
+  a:link, a:visited {
+    transition: color 200ms, border-bottom-color 200ms;
+  }
+
+  a:hover {
+    border-bottom-color: transparent;
+    color: $redorange;
+  }
+}
