@@ -18,10 +18,10 @@
     <div class="page-banner__media">
       <picture>
         <?php if ($xxl): ?>
-          <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
+          <source media="(min-width: 1400px)" srcset="<?php echo $xxl; ?>">
         <?php endif; ?>
         <?php if ($xl): ?>
-          <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
+          <source media="(min-width: 1000px)" srcset="<?php echo $xl; ?>">
           <img src="<?php echo $xl; ?>" alt="" role="none presentation" />
         <?php else: ?>
           <img src="<?php echo $large; ?>" alt="" role="none presentation" />
@@ -97,16 +97,28 @@
       $items = get_posts($args);
       foreach ($items as $item):
       $person_image = get_field('person_image', $item->ID);
-      $xl = $person_image['sizes']['mediaplus-person-xl'];
+      $medium = $person_image['sizes']['mediaplus-m'];
       $large = $person_image['sizes']['large'];
       $email = get_field('person_email', $item->ID);
       $phone = get_field('person_number', $item->ID);
     ?>
-      <div class="grid-col buoyant-kid person" <?php if ($large){echo 'style="background-image: url(\'' . $large . '\')"';} ?>>
+      <div class="grid-col buoyant-kid person person--<?php echo $item->post_name; ?>">
         <div class="person__initial">
           <h3><?php echo $item->post_title; ?></h3>
           <p class="meta"><?php echo get_field('person_title', $item->ID) ?></p>
         </div>
+
+        <style>
+          .person--<?php echo $item->post_name; ?> {
+            background-image: url('<?php echo $medium; ?>');
+          }
+
+          @media (min-width: 500px) {
+            .person--<?php echo $item->post_name; ?> {
+              background-image: url('<?php echo $large; ?>');
+            }
+          }
+        </style>
 
         <button class="meta person__toggle" aria-expanded="false" aria-controls="bio-<?php echo $item->post_name; ?>" data-name="<?php echo $item->post_title; ?>">
           <span aria-label="View more info about <?php echo $item->post_name; ?>">More Info+</span>

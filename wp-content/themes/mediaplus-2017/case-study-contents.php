@@ -87,9 +87,10 @@
                     <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
                   <?php endif; ?>
                   <?php if ($xl): ?>
-                    <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
+                    <source media="(min-width: 1024px)" srcset="<?php echo $xl; ?>">
                   <?php endif; ?>
-                  <source media="(min-width: 500px)" srcset="<?php echo $medium; ?>">
+                  <source media="(min-width: 900px)" srcset="<?php echo $large; ?>">
+                  <source media="(min-width: 600px)" srcset="<?php echo $medium; ?>">
                   <source media="(min-width: 0)" srcset="<?php echo $small; ?>">
                   <img src="<?php echo $large; ?>" alt="<?php echo $image_text; ?>" />
                 </picture>
@@ -123,14 +124,8 @@
       <section class="row row--image page-section">
         <div class="grid-col <?php if ($alignment == 'Right'): ?>grid-col--right<?php endif; ?>">
           <picture>
-            <?php if ($xxl): ?>
-              <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
-            <?php endif; ?>
-            <?php if ($xl): ?>
-              <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
-            <?php endif; ?>
-            <source media="(min-width: 576px)" srcset="<?php echo $large; ?>">
-            <source media="(min-width: 0)" srcset="<?php echo $small; ?>">
+            <source media="(min-width: 900px)" srcset="<?php echo $large; ?>">
+            <source media="(min-width: 0)" srcset="<?php echo $medium; ?>">
             <?php if ($large): ?>
               <img src="<?php echo $large; ?>" alt="<?php echo $image['alt']; ?>" />
             <?php else: ?>

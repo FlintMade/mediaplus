@@ -25,7 +25,7 @@
         ?>
           <picture>
             <?php if ($large): ?>
-              <source media="(min-width: 1000px)" srcset="<?php echo $large; ?>">
+              <source media="(min-width: 1500px)" srcset="<?php echo $large; ?>">
             <?php endif; ?>
             <img src="<?php echo $medium; ?>" alt="" role="none presentation" />
           </picture>

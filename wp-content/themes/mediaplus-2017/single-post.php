@@ -15,12 +15,14 @@
       <div class="page-banner__media">
         <picture>
           <?php if ($xxl): ?>
-            <source media="(min-width: 1200px)" srcset="<?php echo $xxl; ?>">
+            <source media="(min-width: 1400px)" srcset="<?php echo $xxl; ?>">
           <?php endif; ?>
           <?php if ($xl): ?>
-            <source media="(min-width: 800px)" srcset="<?php echo $xl; ?>">
+            <source media="(min-width: 1000px)" srcset="<?php echo $xl; ?>">
+            <img src="<?php echo $xl; ?>" alt="" role="none presentation" />
+          <?php else: ?>
+            <img src="<?php echo $large; ?>" alt="" role="none presentation" />
           <?php endif; ?>
-          <img src="<?php echo $large; ?>" alt="" role="none presentation" />
         </picture>
       </div>
     </div>
