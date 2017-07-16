@@ -263,6 +263,7 @@ var clickToLoadCS = function(e) {
 
   // Swipe up the next link and then fade in the case study
   slideUpCS();
+  resetCaseStudy();
 };
 
 /*
