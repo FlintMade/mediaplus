@@ -120,11 +120,14 @@ var setUpFirstCS = function() {
 
     window.removeEventListener('mousewheel', scrollAwayIntro, false);
     window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
+    window.removeEventListener('touchmove', scrollAwayIntro, false);
+    window.removeEventListener('touchend', scrollAwayIntro, false);
 
     window.addEventListener('mousewheel', scrollEvents, false);
     window.addEventListener('DOMMouseScroll', scrollEvents, false);
-    window.addEventListener('touchmove', scrollEvents, false);
-    window.addEventListener('touchend', scrollEvents, false);
+    window.removeEventListener('touchmove', scrollEvents, false);
+    attachScrollEvents();
+
     window.addEventListener('resize', resizeSidebar);
 
     if (homeIntro.parentNode) {

@@ -71,7 +71,7 @@ add_action('wp_print_scripts', 'wpdocs_dequeue_script', 100);
 function mediaplus_scripts() {
 
 	// Cache busting for all scripts that have or will change
-	$versionString = '07.15.17.01';
+	$versionString = '07.15.17.04';
 
 	// Remove silly WP stuff
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
