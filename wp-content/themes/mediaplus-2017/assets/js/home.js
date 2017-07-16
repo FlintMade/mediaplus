@@ -11,7 +11,6 @@
   *  Remember home as last "case study flow" page
   *	---------------------------------------------
   */
-
 localStorage.setItem('recentPage', 'home');
 
 /*
@@ -68,7 +67,6 @@ var revealText = function() {
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('touchmove', scrollAwayIntro, false);
-    window.addEventListener('touchend', scrollAwayIntro, false);
   }, (overlays.length - .5) * revealInterval);
 };
 
@@ -121,7 +119,6 @@ var setUpFirstCS = function() {
     window.removeEventListener('mousewheel', scrollAwayIntro, false);
     window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.removeEventListener('touchmove', scrollAwayIntro, false);
-    window.removeEventListener('touchend', scrollAwayIntro, false);
 
     window.addEventListener('mousewheel', scrollEvents, false);
     window.addEventListener('DOMMouseScroll', scrollEvents, false);
@@ -137,15 +134,11 @@ var setUpFirstCS = function() {
 };
 
 var scrollAwayIntro = function(e) {
-  if (e.currentTarget === homeScrollLink) {
-    clickAwayIntro(e);
-  } else {
-    delta++;
-    var scrollAmount = 5 * Math.abs(delta);
-    homeIntro.style.top = '-' + scrollAmount + '%';
-    if (scrollAmount >= 100) {
-      setUpFirstCS();
-    }
+  delta++;
+  var scrollAmount = 5 * Math.abs(delta);
+  homeIntro.style.top = '-' + scrollAmount + '%';
+  if (scrollAmount >= 100) {
+    setUpFirstCS();
   }
 };
 
