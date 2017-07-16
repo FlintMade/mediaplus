@@ -70,21 +70,19 @@ var fetchTheCS = function(nextID, currentCS, loaderValue, successFunction) {
     },
     success: function(newPosts) {
       loaderValue.style.width = '100%';
-      setTimeout(function(){
-        loaderValue.style.display = 'none';
-        loaderValue.style.width = '0';
-        loaderValue.style.display = 'block';
-        $('#flow').append(newPosts);
-        setUpGalleries();
+      loaderValue.style.display = 'none';
+      loaderValue.style.width = '0';
+      loaderValue.style.display = 'block';
+      $('#flow').append(newPosts);
+      setUpGalleries();
 
-        if (successFunction) {
-          if (successFunction == fadeReplaceCS) {
-            fadeReplaceCS(currentCS);
-          }
-        } else {
-          resetCaseStudy();
+      if (successFunction) {
+        if (successFunction == fadeReplaceCS) {
+          fadeReplaceCS(currentCS);
         }
-      }, 200);
+      } else {
+        resetCaseStudy();
+      }
     }
   });
 };
