@@ -169,6 +169,7 @@ blockquote {
 }
 
 input {
+  -webkit-appearance: none;
   padding: .75em 0;
   border: 0;
   border-bottom: 1px solid $grey-med;
