@@ -23,9 +23,9 @@
    *	---------------------------------------------
    */
 
-  var bizAttributesWrap = document.querySelector('.biz-attributes'),
-      bizAttributesLists = document.querySelectorAll('.biz-attributes ul'),
-      bizAttributes = document.querySelectorAll('.biz-attributes li[data-attr-slug]');
+  var bizAttributesWrap = document.querySelector('.expertise-attributes'),
+      bizAttributesLists = document.querySelectorAll('.expertise-attributes ul'),
+      bizAttributes = document.querySelectorAll('.expertise-attributes li[data-attr-slug]');
 
   var filterClients = function(e) {
     var currentAttr = e.target.getAttribute('data-attr-slug');
@@ -48,7 +48,7 @@
       e.target.classList.add('current');
 
       // Light up related clients
-      var detailsSections = document.querySelectorAll('.client__details-section');
+      var detailsSections = document.querySelectorAll('.expertise-section');
       for (var i = 0; i < detailsSections.length; i++) {
         if (detailsSections[i].getAttribute('data-clientAttr').indexOf(currentAttr) > -1) {
           findAncestor(detailsSections[i], 'client').classList.add('filtered');

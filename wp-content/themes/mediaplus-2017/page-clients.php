@@ -52,7 +52,7 @@
       </section>
 
       <!-- EXPERTISE ITEMS -->
-      <section class="grid-col">
+      <section class="grid-col expertise-attributes">
         <?php
           $args = array(
             'post_type' => 'expertise',
@@ -129,7 +129,7 @@
                   $item_count = count($posts);
                   $i = 0;
                 ?>
-                  <div class="clear client__details-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
+                  <div class="clear client__details-section expertise-section" data-clientAttr="<?php foreach($posts as $post){echo $post->post_name . ' ';} ?>">
                     <h4 aria-label="Client category">Category</h4>
                     <ul class="client__details-list">
                       <?php foreach($posts as $post): ?>
