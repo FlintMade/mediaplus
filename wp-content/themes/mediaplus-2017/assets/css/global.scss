@@ -138,12 +138,6 @@ blockquote {
   }
 }
 
-@media (min-width: $bp-l) {
-  ul, ol {
-    margin-left: 0;
-  }
-}
-
 @media (min-width: $bp-xxl) {
   body {
     font-size: 112.5%;
