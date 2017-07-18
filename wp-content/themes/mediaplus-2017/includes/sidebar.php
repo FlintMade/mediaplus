@@ -18,13 +18,5 @@
         </li>
       <?php endforeach; ?>
     </ul>
-    <ul class="case-study-sections">
-      <li>
-        <a class="sections__expertise" href="<?php echo get_post_type_archive_link('expertise'); ?>">Expertise</a>
-      </li>
-      <li>
-        <a class="sections__home" href="<?php echo get_bloginfo('url'); ?>">Intro</a>
-      </li>
-    </ul>
   </div>
 </nav>
