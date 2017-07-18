@@ -34,6 +34,10 @@ main {
 	color: #fff;
 }
 
+:focus {
+  outline: 0;
+}
+
 a:link, a:visited {
   border-bottom: 1px solid;
   text-decoration: none;
@@ -177,12 +181,6 @@ input {
   width: 100%;
   background: transparent;
   font: 400 100%/1.75 $font-body;
-
-  &:focus {
-    outline: 0;
-    border-color: $orange;
-    color: $redorange;
-  }
 }
 
 button {

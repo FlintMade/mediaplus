@@ -9,11 +9,6 @@
  *	---------------------------------------------
  */
 
-:focus {
-  outline: 1px solid rgba(245, 90, 0, .5);
-  outline-offset: 2px;
-}
-
 .menu-toggle:hover,
 a:hover .arrow {
   circle {
@@ -25,8 +20,7 @@ a:hover .arrow {
   }
 }
 
-.header__menu a:hover,
-.header__menu a:focus {
+.header__menu a:hover {
   outline: 0;
   color: $redorange;
 }
@@ -50,18 +44,7 @@ input:focus {
  */
 
 body.flow {
-  :focus {
-    outline: 1px solid rgba(255, 166, 0, .5);
-  }
-
-  button.menu-toggle:focus {
-    outline: 0;
-    border: 1px solid rgba(255, 166, 0, .5);
-    border-radius: 50%;
-  }
-
-  .header__menu a:hover,
-  .header__menu a:focus {
+  .header__menu a:hover {
     outline: 0;
     color: $orange;
   }
@@ -84,17 +67,6 @@ body.flow {
  */
 
 body.offerings {
-  :focus {
-    outline: 1px solid rgba(41, 127, 163, .5);
-  }
-
-  button.menu-toggle:focus {
-    outline: 0;
-    border: 1px solid rgba(41, 127, 163, .5);
-    border-radius: 50%;
-  }
-
-  .header__menu a:focus,
   .header__menu a:hover {
     outline: 0;
     color: $blue;
@@ -109,9 +81,5 @@ body.offerings {
     path {
       fill: #fff;
     }
-  }
-
-  input:focus {
-    border-color: $blue;
   }
 }

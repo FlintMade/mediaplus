@@ -59,8 +59,7 @@
     cursor: not-allowed;
   }
 
-  button:hover path,
-  button:focus path {
+  button:hover path {
     stroke: $grey-med;
   }
 }

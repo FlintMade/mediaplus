@@ -167,13 +167,8 @@
   font: 1.06em/1 $font-body;
   color: $grey-med;
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: $redorange;
-  }
-
-  &:focus {
-    outline: 0;
   }
 
   span {

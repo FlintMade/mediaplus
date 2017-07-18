@@ -60,15 +60,10 @@
   width: 100%;
   text-align: right;
 
-  &:hover,
-  &:focus {
+  &:hover {
     svg {
       fill: $grey-dark;
     }
-  }
-
-  &:focus {
-    outline: 0;
   }
 }
 

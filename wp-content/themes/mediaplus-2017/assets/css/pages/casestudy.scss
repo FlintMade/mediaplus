@@ -104,7 +104,6 @@
     transition: opacity 200ms;
   }
 
-  &:focus,
   &.visible {
     bottom: 0;
   }
@@ -131,10 +130,6 @@ a.next-case-study {
   &:first-child:after {
     height: 200%;
   }
-}
-
-body.flow .next-case-study:focus {
-  outline: 0;
 }
 
 /* Make space for the M+ */
@@ -234,7 +229,6 @@ body.flow .next-case-study:focus {
   h1, h2, h3, h4, h5, h6,
   blockquote,
   button:hover,
-  button:focus,
   .next-case-study:hover {
     color: $orange;
   }
@@ -395,17 +389,6 @@ body.flow .next-case-study:focus {
       opacity: 1;
     }
   }
-
-  &:focus {
-    .arrow {
-      opacity: .5;
-    }
-  }
-}
-
-body.flow .gallery__prev:focus,
-body.flow .gallery__next:focus {
-  outline: 0;
 }
 
 .gallery__prev {
@@ -571,10 +554,6 @@ body.flow .gallery__next:focus {
   }
 }
 
-.lists-wrapper:focus {
-  outline: 0;
-}
-
 .lists-wrapper.expanded {
   li:nth-child(n+7) {
     display: block;
@@ -587,10 +566,6 @@ body.flow .gallery__next:focus {
   top: -1.25em;
   right: .5em;
   padding: 1em;
-}
-
-body.flow .toggle-lists:focus {
-  outline: 0;
 }
 
 @media (min-width: 500px) {
