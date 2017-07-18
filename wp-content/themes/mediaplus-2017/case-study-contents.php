@@ -200,13 +200,4 @@
 </article>
 
 <!-- LINK TO NEXT CASE STUDY -->
-<?php
-  $next_post = get_previous_post();
-  if (!empty( $next_post )):
-?>
-  <a class="next-case-study" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>" id="after-<?php echo $post->ID; ?>" data-postid="<?php echo $next_post->ID; ?>">
-    <span>Next expertise:</span>
-    <span class="next__title">&ndash; <?php echo esc_attr($next_post->post_title); ?></span>
-    <?php include('svgs/arrow.svg'); ?>
-  </a>
-<?php endif; ?>
+<?php do_action('next_case_study'); ?>

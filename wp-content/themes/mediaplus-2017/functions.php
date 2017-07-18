@@ -13,14 +13,14 @@ function mediaplus_setup() {
 	 * hard-coded <title> tag in the document head, and expect WordPress to
 	 * provide it for us.
 	 */
-	add_theme_support( 'title-tag' );
+	add_theme_support('title-tag');
 
 	/*
 	 * Enable support for Post Thumbnails on posts and pages.
 	 *
 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
-	add_theme_support( 'post-thumbnails' );
+	add_theme_support('post-thumbnails');
 
 	add_image_size('mediaplus-m', 480, false);
 	
@@ -44,17 +44,17 @@ function mediaplus_setup() {
 
 	// This theme uses wp_nav_menu()
 function register_my_menu() {
-  register_nav_menu('header-menu',__( 'Header Menu' ));
+  register_nav_menu('header-menu',__('Header Menu'));
 }
-add_action( 'init', 'register_my_menu' );
+add_action('init', 'register_my_menu');
 
 // Add search form support
 function wpdocs_after_setup_theme() {
-    add_theme_support( 'html5', array( 'search-form' ) );
+    add_theme_support('html5', array('search-form'));
 }
-add_action( 'after_setup_theme', 'wpdocs_after_setup_theme' );
+add_action('after_setup_theme', 'wpdocs_after_setup_theme');
 }
-add_action( 'after_setup_theme', 'mediaplus_setup' );
+add_action('after_setup_theme', 'mediaplus_setup');
 
 /*
  *	SCRIPTS AND STYLES
@@ -77,8 +77,8 @@ function mediaplus_scripts() {
 	$versionString = '07.17.17';
 
 	// Remove silly WP stuff
-	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action('wp_head', 'print_emoji_detection_script', 7);
+	remove_action('wp_print_styles', 'print_emoji_styles');
 
 	// Load the html5 shiv.
 	wp_enqueue_script('html5', get_theme_file_uri('/assets/js/html5.js'), array(), false, false);
@@ -153,7 +153,7 @@ function mediaplus_scripts() {
 		'query_vars' => json_encode($wp_query->query)
 	));
 }
-add_action( 'wp_enqueue_scripts', 'mediaplus_scripts' );
+add_action('wp_enqueue_scripts', 'mediaplus_scripts');
 
 /*
  *	LOAD FIRST CASE STUDY
@@ -162,11 +162,11 @@ add_action( 'wp_enqueue_scripts', 'mediaplus_scripts' );
  *	--------------------------------------------------------------------------------------
  */
 
-add_action( 'wp_ajax_nopriv_first_case_study', 'first_case_study');
-add_action( 'wp_ajax_first_case_study', 'first_case_study');
+add_action('wp_ajax_nopriv_first_case_study', 'first_case_study');
+add_action('wp_ajax_first_case_study', 'first_case_study');
 
 function first_case_study() {
-	$query_vars = json_decode(stripslashes( $_POST['query_vars'] ), true);
+	$query_vars = json_decode(stripslashes($_POST['query_vars']), true);
 	$query_vars['post_type'] = 'expertise';
 	$query_vars['posts_per_page'] = 1;
 	$posts = new WP_Query($query_vars);
@@ -190,17 +190,54 @@ function case_study_size_override() {
 }
 
 /*
+ *	GET NEXT CASE STUDY WITH ORDERBY TAKEN INTO ACCOUNT
+ *	Background: http://snipplr.com/view/74493/adjacent-post-by-alphabetical-order-in-wordpress/
+ *	--------------------------------------------------------------------------------------
+ */
+
+add_action('next_case_study', 'mediaplus_next_case_study', 16);
+function mediaplus_next_case_study() {
+
+	if (is_singular('expertise')) {
+		global $post, $wpdb;
+		
+		function filter_next_post_sort($sort) {
+			$sort = 'ORDER BY p.menu_order ASC LIMIT 1';
+				return $sort;
+		}
+
+		function filter_next_post_where($where) {
+			global $post, $wpdb;
+
+			$where = $wpdb->prepare("WHERE p.menu_order > '%s' AND p.post_type = 'expertise' AND p.post_status = 'publish'",$post->menu_order);
+			return $where;
+		}
+
+		add_filter('get_next_post_sort', 'filter_next_post_sort');
+		add_filter('get_next_post_where', 'filter_next_post_where');
+
+		$next_post = get_next_post();
+
+		if ($next_post) {
+			echo '<a class="next-case-study" href="' . get_permalink($next_post->ID) . '" id="after-' . $post->ID . '" data-postid="' . $next_post->ID . '"><span>Next expertise:</span><span class="next__title">&ndash; ' .$next_post->post_title. '</span><svg role="none presentation" xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 33 33"><circle class="arrow-circle" fill="#E6E6E6" cx="16.5" cy="16.5" r="16"/><path class="arrow-stroke" fill="#909090" d="M17.9 9.2l-1 1 5.5 5.6H7.8v1.4h14.6l-5.5 5.6 1 1 7.3-7.3z"/></svg></a>';
+		} else {
+		}
+	}
+
+}
+
+/*
  *	LOAD NEXT CASE STUDY
  *	For background: https://www.smashingmagazine.com/2011/10/how-to-use-ajax-in-wordpress/
  *	https://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side
  *	--------------------------------------------------------------------------------------
  */
 
-add_action( 'wp_ajax_nopriv_next_case_study', 'next_case_study');
-add_action( 'wp_ajax_next_case_study', 'next_case_study');
+add_action('wp_ajax_nopriv_next_case_study', 'next_case_study');
+add_action('wp_ajax_next_case_study', 'next_case_study');
 
 function next_case_study() {
-	$query_vars = json_decode(stripslashes( $_POST['query_vars'] ), true);
+	$query_vars = json_decode(stripslashes($_POST['query_vars']), true);
 	$query_vars['post_type'] = 'expertise';
 
 	$query_vars['p'] = $_POST['p'];
@@ -252,7 +289,7 @@ add_action('wp_ajax_nopriv_ajax_pagination', 'mediaplus_ajax_pagination');
 add_action('wp_ajax_ajax_pagination', 'mediaplus_ajax_pagination');
 
 function mediaplus_ajax_pagination() {
-	$query_vars = json_decode(stripslashes( $_POST['query_vars'] ), true);
+	$query_vars = json_decode(stripslashes($_POST['query_vars']), true);
 	$query_vars['paged'] = $_POST['page'];
 	$query_vars['post_status'] = 'publish';
 	$posts = new WP_Query($query_vars);
@@ -261,7 +298,7 @@ function mediaplus_ajax_pagination() {
 	add_filter('editor_max_image_size', 'journal_size_override');
 
 	if($posts->have_posts()) { 
-		while ( $posts->have_posts() ) { 
+		while ($posts->have_posts()) { 
 			$posts->the_post();
 			get_template_part('post-preview');
 		}
@@ -312,9 +349,9 @@ function mediaplus_gallery_shortcode($attr) {
 	static $instance = 0;
 	$instance++;
 
-	if ( ! empty( $attr['ids'] ) ) {
+	if (! empty($attr['ids'])) {
 			// 'ids' is explicitly ordered, unless you specify otherwise.
-			if ( empty( $attr['orderby'] ) ) {
+			if (empty($attr['orderby'])) {
 					$attr['orderby'] = 'post__in';
 			}
 			$attr['include'] = $attr['ids'];
@@ -335,37 +372,37 @@ function mediaplus_gallery_shortcode($attr) {
 		* @param array  $attr     Attributes of the gallery shortcode.
 		* @param int    $instance Unique numeric ID of this gallery shortcode instance.
 		*/
-	$output = apply_filters( 'post_gallery', '', $attr, $instance );
-	if ( $output != '' ) {
+	$output = apply_filters('post_gallery', '', $attr, $instance);
+	if ($output != '') {
 			return $output;
 	}
 
-	$html5 = current_theme_supports( 'html5', 'gallery' );
-	$atts = shortcode_atts( array(
+	$html5 = current_theme_supports('html5', 'gallery');
+	$atts = shortcode_atts(array(
 			'order'      => 'ASC',
 			'orderby'    => 'menu_order ID',
 			'id'         => $post ? $post->ID : 0,
 			'include'    => '',
 			'exclude'    => '',
 			'link'       => ''
-	), $attr, 'gallery' );
+	), $attr, 'gallery');
 
-	$id = intval( $atts['id'] );
+	$id = intval($atts['id']);
 
-	if ( ! empty( $atts['include'] ) ) {
-			$_attachments = get_posts( array( 'include' => $atts['include'], 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $atts['order'], 'orderby' => $atts['orderby'] ) );
+	if (! empty($atts['include'])) {
+			$_attachments = get_posts(array('include' => $atts['include'], 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $atts['order'], 'orderby' => $atts['orderby']));
 
 			$attachments = array();
-			foreach ( $_attachments as $key => $val ) {
+			foreach ($_attachments as $key => $val) {
 					$attachments[$val->ID] = $_attachments[$key];
 			}
-	} elseif ( ! empty( $atts['exclude'] ) ) {
-			$attachments = get_children( array( 'post_parent' => $id, 'exclude' => $atts['exclude'], 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $atts['order'], 'orderby' => $atts['orderby'] ) );
+	} elseif (! empty($atts['exclude'])) {
+			$attachments = get_children(array('post_parent' => $id, 'exclude' => $atts['exclude'], 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $atts['order'], 'orderby' => $atts['orderby']));
 	} else {
-			$attachments = get_children( array( 'post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $atts['order'], 'orderby' => $atts['orderby'] ) );
+			$attachments = get_children(array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $atts['order'], 'orderby' => $atts['orderby']));
 	}
 
-	if ( empty( $attachments ) ) {
+	if (empty($attachments)) {
 			return '';
 	}
 
@@ -380,20 +417,20 @@ function mediaplus_gallery_shortcode($attr) {
 		* @param string $gallery_style Default CSS styles and opening HTML div container
 		*                              for the gallery shortcode output.
 		*/
-	$output = apply_filters( 'gallery_style', $gallery_style . $gallery_div );
+	$output = apply_filters('gallery_style', $gallery_style . $gallery_div);
 
 	$i = 0;
-	foreach ( $attachments as $id => $attachment ) {
-			$image_output = wp_get_attachment_image( $id, $atts['size'], false, $attr );
-			$image_meta  = wp_get_attachment_metadata( $id );
+	foreach ($attachments as $id => $attachment) {
+			$image_output = wp_get_attachment_image($id, $atts['size'], false, $attr);
+			$image_meta  = wp_get_attachment_metadata($id);
 
 			$orientation = '';
-			if ( isset( $image_meta['height'], $image_meta['width'] ) ) {
-					$orientation = ( $image_meta['height'] > $image_meta['width'] ) ? 'portrait' : 'landscape';
+			if (isset($image_meta['height'], $image_meta['width'])) {
+					$orientation = ($image_meta['height'] > $image_meta['width']) ? 'portrait' : 'landscape';
 			}
 			$output .= "<div class='gallery-item'>";
 			$output .= "$image_output";
-			if (trim($attachment->post_excerpt) ) {
+			if (trim($attachment->post_excerpt)) {
 					$output .= "
 							<p class='wp-caption-text gallery-caption' id='$selector-$id'>
 							" . wptexturize($attachment->post_excerpt) . "
@@ -420,7 +457,7 @@ remove_action('shutdown', 'wp_ob_end_flush_all', 1);
 
 function flush_no_mediaplus() {
 	$levels = ob_get_level();
-	for ( $i = 0; $i < $levels - 1; $i++ )
+	for ($i = 0; $i < $levels - 1; $i++)
 		ob_end_flush();
 }
 
