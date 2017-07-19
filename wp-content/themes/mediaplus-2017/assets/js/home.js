@@ -65,13 +65,13 @@ var revealText = function() {
 
     setTimeout(function(){
       homeScrollLink.classList.add('pulse');
-    }, 400);
+    }, 1000);
 
     // Attach scroll-past-home events
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('touchmove', scrollAwayIntro, false);
-  }, overlays.length * revealInterval);
+  }, (overlays.length + .5) * revealInterval);
 };
 
 revealText();
