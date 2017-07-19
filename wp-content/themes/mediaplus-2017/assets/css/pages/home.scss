@@ -111,6 +111,75 @@ body.home {
     width: 32px;
     height: 32px;
   }
+
+  &.pulse {
+    .arrow circle {
+      animation: pulseCircle 4s infinite;
+    }
+
+    .arrow path {
+      animation: pulseArrow 4s infinite;
+    }
+  }
+
+  &:hover {
+    .arrow circle,
+    .arrow path {
+      animation-play-state: paused;
+    }
+  }
+}
+
+@keyframes pulseCircle {
+  0% {
+    fill: #e6e6e6;
+  }
+
+  15% {
+    fill: $orange;
+  }
+
+  30% {
+    fill: #e6e6e6;
+  }
+
+  45% {
+    fill: $orange;
+  }
+
+  60% {
+    fill: #e6e6e6;
+  }
+
+  100% {
+    fill: #e6e6e6;
+  }
+}
+
+@keyframes pulseArrow {
+  0% {
+    fill: #909090;
+  }
+
+  15% {
+    fill: #fff;
+  }
+
+  30% {
+    fill: #909090;
+  }
+
+  45% {
+    fill: #fff;
+  }
+
+  60% {
+    fill: #909090;
+  }
+
+  100% {
+    fill: #909090;
+  }
 }
 
 a.scroll-home {

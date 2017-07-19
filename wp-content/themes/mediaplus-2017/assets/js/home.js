@@ -63,6 +63,10 @@ var revealText = function() {
     fade(homeScrollLink, 0, 1, 400);
     loadFirstCaseStudy();
 
+    setTimeout(function(){
+      homeScrollLink.classList.add('pulse');
+    }, 400);
+
     // Attach scroll-past-home events
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
