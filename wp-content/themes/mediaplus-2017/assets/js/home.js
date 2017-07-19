@@ -71,7 +71,7 @@ var revealText = function() {
     window.addEventListener('mousewheel', scrollAwayIntro, false);
     window.addEventListener('DOMMouseScroll', scrollAwayIntro, false);
     window.addEventListener('touchmove', scrollAwayIntro, false);
-  }, (overlays.length - .5) * revealInterval);
+  }, overlays.length * revealInterval);
 };
 
 revealText();
