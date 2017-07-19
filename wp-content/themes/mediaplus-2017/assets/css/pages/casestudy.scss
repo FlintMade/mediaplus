@@ -71,6 +71,10 @@
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0));
     transition: height 1600ms;
   }
+
+  blockquote {
+    font-size: 1.5em;
+  }
 }
 
 .case-study--new {
@@ -182,6 +186,14 @@ a.next-case-study {
   }
 }
 
+@media (min-width: $bp-m) {
+  .case-study {
+    blockquote {
+      font-size: 2em;
+    }
+  }
+}
+
 @media (min-width: $bp-m) and (max-width: $bp-sidebar-l) {
   .case-studies,
   .next-case-study {
@@ -213,6 +225,10 @@ a.next-case-study {
 
   .case-study__title {
     display: none;
+  }
+
+  .case-study__headline {
+    font-size: 2.5625em;
   }
 
   .status-bar,
