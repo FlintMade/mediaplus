@@ -197,34 +197,30 @@ function case_study_size_override() {
 
 add_action('next_case_study', 'mediaplus_next_case_study', 16);
 function mediaplus_next_case_study() {
-
-	if (is_singular('expertise')) {
-		global $post, $wpdb;
-		
-		function filter_next_post_sort($sort) {
-			$sort = 'ORDER BY p.menu_order ASC LIMIT 1';
-				return $sort;
-		}
-
-		function filter_next_post_where($where) {
-			global $post, $wpdb;
-
-			$where = $wpdb->prepare("WHERE p.menu_order > '%s' AND p.post_type = 'expertise' AND p.post_status = 'publish'",$post->menu_order);
-			return $where;
-		}
-
-		add_filter('get_next_post_sort', 'filter_next_post_sort');
-		add_filter('get_next_post_where', 'filter_next_post_where');
-
-		$next_post = get_next_post();
-
-		if ($next_post) {
-			echo '<a class="next-case-study" href="' . get_permalink($next_post->ID) . '" id="after-' . $post->ID . '" data-postid="' . $next_post->ID . '"><span>Next expertise:</span><span class="next__title">&ndash; ' .$next_post->post_title. '</span><svg role="none presentation" xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 33 33"><circle class="arrow-circle" fill="#E6E6E6" cx="16.5" cy="16.5" r="16"/><path class="arrow-stroke" fill="#909090" d="M17.9 9.2l-1 1 5.5 5.6H7.8v1.4h14.6l-5.5 5.6 1 1 7.3-7.3z"/></svg></a>';
-		} else {
-			echo '<a class="next-case-study" href="' . get_permalink(7) . '" id="after-' . $post->ID . '"><span>Meet the team</span><span class="next__title">&ndash; About</span><svg role="none presentation" xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 33 33"><circle class="arrow-circle" fill="#E6E6E6" cx="16.5" cy="16.5" r="16"/><path class="arrow-stroke" fill="#909090" d="M17.9 9.2l-1 1 5.5 5.6H7.8v1.4h14.6l-5.5 5.6 1 1 7.3-7.3z"/></svg></a>';
-		}
+	global $post, $wpdb;
+	
+	function filter_next_post_sort($sort) {
+		$sort = 'ORDER BY p.menu_order ASC LIMIT 1';
+			return $sort;
 	}
 
+	function filter_next_post_where($where) {
+		global $post, $wpdb;
+
+		$where = $wpdb->prepare("WHERE p.menu_order > '%s' AND p.post_type = 'expertise' AND p.post_status = 'publish'",$post->menu_order);
+		return $where;
+	}
+
+	add_filter('get_next_post_sort', 'filter_next_post_sort');
+	add_filter('get_next_post_where', 'filter_next_post_where');
+
+	$next_post = get_next_post();
+
+	if ($next_post) {
+		echo '<a class="next-case-study" href="' . get_permalink($next_post->ID) . '" id="after-' . $post->ID . '" data-postid="' . $next_post->ID . '"><span>Next expertise:</span><span class="next__title">&ndash; ' .$next_post->post_title. '</span><svg role="none presentation" xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 33 33"><circle class="arrow-circle" fill="#E6E6E6" cx="16.5" cy="16.5" r="16"/><path class="arrow-stroke" fill="#909090" d="M17.9 9.2l-1 1 5.5 5.6H7.8v1.4h14.6l-5.5 5.6 1 1 7.3-7.3z"/></svg></a>';
+	} else {
+		echo '<a class="next-case-study" href="' . get_permalink(7) . '" id="after-' . $post->ID . '"><span>Meet the team</span><span class="next__title">&ndash; About</span><svg role="none presentation" xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 33 33"><circle class="arrow-circle" fill="#E6E6E6" cx="16.5" cy="16.5" r="16"/><path class="arrow-stroke" fill="#909090" d="M17.9 9.2l-1 1 5.5 5.6H7.8v1.4h14.6l-5.5 5.6 1 1 7.3-7.3z"/></svg></a>';
+	}
 }
 
 /*
