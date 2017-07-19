@@ -67,6 +67,7 @@
           <?php foreach ($items as $item): ?>
             <li data-attr-slug="<?php echo strtolower(str_replace(' ', '-', str_replace(' + ', '-', get_the_title($item->ID)))); ?>"><?php echo get_the_title($item->ID); ?></li>
           <?php endforeach; ?>
+          <li data-attr-slug="misc">Misc</li>
         </ul>
       </section>
     </div>
@@ -139,6 +140,13 @@
                     </ul>
                   </div>
                   <?php wp_reset_postdata(); ?>
+                <?php else: ?>
+                  <div class="clear client__details-section expertise-section" data-clientAttr="misc">
+                    <h4 aria-label="Client category">Category</h4>
+                    <ul class="client__details-list">
+                      <li>Misc</li>
+                    </ul>
+                  </div>
                 <?php endif; ?>
               </div>
 
