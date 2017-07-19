@@ -237,11 +237,13 @@ var scrollEvents = function(){
 
 var attachScrollEvents = function() {
   window.addEventListener('scroll', scrollEvents, false);
+  window.addEventListener('DOMMouseScroll', scrollEvents, false);
   window.addEventListener('touchend', scrollEvents, false);
 };
 
 var detachScrollEvents = function() {
   window.removeEventListener('scroll', scrollEvents, false);
+  window.removeEventListener('DOMMouseScroll', scrollEvents, false);
   window.removeEventListener('touchend', scrollEvents, false);
 };
 
@@ -266,6 +268,7 @@ var scrollToCS = function() {
     newCS.classList.remove('case-study--new');
     newCS.scrollIntoView({behavior: 'smooth'});
     nextLink.removeEventListener('click', clickToLoadCS, false);
+    hideNextLink();
 
     // Fade to case study
     setTimeout(function(){
@@ -278,7 +281,6 @@ var scrollToCS = function() {
 var clickToLoadCS = function(e) {
   e.preventDefault();
   scrollToCS();
-  hideNextLink();
   resetCaseStudy();
 };
 

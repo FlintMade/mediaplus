@@ -126,7 +126,7 @@ var setUpFirstCS = function() {
 
     window.addEventListener('mousewheel', scrollEvents, false);
     window.addEventListener('DOMMouseScroll', scrollEvents, false);
-    window.removeEventListener('touchmove', scrollEvents, false);
+    window.addEventListener('touchmove', scrollEvents, false);
     attachScrollEvents();
 
     window.addEventListener('resize', resizeSidebar);
