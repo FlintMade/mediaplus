@@ -28,9 +28,10 @@ module.exports = function(grunt) {
 				files: {
 					'wp-content/themes/mediaplus-2017/assets/js/compiled/scripts.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js'],
 					'wp-content/themes/mediaplus-2017/assets/js/compiled/about.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js', 'wp-content/themes/mediaplus-2017/assets/js/about.js'],
-					'wp-content/themes/mediaplus-2017/assets/js/compiled/casestudy.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js', 'wp-content/themes/mediaplus-2017/assets/js/casestudy.js'],
+					'wp-content/themes/mediaplus-2017/assets/js/compiled/casestudy.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js', 'wp-content/themes/mediaplus-2017/assets/js/smoothscroll.js', 'wp-content/themes/mediaplus-2017/assets/js/casestudy.js'],
 					'wp-content/themes/mediaplus-2017/assets/js/compiled/clients.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js', 'wp-content/themes/mediaplus-2017/assets/js/clients.js'],
-					'wp-content/themes/mediaplus-2017/assets/js/compiled/home.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js', 'wp-content/themes/mediaplus-2017/assets/js/casestudy.js', 'wp-content/themes/mediaplus-2017/assets/js/home.js'],
+					'wp-content/themes/mediaplus-2017/assets/js/compiled/home.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js', 
+					'wp-content/themes/mediaplus-2017/assets/js/smoothscroll.js', 'wp-content/themes/mediaplus-2017/assets/js/casestudy.js', 'wp-content/themes/mediaplus-2017/assets/js/home.js'],
 					'wp-content/themes/mediaplus-2017/assets/js/compiled/journal-index.min.js': ['wp-content/themes/mediaplus-2017/assets/js/scripts.js', 'wp-content/themes/mediaplus-2017/assets/js/journal-index.js']
 				}
 			}

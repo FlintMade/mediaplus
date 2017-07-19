@@ -7,6 +7,16 @@
  *	=============================================
  */
 
+.case-studies {
+  padding-left: 4.575em;
+  padding-right: 2rem;
+
+  .row {
+    margin-right: -2rem;
+    margin-left: -2rem;
+  }
+}
+
 .case-study-list {
   a:link, a:visited {
     opacity: .5;
@@ -32,6 +42,22 @@
   opacity: 1;
   transition: opacity 800ms;
 
+  /* Using instead of top border so that when case study scrolls to top, line is not seen */
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #e2e2e2;
+  }
+
+  &:first-child {
+    border-top: 0;
+  }
+
   &:first-child:after {
     display: block;
     content: '';
@@ -48,6 +74,10 @@
 
 .case-study--new {
   opacity: 0;
+
+  &:first-child {
+    opacity: 1;
+  }
 }
 
 .case-study__title {
@@ -117,25 +147,16 @@ a.next-case-study {
   font-family: $font-heading;
 }
 
-/* Next loaded case study, before transitioned in */
-.case-study--new {
-  min-height: 0;
-  height: 6em;
-  overflow: hidden;
-
-  &:first-child {
-    height: auto;
-  }
-
-  &:first-child:after {
-    height: 200%;
-  }
-}
-
 /* Make space for the M+ */
 @media (max-width: $bp-s) {
   .case-studies {
-    padding-left: 3.325em;
+    padding-right: 1.25rem;
+    padding-left: 4.575em;
+
+    .row {
+      margin-right: -1.25rem;
+      margin-left: -1.25rem;
+    }
   }
 
   .next-case-study {
@@ -150,12 +171,9 @@ a.next-case-study {
 }
 
 @media (min-width: $bp-s) and (max-width: $bp-m) {
-  .case-studies {
-    padding-left: 2.75em;
-  }
-
+  .case-studies,
   .next-case-study {
-    padding-left: 4.75em; /* Align to text */
+    padding-left: 4.75em;
   }
 
   .case-study {
@@ -164,12 +182,9 @@ a.next-case-study {
 }
 
 @media (min-width: $bp-m) and (max-width: $bp-sidebar-l) {
-  .case-studies {
-    padding-left: 4.125em;
-  }
-
+  .case-studies,
   .next-case-study {
-    padding-left: 6.125em; /* Align to text */
+    padding-left: 6.125em;
   }
 
   .case-study {
@@ -186,6 +201,7 @@ a.next-case-study {
 
   .case-studies {
     float: right;
+    padding-left: 2rem;
   }
 
   .case-study {

@@ -285,8 +285,6 @@ body:not(.flow) .header__brand {
     position: fixed;
     top: $space-s-em;
     top: $space-s;
-    right: $space-s-em;
-    right: $space-s;
     margin-top: 0;
     margin-right: 0;
   }
@@ -322,6 +320,13 @@ body:not(.flow) .header__brand {
     a {
       color: $grey-dark;
     }
+  }
+}
+
+@media (max-width: $bp-s) {
+  .menu-toggle {
+    right: $space-s-em;
+    right: $space-s;
   }
 }
 

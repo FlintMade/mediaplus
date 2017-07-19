@@ -126,34 +126,6 @@ var showNextLink = function(nextLink) {
   }
 };
 
-// Visually load in next case study
-var slideUpCS = function() {
-  var nextLink = document.querySelector('.next-case-study.visible'),
-      newCS = document.querySelector('.case-study--new'),
-      currentTop = docOffset(newCS).top;
-
-  // Grow link to fill screen
-  detachScrollEvents();
-  nextLink.style.height = '100%';
-  nextLink.querySelector('.arrow').style.opacity = 0;
-
-  // After grow
-  setTimeout(function(){
-    newCS.classList.remove('case-study--new');
-    window.scrollTo(0, currentTop);
-    nextLink.style.opacity = 0;
-    nextLink.classList.remove('visible');
-    nextLink.removeEventListener('click', clickToLoadCS, false);
-
-    // Fade to case study
-    setTimeout(function(){
-      nextLink.style.height = 0;
-      newCS.style.opacity = 1;
-      attachScrollEvents();
-    }, 400);
-  }, 600);
-};
-
 /*
  *	ANIMATE FAKE LOADING BAR
  *	---------------------------------------------
@@ -178,38 +150,55 @@ var animateLoader = function(scrolledTo, loaderValue) {
 };
 
 /*
+ *	SCROLL TO FADE IN
+ *	---------------------------------------------
+ */
+
+// Unset as new if scrolled down far enough
+var scrollToFadeIn = function() {
+  var newCS = document.querySelector('.case-study--new');
+  if (newCS) {
+    if (newCS.getBoundingClientRect().top <= window.innerHeight * .75) {
+      newCS.classList.remove('case-study--new');
+      hideNextLink();
+      resetCaseStudy();
+    }
+  }
+};
+
+/*
  *	SCROLL TO LOAD
  *	---------------------------------------------
  */
 
 var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
   var currentCS = document.querySelector('.case-study--current');
+  resetCaseStudy();
 
   // If scrolling up
   if (window.pageYOffset < lastScroll) {
     // Hide the visible "next" link
     hideNextLink();
-    resetCaseStudy();
 
   // Scrolling down
   } else {    
     var newCS = document.querySelector('.case-study--new'),
         numCS = document.querySelectorAll('.case-study').length;
 
-    // If new case study loaded, show the next link (might have been scrolled away)
+    // If new case study loaded
     if (newCS) {
-      nextLink = newCS.previousElementSibling;
-      if (nextLink) {
-        showNextLink(nextLink);
+      // Show the next link (might have been scrolled away) unless scrolled down far enough
+      if (newCS.getBoundingClientRect().top > window.innerHeight - 100) {
+        nextLink = newCS.previousElementSibling;
+        if (nextLink) {
+          showNextLink(nextLink);
+        }
       }
     }
   
     // If reached the end of the document
     if (scrolledTo >= document.body.clientHeight - 50) {
-      if (newCS) {
-        slideUpCS();
-        resetCaseStudy();
-      } else {
+      if (!newCS) {
         if (currentCS) {
           var currentID = currentCS.getAttribute('id').replace('cs-', ''),
               nextLink = document.getElementById('after-' + currentID),
@@ -236,6 +225,7 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
 var scrollEvents = function(){
   var scrolledTo = window.pageYOffset + window.innerHeight;
   animateLoader(scrolledTo, loaderValue);
+  scrollToFadeIn();
   scrollThruCS(scrolledTo, loaderValue);
 };
 
@@ -258,11 +248,31 @@ if (document.body.classList.contains('single-case-study')) {
  *	---------------------------------------------
  */
 
+// Visually load in next case study
+var scrollToCS = function() {
+  var nextLink = document.querySelector('.next-case-study.visible'),
+      newCS = document.querySelector('.case-study--new'),
+      currentTop = docOffset(newCS).top;
+
+  detachScrollEvents();
+
+  setTimeout(function(){
+    newCS.classList.remove('case-study--new');
+    newCS.scrollIntoView({behavior: 'smooth'});
+    nextLink.removeEventListener('click', clickToLoadCS, false);
+
+    // Fade to case study
+    setTimeout(function(){
+      newCS.style.opacity = 1;
+      attachScrollEvents();
+    }, 400);
+  }, 600);
+};
+
 var clickToLoadCS = function(e) {
   e.preventDefault();
-
-  // Swipe up the next link and then fade in the case study
-  slideUpCS();
+  scrollToCS();
+  hideNextLink();
   resetCaseStudy();
 };
 
