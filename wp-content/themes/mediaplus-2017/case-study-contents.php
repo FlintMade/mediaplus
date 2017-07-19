@@ -193,6 +193,22 @@
           <button class="toggle-lists" aria-hidden="true" aria-controls="lists-<?php echo $sectionIndex; ?>" aria-expanded="false">View all+</button>
         </section>
 
+      <?php
+        elseif (get_row_layout() == 'cta_section'):
+        $cta_text = get_sub_field('cta_text');
+        $cta_link = get_sub_field('cta_link');
+      ?>
+
+        <!-- CTA SECTION -->
+        <section class="row row--cta page-section">
+          <?php if ($cta_text && $cta_link): ?>
+            <a class="cta-link" href="<?php echo $cta_link; ?>">
+              <span class="cta-link__text"><?php echo $cta_text; ?></span>
+              <?php include('svgs/arrow.svg'); ?>
+            </a>
+          <?php endif; ?>
+        </section>
+
     <?php endif; ?>
 
   <?php $sectionIndex++; endwhile; endif; ?>

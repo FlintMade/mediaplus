@@ -584,3 +584,39 @@ a.next-case-study {
     margin-left: -1em;
   }
 }
+
+/*
+ *	SECTION: CTA
+ *	---------------------------------------------
+ */
+
+.cta-link {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 3em;
+  padding-right: 3em; /* Room for arrow */
+
+  .cta-link__text {
+    @extend .h2;
+    color: $redorange;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -1em;
+    right: 0;
+  }
+}
+
+.cta-link:link,
+.cta-link:visited {
+  border-bottom: 0;
+}
+
+/* Needs to be more specific to override :( */
+body.flow .cta-link:hover {
+  .arrow circle {
+    fill: $redorange;
+  }
+}
