@@ -27,7 +27,9 @@
         <h2 class="h3"><?php echo $offerings_title; ?></h2>
         <ul class="meta-items">
           <?php foreach ($items as $item): ?>
-            <li><?php echo get_the_title($item->ID); ?></li>
+            <?php if (!get_field('hide_from_clients_page', $item->ID)): ?>
+              <li><?php echo get_the_title($item->ID); ?></li>
+            <?php endif; ?>
           <?php endforeach; ?>
         </ul>
       </section>
@@ -65,7 +67,9 @@
         <h2 class="h3"><?php echo $expertise_title; ?></h2>
         <ul class="meta-items">
           <?php foreach ($items as $item): ?>
-            <li data-attr-slug="<?php echo strtolower(str_replace(' ', '-', str_replace(' + ', '-', get_the_title($item->ID)))); ?>"><?php echo get_the_title($item->ID); ?></li>
+            <?php if (!get_field('hide_from_clients_page', $item->ID)): ?>
+              <li data-attr-slug="<?php echo strtolower(str_replace(' ', '-', str_replace(' + ', '-', get_the_title($item->ID)))); ?>"><?php echo get_the_title($item->ID); ?></li>
+            <?php endif; ?>
           <?php endforeach; ?>
           <li data-attr-slug="misc">Misc</li>
         </ul>
