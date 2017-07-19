@@ -122,7 +122,11 @@ var showNextLink = function(nextLink) {
   if (!nextLink.classList.contains('visible')) {
     var nextID = nextLink.getAttribute('data-postid');
     nextLink.classList.add('visible');
-    nextLink.addEventListener('click', clickToLoadCS, false);
+
+    // Link at end of case studies doesn't get this function
+    if (nextID) {
+      nextLink.addEventListener('click', clickToLoadCS, false);
+    }
   }
 };
 
@@ -203,9 +207,11 @@ var scrollThruCS = debounce(function(scrolledTo, loaderValue) {
           var currentID = currentCS.getAttribute('id').replace('cs-', ''),
               nextLink = document.getElementById('after-' + currentID),
               nextID = nextLink.getAttribute('data-postid');
-          if (nextLink) {    
+          if (nextID) {
             // Ajax in a new case study
             fetchTheCS(nextID, nextLink, currentCS, loaderValue);
+          } else {
+            showNextLink(nextLink);
           }
         }
       }
