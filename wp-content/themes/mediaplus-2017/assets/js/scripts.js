@@ -316,41 +316,50 @@ if (supportedTransform()) {
  *	=============================================
  */
 
-/*
- *  ADD CSS ANIM TO HEADER LOGO ON HOVER
- *  Prevents @keyframes from blasting away the
- *  simple hover transition
- *  ----------------------------------------------
- */
-
 var logoBtn = document.getElementById('logo-btn');
 
-logoBtn.addEventListener('mouseenter', function(){
-  logoBtn.classList.add('pulse');
-}, false);
-
-// Pause the animation, grab the current state, return the teaser to inital state
-logoBtn.addEventListener('mouseleave', function(){
-  logoBtn.classList.add('pause-pulse');
-  
-  var teaser = logoBtn.querySelector('.teaser'),
-      teaserWidth = teaser.offsetWidth;
-
-  teaser.style.width = teaserWidth + 'px';
-  logoBtn.classList.remove('pause-pulse');
-  logoBtn.classList.remove('pulse');
-  setTimeout(function(){
-    teaser.style.removeProperty('width');
-  }, 100);
-}, false);
-
-/*
- *  LOGO BUTTON TAKES YOU BACK TO RECENT FLOW PAGE
- *  ----------------------------------------------
- */
-
 if (!document.body.classList.contains('flow')) {
+
+  /*
+   *  LOGO BUTTON TAKES YOU BACK TO RECENT FLOW PAGE
+   *  ----------------------------------------------
+   */
+
   logoBtn.addEventListener('click', sendToFlow, false);
+
+  /*
+   *  TEASE FLOW
+   *  ----------------------------------------------
+   */
+  
+  var teaseFlow = debounce(function(e) {
+    var teaser = document.getElementById('teaser'),
+        bpSidebarL = 1101;
+
+    if (window.outerWidth >= bpSidebarL) {
+      if (e.clientX < 175) {
+        if (!teaser.classList.contains('pulse')) {
+          teaser.classList.add('opening');
+        }
+        setTimeout(function(){
+          teaser.classList.remove('opening');
+          teaser.classList.add('pulse');
+        }, 800);
+      } else {
+        var teaserWidth = teaser.offsetWidth;
+        teaser.classList.add('pause-pulse');
+        teaser.style.width = teaserWidth + 'px';
+        teaser.classList.remove('pause-pulse');
+        teaser.classList.remove('pulse');
+        setTimeout(function(){
+          teaser.style.removeProperty('width');
+        }, 100);
+      }
+    }
+  }, 100);
+
+  window.addEventListener('mousemove', teaseFlow, false);
+
 }
 
 /*

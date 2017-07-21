@@ -34,9 +34,10 @@
         <svg class="logo__plus">
           <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#plusBig"/>
         </svg>
-        <span class="teaser" role="none presentation"></span>
       </a>
     </div>
+
+    <a href="<?php echo get_site_url(); ?>" id="teaser" class="teaser" role="none presentation"></a>
 
     <div class="header__tray">
       <div class="header__tray-content">

@@ -54,7 +54,7 @@ body {
  */
 
 .header__context {
-  z-index: z('sidebar') + 1;
+  z-index: z('sidebar') + 2;
 }
 
 .header__brand {
@@ -112,64 +112,72 @@ body {
 }
 
 /*
- *	LOGO HOVER: TEASE SIDEBAR UNLESS ON FLOW PAGES
- *	----------------------------------------------
+ *	HOVER IN LEFT: TEASE SIDEBAR UNLESS ON FLOW PAGES
+ *	-------------------------------------------------
  */
 
-body:not(.flow) .header__brand {
+body:not(.flow) {
   .teaser {
     display: block;
     content: '';
     position: fixed;
-    z-index: -1;
+    z-index: z('sidebar') + 1;
     top: 0;
     left: 0;
     width: 0;
     height: 100%;
     background: $orange;
     transition: width 400ms;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
-  &.pulse .teaser {
-    animation: pulse 4000ms infinite;
+  .teaser.opening {
+    width: 2.5em;
   }
 
-  &.pause-pulse .teaser {
+  .teaser.pulse {
+    animation: pulse 3000ms infinite;
+  }
+
+  .teaser.pause-pulse {
     animation-play-state: paused;
   }
 }
 
 @keyframes pulse {
   0% {
-    width: 0;
+    width: 2.5em;
+  }
+  
+  10% {
+    width: 3em;
   }
   
   20% {
-    width: 3em;
-  }
-  
-  32% {
     width: 2.5em;
   }
 
-  44% {
+  30% {
     width: 3em;
   }
 
-  56% {
+  40% {
     width: 2.5em;
   }
 
-  68% {
+  50% {
     width: 3em;
   }
 
-  80% {
-    width: 0;
+  60% {
+    width: 2.5em;
   }
 
   100% {
-    width: 0;
+    width: 2.5em;
   }
 }
 
