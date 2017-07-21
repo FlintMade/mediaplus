@@ -7,30 +7,14 @@
  */
 
 /*
- *	COMPANY ATTRIBUTES
- *  See also "Hover + Toggle States"
+ *  EXPERTISE ATTRIBUTES
  *	---------------------------------------------
  */
 
-@media (max-width: $bp-l) {
-  /* Float nested columns as halves */
-  .biz-attributes .grid-col {
-    float: left;
-    width: calc(50% - 1rem);
-  }
-
-  .biz-attributes .grid-col + .grid-col {
-    margin: $space-l 0 0 0;
-    clear: both;
-
-    &:nth-child(2) {
-      margin-top: 0;
-    }
-
-    &:nth-child(even) {
-      margin-left: $space-m;
-      clear: none;
-    }
+@media (min-width: $bp-clients-l) {
+  .expertise-attributes {
+    float: right;
+    width: calc(33.333% - (2 *#{$space-m})/3);
   }
 }
 

@@ -18,14 +18,14 @@
   }
 
   /*
-   *  CLICK ON PROCESS / EXPERTISE TO LIGHT UP
+   *  CLICK ON EXPERTISE TO LIGHT UP
    *  RELEVANT CLIENTS
    *	---------------------------------------------
    */
 
-  var bizAttributesWrap = document.querySelector('.expertise-attributes'),
-      bizAttributesLists = document.querySelectorAll('.expertise-attributes ul'),
-      bizAttributes = document.querySelectorAll('.expertise-attributes li[data-attr-slug]');
+  var expAttributesWrap = document.querySelector('.expertise-attributes'),
+      expAttributesLists = document.querySelectorAll('.expertise-attributes ul'),
+      expAttributes = document.querySelectorAll('.expertise-attributes li[data-attr-slug]');
 
   var filterClients = function(e) {
     var currentAttr = e.target.getAttribute('data-attr-slug');
@@ -33,15 +33,15 @@
     // Deselect this filter
     if (e.target.classList.contains('current')) {
       resetClients();
-      bizAttributesWrap.classList.remove('filtered');
+      expAttributesWrap.classList.remove('filtered');
       e.target.classList.remove('current');
 
     // Select this filter
     } else {
       resetClients();
-      bizAttributesWrap.classList.add('filtered');
+      expAttributesWrap.classList.add('filtered');
       
-      var currentlyCurrent = bizAttributesWrap.querySelector('.current');
+      var currentlyCurrent = expAttributesWrap.querySelector('.current');
       if (currentlyCurrent) {
         currentlyCurrent.classList.remove('current');
       }
@@ -66,20 +66,20 @@
   };
 
   // Attach functionality to biz attributes
-  for (var i = 0; i < bizAttributes.length; i++) {
-    bizAttributes[i].addEventListener('click', filterClients, false);
+  for (var i = 0; i < expAttributes.length; i++) {
+    expAttributes[i].addEventListener('click', filterClients, false);
   }
 
   // Activate business attributes area
-  for (var i = 0; i < bizAttributesLists.length; i++) {
-    var thisList = bizAttributesLists[i];
+  for (var i = 0; i < expAttributesLists.length; i++) {
+    var thisList = expAttributesLists[i];
 
     thisList.addEventListener('mouseenter', function(){
-      bizAttributesWrap.classList.add('active');
+      expAttributesWrap.classList.add('active');
     }, false);
 
     thisList.addEventListener('mouseleave', function(){
-      bizAttributesWrap.classList.remove('active');
+      expAttributesWrap.classList.remove('active');
     }, false);
   }
 

@@ -7,52 +7,11 @@
   $expertise_title = get_field('expertise_title');
 ?>
 <div class="contain">
-  <div class="page-section--feature row row--third-two-thirds buoyant-parent">
+  <div class="page-section row row--third-two-thirds buoyant-parent">
     <div class="grid-col">
       <h1 class="h2"><?php echo $inpage_title; ?></h1>
     </div>
-    <div class="grid-col row row--flush row--thirds biz-attributes">
-
-      <!-- OFFERINGS -->
-      <section class="grid-col">
-        <?php
-          $args = array(
-            'post_type' => 'offerings',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-            'order' => 'menu_order',
-          );
-          $items = get_posts($args);
-        ?>
-        <h2 class="h3"><?php echo $offerings_title; ?></h2>
-        <ul class="meta-items">
-          <?php foreach ($items as $item): ?>
-            <?php if (!get_field('hide_from_clients_page', $item->ID)): ?>
-              <li><?php echo get_the_title($item->ID); ?></li>
-            <?php endif; ?>
-          <?php endforeach; ?>
-        </ul>
-      </section>
-
-      <!-- PROCESS ITEMS -->
-      <section class="grid-col">
-        <?php
-          $args = array(
-            'post_type' => 'process',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-            'order' => 'menu_order',
-          );
-          $items = get_posts($args);
-        ?>
-        <h2 class="h3"><?php echo $process_title; ?></h2>
-        <ul class="meta-items">
-          <?php foreach ($items as $item): ?>
-            <li data-attr-slug="<?php echo strtolower(str_replace(' ', '-', str_replace(' + ', '-', get_the_title($item->ID)))); ?>"><?php echo get_the_title($item->ID); ?></li>
-          <?php endforeach; ?>
-        </ul>
-      </section>
-
+    <div class="grid-col row row--flush row--thirds">
       <!-- EXPERTISE ITEMS -->
       <section class="grid-col expertise-attributes">
         <?php
@@ -78,7 +37,7 @@
   </div>
 <?php endwhile;?>
 
-  <section class="page-section">
+  <section class="page-section page-section--feature">
     <h2 class="sr-only">Client list</h2>
     <?php
       $args = array(
@@ -167,6 +126,49 @@
       <?php endforeach; ?>
     </ul>
   </section>
+
+  <div class="page-section row row--thirds co-attributes buoyant-parent">
+    <!-- OFFERINGS -->
+    <section class="grid-col">
+      <?php
+        $args = array(
+          'post_type' => 'offerings',
+          'post_status' => 'publish',
+          'posts_per_page' => -1,
+          'order' => 'menu_order',
+        );
+        $items = get_posts($args);
+      ?>
+      <h2 class="h3"><?php echo $offerings_title; ?></h2>
+      <ul class="meta-items">
+        <?php foreach ($items as $item): ?>
+          <?php if (!get_field('hide_from_clients_page', $item->ID)): ?>
+            <li><?php echo get_the_title($item->ID); ?></li>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      </ul>
+    </section>
+
+    <!-- PROCESS ITEMS -->
+    <section class="grid-col">
+      <?php
+        $args = array(
+          'post_type' => 'process',
+          'post_status' => 'publish',
+          'posts_per_page' => -1,
+          'order' => 'menu_order',
+        );
+        $items = get_posts($args);
+      ?>
+      <h2 class="h3"><?php echo $process_title; ?></h2>
+      <ul class="meta-items">
+        <?php foreach ($items as $item): ?>
+          <li data-attr-slug="<?php echo strtolower(str_replace(' ', '-', str_replace(' + ', '-', get_the_title($item->ID)))); ?>"><?php echo get_the_title($item->ID); ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </section>
+  </div>
+
 </div>
 
 <?php get_footer(); ?>
