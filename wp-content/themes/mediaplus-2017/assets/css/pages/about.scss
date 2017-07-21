@@ -11,53 +11,6 @@
 }
 
 /*
- *	COMPANY INFO
- *	---------------------------------------------
- */
-
-@media (max-width: $bp-s) {
-  .about-attrs .grid-col {
-    display: inline-block;
-    vertical-align: top;
-
-    &:first-child {
-      margin-bottom: $space-m;
-    }
-  }
-
-  .about-attrs .grid-col + .grid-col {
-    margin: 0 $space-m 0 0;
-  }
-}
-
-@media (min-width: $bp-s) {
-  .about-intro {
-    position: relative;
-  }
-
-  .about-intro-headline {
-    position: absolute;
-    left: $space-m;
-  }
-
-  .about-attrs {
-    padding-top: 5.25em;
-  }
-}
-
-@media (min-width: $bp-l) and (max-width: $bp-xl) {
-  /* Unfloat nested columns */
-  .about-attrs .grid-col {
-    float: none;
-    width: 100%;
-  }
-
-  .about-attrs .grid-col + .grid-col {
-    margin: $space-l 0 0;
-  }
-}
-
-/*
  *	TEAM
  *  See also "Bio states"
  *	---------------------------------------------

@@ -31,58 +31,16 @@
   </div>
 
   <div class="contain page-section">
-    <div class="page-section row row--halves about-intro buoyant-parent">
-
-      <!-- PAGE DESCRIPTION -->
-      <section class="grid-col grid-col--right">
-        <?php if ($intro_headline): ?>
+    <section class="page-section row row--halves about-intro buoyant-parent">
+      <?php if ($intro_headline): ?>
+        <div class="grid-col">
           <h2 class="about-intro-headline"><?php echo $intro_headline; ?></h2>
-        <?php endif; ?>
+        </div>
+      <?php endif; ?>
+      <div class="grid-col">
         <?php the_content(); ?>
-      </section>
-
-      <div class="grid-col row row--flush row--third-two-thirds about-attrs">
-
-        <!-- OFFERINGS -->
-        <?php
-          $args = array(
-            'post_type' => 'offerings',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-            'order' => 'menu_order',
-          );
-          $items = get_posts($args);
-        ?>
-        <div class="grid-col">
-          <h3><?php echo $offerings_title; ?></h3>
-          <ul class="meta-items">
-            <?php foreach ($items as $item): ?>
-              <li><?php echo get_the_title($item->ID); ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-
-        <!-- PROCESS ITEMS -->
-        <?php
-          $args = array(
-            'post_type' => 'process',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-            'order' => 'menu_order',
-          );
-          $items = get_posts($args);
-        ?>
-        <div class="grid-col">
-          <h3><?php echo $process_title; ?></h3>
-          <ul class="meta-items">
-            <?php foreach ($items as $item): ?>
-              <li><?php echo get_the_title($item->ID); ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
       </div>
-
-    </div>
+    </section>
   <?php endwhile;?>
 
   <!-- TEAM MEMBERS -->
