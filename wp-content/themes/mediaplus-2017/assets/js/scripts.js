@@ -211,6 +211,10 @@ if (supportedTransform()) {
     if (e) {
       e.preventDefault();
     }
+
+    window.location.href = '/expertise/';
+
+    /*
     var recentPage = localStorage.getItem('recentPage');
     if (recentPage === 'home' || !recentPage) {
       window.location.href = '/';
@@ -218,6 +222,7 @@ if (supportedTransform()) {
       var recentUrl = localStorage.getItem('recentUrl');
       window.location.href = recentUrl;
     }
+    */
   };
 
   var showMenu = function() {
