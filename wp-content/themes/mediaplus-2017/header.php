@@ -37,7 +37,7 @@
       </a>
     </div>
 
-    <a href="<?php echo get_site_url(); ?>" id="teaser" class="teaser" role="none presentation"></a>
+    <a href="/expertise/" id="teaser" class="teaser" role="none presentation"></a>
 
     <div class="header__tray">
       <div class="header__tray-content">
