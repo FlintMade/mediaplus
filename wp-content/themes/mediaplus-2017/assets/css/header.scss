@@ -225,6 +225,7 @@ body:not(.flow) {
   -ms-transform: translateX(0);
   -webkit-transform: translateX(0);
   transform: translateX(0);
+  font-size: 1.0625em;
 
   &.anim-init {
     transition: transform 400ms;
@@ -235,13 +236,22 @@ body:not(.flow) {
     list-style: none;
   }
 
-  a {
-    color: $grey-med;
+  a:link, a:visited {
+    @extend %animated-link;
+    color: $grey-dark;
+
+    &:after {
+      @extend %animated-link-pseudo;
+      background: $grey-dark;
+    }
   }
 
-  .current-menu-item a,
-  .current_page_item a {
-    color: $grey-dark;
+  a:hover {
+    @extend %animated-link-hover;
+
+    &:after {
+      @extend %animated-link-hover-pseudo;
+    }
   }
 }
 

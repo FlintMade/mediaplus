@@ -20,9 +20,13 @@ a:hover .arrow {
   }
 }
 
-.header__menu a:hover {
-  outline: 0;
+.header__menu .current-menu-item a,
+.header__menu .current_page_item a {
   color: $redorange;
+
+  &:after {
+    background: $redorange;
+  }
 }
 
 input:focus {
@@ -44,9 +48,13 @@ input:focus {
  */
 
 body.flow {
-  .header__menu a:hover {
-    outline: 0;
+  .header__menu .current-menu-item a,
+  .header__menu .current_page_item a {
     color: $orange;
+
+    &:after {
+      background: $orange;
+    }
   }
 
   .menu-toggle:hover,
@@ -66,10 +74,15 @@ body.flow {
  *	---------------------------------------------
  */
 
+/*
 body.offerings {
-  .header__menu a:hover {
-    outline: 0;
+  .header__menu .current-menu-item a,
+  .header__menu .current_page_item a {
     color: $blue;
+
+    &:after {
+      background: $blue;
+    }
   }
 
   .menu-toggle:hover,
@@ -83,3 +96,4 @@ body.offerings {
     }
   }
 }
+*/
