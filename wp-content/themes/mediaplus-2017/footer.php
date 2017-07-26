@@ -75,5 +75,7 @@
   </script>
 <?php endif; ?>
 
+<?php include('includes/ga.php'); ?>
+
 </body>
 </html>

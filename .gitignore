@@ -29,3 +29,5 @@ wp-content/themes/mediaplus-2017/includes/mc-form.php
 wp-content/themes/mediaplus-2017/includes/mc-non-form.php
 
 *.map
+
+wp-content/themes/mediaplus-2017/includes/ga.php
