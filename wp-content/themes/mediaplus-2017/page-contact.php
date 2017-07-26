@@ -44,7 +44,7 @@
               <?php echo $item_contact_name; ?>
             </p>
             <p class="inquiry__email">
-              <a href="mailto:<?php echo $email_address; ?>">
+              <a href="mailto:<?php echo $item_contact_email; ?>">
                 <?php echo $item_contact_email; ?>
               </a>
             </p>
