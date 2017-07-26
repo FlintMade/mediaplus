@@ -95,7 +95,9 @@
             <?php endif; ?>
             <?php if ($phone): ?>
               <dd class="person__meta-label">Phone</dd>
-              <dt class="person__meta-value"><?php echo $phone; ?></dt>
+              <dt class="person__meta-value">
+                <a href="tel:+<?php echo preg_replace('/[^0-9]/', '', $phone); ?>"><?php echo $phone; ?></a>
+              </dt>
             <?php endif; ?>
           </div>
         </div>

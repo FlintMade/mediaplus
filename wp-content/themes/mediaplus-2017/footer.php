@@ -24,7 +24,7 @@
             <div class="grid-col">
               <h2><?php echo $footer_phone_email_title; ?></h2>
               <p>
-                <?php echo $phone_number; ?><br />
+                <a href="tel:+<?php echo preg_replace('/[^0-9]/', '', $phone_number); ?>"><?php echo $phone_number; ?></a><br />
                 <a href="mailto:<?php echo $email_address; ?>"><?php echo $email_address; ?></a>
               </p>
             </div>

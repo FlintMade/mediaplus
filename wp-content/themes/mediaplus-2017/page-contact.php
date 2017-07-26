@@ -23,7 +23,7 @@
         USA<br />
       </p>
       <p>
-        <?php echo $phone_number; ?><br />
+        <a href="tel:+<?php echo preg_replace('/[^0-9]/', '', $phone_number); ?>"><?php echo $phone_number; ?></a><br />
         <a href="mailto:<?php echo $email_address; ?>"><?php echo $email_address; ?></a>
       </p>
     </div>
