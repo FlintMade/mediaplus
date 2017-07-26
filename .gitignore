@@ -20,7 +20,6 @@ xmlrpc.php
 .sass-cache
 node_modules/*
 
-/.htaccess
 /license.txt
 /readme.html
 /sitemap.xml
