@@ -56,7 +56,7 @@
   margin-left: 0;
   list-style: none;
   font-weight: 600;
-  font-size: 2.286em; /* 32px */
+  font-size: 2em;
   line-height: 1.03125;
 }
 
@@ -70,17 +70,17 @@ body.single-expertise a.sections__expertise {
   .site-sidebar__content {
     padding-left: 5em;
   }
+
+  .case-study-list {
+    font-size: 2.5625em; /* 41px */
+    line-height: 1.02;
+  }
 }
 
 @media (min-width: $bp-header-m) {
   .site-sidebar__content {
     margin-top: -.25em;
     padding: $space-m $space-m $space-m 6.125em;
-  }
-
-  .case-study-list {
-    font-size: 2.5625em; /* 41px */
-    line-height: 1.05;
   }
 }
 

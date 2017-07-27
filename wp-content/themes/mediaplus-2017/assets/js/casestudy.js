@@ -298,7 +298,7 @@ var navigateNewCS = function(e) {
       nextID = link.getAttribute('id').replace('link-', ''),
       currentCS = document.querySelector('.case-study--current');
 
-  if (link.classList.contains('no-highlight')) {
+  if (link.classList.contains('current')) {
     if (window.innerWidth < bpSidebarL) {
       closeSidebar();
       link.classList.remove('no-highlight');
@@ -395,7 +395,12 @@ if (sidebar) {
   var openSidebar = function() {
     sidebar.classList.remove('closed');
     logoTextWrap.classList.add('abbreviated');
-    document.body.style.overflow = 'hidden';
+
+    if (window.innerWidth < bpSidebarL) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
 
     // Stagger CSS transitions
     setTimeout(function(){
@@ -421,7 +426,7 @@ if (sidebar) {
   };
 
   var resizeSidebar = debounce(function() {
-    if (window.outerWidth >= bpSidebarL) {
+    if (window.innerWidth >= bpSidebarL) {
 
       // Remove class set to make first current link look inactive on "mobile"
       var noHighlight = document.querySelector('.case-study-list .no-highlight');
