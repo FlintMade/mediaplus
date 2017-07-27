@@ -110,15 +110,18 @@ var delta = 0;
 var setUpFirstCS = function() {
   var currentCS = document.querySelector('.case-study--current');
   setRecentCS(currentCS);
-  if (window.outerWidth >= bpSidebarL) {
-    openSidebar();
-  } else {
+
+  if (window.outerWidth < bpSidebarL) {
     logoTextWrap.classList.add('abbreviated');
+
+    // Make first current link look inactive on "mobile"
+    document.querySelector('.case-study-list .current').classList.add('no-highlight');
   }
 
   setTimeout(function(){
     document.body.classList.add('intro-scrolled');
     currentCS.classList.remove('case-study--new');
+    openSidebar();
 
     window.removeEventListener('mousewheel', scrollAwayIntro, false);
     window.removeEventListener('DOMMouseScroll', scrollAwayIntro, false);
@@ -130,6 +133,7 @@ var setUpFirstCS = function() {
     attachScrollEvents();
 
     window.addEventListener('resize', resizeSidebar);
+    logoBtn.addEventListener('click', toggleSidebar, false);
 
     if (homeIntro.parentNode) {
       homeIntro.parentNode.removeChild(homeIntro);

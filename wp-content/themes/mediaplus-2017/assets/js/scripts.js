@@ -315,22 +315,7 @@ if (supportedTransform()) {
 
 }
 
-/*
- *	=============================================
- *	HEADER LOGO / SIDEBAR NAV
- *	=============================================
- */
-
-var logoBtn = document.getElementById('logo-btn');
-
 if (!document.body.classList.contains('flow')) {
-
-  /*
-   *  LOGO BUTTON TAKES YOU BACK TO RECENT FLOW PAGE
-   *  ----------------------------------------------
-   */
-
-  logoBtn.addEventListener('click', sendToFlow, false);
 
   /*
    *  TEASE FLOW

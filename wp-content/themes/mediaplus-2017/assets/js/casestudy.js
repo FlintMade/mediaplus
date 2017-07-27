@@ -27,6 +27,7 @@ var setRecentCS = function(recent) {
     localStorage.setItem('recentUrl', recentUrl);
 
     if (currentLink) {
+      currentLink.classList.remove('no-highlight');
       currentLink.classList.remove('current');
     }
 
@@ -297,19 +298,31 @@ var navigateNewCS = function(e) {
       nextID = link.getAttribute('id').replace('link-', ''),
       currentCS = document.querySelector('.case-study--current');
 
-  // Check to see if a new case study was previously loaded but not scrolled to
-  var previouslyLoadedCS = flow.querySelector('.case-study--new');
-  
-  if (previouslyLoadedCS) {
-    var previouslyLoadedID = currentCS.getAttribute('id').replace('cs-', ''),
-        nextLink = document.getElementById('after-' + previouslyLoadedID);
-    previouslyLoadedCS.parentNode.removeChild(previouslyLoadedCS);
-    nextLink.parentNode.removeChild(nextLink);
+  if (link.classList.contains('no-highlight')) {
+    if (window.innerWidth < bpSidebarL) {
+      closeSidebar();
+      link.classList.remove('no-highlight');
+    }
+  } else {
+    // Check to see if a new case study was previously loaded but not scrolled to
+    var previouslyLoadedCS = flow.querySelector('.case-study--new');
+    
+    if (previouslyLoadedCS) {
+      var previouslyLoadedID = currentCS.getAttribute('id').replace('cs-', ''),
+          nextLink = document.getElementById('after-' + previouslyLoadedID);
+      previouslyLoadedCS.parentNode.removeChild(previouslyLoadedCS);
+      nextLink.parentNode.removeChild(nextLink);
+    }
+    
+    // Ajax in new case study
+    fetchTheCS(nextID, link, currentCS, loaderValue, fadeReplaceCS);
+
+    if (window.innerWidth < bpSidebarL) {
+      setTimeout(closeSidebar, 600);
+    }
+
+    attachScrollEvents();
   }
-  
-  // Ajax in new case study
-  fetchTheCS(nextID, link, currentCS, loaderValue, fadeReplaceCS);
-  attachScrollEvents();
 };
 
 // Do the actual replacement of current CS => new CS
@@ -355,19 +368,34 @@ for (var i = 0; i < sidebarNavLinks.length; i++) {
  *  ---------------------------------------------
  */
 
-var sidebar = document.getElementById('sidebar-nav');
+var logoBtn = document.getElementById('logo-btn'),
+    sidebar = document.getElementById('sidebar-nav');
 
 if (sidebar) {
-  var bpSidebarM = 901,
-      bpSidebarL = 1101,
+  var bpSidebarL = 1101,
+      userOpenedSidebar = false,
       logoTextWrap = logoBtn.querySelector('.logo__text-wrap'),
       sidebar = document.getElementById('sidebar-nav'),
       sidebarContent = sidebar.querySelector('.site-sidebar__content');
 
   /* Toggle sidebar nav */
+  var toggleSidebar = function(e) {
+    if (window.innerWidth < bpSidebarL) {
+      e.preventDefault();
+      if (sidebar.getAttribute('aria-hidden')) {
+        openSidebar();
+        userOpenedSidebar = true;
+      } else {
+        closeSidebar();
+        userOpenedSidebar = false;
+      }
+    }
+  };
+
   var openSidebar = function() {
     sidebar.classList.remove('closed');
     logoTextWrap.classList.add('abbreviated');
+    document.body.style.overflow = 'hidden';
 
     // Stagger CSS transitions
     setTimeout(function(){
@@ -380,6 +408,7 @@ if (sidebar) {
 
   var closeSidebar = function() {
     sidebarContent.classList.remove('active');
+    document.body.style.overflow = 'auto';
     
     // Stagger CSS transitions
     setTimeout(function(){
@@ -393,9 +422,18 @@ if (sidebar) {
 
   var resizeSidebar = debounce(function() {
     if (window.outerWidth >= bpSidebarL) {
+
+      // Remove class set to make first current link look inactive on "mobile"
+      var noHighlight = document.querySelector('.case-study-list .no-highlight');
+      if (noHighlight) {
+        noHighlight.classList.remove('no-highlight');
+      }
+
       openSidebar();
     } else {
-      closeSidebar();
+      if (!userOpenedSidebar) {
+        closeSidebar();
+      }
     }
   }, 400);
 
@@ -403,6 +441,7 @@ if (sidebar) {
   if (!document.body.classList.contains('home')) {
     resizeSidebar();
     window.addEventListener('resize', resizeSidebar);
+    logoBtn.addEventListener('click', toggleSidebar, false);
   }
 }
 

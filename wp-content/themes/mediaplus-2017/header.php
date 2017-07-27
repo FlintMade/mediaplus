@@ -25,7 +25,7 @@
 <?php endif; ?>
   <header role="banner" class="clear header">
     <div class="header__context">
-      <a class="header__brand" href="<?php echo get_site_url(); ?>" title="Media plus show case studies" id="logo-btn">
+      <a class="header__brand" href="/expertise/" title="Media plus show case studies" id="logo-btn">
         <span class="logo__text-wrap <?php if (is_singular('expertise') || is_singular('offerings')): ?>abbreviated<?php endif; ?>">
           <svg class="logo__text">
             <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/images/sprite.svg#media"/>
