@@ -76,6 +76,10 @@
   margin-top: 1.5rem;
 }
 
+.client__dates + .client__details-section {
+  margin-top: 0;
+}
+
 .client__item-count {
   display: none;
 }
@@ -92,13 +96,13 @@
   .client h4 {
     font-size: 1.06em;
   }
+
+  .client__details-interior {
+    padding-top: 1.5em;
+  }
 }
 
 @media (min-width: $bp-s) {
-  .client__dates + .client__details-section {
-    margin-top: 0;
-  }
-
   .client__more {
     margin-top: 1em;
   }

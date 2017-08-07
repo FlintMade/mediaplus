@@ -60,7 +60,7 @@
           </div>
 
           <div id="details-<?php echo $item->post_name; ?>" class="grid-col client__details">
-            <div class="client__details-interior">
+            <div class="clear client__details-interior">
               <div class="row row--flush row--thirds">
                 <!-- CLIENT DATES -->
                 <div class="client__dates">
