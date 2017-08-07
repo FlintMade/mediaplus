@@ -60,7 +60,5 @@
       </div>
     </div>
   </header>
-  <?php if (is_front_page() || is_singular('expertise') || is_singular('offerings')): ?>
-    <?php include('includes/sidebar.php'); ?>
-  <?php endif; ?>
+  <?php include('includes/sidebar.php'); ?>
   <main role="main" class="page-content <?php if (is_front_page()): ?>main--home<?php endif; ?>">

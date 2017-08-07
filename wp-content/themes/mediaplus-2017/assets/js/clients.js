@@ -168,6 +168,7 @@
 
     // ON RESIZE
       var resizeClientDetails = function(){
+        console.log('resize function ran');
         for (var i = 0; i < clientDetails.length; i++) {
           var theseDetails = clientDetails[i],
               client = findAncestor(theseDetails, 'client');

@@ -315,13 +315,123 @@ if (supportedTransform()) {
 
 }
 
-if (!document.body.classList.contains('flow')) {
+/*
+ *	=============================================
+ *	SIDEBAR
+ *	=============================================
+ */
 
-  /*
-   *  TEASE FLOW
-   *  ----------------------------------------------
-   */
+/*
+ *  SIDEBAR TOGGLING
+ *  ---------------------------------------------
+ */
+
+var logoBtn = document.getElementById('logo-btn'),
+    sidebar = document.getElementById('sidebar-nav'),
+    bpSidebarL = 1101,
+    userOpenedSidebar = false,
+    logoTextWrap = logoBtn.querySelector('.logo__text-wrap'),
+    sidebar = document.getElementById('sidebar-nav'),
+    sidebarContent = sidebar.querySelector('.site-sidebar__content'),
+    flowPage = document.body.classList.contains('flow');
+
+/* Toggle sidebar nav */
+var toggleSidebar = function(e) {
+  if (window.innerWidth < bpSidebarL) {
+    e.preventDefault();
+    if (sidebar.getAttribute('aria-hidden')) {
+      openSidebar();
+      userOpenedSidebar = true;
+    } else {
+      closeSidebar();
+      userOpenedSidebar = false;
+    }
+  }
+};
+
+var openSidebar = function() {
+  sidebar.classList.remove('closed');
+  logoTextWrap.classList.add('abbreviated');
+
+  if (window.innerWidth < bpSidebarL) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
+
+  // Stagger CSS transitions
+  setTimeout(function(){
+    sidebar.removeAttribute('aria-hidden');
+    setTimeout(function(){
+      sidebarContent.classList.add('active');
+    }, 600);
+  }, 200);
+};
+
+var closeSidebar = function() {
+  sidebarContent.classList.remove('active');
+  document.body.style.overflow = 'auto';
   
+  // Stagger CSS transitions
+  setTimeout(function(){
+    sidebar.setAttribute('aria-hidden', 'true');
+  }, 100);
+
+  setTimeout(function(){
+    sidebar.classList.add('closed');
+  }, 800);
+};
+
+// Resize sidebar on flow pages; separating logic so it doesn't have to run a flow-or-not check every time the f(x) fires
+var resizeSidebarOnFlow = debounce(function() {
+  if (window.innerWidth >= bpSidebarL) {
+
+    // Remove class set to make first current link look inactive on "mobile"
+    var noHighlight = document.querySelector('.case-study-list .no-highlight');
+    if (noHighlight) {
+      noHighlight.classList.remove('no-highlight');
+    }
+
+    openSidebar();
+  } else {
+    if (!userOpenedSidebar) {
+      closeSidebar();
+    }
+  }
+}, 400);
+
+// Resize sidebar on flow pages
+var resizeSidebarOnInfo = debounce(function() {
+  console.log('resize sidebar fx ran');
+  if (window.innerWidth >= bpSidebarL) {
+    closeSidebar();
+    userOpenedSidebar = false;
+
+    // Expand logo to full word after sidebar anim
+    setTimeout(function(){
+      logoTextWrap.classList.remove('abbreviated');
+    }, 800);
+  }
+}, 400);
+
+// Hook up the functions
+if (!document.body.classList.contains('home')) {
+  logoBtn.addEventListener('click', toggleSidebar, false);
+
+  if (flowPage) {
+    resizeSidebarOnFlow();
+    window.addEventListener('resize', resizeSidebarOnFlow);
+  } else {
+    window.addEventListener('resize', resizeSidebarOnInfo);
+  }
+}
+
+/*
+ *  TEASE FLOW
+ *  ----------------------------------------------
+ */
+
+if (!flowPage) {
   var teaseFlow = debounce(function(e) {
     var teaser = document.getElementById('teaser'),
         bpSidebarL = 1101;
@@ -349,7 +459,6 @@ if (!document.body.classList.contains('flow')) {
   }, 100);
 
   window.addEventListener('mousemove', teaseFlow, false);
-
 }
 
 /*

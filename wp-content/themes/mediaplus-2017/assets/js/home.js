@@ -132,7 +132,7 @@ var setUpFirstCS = function() {
     window.addEventListener('touchmove', scrollEvents, false);
     attachScrollEvents();
 
-    window.addEventListener('resize', resizeSidebar);
+    window.addEventListener('resize', resizeSidebarOnFlow);
     logoBtn.addEventListener('click', toggleSidebar, false);
 
     if (homeIntro.parentNode) {
