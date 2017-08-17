@@ -37,6 +37,8 @@
           $item_title = $item['inquiry_type_title'];
           $item_contact_name = $item['contact_name'];
           $item_contact_email = $item['contact_email_address'];
+          $item_link_text = $item['contact_link_text'];
+          $item_url = $item['contact_url'];
         ?>
           <li class="grid-col inquiry-type">
             <h3><?php echo $item_title; ?></h3>
@@ -44,9 +46,15 @@
               <?php echo $item_contact_name; ?>
             </p>
             <p class="inquiry__email">
-              <a href="mailto:<?php echo $item_contact_email; ?>">
-                <?php echo $item_contact_email; ?>
-              </a>
+              <?php if ($item_contact_email): ?>
+                <a href="mailto:<?php echo $item_contact_email; ?>">
+                  <?php echo $item_contact_email; ?>
+                </a>
+              <?php else: ?>
+                <a href="<?php echo $item_url; ?>">
+                  <?php echo $item_link_text; ?>
+                </a>
+              <?php endif; ?>
             </p>
           </li>
         <?php endforeach; ?>
